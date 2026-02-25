@@ -1,11 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ExternalLink, MessageCircle, Facebook, Twitter, Link2, Volume2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Menu, X, ExternalLink } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { AnimatePresence, motion } from 'motion/react';
 
 export default function NewsDetailPage() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const location = useLocation();
+    const news = location.state?.news || {
+        title: "카카오, '사이좋은 AI 포럼' 통해 미래세대 위한 AI 시민성 교육 담론 주도",
+        date: "2026년 02월 25일",
+        tag: "뉴스",
+        image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=2500"
+    };
 
     // Scroll to top on mount
     useEffect(() => {
@@ -33,12 +40,12 @@ export default function NewsDetailPage() {
                     {/* Right: CTA Buttons */}
                     <div className="flex items-center gap-3">
                         <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10">
-                            kt ds <ExternalLink size={14} className="ml-1" />
+                            kt ds <ExternalLink size={14} />
                         </Button>
-                        <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold text-[14px]">
-                            AI Agent 스튜디오 <ExternalLink size={14} className="ml-1" />
+                        <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard">
+                            AI Agent 스튜디오 <ExternalLink size={14} />
                         </Button>
-                        <button className="lg:hidden text-white p-2" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
+                        <button className="lg:hidden text-white p-2 smooth-gpu" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
                             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
                     </div>
@@ -54,15 +61,15 @@ export default function NewsDetailPage() {
                             className="lg:hidden absolute top-full left-0 right-0 bg-[#0a0a0a]/95 backdrop-blur-xl py-4 px-6 overflow-hidden border-b border-white/10"
                         >
                             <div className="flex flex-col gap-4">
-                                <Link to="/" className="text-white/90 hover:text-white font-medium py-2" onClick={() => setIsMenuOpen(false)}>멀티 에이전트 플랫폼</Link>
-                                <Link to="/#use-cases" className="text-white/90 hover:text-white font-medium py-2" onClick={() => setIsMenuOpen(false)}>고객 사례</Link>
-                                <Link to="/news" className="text-white font-semibold py-2" onClick={() => setIsMenuOpen(false)}>새로운 소식</Link>
-                                <div className="pt-4 mt-2 border-t border-white/10 flex flex-col gap-3">
-                                    <Button variant="ghost" className="text-white hover:text-white hover:bg-white/10 justify-start w-full">
-                                        kt ds <ExternalLink size={16} className="ml-2" />
+                                <Link to="/" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>멀티 에이전트 플랫폼</Link>
+                                <Link to="/#use-cases" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>고객 사례</Link>
+                                <Link to="/news" className="text-white font-semibold py-1" onClick={() => setIsMenuOpen(false)}>새로운 소식</Link>
+                                <div className="pt-2 mt-2 border-t border-white/10 flex flex-col gap-2">
+                                    <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start">
+                                        kt ds <ExternalLink size={14} />
                                     </Button>
-                                    <Button className="bg-white text-black hover:bg-white/90 w-full justify-center font-bold">
-                                        AI Agent 스튜디오 <ExternalLink size={16} className="ml-2" />
+                                    <Button size="sm" className="bg-white text-black hover:bg-white/90 w-full justify-center font-semibold">
+                                        AI Agent 스튜디오 <ExternalLink size={14} />
                                     </Button>
                                 </div>
                             </div>
@@ -76,42 +83,23 @@ export default function NewsDetailPage() {
                 <div className="max-w-[900px] mx-auto text-center flex flex-col items-center">
                     {/* Category & Date */}
                     <div className="flex items-center gap-3 mb-6 text-white/50 text-[15px] font-medium tracking-wide">
-                        <span>뉴스</span>
+                        <span>{news.tag}</span>
                         <span className="text-xs">|</span>
-                        <span>2026년 02월 25일</span>
+                        <span>{news.date}</span>
                     </div>
 
                     {/* Main Title */}
                     <h1 className="text-[36px] md:text-[50px] font-bold text-white mb-10 leading-snug break-keep tracking-tight">
-                        카카오, '사이좋은 AI 포럼' 통해 미래세대 위한 AI 시민성 교육 담론 주도
+                        {news.title}
                     </h1>
-
-                    {/* Interaction Buttons (Toss style reference) */}
-                    <div className="flex gap-2.5 items-center mt-2">
-                        {[
-                            { icon: MessageCircle, label: "Kakao" },
-                            { icon: Facebook, label: "Facebook" },
-                            { icon: Twitter, label: "Twitter" },
-                            { icon: Link2, label: "Copy Link" },
-                            { icon: Volume2, label: "Listen" }
-                        ].map((btn, idx) => (
-                            <button
-                                key={idx}
-                                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all hover:scale-105"
-                                aria-label={btn.label}
-                            >
-                                <btn.icon size={18} className="text-white/70" />
-                            </button>
-                        ))}
-                    </div>
                 </div>
             </section>
 
             {/* 2. Hero Image */}
             <div className="w-full px-0 sm:px-6 mb-20 max-w-[1400px] mx-auto">
-                <div className="w-full aspect-[21/9] sm:aspect-[24/9] md:aspect-[2.5/1] overflow-hidden sm:rounded-[32px] bg-zinc-900">
+                <div className="w-full aspect-[21/9] sm:aspect-[24/9] md:aspect-[2.5/1] overflow-hidden sm:rounded-[32px] bg-zinc-900 border border-white/5">
                     <img
-                        src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=2500"
+                        src={news.image}
                         alt="Event Detail"
                         className="w-full h-full object-cover"
                     />

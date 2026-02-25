@@ -58,13 +58,13 @@ export default function NewsPage() {
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10 text-[14px] font-medium h-9 px-4">
-                            kt ds <ExternalLink size={14} className="ml-1" />
+                        <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10">
+                            kt ds <ExternalLink size={14} />
                         </Button>
-                        <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-5 h-9 rounded-full text-[14px] font-bold transition-all hover:scale-105 active:scale-95">
-                            AI Agent 스튜디오 <ExternalLink size={14} className="ml-1" />
+                        <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard">
+                            AI Agent 스튜디오 <ExternalLink size={14} />
                         </Button>
-                        <button className="lg:hidden text-white p-2" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
+                        <button className="lg:hidden text-white p-2 smooth-gpu" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
                             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
                     </div>
@@ -83,12 +83,12 @@ export default function NewsPage() {
                                 <Link to="/" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>멀티 에이전트 플랫폼</Link>
                                 <Link to="/#use-cases" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>고객 사례</Link>
                                 <Link to="/news" className="text-white font-bold py-1" onClick={() => setIsMenuOpen(false)}>새로운 소식</Link>
-                                <div className="pt-4 mt-2 border-t border-white/10 flex flex-col gap-3">
-                                    <Button variant="ghost" className="text-white/90 hover:text-white justify-start h-10 font-medium">
-                                        kt ds <ExternalLink size={14} className="ml-2" />
+                                <div className="pt-2 mt-2 border-t border-white/10 flex flex-col gap-2">
+                                    <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start">
+                                        kt ds <ExternalLink size={14} />
                                     </Button>
-                                    <Button className="bg-white text-black hover:bg-white/90 w-full justify-center h-12 rounded-full font-bold text-[15px]">
-                                        AI Agent 스튜디오 <ExternalLink size={14} className="ml-2" />
+                                    <Button size="sm" className="bg-white text-black hover:bg-white/90 w-full justify-center font-semibold">
+                                        AI Agent 스튜디오 <ExternalLink size={14} />
                                     </Button>
                                 </div>
                             </div>
