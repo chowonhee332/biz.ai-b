@@ -1128,7 +1128,7 @@ const App = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false }}
               transition={{ duration: 0.8 }}
-              className="relative rounded-[40px] overflow-hidden bg-[#0A0A0A] border border-white/5 mb-8 h-[600px] flex items-center group"
+              className="relative rounded-[40px] overflow-hidden bg-[#0A0A0A] border border-white/5 mb-8 h-[500px] flex items-center group"
             >
               <div className="absolute inset-0 w-full h-full">
                 <LightRays
