@@ -1121,7 +1121,7 @@ const App = () => {
 
         {/* AI Agent 스튜디오 섹션 */}
         <section id="studio-v2" className="py-32 px-6 bg-[#0a0a0a]">
-          <div className="max-w-[1240px] mx-auto">
+          <div className="max-w-[1200px] mx-auto">
             {/* 메인 CTA 카드 - 파티클 배경 */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
