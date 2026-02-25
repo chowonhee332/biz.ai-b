@@ -89,9 +89,6 @@ export default function NewsPage() {
 
                     {/* 1. 상단 하이라이트 (카드 뷰) */}
                     <div className="mb-24">
-                        <h2 className="text-[24px] font-bold text-white mb-8 flex items-center gap-3">
-                            <span className="text-blue-400">⚡️</span> 주요 소식
-                        </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             {[
                                 { title: "AI Agent Builder\nAI:ON-U 정식 출시", date: "Feb 20, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" },
