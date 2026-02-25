@@ -83,46 +83,124 @@ export default function NewsPage() {
                             새로운 소식
                         </h1>
                         <p className="text-white/70 text-[20px] max-w-2xl font-medium leading-relaxed">
-                            Biz.AI의 최신 업데이트, 인사이트 및 제품 공지사항을 확인하세요.
+                            Biz.AI가 전하는 최신 업데이트와 인사이트를 확인하세요.
                         </p>
                     </motion.div>
 
-                    {/* 간소화된 뉴스 리스트 플레이스홀더 */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {[
-                            { title: "AI Agent Builder\nAI:ON-U 정식 출시", date: "Feb 20, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" },
-                            { title: "Enterprise RAG\n엔진 2.0 업데이트", date: "Jan 15, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" },
-                            { title: "Kt ds, AI Agent\n도입 사례 공개", date: "Dec 22, 2025", tag: "Case Study", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" },
-                            { title: "2025 AI Trends\nReport 발간", date: "Nov 30, 2025", tag: "Insight", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" },
-                            { title: "Biz.AI 첫\n밋업 행사 개최 안내", date: "Oct 12, 2025", tag: "Event", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=800" },
-                            { title: "신규 파트너십\n체결 발표", date: "Sep 05, 2025", tag: "Partnership", image: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=800" }
-                        ].map((news, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ y: 40, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.2 + i * 0.1, duration: 0.6, ease: "easeOut" }}
-                                className="group cursor-pointer"
-                            >
-                                {/* 썸네일 */}
-                                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-6 bg-zinc-900 border border-white/5 shadow-2xl">
-                                    <img
-                                        src={news.image}
-                                        alt={news.title}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40" />
-                                </div>
+                    {/* 1. 상단 하이라이트 (카드 뷰) */}
+                    <div className="mb-24">
+                        <h2 className="text-[24px] font-bold text-white mb-8 flex items-center gap-3">
+                            <span className="text-blue-400">⚡️</span> 주요 소식
+                        </h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            {[
+                                { title: "AI Agent Builder\nAI:ON-U 정식 출시", date: "Feb 20, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" },
+                                { title: "Enterprise RAG\n엔진 2.0 업데이트", date: "Jan 15, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" },
+                            ].map((news, i) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ y: 40, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{ delay: 0.2 + i * 0.1, duration: 0.6, ease: "easeOut" }}
+                                    className="group cursor-pointer bg-[#111] rounded-3xl overflow-hidden border border-white/5 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 shadow-2xl"
+                                >
+                                    <div className="relative w-full aspect-video overflow-hidden bg-zinc-900 border-b border-white/5">
+                                        <img
+                                            src={news.image}
+                                            alt={news.title}
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+                                    </div>
+                                    <div className="p-8">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <span className="px-3 py-1 bg-white/10 text-white/90 text-[13px] font-semibold rounded-full">{news.tag}</span>
+                                            <span className="text-white/40 text-[14px] font-medium">{news.date}</span>
+                                        </div>
+                                        <h3 className="text-white text-[26px] font-bold leading-snug whitespace-pre-line group-hover:text-blue-400 transition-colors">{news.title}</h3>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
 
-                                {/* 텍스트 */}
-                                <h3 className="text-white text-[22px] font-bold leading-snug mb-4 whitespace-pre-line group-hover:text-blue-400 transition-colors">{news.title}</h3>
-                                <div className="flex items-center gap-3 mt-auto">
-                                    <span className="text-white/60 text-[15px] font-medium">{news.date}</span>
-                                    <span className="text-white/40 text-[15px]">·</span>
-                                    <span className="text-white/60 text-[15px] font-medium">{news.tag}</span>
+                    {/* 2. 하단 리스트 & 사이드바 영역 */}
+                    <div className="flex flex-col lg:flex-row gap-16">
+                        {/* 좌측 메인 리스트 뷰 */}
+                        <div className="flex-1">
+                            <h2 className="text-[24px] font-bold text-white mb-8 border-b border-white/10 pb-4">
+                                전체 소식
+                            </h2>
+                            <div className="flex flex-col gap-8">
+                                {[
+                                    { title: "Kt ds, AI Agent 도입 사례 공개", desc: "금융권부터 제조 영역까지, 실제 현장에서 활약 중인 Biz.AI의 다양한 도입 사례와 놀라운 성과를 상세히 공개합니다.", date: "Dec 22, 2025", tag: "Case Study", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" },
+                                    { title: "2025 AI Trends Report 발간", desc: "올 한 해 주목해야 할 엔터프라이즈 AI 시장의 핵심 트렌드와 기술적 변화를 심층 분석한 리포트가 발간되었습니다.", date: "Nov 30, 2025", tag: "Insight", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" },
+                                    { title: "Biz.AI 첫 밋업 행사 성황리 개최", desc: "고객사와 개발 파트너들이 한자리에 모여 AI 에이전트의 미래를 논의했던 첫 밋업 행사의 생생한 현장을 전달합니다.", date: "Oct 12, 2025", tag: "Event", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=800" },
+                                    { title: "글로벌 클라우드 플랫폼 신규 파트너십", desc: "멀티 클라우드 환경에서도 더욱 안정적이고 유연한 AI 서비스가 가능하도록 글로벌 파트너십을 체결했습니다.", date: "Sep 05, 2025", tag: "Partnership", image: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=800" }
+                                ].map((news, i) => (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: i * 0.1, duration: 0.5 }}
+                                        className="group flex flex-col-reverse sm:flex-row gap-6 items-center p-6 rounded-3xl bg-transparent hover:bg-[#111] border border-transparent hover:border-white/5 transition-all cursor-pointer"
+                                    >
+                                        <div className="flex-1 w-full">
+                                            <div className="flex items-center gap-3 mb-3">
+                                                <span className="text-white/40 text-[14px] font-medium">{news.date}</span>
+                                                <span className="text-white/20 text-[14px]">|</span>
+                                                <span className="text-blue-400 text-[14px] font-medium">{news.tag}</span>
+                                            </div>
+                                            <h3 className="text-white text-[22px] font-bold leading-snug mb-3 group-hover:text-blue-400 transition-colors">{news.title}</h3>
+                                            <p className="text-white/60 text-[16px] leading-relaxed line-clamp-2">{news.desc}</p>
+                                        </div>
+
+                                        <div className="w-full sm:w-[240px] shrink-0 aspect-video rounded-2xl overflow-hidden bg-zinc-900 border border-white/5">
+                                            <img
+                                                src={news.image}
+                                                alt={news.title}
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            />
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* 우측 사이드바 (추천 소식 & 태그) */}
+                        <div className="w-full lg:w-[320px] shrink-0 flex flex-col gap-12">
+                            {/* 추천 소식 */}
+                            <div>
+                                <h3 className="text-[18px] font-bold text-white mb-6 flex items-center gap-2">
+                                    <span className="text-blue-400">🔥</span> 추천 소식
+                                </h3>
+                                <div className="flex flex-col gap-4">
+                                    {[
+                                        { title: "AI:ON-U 도입 가이드", date: "Feb 10, 2026" },
+                                        { title: "성공적인 RAG 시스템 구축을 위한 5가지 원칙", date: "Jan 05, 2026" },
+                                        { title: "Biz.AI 요금제 개편 안내", date: "Dec 10, 2025" }
+                                    ].map((item, i) => (
+                                        <div key={i} className="group p-5 rounded-2xl bg-[#0e0e0e] border border-white/5 hover:border-white/20 hover:bg-[#141414] transition-all cursor-pointer">
+                                            <div className="text-white/40 text-[12px] font-medium mb-2">{item.date}</div>
+                                            <h4 className="text-white/90 text-[15px] font-bold leading-snug group-hover:text-white transition-colors">{item.title}</h4>
+                                        </div>
+                                    ))}
                                 </div>
-                            </motion.div>
-                        ))}
+                            </div>
+
+                            {/* 인기 태그 */}
+                            <div>
+                                <h3 className="text-[18px] font-bold text-white mb-6">인기 태그</h3>
+                                <div className="flex flex-wrap gap-2">
+                                    {['Product', 'AI Agent', 'RAG', 'Case Study', 'Insight', 'Event', 'Tech'].map((tag, i) => (
+                                        <span key={i} className="px-4 py-2 rounded-full bg-[#111] border border-white/10 text-white/70 text-[13px] font-medium hover:bg-white/10 hover:text-white transition-colors cursor-pointer">
+                                            # {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
