@@ -1134,7 +1134,7 @@ const App = () => {
                 <LightRays
                   raysOrigin="right"
                   raysColor="#0aa1ff"
-                  raysSpeed={2.0}
+                  raysSpeed={0.4}
                   lightSpread={1.5}
                   rayLength={5}
                   followMouse={true}
