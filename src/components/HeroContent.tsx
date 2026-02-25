@@ -138,22 +138,7 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
         </Button>
       </motion.div>
 
-      {/* 롤링 인디케이터 */}
-      <div className={`flex gap-2 ${isLeft ? 'justify-start' : 'justify-center'} mt-8`}>
-        {HERO_SLIDES.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setIndex(i)}
-            className="p-1 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
-            aria-label={`슬라이드 ${i + 1}로 이동`}
-          >
-            <span
-              className={`block w-2 h-2 rounded-full transition-all duration-300 ${i === index ? 'bg-white w-6' : 'bg-white/40 hover:bg-white/60'
-                }`}
-            />
-          </button>
-        ))}
-      </div>
+
     </div>
   );
 }
