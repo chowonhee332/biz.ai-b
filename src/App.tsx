@@ -1128,14 +1128,26 @@ const App = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false }}
               transition={{ duration: 0.8 }}
-              className="relative rounded-[40px] overflow-hidden bg-[#0A0A0A] border border-white/5 mb-8 h-[500px] flex items-center group"
+              className="relative rounded-[40px] overflow-hidden bg-[#0A0A0A] border border-white/5 mb-8 h-[600px] flex items-center group"
             >
-              <img
-                src="/banner.png"
-                alt="AI Agent Studio"
-                className="absolute inset-0 w-full h-full object-cover opacity-80"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent z-[1]" />
+              <div className="absolute inset-0 w-full h-full">
+                <LightRays
+                  raysOrigin="right"
+                  raysColor="#0aa1ff"
+                  raysSpeed={1.5}
+                  lightSpread={1.3}
+                  rayLength={3}
+                  followMouse={true}
+                  mouseInfluence={0.1}
+                  noiseAmount={0}
+                  distortion={0}
+                  className="custom-rays opacity-60"
+                  pulsating={false}
+                  fadeDistance={1}
+                  saturation={1}
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/40 to-transparent z-[1]" />
 
               <div className="relative z-10 pl-16 md:pl-24 max-w-2xl font-pretendard">
                 <h2 className="text-[44px] font-black bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
