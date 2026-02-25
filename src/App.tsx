@@ -11,7 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import ParticleEngine from './components/ParticleEngine';
 import HeroContent from './components/HeroContent';
 import { LightRays } from './components/LightRays';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowUp,
   Search,
@@ -367,6 +367,7 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showTopBtn, setShowTopBtn] = useState(false);
   const [activeDomain, setActiveDomain] = useState<number>(0);
+  const navigate = useNavigate();
   const { scrollY, scrollYProgress } = useScroll();
 
 
@@ -944,16 +945,15 @@ const App = () => {
         {/* 새로운 소식 섹션 */}
         <section id="news" className="py-32 px-6 bg-[#0a0a0a] relative">
           <div className="max-w-[1200px] mx-auto">
-            {/* 헤더: 타이틀 + 버튼 */}
-            <div className="flex items-center justify-between mb-12">
-              <h2 className="text-[40px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent tracking-tight font-pretendard uppercase">
+            {/* 헤더: 타이틀 중앙 정렬 및 스타일 통일 */}
+            <div className="flex flex-col items-center text-center mb-16">
+              <span className="text-[#FF4D4D] font-bold text-[14px] mb-4 tracking-[0.2em] uppercase">News</span>
+              <h2 className="text-[52px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
                 새로운 소식
               </h2>
-              <Link to="/news">
-                <button className="px-6 py-2.5 rounded-full border border-white/20 text-white text-[14px] font-medium hover:bg-white/10 transition-all">
-                  더보기
-                </button>
-              </Link>
+              <p className="text-white/70 text-[18px] max-w-2xl font-medium leading-relaxed">
+                Biz.AI가 전하는 최신 업데이트와 인사이트를 확인하세요.
+              </p>
             </div>
 
             {/* 뉴스 카드 그리드 */}
@@ -971,6 +971,7 @@ const App = () => {
                   transition={{ delay: i * 0.1, duration: 0.5 }}
                   viewport={{ once: false }}
                   className="group cursor-pointer"
+                  onClick={() => navigate(`/news/${i + 1}`, { state: { news } })}
                 >
                   {/* 썸네일 */}
                   <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mb-5 bg-zinc-900 border border-white/5 shadow-2xl">
@@ -984,27 +985,30 @@ const App = () => {
                   </div>
 
                   {/* 텍스트 */}
-                  <h3 className="text-white text-[18px] font-bold leading-snug mb-3 whitespace-pre-line group-hover:text-blue-400 transition-colors">{news.title}</h3>
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-white/80 text-[20px] font-medium">{news.date}</span>
-                    <span className="text-white/80 text-[20px]">·</span>
-                    <span className="text-white/80 text-[20px] font-medium">{news.tag}</span>
+                  <div className="flex flex-col">
+                    <span className="text-blue-400 text-[14px] font-bold mb-3">{news.tag}</span>
+                    <h3 className="text-white text-[18px] font-bold leading-snug mb-3 whitespace-pre-line group-hover:text-blue-400 transition-colors">
+                      {news.title}
+                    </h3>
+                    <span className="text-white/40 text-[14px] font-medium">{news.date}</span>
                   </div>
-                  <span className="text-white/60 text-[14px] font-medium group-hover:text-white transition-colors">
-                    Read more →
-                  </span>
                 </motion.div>
               ))}
             </div>
 
-            {/* 네비게이션 화살표 */}
-            <div className="flex items-center gap-2">
-              <button className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all">
-                <ChevronDown size={16} className="rotate-90" />
-              </button>
-              <button className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all">
-                <ChevronDown size={16} className="-rotate-90" />
-              </button>
+            {/* 더보기 버튼 하단 중앙 배치 */}
+            <div className="flex flex-col items-center mt-12">
+              <Link to="/news">
+                <button className="group relative px-12 py-4 rounded-full bg-white/5 text-white text-[16px] font-bold hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center overflow-hidden">
+                  <span className="relative flex items-center transition-transform duration-300 group-hover:-translate-x-2">
+                    전체 소식 더보기
+                    <ArrowRight
+                      size={18}
+                      className="absolute left-full ml-2 opacity-0 group-hover:opacity-100 transition-all duration-300"
+                    />
+                  </span>
+                </button>
+              </Link>
             </div>
           </div>
         </section>
@@ -1278,7 +1282,7 @@ const App = () => {
             </div>
           </div>
         </footer>
-      </div>
+      </div >
 
       <AnimatePresence>
         {showTopBtn && (

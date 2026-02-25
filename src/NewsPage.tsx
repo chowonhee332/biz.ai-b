@@ -99,7 +99,7 @@ export default function NewsPage() {
 
             {/* 2. 본문 컨텐츠 시작 */}
             <section className="pt-48 pb-32 px-6 flex-1">
-                <div className="max-w-[1240px] mx-auto">
+                <div className="max-w-[1200px] mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -109,7 +109,7 @@ export default function NewsPage() {
                         <h1 className="text-[52px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
                             새로운 소식
                         </h1>
-                        <p className="text-white/70 text-[20px] max-w-2xl font-medium leading-relaxed">
+                        <p className="text-white/70 text-[18px] max-w-2xl font-medium leading-relaxed">
                             Biz.AI가 전하는 최신 업데이트와 인사이트를 확인하세요.
                         </p>
                     </motion.div>
@@ -152,7 +152,7 @@ export default function NewsPage() {
                                     <div
                                         key={i}
                                         onClick={() => navigate('/news/1', { state: { news } })}
-                                        className="group cursor-pointer bg-transparent rounded-3xl overflow-hidden border border-transparent hover:border-white/5 transition-all duration-500 hover:-translate-y-2 hover:bg-[#111] hover:shadow-2xl shrink-0 flex flex-col"
+                                        className="group cursor-pointer bg-transparent rounded-3xl overflow-hidden shrink-0 flex flex-col transition-all duration-500"
                                         style={{ width: 'var(--card-width)' }}
                                     >
                                         <div className="relative w-full aspect-[16/10] overflow-hidden bg-zinc-900 rounded-2xl">
@@ -161,19 +161,11 @@ export default function NewsPage() {
                                                 alt={news.title}
                                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                             />
-                                            {/* Hover overlay hint */}
-                                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
                                         </div>
-                                        <div className="pt-6 px-2 pb-6 flex-1 flex flex-col">
-                                            <div className="flex items-center gap-3 mb-3">
-                                                <span className="text-white/40 text-[14px] font-medium">{news.date}</span>
-                                                <span className="text-white/20 text-[14px]">|</span>
-                                                <span className="text-blue-400 text-[14px] font-medium">{news.tag}</span>
-                                            </div>
-                                            <h3 className="text-white text-[22px] font-bold leading-snug whitespace-pre-line group-hover:text-blue-400 transition-colors mb-2">{news.title}</h3>
-                                            <p className="text-white/60 text-[15px] font-medium leading-relaxed line-clamp-2 mt-auto">
-                                                새로운 업데이트와 인사이틀 확인해보세요. Biz.AI의 더 나은 미래를 엽니다.
-                                            </p>
+                                        <div className="pt-6 px-2 pb-2 flex-1 flex flex-col">
+                                            <span className="text-white/40 text-[14px] font-medium mb-3">{news.tag}</span>
+                                            <h3 className="text-white text-[22px] font-bold leading-snug whitespace-pre-line group-hover:text-blue-400 transition-colors mb-4">{news.title}</h3>
+                                            <span className="text-white/40 text-[14px] font-medium mt-auto">{news.date}</span>
                                         </div>
                                     </div>
                                 ))}
@@ -215,7 +207,7 @@ export default function NewsPage() {
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: i * 0.1, duration: 0.5 }}
-                                        className="group flex flex-col-reverse sm:flex-row gap-6 items-center p-6 rounded-3xl bg-transparent hover:bg-[#111] border border-transparent hover:border-white/5 transition-all cursor-pointer"
+                                        className="group flex flex-col-reverse sm:flex-row gap-8 items-center py-8 rounded-3xl bg-transparent transition-all cursor-pointer"
                                     >
                                         <div className="flex-1 w-full flex flex-col">
                                             <span className="text-blue-400 text-[14px] font-bold mb-3">{news.tag}</span>
