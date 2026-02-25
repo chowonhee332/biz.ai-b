@@ -1,17 +1,39 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, ExternalLink } from 'lucide-react';
+import { Menu, X, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Linkedin, Youtube } from 'lucide-react';
 
+const HIGHLIGHT_NEWS = [
+    { title: "AI Agent Builder\nAI:ON-U 정식 출시", date: "Feb 20, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" },
+    { title: "Enterprise RAG\n엔진 2.0 업데이트", date: "Jan 15, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" },
+    { title: "멀티 에이전트 시스템\n혁신적 성과 달성", date: "Jan 03, 2026", tag: "Tech", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" },
+    { title: "Biz.AI 글로벌 파트너스\n서밋 2026 성공적 개최", date: "Dec 18, 2025", tag: "Event", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=800" },
+    { title: "데이터 보안\n최상위 등급 획득", date: "Nov 25, 2025", tag: "Company", image: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=800" },
+    { title: "차세대 언어 모델\n도입 및 기술 검증 완료", date: "Nov 10, 2025", tag: "Insight", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" },
+    { title: "2025 AI 혁신 어워드\n올해의 제품상 수상", date: "Oct 30, 2025", tag: "Award", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800" },
+];
+
 export default function NewsPage() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [currentSlide, setCurrentSlide] = useState(0);
 
     // Scroll to top on mount
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    // 3초마다 슬라이드 자동 이동
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % HIGHLIGHT_NEWS.length);
+        }, 3000);
+        return () => clearInterval(timer);
+    }, []);
+
+    const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % HIGHLIGHT_NEWS.length);
+    const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + HIGHLIGHT_NEWS.length) % HIGHLIGHT_NEWS.length);
 
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-white font-pretendard flex flex-col">
@@ -87,37 +109,70 @@ export default function NewsPage() {
                         </p>
                     </motion.div>
 
-                    {/* 1. 상단 하이라이트 (카드 뷰) */}
-                    <div className="mb-24">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            {[
-                                { title: "AI Agent Builder\nAI:ON-U 정식 출시", date: "Feb 20, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" },
-                                { title: "Enterprise RAG\n엔진 2.0 업데이트", date: "Jan 15, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" },
-                            ].map((news, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ y: 40, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{ delay: 0.2 + i * 0.1, duration: 0.6, ease: "easeOut" }}
-                                    className="group cursor-pointer bg-[#111] rounded-3xl overflow-hidden border border-white/5 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 shadow-2xl"
-                                >
-                                    <div className="relative w-full aspect-video overflow-hidden bg-zinc-900 border-b border-white/5">
-                                        <img
-                                            src={news.image}
-                                            alt={news.title}
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
-                                    </div>
-                                    <div className="p-8">
-                                        <div className="flex items-center gap-3 mb-4">
-                                            <span className="px-3 py-1 bg-white/10 text-white/90 text-[13px] font-semibold rounded-full">{news.tag}</span>
-                                            <span className="text-white/40 text-[14px] font-medium">{news.date}</span>
+                    {/* 1. 상단 하이라이트 (캐러셀 뷰) */}
+                    <div className="mb-24 relative">
+                        {/* 캐러셀 래퍼 */}
+                        <div className="overflow-hidden rounded-3xl pb-16">
+                            <motion.div
+                                className="flex gap-8"
+                                animate={{ x: `calc(-${currentSlide * 100}% - ${currentSlide * 32}px)` }}
+                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                style={{ width: `${HIGHLIGHT_NEWS.length * 100}%` }}
+                            >
+                                {HIGHLIGHT_NEWS.map((news, i) => (
+                                    <div
+                                        key={i}
+                                        className="group cursor-pointer bg-[#111] rounded-3xl overflow-hidden border border-white/5 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 shadow-2xl shrink-0"
+                                        style={{ width: `calc((100% - ${(HIGHLIGHT_NEWS.length - 1) * 32}px) / ${HIGHLIGHT_NEWS.length})` }}
+                                    >
+                                        <div className="relative w-full aspect-video overflow-hidden bg-zinc-900 border-b border-white/5">
+                                            <img
+                                                src={news.image}
+                                                alt={news.title}
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
                                         </div>
-                                        <h3 className="text-white text-[26px] font-bold leading-snug whitespace-pre-line group-hover:text-blue-400 transition-colors">{news.title}</h3>
+                                        <div className="p-8">
+                                            <div className="flex items-center gap-3 mb-4">
+                                                <span className="px-3 py-1 bg-white/10 text-white/90 text-[13px] font-semibold rounded-full">{news.tag}</span>
+                                                <span className="text-white/40 text-[14px] font-medium">{news.date}</span>
+                                            </div>
+                                            <h3 className="text-white text-[26px] font-bold leading-snug whitespace-pre-line group-hover:text-blue-400 transition-colors">{news.title}</h3>
+                                        </div>
                                     </div>
-                                </motion.div>
-                            ))}
+                                ))}
+                            </motion.div>
+                        </div>
+
+                        {/* 좌우 이동 및 인디케이터 컨트롤 영역 (좌측 하단) */}
+                        <div className="absolute bottom-0 left-0 flex items-center gap-6 mt-6 pl-2">
+                            <div className="flex gap-2">
+                                <button
+                                    onClick={prevSlide}
+                                    className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-[#111] hover:bg-white/10 hover:border-white/30 transition-all text-white/70 hover:text-white"
+                                >
+                                    <ChevronLeft size={20} />
+                                </button>
+                                <button
+                                    onClick={nextSlide}
+                                    className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-[#111] hover:bg-white/10 hover:border-white/30 transition-all text-white/70 hover:text-white"
+                                >
+                                    <ChevronRight size={20} />
+                                </button>
+                            </div>
+
+                            {/* 인디케이터 점 */}
+                            <div className="flex gap-2 items-center h-full">
+                                {HIGHLIGHT_NEWS.map((_, i) => (
+                                    <button
+                                        key={i}
+                                        onClick={() => setCurrentSlide(i)}
+                                        className={`h-1.5 rounded-full transition-all duration-300 ${i === currentSlide ? 'w-8 bg-blue-500' : 'w-2 bg-white/20 hover:bg-white/40'}`}
+                                        aria-label={`Go to slide ${i + 1}`}
+                                    />
+                                ))}
+                            </div>
                         </div>
                     </div>
 
