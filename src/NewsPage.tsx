@@ -19,6 +19,9 @@ export default function NewsPage() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
 
+    // 최대 슬라이드 인덱스 계산 (데스크탑 기준 3개 아이템 노출 시)
+    const MAX_SLIDES = Math.max(0, HIGHLIGHT_NEWS.length - 3);
+
     // Scroll to top on mount
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -27,13 +30,13 @@ export default function NewsPage() {
     // 3초마다 슬라이드 자동 이동
     useEffect(() => {
         const timer = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % HIGHLIGHT_NEWS.length);
+            setCurrentSlide((prev) => (prev >= MAX_SLIDES ? 0 : prev + 1));
         }, 3000);
         return () => clearInterval(timer);
     }, []);
 
-    const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % HIGHLIGHT_NEWS.length);
-    const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + HIGHLIGHT_NEWS.length) % HIGHLIGHT_NEWS.length);
+    const nextSlide = () => setCurrentSlide((prev) => (prev >= MAX_SLIDES ? 0 : prev + 1));
+    const prevSlide = () => setCurrentSlide((prev) => (prev === 0 ? MAX_SLIDES : prev - 1));
 
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-white font-pretendard flex flex-col">
@@ -109,40 +112,69 @@ export default function NewsPage() {
                         </p>
                     </motion.div>
 
-                    {/* 1. 상단 하이라이트 (캐러셀 뷰) */}
+                    {/* 1. 상단 하이라이트 (캐러셀 뷰 - 3단 카드 레이아웃) */}
                     <div className="mb-24 relative">
+                        <style>{`
+                            .news-carousel {
+                                --cards-per-view: 1;
+                                --gap: 16px;
+                            }
+                            @media (min-width: 768px) {
+                                .news-carousel {
+                                    --cards-per-view: 2;
+                                    --gap: 24px;
+                                }
+                            }
+                            @media (min-width: 1024px) {
+                                .news-carousel {
+                                    --cards-per-view: 3;
+                                    --gap: 32px;
+                                }
+                            }
+                            .news-carousel {
+                                --card-width: calc((100% - (var(--cards-per-view) - 1) * var(--gap)) / var(--cards-per-view));
+                                --slide-move: calc(var(--card-width) + var(--gap));
+                            }
+                        `}</style>
                         {/* 캐러셀 래퍼 */}
-                        <div className="overflow-hidden rounded-3xl pb-16">
-                            <motion.div
-                                className="flex gap-8"
-                                animate={{ x: `calc(-${currentSlide * 100}% - ${currentSlide * 32}px)` }}
-                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                style={{ width: `${HIGHLIGHT_NEWS.length * 100}%` }}
+                        <div className="overflow-hidden pb-16 news-carousel">
+                            <div
+                                className="flex transition-transform duration-500 ease-out"
+                                style={{
+                                    gap: 'var(--gap)',
+                                    width: '100%',
+                                    transform: `translateX(calc(-${currentSlide} * var(--slide-move)))`
+                                }}
                             >
                                 {HIGHLIGHT_NEWS.map((news, i) => (
                                     <div
                                         key={i}
-                                        className="group cursor-pointer bg-[#111] rounded-3xl overflow-hidden border border-white/5 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 shadow-2xl shrink-0"
-                                        style={{ width: `calc((100% - ${(HIGHLIGHT_NEWS.length - 1) * 32}px) / ${HIGHLIGHT_NEWS.length})` }}
+                                        className="group cursor-pointer bg-transparent rounded-3xl overflow-hidden border border-transparent hover:border-white/5 transition-all duration-500 hover:-translate-y-2 hover:bg-[#111] hover:shadow-2xl shrink-0 flex flex-col"
+                                        style={{ width: 'var(--card-width)' }}
                                     >
-                                        <div className="relative w-full aspect-video overflow-hidden bg-zinc-900 border-b border-white/5">
+                                        <div className="relative w-full aspect-[16/10] overflow-hidden bg-zinc-900 rounded-2xl">
                                             <img
                                                 src={news.image}
                                                 alt={news.title}
                                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+                                            {/* Hover overlay hint */}
+                                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
                                         </div>
-                                        <div className="p-8">
-                                            <div className="flex items-center gap-3 mb-4">
-                                                <span className="px-3 py-1 bg-white/10 text-white/90 text-[13px] font-semibold rounded-full">{news.tag}</span>
+                                        <div className="pt-6 px-2 pb-6 flex-1 flex flex-col">
+                                            <div className="flex items-center gap-3 mb-3">
                                                 <span className="text-white/40 text-[14px] font-medium">{news.date}</span>
+                                                <span className="text-white/20 text-[14px]">|</span>
+                                                <span className="text-blue-400 text-[14px] font-medium">{news.tag}</span>
                                             </div>
-                                            <h3 className="text-white text-[26px] font-bold leading-snug whitespace-pre-line group-hover:text-blue-400 transition-colors">{news.title}</h3>
+                                            <h3 className="text-white text-[22px] font-bold leading-snug whitespace-pre-line group-hover:text-blue-400 transition-colors mb-2">{news.title}</h3>
+                                            <p className="text-white/60 text-[15px] font-medium leading-relaxed line-clamp-2 mt-auto">
+                                                새로운 업데이트와 인사이틀 확인해보세요. Biz.AI의 더 나은 미래를 엽니다.
+                                            </p>
                                         </div>
                                     </div>
                                 ))}
-                            </motion.div>
+                            </div>
                         </div>
 
                         {/* 좌우 이동 및 인디케이터 컨트롤 영역 (좌측 하단) */}
@@ -164,7 +196,7 @@ export default function NewsPage() {
 
                             {/* 인디케이터 점 */}
                             <div className="flex gap-2 items-center h-full">
-                                {HIGHLIGHT_NEWS.map((_, i) => (
+                                {Array.from({ length: MAX_SLIDES + 1 }).map((_, i) => (
                                     <button
                                         key={i}
                                         onClick={() => setCurrentSlide(i)}
