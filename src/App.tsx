@@ -531,8 +531,31 @@ const App = () => {
       <section id="hero" className="relative z-20 h-screen flex items-center justify-center overflow-clip bg-[#0a0a0a] font-poppins">
 
 
-        <div className="relative z-10 flex items-center w-full">
-          <HeroContent align="left" />
+        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 h-full flex items-center">
+          <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-10">
+            {/* Left Content */}
+            <div className="flex-1">
+              <HeroContent align="left" />
+            </div>
+
+            {/* Right Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="hidden lg:block flex-1 relative"
+            >
+              <div className="relative">
+                {/* Subtle glow behind image */}
+                <div className="absolute -inset-10 bg-blue-500/10 rounded-full blur-[100px]" />
+                <img
+                  src="/banner.png"
+                  alt="Biz.AI Hero"
+                  className="w-full h-auto object-contain relative z-10"
+                />
+              </div>
+            </motion.div>
+          </div>
         </div>
 
         {/* 스크롤 다운 인디케이터 */}
