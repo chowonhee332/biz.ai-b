@@ -120,7 +120,7 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
+        transition={{ duration: 0.5, delay: 0 }}
         className={`flex flex-col sm:flex-row gap-4 ${isLeft ? 'justify-start' : 'justify-center'} mt-16`}
       >
         <Button
