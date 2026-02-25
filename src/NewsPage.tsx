@@ -44,17 +44,17 @@ export default function NewsPage() {
         <div className="min-h-screen bg-[#0a0a0a] text-white font-pretendard flex flex-col">
             {/* 1. GNB 영역 (App.tsx와 동일하게 구성하지만 링크는 '/' 및 기타 영역 유지) */}
             <nav className="fixed w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-xl py-4 px-6 md:px-10 border-b border-white/5">
-                <div className="max-w-[1240px] mx-auto flex justify-between items-center">
+                <div className="max-w-[1200px] mx-auto flex justify-between items-center">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2 shrink-0">
                         <img src="/bizai_logo.png" alt="Biz.AI Logo" className="h-6 w-auto" />
-                        <span className="text-[22px] font-bold text-white tracking-tight hidden sm:inline">Biz.AI</span>
+                        <span className="text-xl font-bold text-white tracking-tight hidden sm:inline">Biz.AI</span>
                     </Link>
 
                     <div className="hidden lg:flex items-center gap-8 text-white/90 text-[14px] font-medium">
                         <Link to="/" className="hover:text-white transition-colors">멀티 에이전트 플랫폼</Link>
                         <Link to="/#use-cases" className="hover:text-white transition-colors">고객 사례</Link>
-                        <Link to="/news" className="text-white font-bold transition-colors">새로운 소식</Link>
+                        <Link to="/news" className="text-white font-semibold transition-colors">새로운 소식</Link>
                     </div>
 
                     <div className="flex items-center gap-3">
@@ -151,7 +151,7 @@ export default function NewsPage() {
                                 {HIGHLIGHT_NEWS.map((news, i) => (
                                     <div
                                         key={i}
-                                        onClick={() => navigate('/news/1')}
+                                        onClick={() => navigate('/news/1', { state: { news } })}
                                         className="group cursor-pointer bg-transparent rounded-3xl overflow-hidden border border-transparent hover:border-white/5 transition-all duration-500 hover:-translate-y-2 hover:bg-[#111] hover:shadow-2xl shrink-0 flex flex-col"
                                         style={{ width: 'var(--card-width)' }}
                                     >
@@ -210,7 +210,7 @@ export default function NewsPage() {
                                 ].map((news, i) => (
                                     <motion.div
                                         key={i}
-                                        onClick={() => navigate(`/news/${i + 1}`)}
+                                        onClick={() => navigate(`/news/${i + 1}`, { state: { news } })}
                                         initial={{ opacity: 0, x: -20 }}
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
