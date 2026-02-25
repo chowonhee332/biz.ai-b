@@ -5,8 +5,8 @@ import type { MotionValue } from 'motion/react';
 const PARTICLE_COUNT = 12000;
 const RING_CENTER = 0.72; // Larger overall shape
 const RING_SIGMA = 0.12; // Tighter core density
-const MOUSE_INFLUENCE = 0.01;
-const MOUSE_RADIUS = 0.16;
+const MOUSE_INFLUENCE = 0.08;
+const MOUSE_RADIUS = 0.22;
 const GATHER_DURATION = 4;
 
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
@@ -214,9 +214,24 @@ export default function ParticleEngine({ scrollYProgress, className = '', mode =
         const easedX = p.startX + (targetX - p.startX) * eased;
         const easedY = p.startY + (targetY - p.startY) * eased;
 
-        const mouseInf = MOUSE_INFLUENCE * (1 - eased);
-        const x = easedX + (mouseX - 0.5) * mouseInf;
-        const y = easedY + (mouseY - 0.5) * mouseInf;
+        // Mouse displacement logic: particles move away from/towards the cursor based on distance
+        const dx = easedX - mouseX;
+        const dy = easedY - mouseY;
+        const distSq = dx * dx + dy * dy;
+        const mouseRadiusSq = MOUSE_RADIUS * MOUSE_RADIUS;
+
+        let offsetX = 0;
+        let offsetY = 0;
+
+        if (distSq < mouseRadiusSq) {
+          const dist = Math.sqrt(distSq);
+          const force = (1 - dist / MOUSE_RADIUS) * MOUSE_INFLUENCE * eased;
+          offsetX = dx * force;
+          offsetY = dy * force;
+        }
+
+        const x = easedX + offsetX;
+        const y = easedY + offsetY;
 
         const size = p.size * (1 - eased) + ((p as any).targetSize * 0.01 * minSize / 400 || p.size) * eased;
         const twinkle = 0.4 + 0.6 * Math.sin(elapsed * p.twinkleSpeed + p.twinkleOffset);
