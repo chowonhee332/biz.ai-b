@@ -532,18 +532,18 @@ const App = () => {
 
 
         {/* Background Image Area (Overlapping) */}
-        <div className="absolute right-[-5%] top-1/2 -translate-y-1/2 w-[65%] h-full z-0 flex items-center justify-end pointer-events-none">
+        <div className="absolute right-[3%] top-1/2 -translate-y-1/2 w-[55%] z-0 flex items-center justify-center pointer-events-none">
           <motion.div
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
-            className="relative w-full h-full flex items-center justify-end"
+            initial={{ opacity: 0, x: 60, scale: 0.98 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            className="relative w-full flex items-center justify-center"
           >
             <div className="absolute -inset-20 bg-blue-500/5 rounded-full blur-[120px] z-0" />
             <img
               src="/banner.png"
               alt="Biz.AI Hero"
-              className="max-h-[85%] w-auto object-contain relative z-10 opacity-80"
+              className="w-full h-auto object-contain relative z-10 opacity-85"
             />
           </motion.div>
         </div>
