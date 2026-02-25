@@ -78,20 +78,31 @@ const AnimatedCounter = ({ from, to }: { from: number; to: number }) => {
   return <span ref={nodeRef}>{Intl.NumberFormat("en-US").format(from)}</span>;
 };
 
-const SolutionCard = ({ image, title, desc, tag }: { image: string; title: string; desc: string; tag: string }) => (
-  <div className="flex flex-col h-full text-left bg-transparent group px-8 relative w-[364px]">
-    <div className="w-[300px] h-[300px] rounded-[32px] overflow-hidden bg-transparent mb-10 relative flex items-center justify-center shadow-2xl">
-      <img
-        src={image}
-        alt={title}
-        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-[0.22,1,0.36,1] smooth-gpu"
+const SolutionCard = ({ image, title, desc, highlight }: { image: string; title: string; desc: string; highlight: string }) => (
+  <div className="w-[320px] h-[280px] mx-auto rounded-[20px] bg-white flex items-center justify-center p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-black/[0.03] cursor-pointer transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-2 group relative overflow-hidden">
+    {/* Default Logo View */}
+    <img
+      src={image}
+      alt={title}
+      className="w-[200px] h-auto object-contain transition-all duration-700 group-hover:scale-105 group-hover:opacity-0"
+    />
+
+    {/* Hover Overlay View */}
+    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col p-8 text-left">
+      <div
+        className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+        style={{ backgroundImage: `url('/thumbnail_bg.png')` }}
       />
-    </div>
-    <div className="flex flex-col flex-grow w-[300px] font-pretendard px-[12px]">
-      <h4 className="text-[28px] font-bold text-gray-800 mb-3 tracking-tighter leading-tight">{title}</h4>
-      <p className="text-black/80 text-[16px] leading-relaxed mb-8 font-normal break-keep">{desc}</p>
-      <div className="mt-auto">
-        <span className="text-[#3B82F6] font-bold text-[15px]">{tag}</span>
+      <div className="absolute inset-0 bg-black/60" />
+
+      <div className="relative z-10 flex flex-col h-full font-pretendard">
+        <h4 className="text-white text-[24px] font-bold mb-4">{title}</h4>
+        <p className="text-white/80 text-[15px] leading-relaxed mb-8 break-keep font-medium">
+          {desc}
+        </p>
+        <div className="mt-auto">
+          <span className="text-[#00E5FF] font-bold text-[16px] tracking-tight">{highlight}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -566,35 +577,38 @@ const App = () => {
                 </div>
                 <LightRays className="opacity-40" />
 
-                <div className="mb-14">
-                  <div className="grid grid-cols-1 md:grid-cols-3 divide-x divide-gray-100 w-fit mx-auto">
+                {/* 그룹 1: 전사 공통 */}
+                <div className="mb-20 max-w-[984px] mx-auto">
+                  <div className="flex items-center gap-2 mb-6 ml-4">
+                    <span className="text-[18px] font-bold text-gray-800">전사 공통 (General Business)</span>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-[12px] justify-items-center">
                     {[
                       {
-                        image: "/1.png",
+                        image: "/logo_1.png",
                         title: "AI:ON-U",
                         desc: "엔터프라이즈 맞춤형 AI Agent를 빠르게 구축하는 No-Code 기반 Agent Builder",
-                        tag: "#3분 완성 Agent"
+                        highlight: "#3분 완성 Agent"
                       },
                       {
-                        image: "/2.png",
-                        title: "Works AI",
+                        image: "/logo_2.png",
+                        title: "works AI",
                         desc: "AI Agent 기반으로 다양한 업무처리를 지원하는 사내 AI Agent Portal",
-                        tag: "#3분 완성 Agent"
+                        highlight: "#업무 효율 200% 향상"
                       },
                       {
-                        image: "/3.png",
-                        title: "AI 회의록",
-                        desc: "음성 기반 회의 자동 기록 요약 및 업무 추출 AI 서비스",
-                        tag: "#3분 완성 Agent"
+                        image: "/logo_3.png",
+                        title: "cloudwiz",
+                        desc: "클라우드 운영 효율화와 자동화를 지원하는 관리 서비스",
+                        highlight: "#멀티 클라우드 비용 30% 절감"
                       }
                     ].map((card, i) => (
                       <motion.div
                         key={i}
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: false }}
+                        viewport={{ once: true }}
                         transition={{ delay: i * 0.1, duration: 0.5 }}
-                        className="smooth-gpu"
                       >
                         <SolutionCard {...card} />
                       </motion.div>
@@ -602,41 +616,46 @@ const App = () => {
                   </div>
                 </div>
 
-                <div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 divide-x divide-gray-100 w-fit mx-auto">
+                {/* 그룹 2: IT 서비스/개발 직군 */}
+                <div className="mb-14 max-w-[984px] mx-auto">
+                  <div className="flex items-center gap-2 mb-6 ml-4">
+                    <span className="text-[18px] font-bold text-gray-800">IT 서비스/개발 직군 (IT Service & Dev)</span>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-[12px] justify-items-center">
                     {[
                       {
-                        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600",
-                        title: "CloudWiz",
+                        image: "/logo_3.png",
+                        title: "cloudwiz",
                         desc: "클라우드 운영 효율화와 자동화를 지원하는 관리 서비스",
-                        tag: "지원하는 관리 서비스"
+                        highlight: "#멀티 클라우드 비용 30% 절감"
                       },
                       {
-                        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=600",
-                        title: "Beast AI Gateway",
-                        desc: "엔터프라이즈용 AI 기술, API를 통합 관리하는 서비스",
-                        tag: "통합 관리하는 서비스"
+                        image: "/logo_4.png",
+                        title: "BEAST",
+                        desc: "엔터프라이즈용 AI 기술, API를 통합 관리하는 솔루션",
+                        highlight: "#안전한 AI API 통합 관리"
                       },
                       {
-                        image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=600",
-                        title: "CodeBox",
+                        image: "/logo_5.png",
+                        title: "CODEBOX",
                         desc: "폐쇄형 설치형 AI 코드 개발 어플라이언스",
-                        tag: "어플라이언스"
+                        highlight: "#보안 특화 AI 개발 환경"
                       }
                     ].map((card, i) => (
                       <motion.div
                         key={i}
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: false }}
+                        viewport={{ once: true }}
                         transition={{ delay: i * 0.1, duration: 0.5 }}
-                        className="smooth-gpu"
                       >
                         <SolutionCard {...card} />
                       </motion.div>
                     ))}
                   </div>
                 </div>
+
+
               </div>
             </section>
           </motion.div>
