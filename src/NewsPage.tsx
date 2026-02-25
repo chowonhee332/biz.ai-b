@@ -176,24 +176,6 @@ export default function NewsPage() {
                                 ))}
                             </div>
                         </div>
-
-                        {/* 좌우 이동 컨트롤 영역 (좌측 하단) */}
-                        <div className="absolute bottom-0 left-0 flex items-center gap-6 mt-6 pl-2">
-                            <div className="flex gap-2">
-                                <button
-                                    onClick={prevSlide}
-                                    className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-[#111] hover:bg-white/10 hover:border-white/30 transition-all text-white/70 hover:text-white"
-                                >
-                                    <ChevronLeft size={20} />
-                                </button>
-                                <button
-                                    onClick={nextSlide}
-                                    className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-[#111] hover:bg-white/10 hover:border-white/30 transition-all text-white/70 hover:text-white"
-                                >
-                                    <ChevronRight size={20} />
-                                </button>
-                            </div>
-                        </div>
                     </div>
 
                     {/* 2. 하단 리스트 & 사이드바 영역 */}
