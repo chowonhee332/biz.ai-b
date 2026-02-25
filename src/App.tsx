@@ -546,14 +546,18 @@ const App = () => {
               transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
               className="hidden lg:block absolute left-[55%] top-1/2 -translate-y-1/2 w-[720px] z-10 pointer-events-none"
             >
-              <div className="relative">
+              <motion.div
+                className="relative"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+              >
                 <div className="absolute -inset-20 bg-blue-500/5 rounded-full blur-[100px] z-0" />
                 <img
                   src="/banner.png"
                   alt="Biz.AI Hero"
                   className="w-full h-auto object-contain relative z-10 opacity-90 shadow-2xl"
                 />
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
