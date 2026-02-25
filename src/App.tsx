@@ -1156,7 +1156,7 @@ const App = () => {
                     {item.icon}
                   </div>
                   <h3 className="text-white text-xl font-bold mb-4">{item.title}</h3>
-                  <p className="text-white/80 text-[20px] leading-relaxed break-keep font-medium">
+                  <p className="text-white/60 text-[16px] leading-relaxed break-keep font-normal">
                     {item.desc}
                   </p>
                 </motion.div>
