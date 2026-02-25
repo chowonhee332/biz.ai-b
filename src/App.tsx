@@ -528,7 +528,7 @@ const App = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="relative z-20 h-screen flex items-center justify-center overflow-clip bg-[#0a0a0a] font-poppins">
+      <section id="hero" className="relative z-20 h-screen flex items-center justify-center overflow-clip bg-[#000000] font-poppins">
 
 
         <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 h-full flex items-center">
