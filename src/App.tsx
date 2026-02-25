@@ -1190,16 +1190,16 @@ const App = () => {
                 </h2>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <Button
-                    className="group bg-white text-black hover:bg-white/90 w-[170px] h-[48px] text-[16px] font-bold rounded-full transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.15)]"
+                    className="group bg-white text-[#000000] hover:bg-white/90 w-[140px] h-[40px] py-0 text-[14px] font-semibold rounded-full transition-all flex items-center justify-center gap-0 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                   >
                     무료체험 신청
-                    <ChevronRight size={18} className="ml-1 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight size={18} className="max-w-0 opacity-0 group-hover:max-w-[24px] group-hover:opacity-100 group-hover:ml-1 transition-all duration-300 overflow-hidden" />
                   </Button>
                   <Button
-                    className="group bg-white/5 text-white border border-white/10 hover:bg-white/10 backdrop-blur-md w-[170px] h-[48px] text-[16px] font-bold rounded-full transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center mt-3 sm:mt-0"
+                    className="group bg-white/10 text-white border-none hover:bg-white/20 w-[140px] h-[40px] py-0 text-[14px] font-semibold rounded-full transition-all flex items-center justify-center gap-0 mt-3 sm:mt-0"
                   >
                     솔루션 문의
-                    <ChevronRight size={18} className="ml-1 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight size={18} className="max-w-0 opacity-0 group-hover:max-w-[24px] group-hover:opacity-100 group-hover:ml-1 transition-all duration-300 overflow-hidden" />
                   </Button>
                 </div>
               </motion.div>
