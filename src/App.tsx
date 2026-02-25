@@ -532,7 +532,7 @@ const App = () => {
         <div className="absolute inset-0 z-0 pointer-events-none">
           <ParticleEngine scrollYProgress={scrollYProgress} />
         </div>
-        <div className="absolute inset-x-0 bottom-0 h-[500px] bg-[radial-gradient(ellipse_at_bottom,rgba(37,99,235,0.15)_0%,transparent_70%)] pointer-events-none z-0" />
+
         <div className="relative z-10 flex items-center justify-center w-full">
           <HeroContent />
         </div>
@@ -560,7 +560,7 @@ const App = () => {
       <div className="relative z-20 bg-[#0a0a0a]">
         <div className="relative w-full pt-10">
           {/* Continuous gradient from the Hero section into the gap */}
-          <div className="absolute inset-x-0 top-0 h-[500px] bg-[radial-gradient(ellipse_at_top,rgba(37,99,235,0.15)_0%,transparent_70%)] pointer-events-none z-0" />
+
           <motion.div
             style={{ clipPath, willChange: 'clip-path' }}
             className="bg-[#F3F5FC] border border-black/5 relative z-20 overflow-hidden mb-20 smooth-gpu"
