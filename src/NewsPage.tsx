@@ -18,6 +18,7 @@ const HIGHLIGHT_NEWS = [
 export default function NewsPage() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [activeCategory, setActiveCategory] = useState("All");
 
     // 최대 슬라이드 인덱스 계산 (데스크탑 기준 3개 아이템 노출 시)
     const MAX_SLIDES = Math.max(0, HIGHLIGHT_NEWS.length - 3);
@@ -182,6 +183,22 @@ export default function NewsPage() {
                     <div className="flex flex-col lg:flex-row gap-16">
                         {/* 좌측 메인 리스트 뷰 */}
                         <div className="flex-1">
+                            {/* 카테고리 탭 */}
+                            <div className="flex items-center gap-8 mb-12 border-b border-white/5 pb-4">
+                                {["All", "News", "Tech Stories", "Documentation"].map((category) => (
+                                    <button
+                                        key={category}
+                                        onClick={() => setActiveCategory(category)}
+                                        className={`text-[18px] md:text-[20px] font-bold transition-colors ${activeCategory === category
+                                                ? "text-white"
+                                                : "text-white/30 hover:text-white/60"
+                                            }`}
+                                    >
+                                        {category}
+                                    </button>
+                                ))}
+                            </div>
+
                             <div className="flex flex-col gap-8">
                                 {[
                                     { title: "Kt ds, AI Agent 도입 사례 공개", desc: "금융권부터 제조 영역까지, 실제 현장에서 활약 중인 Biz.AI의 다양한 도입 사례와 놀라운 성과를 상세히 공개합니다.", date: "Dec 22, 2025", tag: "Case Study", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" },
