@@ -1134,17 +1134,17 @@ const App = () => {
                 <LightRays
                   raysOrigin="right"
                   raysColor="#0aa1ff"
-                  raysSpeed={1.5}
-                  lightSpread={1.3}
-                  rayLength={3}
+                  raysSpeed={2.0}
+                  lightSpread={1.5}
+                  rayLength={5}
                   followMouse={true}
-                  mouseInfluence={0.1}
+                  mouseInfluence={0.2}
                   noiseAmount={0}
-                  distortion={0}
-                  className="custom-rays opacity-60"
-                  pulsating={false}
+                  distortion={0.1}
+                  className="custom-rays"
+                  pulsating={true}
                   fadeDistance={1}
-                  saturation={1}
+                  saturation={1.2}
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/40 to-transparent z-[1]" />
