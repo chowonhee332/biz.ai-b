@@ -11,6 +11,8 @@ import { Badge } from '@/components/ui/badge';
 import ParticleEngine from './components/ParticleEngine';
 import HeroContent from './components/HeroContent';
 import { LightRays } from './components/LightRays';
+import Silk from './components/Silk';
+import { BackgroundGradientAnimation } from './components/ui/background-gradient-animation';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowUp,
@@ -1190,19 +1192,27 @@ const App = () => {
           </div>
         </section>
 
-        {/* CTA 배너 - Full Width (Premium Animation Style) */}
+        {/* CTA 배너 - Full Width (Advanced LightRays Style) */}
         <div className="w-full py-0">
           <section className="relative h-[500px] w-full overflow-hidden flex items-center justify-center bg-black border-y border-white/5">
-            <div className="absolute inset-0 bg-black overflow-hidden pointer-events-none">
-              {/* High-quality Particle Engine in Logo Mode */}
-              <ParticleEngine mode="logo" className="opacity-60 scale-110" />
-
-              {/* Dynamic Moving Gradients */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(37,99,235,0.2),transparent_70%)] animate-pulse" />
-              <div className="absolute inset-x-0 bottom-0 h-[300px] bg-[radial-gradient(ellipse_at_bottom,rgba(37,99,235,0.15)_0%,transparent_70%)] pointer-events-none z-0" />
+            <div className="absolute inset-0 z-0">
+              <LightRays
+                raysOrigin="top-center"
+                raysColor="#ffffff"
+                raysSpeed={1.5}
+                lightSpread={1}
+                rayLength={3}
+                followMouse={true}
+                mouseInfluence={0.2}
+                noiseAmount={0}
+                distortion={0}
+                className="custom-rays"
+                pulsating={false}
+                fadeDistance={1}
+                saturation={1}
+              />
             </div>
-
-            <div className="relative z-10 w-full max-w-[1240px] mx-auto text-center font-pretendard px-6">
+            <div className="relative z-10 w-full max-w-[1240px] mx-auto text-center font-pretendard px-6 py-20">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
