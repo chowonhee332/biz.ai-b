@@ -531,27 +531,30 @@ const App = () => {
       <section id="hero" className="relative z-20 h-screen flex items-center justify-center overflow-clip bg-[#000000] font-poppins">
 
 
-        {/* Background Image Area (Overlapping) */}
-        <div className="absolute right-[3%] top-1/2 -translate-y-1/2 w-[55%] z-0 flex items-center justify-center pointer-events-none">
-          <motion.div
-            initial={{ opacity: 0, x: 60, scale: 0.98 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="relative w-full flex items-center justify-center"
-          >
-            <div className="absolute -inset-20 bg-blue-500/5 rounded-full blur-[120px] z-0" />
-            <img
-              src="/banner.png"
-              alt="Biz.AI Hero"
-              className="w-full h-auto object-contain relative z-10 opacity-85"
-            />
-          </motion.div>
-        </div>
-
-        {/* Foreground Content Area - Constrained to 1200px */}
+        {/* Content Area - Constrained to 1200px */}
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 flex items-center h-full">
-          <div className="w-full lg:max-w-[800px]">
-            <HeroContent align="left" />
+          <div className="w-full flex flex-col lg:flex-row items-center relative">
+            {/* Left Content */}
+            <div className="w-full lg:max-w-[800px] relative z-20">
+              <HeroContent align="left" />
+            </div>
+
+            {/* Right Image (Fixed size, positioned relative to 1200px grid) */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
+              className="hidden lg:block absolute left-[55%] top-1/2 -translate-y-1/2 w-[720px] z-10 pointer-events-none"
+            >
+              <div className="relative">
+                <div className="absolute -inset-20 bg-blue-500/5 rounded-full blur-[100px] z-0" />
+                <img
+                  src="/banner.png"
+                  alt="Biz.AI Hero"
+                  className="w-full h-auto object-contain relative z-10 opacity-90 shadow-2xl"
+                />
+              </div>
+            </motion.div>
           </div>
         </div>
 
