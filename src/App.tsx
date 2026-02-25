@@ -12,6 +12,7 @@ import ParticleEngine from './components/ParticleEngine';
 import HeroContent from './components/HeroContent';
 import { LightRays } from './components/LightRays';
 import Silk from './components/Silk';
+import Aurora from './components/Aurora';
 import { BackgroundGradientAnimation } from './components/ui/background-gradient-animation';
 import { Link, useNavigate } from 'react-router-dom';
 import {
@@ -1192,24 +1193,15 @@ const App = () => {
           </div>
         </section>
 
-        {/* CTA 배너 - Full Width (Advanced LightRays Style) */}
+        {/* CTA 배너 - Full Width (Premium Aurora Style) */}
         <div className="w-full py-0">
           <section className="relative h-[500px] w-full overflow-hidden flex items-center justify-center bg-black border-y border-white/5">
             <div className="absolute inset-0 z-0">
-              <LightRays
-                raysOrigin="top-center"
-                raysColor="#ffffff"
-                raysSpeed={1.5}
-                lightSpread={1}
-                rayLength={3}
-                followMouse={true}
-                mouseInfluence={0.2}
-                noiseAmount={0}
-                distortion={0}
-                className="custom-rays"
-                pulsating={false}
-                fadeDistance={1}
-                saturation={1}
+              <Aurora
+                colorStops={["#66fcff", "#ff7a7a", "#0f5fff"]}
+                blend={0.5}
+                amplitude={1.0}
+                speed={1}
               />
             </div>
             <div className="relative z-10 w-full max-w-[1240px] mx-auto text-center font-pretendard px-6 py-20">
