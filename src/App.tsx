@@ -529,9 +529,7 @@ const App = () => {
 
       {/* Hero Section */}
       <section id="hero" className="relative z-20 h-screen flex items-center justify-center overflow-clip bg-[#0a0a0a] font-poppins">
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <ParticleEngine scrollYProgress={scrollYProgress} />
-        </div>
+
 
         <div className="relative z-10 flex items-center w-full">
           <HeroContent align="left" />
