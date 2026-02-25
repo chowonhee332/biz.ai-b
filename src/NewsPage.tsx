@@ -125,9 +125,6 @@ export default function NewsPage() {
                     <div className="flex flex-col lg:flex-row gap-16">
                         {/* 좌측 메인 리스트 뷰 */}
                         <div className="flex-1">
-                            <h2 className="text-[24px] font-bold text-white mb-8 border-b border-white/10 pb-4">
-                                전체 소식
-                            </h2>
                             <div className="flex flex-col gap-8">
                                 {[
                                     { title: "Kt ds, AI Agent 도입 사례 공개", desc: "금융권부터 제조 영역까지, 실제 현장에서 활약 중인 Biz.AI의 다양한 도입 사례와 놀라운 성과를 상세히 공개합니다.", date: "Dec 22, 2025", tag: "Case Study", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" },
@@ -162,40 +159,6 @@ export default function NewsPage() {
                                         </div>
                                     </motion.div>
                                 ))}
-                            </div>
-                        </div>
-
-                        {/* 우측 사이드바 (추천 소식 & 태그) */}
-                        <div className="w-full lg:w-[320px] shrink-0 flex flex-col gap-12">
-                            {/* 추천 소식 */}
-                            <div>
-                                <h3 className="text-[18px] font-bold text-white mb-6 flex items-center gap-2">
-                                    <span className="text-blue-400">🔥</span> 추천 소식
-                                </h3>
-                                <div className="flex flex-col gap-4">
-                                    {[
-                                        { title: "AI:ON-U 도입 가이드", date: "Feb 10, 2026" },
-                                        { title: "성공적인 RAG 시스템 구축을 위한 5가지 원칙", date: "Jan 05, 2026" },
-                                        { title: "Biz.AI 요금제 개편 안내", date: "Dec 10, 2025" }
-                                    ].map((item, i) => (
-                                        <div key={i} className="group p-5 rounded-2xl bg-[#0e0e0e] border border-white/5 hover:border-white/20 hover:bg-[#141414] transition-all cursor-pointer">
-                                            <div className="text-white/40 text-[12px] font-medium mb-2">{item.date}</div>
-                                            <h4 className="text-white/90 text-[15px] font-bold leading-snug group-hover:text-white transition-colors">{item.title}</h4>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* 인기 태그 */}
-                            <div>
-                                <h3 className="text-[18px] font-bold text-white mb-6">인기 태그</h3>
-                                <div className="flex flex-wrap gap-2">
-                                    {['Product', 'AI Agent', 'RAG', 'Case Study', 'Insight', 'Event', 'Tech'].map((tag, i) => (
-                                        <span key={i} className="px-4 py-2 rounded-full bg-[#111] border border-white/10 text-white/70 text-[13px] font-medium hover:bg-white/10 hover:text-white transition-colors cursor-pointer">
-                                            # {tag}
-                                        </span>
-                                    ))}
-                                </div>
                             </div>
                         </div>
                     </div>
