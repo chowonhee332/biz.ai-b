@@ -189,7 +189,7 @@ export default function NewsPage() {
                                     <button
                                         key={category}
                                         onClick={() => setActiveCategory(category)}
-                                        className={`text-[18px] md:text-[20px] font-bold transition-colors ${activeCategory === category
+                                        className={`text-[28px] font-bold transition-colors ${activeCategory === category
                                             ? "text-white"
                                             : "text-white/30 hover:text-white/60"
                                             }`}
@@ -214,14 +214,11 @@ export default function NewsPage() {
                                         transition={{ delay: i * 0.1, duration: 0.5 }}
                                         className="group flex flex-col-reverse sm:flex-row gap-6 items-center p-6 rounded-3xl bg-transparent hover:bg-[#111] border border-transparent hover:border-white/5 transition-all cursor-pointer"
                                     >
-                                        <div className="flex-1 w-full">
-                                            <div className="flex items-center gap-3 mb-3">
-                                                <span className="text-white/40 text-[14px] font-medium">{news.date}</span>
-                                                <span className="text-white/20 text-[14px]">|</span>
-                                                <span className="text-blue-400 text-[14px] font-medium">{news.tag}</span>
-                                            </div>
-                                            <h3 className="text-white text-[22px] font-bold leading-snug mb-3 group-hover:text-blue-400 transition-colors">{news.title}</h3>
-                                            <p className="text-white/60 text-[16px] leading-relaxed line-clamp-2">{news.desc}</p>
+                                        <div className="flex-1 w-full flex flex-col">
+                                            <span className="text-blue-400 text-[14px] font-bold mb-3">{news.tag}</span>
+                                            <h3 className="text-white text-[24px] font-bold leading-snug mb-3 group-hover:text-blue-400 transition-colors">{news.title}</h3>
+                                            <p className="text-white/60 text-[16px] leading-relaxed line-clamp-2 mb-6">{news.desc}</p>
+                                            <span className="text-white/40 text-[14px] font-medium mt-auto">{news.date}</span>
                                         </div>
 
                                         <div className="w-full sm:w-[240px] shrink-0 aspect-video rounded-2xl overflow-hidden bg-zinc-900 border border-white/5">
