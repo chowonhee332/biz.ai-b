@@ -577,7 +577,7 @@ const App = () => {
                     AI 전략부터 운영까지, 기업 AI의 전 과정을 통합 지원합니다.
                   </p>
                 </div>
-                <LightRays className="opacity-40" />
+
 
                 {/* 그룹 1: 전사 공통 */}
                 <div className="mb-20 max-w-[984px] mx-auto">
