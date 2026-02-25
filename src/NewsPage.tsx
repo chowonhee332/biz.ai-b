@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Linkedin, Youtube } from 'lucide-react';
 
@@ -19,6 +19,7 @@ export default function NewsPage() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [activeCategory, setActiveCategory] = useState("All");
+    const navigate = useNavigate();
 
     // 최대 슬라이드 인덱스 계산 (데스크탑 기준 3개 아이템 노출 시)
     const MAX_SLIDES = Math.max(0, HIGHLIGHT_NEWS.length - 3);
@@ -150,6 +151,7 @@ export default function NewsPage() {
                                 {HIGHLIGHT_NEWS.map((news, i) => (
                                     <div
                                         key={i}
+                                        onClick={() => navigate('/news/1')}
                                         className="group cursor-pointer bg-transparent rounded-3xl overflow-hidden border border-transparent hover:border-white/5 transition-all duration-500 hover:-translate-y-2 hover:bg-[#111] hover:shadow-2xl shrink-0 flex flex-col"
                                         style={{ width: 'var(--card-width)' }}
                                     >
@@ -208,6 +210,7 @@ export default function NewsPage() {
                                 ].map((news, i) => (
                                     <motion.div
                                         key={i}
+                                        onClick={() => navigate(`/news/${i + 1}`)}
                                         initial={{ opacity: 0, x: -20 }}
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
