@@ -468,7 +468,7 @@ const App = () => {
           <div className="hidden lg:flex items-center gap-8 text-white/90 text-[14px] font-medium">
             <Link to="/" className="hover:text-white transition-colors">멀티 에이전트 플랫폼</Link>
             <a href="#use-cases" className="hover:text-white transition-colors">고객 사례</a>
-            <a href="#process" className="hover:text-white transition-colors">회사 소개</a>
+            <Link to="/news" className="hover:text-white transition-colors">새로운 소식</Link>
           </div>
 
           {/* Right: CTA Buttons */}
@@ -497,7 +497,7 @@ const App = () => {
               <div className="flex flex-col gap-4">
                 <Link to="/" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>멀티 에이전트 플랫폼</Link>
                 <a href="#use-cases" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>고객 사례</a>
-                <a href="#process" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>회사 소개</a>
+                <Link to="/news" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>새로운 소식</Link>
                 <div className="pt-2 mt-2 border-t border-white/10 flex flex-col gap-2">
                   <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start">
                     kt ds <ExternalLink size={14} />
@@ -947,11 +947,13 @@ const App = () => {
             {/* 헤더: 타이틀 + 버튼 */}
             <div className="flex items-center justify-between mb-12">
               <h2 className="text-[40px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent tracking-tight font-pretendard uppercase">
-                News
+                새로운 소식
               </h2>
-              <button className="px-6 py-2.5 rounded-full border border-white/20 text-white text-[14px] font-medium hover:bg-white/10 transition-all">
-                View blog
-              </button>
+              <Link to="/news">
+                <button className="px-6 py-2.5 rounded-full border border-white/20 text-white text-[14px] font-medium hover:bg-white/10 transition-all">
+                  더보기
+                </button>
+              </Link>
             </div>
 
             {/* 뉴스 카드 그리드 */}
