@@ -103,9 +103,9 @@ export default function NewsPage() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="text-center md:text-left mb-20"
+                        className="text-center flex flex-col items-center mb-20"
                     >
-                        <h1 className="text-[48px] md:text-[64px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
+                        <h1 className="text-[52px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
                             새로운 소식
                         </h1>
                         <p className="text-white/70 text-[20px] max-w-2xl font-medium leading-relaxed">
@@ -190,8 +190,8 @@ export default function NewsPage() {
                                         key={category}
                                         onClick={() => setActiveCategory(category)}
                                         className={`text-[18px] md:text-[20px] font-bold transition-colors ${activeCategory === category
-                                                ? "text-white"
-                                                : "text-white/30 hover:text-white/60"
+                                            ? "text-white"
+                                            : "text-white/30 hover:text-white/60"
                                             }`}
                                     >
                                         {category}
