@@ -533,8 +533,8 @@ const App = () => {
           <ParticleEngine scrollYProgress={scrollYProgress} />
         </div>
 
-        <div className="relative z-10 flex items-center justify-center w-full">
-          <HeroContent />
+        <div className="relative z-10 flex items-center w-full">
+          <HeroContent align="left" />
         </div>
 
         {/* 스크롤 다운 인디케이터 */}
