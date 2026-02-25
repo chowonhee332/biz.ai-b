@@ -177,7 +177,7 @@ export default function NewsPage() {
                             </div>
                         </div>
 
-                        {/* 좌우 이동 및 인디케이터 컨트롤 영역 (좌측 하단) */}
+                        {/* 좌우 이동 컨트롤 영역 (좌측 하단) */}
                         <div className="absolute bottom-0 left-0 flex items-center gap-6 mt-6 pl-2">
                             <div className="flex gap-2">
                                 <button
@@ -192,18 +192,6 @@ export default function NewsPage() {
                                 >
                                     <ChevronRight size={20} />
                                 </button>
-                            </div>
-
-                            {/* 인디케이터 점 */}
-                            <div className="flex gap-2 items-center h-full">
-                                {Array.from({ length: MAX_SLIDES + 1 }).map((_, i) => (
-                                    <button
-                                        key={i}
-                                        onClick={() => setCurrentSlide(i)}
-                                        className={`h-1.5 rounded-full transition-all duration-300 ${i === currentSlide ? 'w-8 bg-blue-500' : 'w-2 bg-white/20 hover:bg-white/40'}`}
-                                        aria-label={`Go to slide ${i + 1}`}
-                                    />
-                                ))}
                             </div>
                         </div>
                     </div>
