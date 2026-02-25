@@ -531,30 +531,27 @@ const App = () => {
       <section id="hero" className="relative z-20 h-screen flex items-center justify-center overflow-clip bg-[#000000] font-poppins">
 
 
-        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 h-full flex items-center">
-          <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-10">
-            {/* Left Content */}
-            <div className="flex-1">
-              <HeroContent align="left" />
-            </div>
+        {/* Background Image Area (Overlapping) */}
+        <div className="absolute right-[-5%] top-1/2 -translate-y-1/2 w-[65%] h-full z-0 flex items-center justify-end pointer-events-none">
+          <motion.div
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
+            className="relative w-full h-full flex items-center justify-end"
+          >
+            <div className="absolute -inset-20 bg-blue-500/5 rounded-full blur-[120px] z-0" />
+            <img
+              src="/banner.png"
+              alt="Biz.AI Hero"
+              className="max-h-[85%] w-auto object-contain relative z-10 opacity-80"
+            />
+          </motion.div>
+        </div>
 
-            {/* Right Image */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="hidden lg:block flex-1 relative"
-            >
-              <div className="relative">
-                {/* Subtle glow behind image */}
-                <div className="absolute -inset-10 bg-blue-500/10 rounded-full blur-[100px]" />
-                <img
-                  src="/banner.png"
-                  alt="Biz.AI Hero"
-                  className="w-full h-auto object-contain relative z-10"
-                />
-              </div>
-            </motion.div>
+        {/* Foreground Content Area - Constrained to 1200px */}
+        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 flex items-center h-full">
+          <div className="w-full lg:max-w-[800px]">
+            <HeroContent align="left" />
           </div>
         </div>
 
