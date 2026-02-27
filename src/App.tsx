@@ -935,26 +935,30 @@ const App = () => {
                         return (
                           <div key={item.id} className="group py-[16px] md:py-[23px] border-b border-white/10">
                             {(() => {
-                              const qRange = index === 0 ? [0, 0.15] : index === 1 ? [0.33, 0.48] : [0.66, 0.81];
-                              const dRange = [qRange[1] + 0.05, qRange[1] + 0.15];
+                              // Each use case now has 3 phases: 
+                              // 1. Image slide phase (5% of section)
+                              // 2. Text reveal phase (~15% of section)
+                              // 3. Details reveal phase (~10% of section)
+                              const qRange: [number, number] = index === 0 ? [0.05, 0.2] : index === 1 ? [0.38, 0.53] : [0.71, 0.86];
+                              const dRange: [number, number] = [qRange[1] + 0.05, qRange[1] + 0.15];
 
-                              // Question fades out as details fade in
+                              // Image slide progress
+                              const slideRange: [number, number] = index === 0 ? [0, 0.05] : index === 1 ? [0.33, 0.38] : [0.66, 0.71];
+
                               const qOpacity = useTransform(sectionProgress, [dRange[0], dRange[0] + 0.05], [1, 0]);
                               const dOpacity = useTransform(sectionProgress, dRange, [0, 1]);
                               const dY = useTransform(sectionProgress, dRange, [20, 0]);
 
                               return (
                                 <div className="relative">
-                                  {/* Question Layer */}
                                   <motion.div style={{ opacity: qOpacity }} className={!isActive ? "hidden" : ""}>
                                     <CharacterReveal
                                       text={item.question}
                                       scrollProgress={sectionProgress}
-                                      range={qRange as [number, number]}
+                                      range={qRange}
                                     />
                                   </motion.div>
 
-                                  {/* Details Layer (AI Portal Part) */}
                                   <motion.div
                                     style={{ opacity: dOpacity, y: dY }}
                                     className={`absolute top-0 left-0 w-full ${!isActive ? "hidden" : ""}`}
@@ -1006,26 +1010,31 @@ const App = () => {
 
                   <div className="w-full lg:w-[58%] h-full flex items-center justify-end overflow-visible">
                     <div className="w-full relative h-[60vh]">
-                      {useCaseItems.map((item, index) => (
-                        <motion.div
-                          key={index}
-                          initial={false}
-                          animate={{
-                            opacity: activeUseCase === index ? 1 : 0,
-                            scale: activeUseCase === index ? 1 : 0.95,
-                            x: activeUseCase === index ? 0 : 60
-                          }}
-                          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                          className="absolute inset-0 w-full h-full flex items-center justify-center lg:justify-end"
-                        >
-                          <UseCaseVisual
-                            image={item.image}
-                            index={index}
-                            setActive={() => { }} // Managed by sectionProgress
-                            isActive={activeUseCase === index}
-                          />
-                        </motion.div>
-                      ))}
+                      {useCaseItems.map((item, index) => {
+                        const isActive = activeUseCase === index;
+                        const slideRange: [number, number] = index === 0 ? [0, 0.05] : index === 1 ? [0.33, 0.38] : [0.66, 0.71];
+                        const x = useTransform(sectionProgress, slideRange, [60, 0]);
+                        const opacity = useTransform(sectionProgress, [slideRange[0], slideRange[1]], [0, 1]);
+
+                        return (
+                          <motion.div
+                            key={index}
+                            style={{
+                              opacity: isActive ? opacity : 0,
+                              x: isActive ? x : 60,
+                              scale: isActive ? 1 : 0.95,
+                            }}
+                            className="absolute inset-0 w-full h-full flex items-center justify-center lg:justify-end"
+                          >
+                            <UseCaseVisual
+                              image={item.image}
+                              index={index}
+                              setActive={() => { }}
+                              isActive={isActive}
+                            />
+                          </motion.div>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
