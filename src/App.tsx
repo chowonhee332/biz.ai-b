@@ -958,16 +958,10 @@ const App = () => {
               className="w-full flex flex-col items-center"
             >
               <span className="text-[#0885FE] font-bold text-[14px] tracking-widest block mb-4 uppercase">Use Case</span>
-              <h2 className="text-[36px] md:text-[44px] lg:text-[58px] font-black bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent tracking-tight leading-[1.1] font-pretendard mx-auto mb-6">
+              <h2 className="text-[36px] md:text-[44px] lg:text-[58px] font-black bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent tracking-tight leading-[1.1] font-pretendard mx-auto">
                 Solution, Multi Agent <br />
                 Use Cases
               </h2>
-              <Link to="/use-cases" className="inline-flex items-center gap-2 group border border-white/20 rounded-full px-5 py-2 hover:bg-white/5 transition-colors">
-                <span className="text-white text-[15px] font-medium">전체보기</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg>
-              </Link>
             </motion.div>
           </div>
 
@@ -1008,7 +1002,7 @@ const App = () => {
                             >
                               <motion.p
                                 style={{ opacity: numOpacity }}
-                                className="text-white text-[32px] font-bold tracking-tight mb-1 font-pretendard"
+                                className="text-white text-[34px] font-bold tracking-tight mb-4 font-pretendard"
                               >
                                 {String(index + 1).padStart(2, '0')}
                               </motion.p>
@@ -1025,7 +1019,7 @@ const App = () => {
                               className="absolute inset-0 w-full"
                             >
                               {/* 숫자: 설명 레이어에서도 유지 */}
-                              <p className="text-white text-[32px] font-bold tracking-tight mb-1 font-pretendard">
+                              <p className="text-white text-[34px] font-bold tracking-tight mb-4 font-pretendard">
                                 {String(index + 1).padStart(2, '0')}
                               </p>
                               <h3 className="text-[34px] font-bold text-white mb-2 leading-tight">
@@ -1098,6 +1092,14 @@ const App = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="w-full relative z-20 flex justify-center pb-24 pt-12">
+            <Link to="/use-cases" className="inline-flex items-center gap-2 group border border-white/30 rounded-full px-6 py-3 hover:bg-white/10 transition-colors">
+              <span className="text-white text-[15px] font-medium border-b border-transparent group-hover:border-white/50 transition-colors pb-[1px]">전체보기</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </Link>
           </div>
         </section>
 
@@ -1421,13 +1423,13 @@ const App = () => {
                 </h2>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <Button
-                    className="group bg-white text-[#000000] hover:bg-white/90 w-[140px] h-[40px] py-0 text-[14px] font-semibold rounded-full transition-all flex items-center justify-center gap-0 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                    className="group bg-white text-[#000000] hover:bg-white/90 w-[140px] h-[40px] py-0 text-[15px] font-semibold rounded-full transition-all flex items-center justify-center gap-0 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                   >
                     무료체험 신청
                     <ChevronRight size={18} className="max-w-0 opacity-0 group-hover:max-w-[24px] group-hover:opacity-100 group-hover:ml-1 transition-all duration-300 overflow-hidden" />
                   </Button>
                   <Button
-                    className="group bg-white/10 text-white border-none hover:bg-white/20 w-[140px] h-[40px] py-0 text-[14px] font-semibold rounded-full transition-all flex items-center justify-center gap-0 mt-3 sm:mt-0"
+                    className="group bg-white/10 text-white border-none hover:bg-white/20 w-[140px] h-[40px] py-0 text-[15px] font-semibold rounded-full transition-all flex items-center justify-center gap-0 mt-3 sm:mt-0"
                   >
                     솔루션 문의
                     <ChevronRight size={18} className="max-w-0 opacity-0 group-hover:max-w-[24px] group-hover:opacity-100 group-hover:ml-1 transition-all duration-300 overflow-hidden" />
