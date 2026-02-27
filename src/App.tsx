@@ -482,7 +482,9 @@ const StudioSection = () => {
 
             <button className="w-[120px] h-[48px] text-[16px] font-medium border border-white/40 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent">
               <span>더보기</span>
-              <ChevronRight size={16} className="max-w-0 opacity-0 group-hover:max-w-[18px] group-hover:opacity-100 group-hover:ml-[2px] transition-all duration-300 overflow-hidden" />
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="max-w-0 opacity-0 group-hover:max-w-[18px] group-hover:opacity-100 group-hover:ml-[4px] transition-all duration-300 overflow-hidden">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
             </button>
           </div>
         </motion.div>
@@ -677,11 +679,11 @@ const App = () => {
 
           {/* Right: CTA Buttons */}
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10">
-              kt ds <ExternalLink size={14} />
+            <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10 group">
+              kt ds <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
             </Button>
-            <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard">
-              AI Agent 스튜디오 <ExternalLink size={14} />
+            <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard group">
+              AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
             </Button>
             <button className="lg:hidden text-white p-2 smooth-gpu" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -703,11 +705,11 @@ const App = () => {
                 <Link to="/use-cases" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>고객 사례</Link>
                 <Link to="/news" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>새로운 소식</Link>
                 <div className="pt-2 mt-2 border-t border-white/10 flex flex-col gap-2">
-                  <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start">
-                    kt ds <ExternalLink size={14} />
+                  <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group">
+                    kt ds <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                   </Button>
-                  <Button size="sm" className="bg-white text-black hover:bg-white/90 w-full justify-center font-semibold">
-                    AI Agent 스튜디오 <ExternalLink size={14} />
+                  <Button size="sm" className="bg-white text-black hover:bg-white/90 w-full justify-center font-semibold group">
+                    AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                   </Button>
                 </div>
               </div>
