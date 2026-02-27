@@ -520,6 +520,7 @@ const App = () => {
       id: "works-ai",
       titlePrefix: "AI Portal",
       titleSuffix: "WorksAI",
+      question: "회사에서 사용하는 수많은 메뉴를\n사내 최적화하여,\n한 곳에서 모아 볼 수는 없나요?",
       desc: "AI 챗봇 기반으로 다양한 업무 처리를 지원하는 AI Agent 포털 서비스로 기업 전체 AI 서비스를 통합 관리하고 접근할 수 있는 중앙 플랫폼입니다.",
       tags: ["AI 비서+그룹웨어", "맞춤형"],
       themeColor: "blue",
@@ -534,6 +535,7 @@ const App = () => {
     {
       id: "audit-agent",
       titlePrefix: "Audit Agent",
+      question: "산더미처럼 쌓인 규정과 지침,\nAI가 읽고 리스크만 딱 짚어줄 순 없나요?",
       desc: "방대한 기업 규제 및 감사 문서를 AI가 신속히 분석하여, 법적 리스크를 사전에 파악하고 완벽한 컴플라이언스 대응을 지원합니다.",
       tags: ["자료검색", "감사/리스크"],
       themeColor: "sky",
@@ -548,6 +550,7 @@ const App = () => {
     {
       id: "meeting-agent",
       titlePrefix: "지능형 회의록 Agent",
+      question: "분명 회의는 길었는데,\n핵심 내용만 쏙쏙 뽑아볼 순 없나요?",
       desc: "음성 인식(STT)과 NLP를 결합하여 회의 중 나오는 화자를 구분하고, 자동으로 액션 아이템을 추출합니다.",
       tags: ["음성인식", "업무추출"],
       themeColor: "emerald",
@@ -876,6 +879,25 @@ const App = () => {
                     const isActive = index === activeUseCase;
                     return (
                       <div key={item.id} className="group py-[16px] md:py-[23px] border-b border-white/10">
+                        <AnimatePresence>
+                          {isActive && item.question && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0, y: -20 }}
+                              animate={{ opacity: 1, height: "auto", y: 0 }}
+                              exit={{ opacity: 0, height: 0, y: -20 }}
+                              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                              className="overflow-hidden mb-10"
+                            >
+                              <div className="text-[28px] md:text-[34px] font-bold leading-[1.2] tracking-tight whitespace-pre-line">
+                                {item.question.split('\n').map((line, i, arr) => (
+                                  <div key={i} className={i === arr.length - 1 ? "text-[#0885FE]" : "text-white"}>
+                                    {line}
+                                  </div>
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                         <h3
                           className={`text-[24px] md:text-[32px] tracking-tight transition-all duration-500 cursor-pointer flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 ${isActive ? 'text-white' : 'text-white/30 hover:text-white/50'}`}
                           onClick={() => {
