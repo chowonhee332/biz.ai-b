@@ -698,7 +698,7 @@ const App = () => {
 
                 {/* 그룹 1: 전사 공통 */}
                 <div className="mb-32 max-w-[900px] mx-auto">
-                  <div className="flex items-center gap-2 mb-3 ml-4">
+                  <div className="flex items-center gap-2 mb-5 ml-4">
                     <span className="text-[18px] font-normal text-gray-800">전사 공통 (General Business)</span>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3 justify-items-center">
@@ -737,7 +737,7 @@ const App = () => {
 
                 {/* 그룹 2: IT 서비스/개발 직군 */}
                 <div className="mb-14 max-w-[900px] mx-auto">
-                  <div className="flex items-center gap-2 mb-3 ml-4">
+                  <div className="flex items-center gap-2 mb-5 ml-4">
                     <span className="text-[18px] font-normal text-gray-800">IT 서비스/개발 직군 (IT Service & Dev)</span>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3 justify-items-center">
