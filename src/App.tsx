@@ -129,7 +129,7 @@ const CharacterReveal = ({ text, className, isActive }: { text: string; classNam
 
   return (
     <div ref={ref} className={className}>
-      <div className="text-[28px] md:text-[34px] font-bold leading-[1.2] tracking-tight">
+      <div className="text-[28px] font-bold leading-[1.2] tracking-tight">
         {lines.map((line, lineIdx) => (
           <div key={lineIdx} className={lineIdx === lines.length - 1 ? "text-[#0885FE]" : "text-white"}>
             {line.split('').map((char, charIdx) => {
