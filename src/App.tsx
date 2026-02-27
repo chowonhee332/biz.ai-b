@@ -608,7 +608,7 @@ const App = () => {
     {
       id: "meeting-agent",
       titlePrefix: "지능형 회의록 Agent",
-      question: "분명 회의는 길었는데,\n핵심 내용만 쏙쏙\n뽑아볼 순 없나요?",
+      question: "너무나 긴 회의시간....\n핵심 내용만 쏙쏙\n뽑아볼 순 없나요?",
       desc: "음성 인식(STT)과 NLP를 결합하여 회의 중 나오는 화자를 구분하고, 자동으로 액션 아이템을 추출합니다.",
       tags: ["음성인식", "업무추출"],
       themeColor: "emerald",
