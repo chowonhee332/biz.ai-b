@@ -919,8 +919,7 @@ const App = () => {
             >
               <span className="text-[#0885FE] font-bold text-[14px] tracking-widest block mb-4 uppercase">Use Case</span>
               <h2 className="text-[36px] md:text-[44px] lg:text-[58px] font-black bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent tracking-tight leading-[1.1] font-pretendard mx-auto">
-                Solution, <br />
-                Multi Agent <br />
+                Solution, Multi Agent <br />
                 Use Cases
               </h2>
             </motion.div>
