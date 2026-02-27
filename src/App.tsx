@@ -909,7 +909,7 @@ const App = () => {
 
         <section id="use-cases" className="relative bg-[#000000]">
           {/* Title Area: Normal Scrolling */}
-          <div className="max-w-[1200px] mx-auto w-full px-4 md:px-6 pt-32 pb-8 text-center">
+          <div className="max-w-[1200px] mx-auto w-full px-4 md:px-6 pt-32 pb-[52px] text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
