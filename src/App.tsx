@@ -109,19 +109,45 @@ const SolutionCard = ({ image, title, desc, highlight }: { image: string; title:
   </div>
 );
 
-const ScrollRevealLine = ({ children, className }: { children: React.ReactNode; className?: string }) => {
+
+
+const Char = ({ children, progress, range }: { children: string; progress: any; range: [number, number] }) => {
+  const opacity = useTransform(progress, range, [0.2, 1]);
+  return <motion.span style={{ opacity }}>{children}</motion.span>;
+};
+
+const CharacterReveal = ({ text, className, isActive }: { text: string; className?: string; isActive: boolean }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.9", "end 0.5"]
+    offset: ["start 0.85", "end 0.4"]
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 1], [0.1, 1]);
+  const lines = text.split('\n');
+  const totalLength = text.length;
+  let charCounter = 0;
 
   return (
-    <motion.div ref={ref} style={{ opacity }} className={className}>
-      {children}
-    </motion.div>
+    <div ref={ref} className={className}>
+      <div className="text-[28px] md:text-[34px] font-bold leading-[1.2] tracking-tight">
+        {lines.map((line, lineIdx) => (
+          <div key={lineIdx} className={lineIdx === lines.length - 1 ? "text-[#0885FE]" : "text-white"}>
+            {line.split('').map((char, charIdx) => {
+              const start = charCounter / totalLength;
+              const end = (charCounter + 1) / totalLength;
+              charCounter++;
+              return (
+                <Char key={charIdx} progress={scrollYProgress} range={[start, end]}>
+                  {char}
+                </Char>
+              );
+            })}
+            {/* Add newline in counter for proper spacing calculation if needed, but text length handles it */}
+            {lineIdx < lines.length - 1 && (() => { charCounter++; return null; })()}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
@@ -897,17 +923,11 @@ const App = () => {
                       <div key={item.id} className="group py-[16px] md:py-[23px] border-b border-white/10">
                         <AnimatePresence>
                           {isActive && item.question && (
-                            <div className="overflow-hidden mb-10">
-                              <div className="text-[28px] md:text-[34px] font-bold leading-[1.2] tracking-tight whitespace-pre-line">
-                                {item.question.split('\n').map((line, i) => (
-                                  <ScrollRevealLine
-                                    key={i}
-                                    className={i === item.question.split('\n').length - 1 ? "text-[#0885FE]" : "text-white"}
-                                  >
-                                    {line}
-                                  </ScrollRevealLine>
-                                ))}
-                              </div>
+                            <div className="mb-10">
+                              <CharacterReveal
+                                text={item.question}
+                                isActive={isActive}
+                              />
                             </div>
                           )}
                         </AnimatePresence>
