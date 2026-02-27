@@ -1093,12 +1093,14 @@ const App = () => {
               </div>
             </div>
           </div>
-          <div className="w-full relative z-20 flex justify-center pb-24 pt-12">
-            <Link to="/use-cases" className="inline-flex items-center gap-2 group border border-white/30 rounded-full px-6 py-3 hover:bg-white/10 transition-colors">
-              <span className="text-white text-[15px] font-medium border-b border-transparent group-hover:border-white/50 transition-colors pb-[1px]">전체보기</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
+          <div className="w-full relative z-20 flex justify-center pb-24 pt-8">
+            <Link to="/use-cases">
+              <button className="w-[120px] h-[48px] text-[16px] font-medium border border-white/40 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent">
+                <span>전체보기</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="max-w-0 opacity-0 group-hover:max-w-[18px] group-hover:opacity-100 group-hover:ml-[4px] transition-all duration-300 overflow-hidden">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" />
+                </svg>
+              </button>
             </Link>
           </div>
         </section>
