@@ -550,12 +550,12 @@ const App = () => {
       titleSuffix: "WorksAI",
       desc: "AI 챗봇 기반으로 다양한 업무 처리를 지원하는 AI Agent 포털 서비스로 기업 전체 AI 서비스를 통합 관리하고 접근할 수 있는 중앙 플랫폼입니다.",
       tags: ["AI 비서+그룹웨어", "맞춤형"],
+      themeColor: "blue",
       features: [
         "기본적인 업무 기반에 최적화된 AI Agent 제공",
         "업무에 필요한 에이전트를 직접 만들어 사내 공유/ 활용",
         "그룹웨어 위젯 및 메뉴 커스텀을 통해 개인 맞춤형 컨텐츠 제공"
       ],
-      themeColor: "blue",
       icon: <Utensils className="w-8 h-8" />,
       image: "/test-1.png"
     },
@@ -564,12 +564,12 @@ const App = () => {
       titlePrefix: "Audit Agent",
       desc: "방대한 기업 규제 및 감사 문서를 AI가 신속히 분석하여, 법적 리스크를 사전에 파악하고 완벽한 컴플라이언스 대응을 지원합니다.",
       tags: ["자료검색", "감사/리스크"],
+      themeColor: "sky",
       features: [
         "사내 규정 및 가이드라인 기반의 AI 감사 수행",
         "키워드/의미 기반의 빠른 법령 및 판례 검색",
         "감사 보고서 자동 초안 작성 및 리스크 등급 분류"
       ],
-      themeColor: "sky",
       icon: <Search className="w-8 h-8" />,
       image: "/test-2.png"
     },
@@ -578,12 +578,12 @@ const App = () => {
       titlePrefix: "지능형 회의록 Agent",
       desc: "음성 인식(STT)과 NLP를 결합하여 회의 중 나오는 화자를 구분하고, 자동으로 액션 아이템을 추출합니다.",
       tags: ["음성인식", "업무추출"],
+      themeColor: "emerald",
       features: [
         "실시간 음성 인식 및 화자 분리 기록",
         "회의 내용 자동 요약 및 주요 의사결정 사항 추출",
         "참석자 대상 회의록 자동 메일/메신저 발송 연동"
       ],
-      themeColor: "emerald",
       icon: <Monitor className="w-8 h-8" />,
       image: "/test-3.png"
     }
@@ -861,24 +861,25 @@ const App = () => {
         </section>
 
         <section id="use-cases" className="py-32 bg-[#000000] relative">
-          <div className="max-w-[1200px] mx-auto w-full min-h-[150vh] relative flex flex-col items-start px-6">
-            <div className="w-full mb-6 pt-[80px]">
-              <h2 className="text-[58px] font-black bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent tracking-tight leading-[1.1] font-pretendard">
+          <div className="max-w-[1200px] mx-auto w-full min-h-[100vh] lg:min-h-[150vh] relative flex flex-col items-start px-4 md:px-6">
+            <div className="w-full mb-6 pt-[40px] md:pt-[80px]">
+              <span className="text-[#0885FE] font-bold text-[14px] tracking-widest block mb-4 md:mb-5 uppercase">Use Case</span>
+              <h2 className="text-[36px] md:text-[44px] lg:text-[58px] font-black bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent tracking-tight leading-[1.1] font-pretendard">
                 Solution, <br />
                 Multi Agent <br />
                 Use Cases
               </h2>
             </div>
 
-            <div className="w-full flex flex-col lg:flex-row items-start relative gap-0">
-              <div className="w-full lg:w-[42%] lg:sticky lg:top-0 lg:h-screen flex flex-col justify-start z-20 pr-12 lg:pr-16 pt-[100px]">
+            <div className="w-full flex flex-col lg:flex-row items-start relative gap-8 lg:gap-0">
+              <div className="w-full lg:w-[42%] lg:sticky lg:top-0 lg:h-screen flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16 pt-[40px] md:pt-[100px]">
                 <div className="flex flex-col">
                   {useCaseItems.map((item, index) => {
                     const isActive = index === activeUseCase;
                     return (
-                      <div key={item.id} className="group py-[23px] border-b border-white/10">
+                      <div key={item.id} className="group py-[16px] md:py-[23px] border-b border-white/10">
                         <h3
-                          className={`text-[32px] tracking-tight transition-all duration-500 cursor-pointer flex items-center gap-4 ${isActive ? 'text-white' : 'text-white/30 hover:text-white/50'}`}
+                          className={`text-[24px] md:text-[32px] tracking-tight transition-all duration-500 cursor-pointer flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 ${isActive ? 'text-white' : 'text-white/30 hover:text-white/50'}`}
                           onClick={() => {
                             const element = document.getElementById(`usecase-${item.id}`);
                             if (element) {
@@ -958,7 +959,7 @@ const App = () => {
                 </div>
               </div>
 
-              <div className="w-full lg:w-[58%] flex flex-col gap-[30vh] pb-[30vh] pt-[140px] items-center lg:items-end overflow-visible">
+              <div className="w-full lg:w-[58%] flex flex-col gap-12 lg:gap-[30vh] pb-[10vh] lg:pb-[30vh] pt-[40px] lg:pt-[140px] items-center lg:items-end overflow-visible">
                 {useCaseItems.map((item, index) => (
                   <div key={index} id={`usecase-${item.id}`} className="w-full scroll-mt-[20vh]">
                     <UseCaseVisual
@@ -975,10 +976,7 @@ const App = () => {
           </div>
         </section>
 
-        <ProcessSection />
-
-
-        <section id="logos" className="relative py-12 bg-[#000000] overflow-hidden">
+        <section id="logos" className="relative py-12 bg-black overflow-hidden">
           <div className="relative z-10 max-w-[1200px] mx-auto px-6 text-center">
             <div className="relative overflow-hidden w-full py-4">
               <motion.div
@@ -988,29 +986,25 @@ const App = () => {
                   repeat: Infinity,
                   repeatType: "loop",
                   duration: 30,
-                  ease: "linear",
+                  ease: "linear"
                 }}
               >
                 {[...Array(2)].map((_, i) => (
-                  <div key={i} className="flex items-center gap-x-20 shrink-0 px-10">
+                  <React.Fragment key={i}>
                     {[
-                      { name: "Google", url: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
-                      { name: "Microsoft", url: "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" },
-                      { name: "GitHub", url: "https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" },
-                      { name: "Uber", url: "https://upload.wikimedia.org/wikipedia/commons/5/58/Uber_logo_2018.svg" },
-                      { name: "Notion", url: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg" },
-                      { name: "Amazon", url: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
-                      { name: "Slack", url: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Slack_Technologies_Logo.svg" },
-                    ].map((logo, idx) => (
-                      <div key={`${i}-${idx}`} className="h-7 w-auto opacity-100 transition-opacity duration-300">
-                        <img
-                          src={logo.url}
-                          alt={logo.name}
-                          className="h-full w-auto object-contain filter brightness-0 invert"
-                        />
+                      { name: "Kakaobank", color: "blue" },
+                      { name: "Samsung", color: "blue" },
+                      { name: "SK Hynix", color: "blue" },
+                      { name: "Hyundai", color: "blue" }
+                    ].map((brand, idx) => (
+                      <div key={`${i}-${idx}`} className="flex items-center space-x-2">
+                        <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
+                          <div className="w-4 h-4 rounded-full bg-blue-500/40" />
+                        </div>
+                        <span className="text-xl font-bold text-white/40 tracking-tight">{brand.name}</span>
                       </div>
                     ))}
-                  </div>
+                  </React.Fragment>
                 ))}
               </motion.div>
             </div>
