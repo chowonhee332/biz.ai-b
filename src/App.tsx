@@ -121,12 +121,10 @@ const CharacterReveal = ({ text, className, scrollProgress, range }: { text: str
   const totalLength = text.length;
   let charCounter = 0;
 
-  // Track simple opacity based on overall range for additional flexibility if needed
-  const opacity = useTransform(scrollProgress, range, [1, 1]);
-
+  // Question stays fully visible once reveal is done, but parent can fade it
   return (
     <div className={className}>
-      <div className="text-[28px] font-bold leading-[1.5] tracking-tight">
+      <div className="text-[36px] font-bold leading-[1.5] tracking-tight">
         {lines.map((line, lineIdx) => (
           <div key={lineIdx} className={lineIdx === lines.length - 1 ? "text-[#0885FE]" : "text-white"}>
             {line.split('').map((char, charIdx) => {
@@ -936,92 +934,70 @@ const App = () => {
                         const isActive = index === activeUseCase;
                         return (
                           <div key={item.id} className="group py-[16px] md:py-[23px] border-b border-white/10">
-                            <AnimatePresence>
-                              {isActive && item.question && (
-                                <div className="mb-10">
-                                  <CharacterReveal
-                                    text={item.question}
-                                    scrollProgress={sectionProgress}
-                                    range={index === 0 ? [0, 0.2] : index === 1 ? [0.33, 0.53] : [0.66, 0.86]}
-                                  />
-                                </div>
-                              )}
-                            </AnimatePresence>
-                            <h3
-                              className={`text-[24px] md:text-[32px] tracking-tight transition-all duration-500 cursor-pointer flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 ${isActive ? 'text-white' : 'text-white/30 hover:text-white/50'}`}
-                              onClick={() => {
-                                const element = document.getElementById(`usecase-${item.id}`);
-                                if (element) {
-                                  isScrollingRef.current = true;
-                                  element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                  setActiveUseCase(index);
-                                  setTimeout(() => {
-                                    isScrollingRef.current = false;
-                                  }, 1000);
-                                }
-                              }}
-                            >
-                              <span className="font-bold">{item.titlePrefix}</span>
-                              {item.titleSuffix && <span className="font-light">{item.titleSuffix}</span>}
-                            </h3>
+                            {(() => {
+                              const qRange = index === 0 ? [0, 0.15] : index === 1 ? [0.33, 0.48] : [0.66, 0.81];
+                              const dRange = [qRange[1] + 0.05, qRange[1] + 0.15];
 
-                            <AnimatePresence mode="wait">
-                              {isActive && (
-                                <motion.div
-                                  initial={{ height: 0, opacity: 0 }}
-                                  animate={{ height: "auto", opacity: 1 }}
-                                  exit={{ height: 0, opacity: 0 }}
-                                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                                  className="overflow-hidden"
-                                >
-                                  <div className="mt-2.5">
-                                    <motion.p
-                                      initial={{ y: 10, opacity: 0 }}
-                                      animate={{ y: 0, opacity: 1 }}
-                                      transition={{ duration: 0.3 }}
-                                      className="text-[16px] text-white/80 leading-relaxed max-w-lg mb-8 whitespace-pre-line font-normal"
-                                    >
-                                      {item.desc}
-                                    </motion.p>
+                              // Question fades out as details fade in
+                              const qOpacity = useTransform(sectionProgress, [dRange[0], dRange[0] + 0.05], [1, 0]);
+                              const dOpacity = useTransform(sectionProgress, dRange, [0, 1]);
+                              const dY = useTransform(sectionProgress, dRange, [20, 0]);
 
-                                    {item.features && (
-                                      <motion.div
-                                        initial={{ y: 15, opacity: 0 }}
-                                        animate={{ y: 0, opacity: 1 }}
-                                        transition={{ delay: 0.1, duration: 0.4 }}
-                                        className="bg-white/[0.04] border border-white/5 rounded-2xl p-6 mb-8 max-w-lg"
-                                      >
-                                        <ul className="space-y-1">
-                                          {item.features.map((feature: string, i: number) => (
-                                            <li key={i} className="flex items-start gap-3 text-white/70 text-[15px] leading-relaxed">
-                                              <span className="text-white/40 mt-[2px]">•</span>
-                                              <span>{feature}</span>
-                                            </li>
-                                          ))}
-                                        </ul>
-                                      </motion.div>
-                                    )}
+                              return (
+                                <div className="relative">
+                                  {/* Question Layer */}
+                                  <motion.div style={{ opacity: qOpacity }} className={!isActive ? "hidden" : ""}>
+                                    <CharacterReveal
+                                      text={item.question}
+                                      scrollProgress={sectionProgress}
+                                      range={qRange as [number, number]}
+                                    />
+                                  </motion.div>
 
-                                    {item.tags && (
-                                      <motion.div
-                                        initial={{ y: 20, opacity: 0 }}
-                                        animate={{ y: 0, opacity: 1 }}
-                                        transition={{ delay: 0.2 }}
-                                        className="flex flex-wrap gap-2.5"
-                                      >
-                                        {item.tags.map((tag: string, i: number) => {
-                                          return (
+                                  {/* Details Layer (AI Portal Part) */}
+                                  <motion.div
+                                    style={{ opacity: dOpacity, y: dY }}
+                                    className={`absolute top-0 left-0 w-full ${!isActive ? "hidden" : ""}`}
+                                  >
+                                    <h3 className="text-[36px] font-bold text-white mb-6">
+                                      {item.titlePrefix} {item.titleSuffix}
+                                    </h3>
+
+                                    <div className="mt-2.5">
+                                      <p className="text-[16px] text-white/80 leading-relaxed max-w-lg mb-8 whitespace-pre-line font-normal">
+                                        {item.desc}
+                                      </p>
+
+                                      {item.features && (
+                                        <div className="bg-white/[0.04] border border-white/5 rounded-2xl p-6 mb-8 max-w-lg">
+                                          <ul className="space-y-1">
+                                            {item.features.map((feature: string, i: number) => (
+                                              <li key={i} className="flex items-start gap-3 text-white/70 text-[15px] leading-relaxed">
+                                                <span className="text-white/40 mt-[2px]">•</span>
+                                                <span>{feature}</span>
+                                              </li>
+                                            ))}
+                                          </ul>
+                                        </div>
+                                      )}
+
+                                      {item.tags && (
+                                        <div className="flex flex-wrap gap-2.5">
+                                          {item.tags.map((tag: string, i: number) => (
                                             <span key={i} className="px-4 py-1.5 rounded-full bg-[#0885FE]/10 border border-[#0885FE]/20 text-[14px] font-medium text-[#00AEFF] transition-none backdrop-blur-sm">
                                               # {tag}
                                             </span>
-                                          );
-                                        })}
-                                      </motion.div>
-                                    )}
-                                  </div>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
+                                          ))}
+                                        </div>
+                                      )}
+                                    </div>
+                                  </motion.div>
+                                </div>
+                              );
+                            })()}
+
+
+
                           </div>
                         );
                       })}
@@ -1037,7 +1013,7 @@ const App = () => {
                           animate={{
                             opacity: activeUseCase === index ? 1 : 0,
                             scale: activeUseCase === index ? 1 : 0.95,
-                            y: activeUseCase === index ? 0 : 20
+                            x: activeUseCase === index ? 0 : 60
                           }}
                           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                           className="absolute inset-0 w-full h-full flex items-center justify-center lg:justify-end"
