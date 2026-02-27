@@ -937,119 +937,79 @@ const App = () => {
               <div className="max-w-[1200px] mx-auto w-full relative flex flex-col">
                 <div className="w-full flex flex-col lg:flex-row items-start relative gap-8 lg:gap-0">
                   <div className="w-full lg:w-[42%] flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16">
-                    <div className="flex flex-col">
+                    {/* 단일 슬롯: 모든 Use Case가 동일한 자리에서 교체됨 */}
+                    <div className="relative" style={{ minHeight: '60vh' }}>
                       {useCaseItems.map((item, index) => {
-                        const isActive = index === activeUseCase;
+                        // 각 아이템별 범위 정의 (0.33씩 3등분)
+                        const qRange: [number, number] = index === 0 ? [0.03, 0.10] : index === 1 ? [0.36, 0.43] : [0.69, 0.76];
+                        const dRange: [number, number] = [qRange[1] + 0.02, qRange[1] + 0.05];
+
+                        // Q: 등장 → D가 시작되면 사라짐
+                        const qOpacity = useTransform(sectionProgress, [qRange[0], qRange[1], dRange[0], dRange[0] + 0.02], [0, 1, 1, 0]);
+                        // D: Q가 사라지면서 등장 → 다음 Q 시작 전에 사라짐
+                        const nextStart = index < 2 ? (index === 0 ? 0.33 : 0.66) : 1.0;
+                        const dOpacity = useTransform(sectionProgress, [dRange[0], dRange[1], nextStart - 0.03, nextStart], [0, 1, 1, 0]);
+                        const dY = useTransform(sectionProgress, dRange, [20, 0]);
+
+                        // 숫자 오퍼시티: qRange 시작부터 dRange 끝까지 유지, 이후 사라짐
+                        const numOpacity = useTransform(sectionProgress, [qRange[0], qRange[1], nextStart - 0.03, nextStart], [0, 1, 1, 0]);
+
                         return (
-                          <div key={item.id} className="group py-[16px] md:py-[23px] border-b border-white/10">
-                            {isActive ? (
-                              (() => {
-                                // Balanced ranges for 600vh (0.33 per item)
-                                // Q-Reveal: Faster (0.07 duration)
-                                // Stay: Longer persistence (0.18 duration)
-
-                                const qRange: [number, number] = index === 0 ? [0.03, 0.10] : index === 1 ? [0.36, 0.43] : [0.69, 0.76];
-                                const dRange: [number, number] = [qRange[1] + 0.02, qRange[1] + 0.05]; // Q->D transition (0.03 duration)
-
-                                const qOpacity = useTransform(sectionProgress, [dRange[0], dRange[0] + 0.02], [1, 0]);
-                                const dOpacity = useTransform(sectionProgress, dRange, [0, 1]);
-                                const dY = useTransform(sectionProgress, dRange, [20, 0]);
-
-                                return (
-                                  <div className="relative">
-                                    {/*
-                                        Unified Container approach:
-                                        We keep Question in flow to define initial height,
-                                        but we use Details to define final height.
-                                        To prevent overlap, we use a grid where both occupy the same row/col.
-                                      */}
-                                    <div className="grid grid-cols-1 items-start">
-                                      {/* Question Layer */}
-                                      <motion.div
-                                        style={{
-                                          gridArea: '1 / 1 / 2 / 2',
-                                          opacity: qOpacity,
-                                        }}
-                                        className="pb-4"
-                                      >
-                                        {/* 01 / 02 / 03 인덱스 번호 — 질문 텍스트와 동일한 스크롤 오퍼시티 */}
-                                        {(() => {
-                                          const numOpacity = useTransform(sectionProgress, qRange, [0.15, 1]);
-                                          return (
-                                            <motion.p
-                                              style={{ opacity: numOpacity }}
-                                              className="text-white text-[32px] font-bold tracking-tight mb-1 font-pretendard"
-                                            >
-                                              {String(index + 1).padStart(2, '0')}
-                                            </motion.p>
-                                          );
-                                        })()}
-                                        <CharacterReveal
-                                          text={item.question}
-                                          scrollProgress={sectionProgress}
-                                          range={qRange}
-                                        />
-                                      </motion.div>
-
-                                      {/* Details Layer: Shares the exact same start point as Question */}
-                                      <motion.div
-                                        style={{
-                                          gridArea: '1 / 1 / 2 / 2',
-                                          opacity: dOpacity,
-                                          y: dY,
-                                        }}
-                                        className="w-full"
-                                      >
-                                        <h3 className="text-[36px] font-bold text-white mb-6">
-                                          {item.titlePrefix} {item.titleSuffix}
-                                        </h3>
-
-                                        <div className="mt-2.5">
-                                          <p className="text-[16px] text-white/80 leading-relaxed max-w-lg mb-8 whitespace-pre-line font-normal">
-                                            {item.desc}
-                                          </p>
-
-                                          {item.features && (
-                                            <div className="bg-white/[0.04] border border-white/5 rounded-2xl p-6 mb-8 max-w-lg">
-                                              <ul className="space-y-1">
-                                                {item.features.map((feature: string, i: number) => (
-                                                  <li key={i} className="flex items-start gap-3 text-white/70 text-[15px] leading-relaxed">
-                                                    <span className="text-white/40 mt-[2px]">•</span>
-                                                    <span>{feature}</span>
-                                                  </li>
-                                                ))}
-                                              </ul>
-                                            </div>
-                                          )}
-
-                                          {item.tags && (
-                                            <div className="flex flex-wrap gap-2.5">
-                                              {item.tags.map((tag: string, i: number) => (
-                                                <span key={i} className="px-4 py-1.5 rounded-full bg-[#0885FE]/10 border border-[#0885FE]/20 text-[14px] font-medium text-[#00AEFF] transition-none backdrop-blur-sm">
-                                                  # {tag}
-                                                </span>
-                                              ))}
-                                            </div>
-                                          )}
-                                        </div>
-                                      </motion.div>
-                                    </div>
-                                  </div>
-                                );
-                              })()
-                            ) : (
-                              // Inactive Title: Visible at medium opacity
-                              <motion.h3
-                                initial={{ opacity: 0.4 }}
-                                animate={{ opacity: 0.4 }}
-                                className="text-[32px] font-bold text-white/40 tracking-tight"
+                          <div key={item.id} className="absolute inset-0 w-full">
+                            {/* 번호 + 질문 레이어 */}
+                            <motion.div
+                              style={{ opacity: qOpacity }}
+                              className="absolute inset-0"
+                            >
+                              <motion.p
+                                style={{ opacity: numOpacity }}
+                                className="text-white text-[32px] font-bold tracking-tight mb-1 font-pretendard"
                               >
+                                {String(index + 1).padStart(2, '0')}
+                              </motion.p>
+                              <CharacterReveal
+                                text={item.question}
+                                scrollProgress={sectionProgress}
+                                range={qRange}
+                              />
+                            </motion.div>
+
+                            {/* 설명 레이어 */}
+                            <motion.div
+                              style={{ opacity: dOpacity, y: dY }}
+                              className="absolute inset-0 w-full"
+                            >
+                              <p className="text-white text-[32px] font-bold tracking-tight mb-1 font-pretendard">
+                                {String(index + 1).padStart(2, '0')}
+                              </p>
+                              <h3 className="text-[28px] font-bold text-white mb-2 leading-tight">
                                 {item.titlePrefix} {item.titleSuffix}
-                              </motion.h3>
-                            )}
-
-
-
+                              </h3>
+                              <p className="text-[15px] text-white/70 leading-relaxed max-w-lg mb-6 font-normal">
+                                {item.desc}
+                              </p>
+                              {item.features && (
+                                <div className="bg-white/[0.04] border border-white/5 rounded-2xl p-5 mb-6 max-w-lg">
+                                  <ul className="space-y-1.5">
+                                    {item.features.map((feature: string, i: number) => (
+                                      <li key={i} className="flex items-start gap-3 text-white/70 text-[14px] leading-relaxed">
+                                        <span className="text-white/40 mt-[2px]">•</span>
+                                        <span>{feature}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+                              {item.tags && (
+                                <div className="flex flex-wrap gap-2">
+                                  {item.tags.map((tag: string, i: number) => (
+                                    <span key={i} className="px-4 py-1.5 rounded-full bg-[#0885FE]/10 border border-[#0885FE]/20 text-[13px] font-medium text-[#00AEFF] backdrop-blur-sm">
+                                      # {tag}
+                                    </span>
+                                  ))}
+                                </div>
+                              )}
+                            </motion.div>
                           </div>
                         );
                       })}
