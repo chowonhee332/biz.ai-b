@@ -112,13 +112,13 @@ const SolutionCard = ({ image, title, desc, highlight }: { image: string; title:
 
 
 const Char = ({ children, progress, range }: { children: string; progress: any; range: [number, number] }) => {
-  const opacity = useTransform(progress, range, [0.2, 1]);
-  return <motion.span style={{ opacity }}>{children}</motion.span>;
+  const opacity = useTransform(progress, range, [0.4, 1]);
+  return <motion.span style={{ opacity }} className="whitespace-pre">{children}</motion.span>;
 };
 
 const CharacterReveal = ({ text, className, scrollProgress, range }: { text: string; className?: string; scrollProgress: any, range: [number, number] }) => {
   const lines = text.split('\n');
-  const totalLength = text.length;
+  const totalChars = text.length; // Include all characters including spaces
   let charCounter = 0;
 
   return (
@@ -126,12 +126,12 @@ const CharacterReveal = ({ text, className, scrollProgress, range }: { text: str
       {lines.map((line, lineIdx) => (
         <div
           key={lineIdx}
-          className={`flex flex-wrap text-[34px] font-bold tracking-tight leading-[1.5] ${lineIdx === lines.length - 1 ? "text-[#0885FE]" : "text-white"
+          className={`flex flex-wrap text-[34px] font-bold tracking-tight leading-[1.3] ${lineIdx === lines.length - 1 ? "text-[#0885FE]" : "text-white"
             }`}
         >
           {line.split('').map((char, charIdx) => {
-            const charStart = range[0] + (charCounter / totalLength) * (range[1] - range[0]);
-            const charEnd = range[0] + ((charCounter + 1) / totalLength) * (range[1] - range[0]);
+            const charStart = range[0] + (charCounter / totalChars) * (range[1] - range[0]);
+            const charEnd = range[0] + ((charCounter + 1) / totalChars) * (range[1] - range[0]);
             charCounter++;
             return (
               <Char key={charIdx} progress={scrollProgress} range={[charStart, charEnd]}>
@@ -508,14 +508,18 @@ const App = () => {
   const useCaseRef = useRef<HTMLDivElement>(null); // Keep one declaration
   const { scrollYProgress: sectionProgress } = useScroll({
     target: useCaseRef,
-    offset: ["start start", "end end"]
+    offset: ["start 0.5", "end 1.2"]
   });
   const [activeUseCase, setActiveUseCase] = useState(0);
 
-  // Auto-switch active Use Case based on scroll progress
+  // Re-balanced active ranges for 500vh scroll length and longer persistence
   useMotionValueEvent(sectionProgress, "change", (latest) => {
-    if (latest < 0.33) setActiveUseCase(0);
-    else if (latest < 0.66) setActiveUseCase(1);
+    // Ranges for activeUseCase based on new qRange and dRange
+    // Item 0: qRange ends at 0.10, dRange ends at 0.15. Details persist until ~0.28
+    // Item 1: qRange ends at 0.43, dRange ends at 0.48. Details persist until ~0.61
+    // Item 2: qRange ends at 0.76, dRange ends at 0.81. Details persist until ~0.94
+    if (latest < 0.28) setActiveUseCase(0);
+    else if (latest < 0.61) setActiveUseCase(1);
     else setActiveUseCase(2);
   });
 
@@ -927,8 +931,8 @@ const App = () => {
           </div>
 
           {/* Sticky Pinned Area: Begins after the title scrolls away */}
-          <div ref={useCaseRef} className="relative h-[300vh]">
-            <div className="sticky top-0 h-screen w-full flex items-start justify-center px-4 md:px-6 overflow-hidden pt-[10vh]">
+          <div ref={useCaseRef} className="relative h-[600vh]">
+            <div className="sticky top-[20px] h-screen w-full flex items-start justify-center px-4 md:px-6 overflow-hidden pt-[10vh]">
               <div className="max-w-[1200px] mx-auto w-full relative flex flex-col">
                 <div className="w-full flex flex-col lg:flex-row items-start relative gap-8 lg:gap-0">
                   <div className="w-full lg:w-[42%] flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16">
@@ -939,17 +943,27 @@ const App = () => {
                           <div key={item.id} className="group py-[16px] md:py-[23px] border-b border-white/10">
                             {isActive ? (
                               (() => {
-                                const qRange: [number, number] = index === 0 ? [0.05, 0.2] : index === 1 ? [0.38, 0.53] : [0.71, 0.86];
-                                const dRange: [number, number] = [qRange[1] + 0.05, qRange[1] + 0.15];
+                                // Balanced ranges for 600vh (0.33 per item)
+                                // Q-Reveal: Faster (0.07 duration)
+                                // Stay: Longer persistence (0.18 duration)
 
-                                const qOpacity = useTransform(sectionProgress, [dRange[0], dRange[0] + 0.05], [1, 0]);
+                                const qRange: [number, number] = index === 0 ? [0.03, 0.10] : index === 1 ? [0.36, 0.43] : [0.69, 0.76];
+                                const dRange: [number, number] = [qRange[1] + 0.02, qRange[1] + 0.05]; // Q->D transition (0.03 duration)
+
+                                const qOpacity = useTransform(sectionProgress, [dRange[0], dRange[0] + 0.02], [1, 0]);
                                 const dOpacity = useTransform(sectionProgress, dRange, [0, 1]);
                                 const dY = useTransform(sectionProgress, dRange, [20, 0]);
 
                                 return (
                                   <div className="relative">
-                                    {/* Question Layer */}
-                                    <motion.div style={{ opacity: qOpacity }}>
+                                    {/* Question Layer: Always in flow while active */}
+                                    <motion.div
+                                      style={{
+                                        opacity: qOpacity,
+                                        height: qOpacity.get() === 0 ? 0 : 'auto',
+                                        overflow: 'hidden'
+                                      }}
+                                    >
                                       <CharacterReveal
                                         text={item.question}
                                         scrollProgress={sectionProgress}
@@ -957,10 +971,14 @@ const App = () => {
                                       />
                                     </motion.div>
 
-                                    {/* Details Layer */}
+                                    {/* Details Layer: In standard flow to push subsequent items down */}
                                     <motion.div
-                                      style={{ opacity: dOpacity, y: dY }}
-                                      className="absolute top-0 left-0 w-full"
+                                      style={{
+                                        opacity: dOpacity,
+                                        y: dY,
+                                        marginTop: useTransform(sectionProgress, [dRange[0], dRange[1]], [-40, 0])
+                                      }}
+                                      className="w-full"
                                     >
                                       <h3 className="text-[36px] font-bold text-white mb-6">
                                         {item.titlePrefix} {item.titleSuffix}
@@ -1021,10 +1039,10 @@ const App = () => {
                     <div className="w-full relative h-[60vh]">
                       {useCaseItems.map((item, index) => {
                         const isActive = activeUseCase === index;
-                        const slideRange: [number, number] = index === 0 ? [0, 0.05] : index === 1 ? [0.33, 0.38] : [0.66, 0.71];
-                        const activeRange: [number, number] = index === 0 ? [0.05, 0.33] : index === 1 ? [0.38, 0.66] : [0.71, 1.0];
+                        const slideRange: [number, number] = index === 0 ? [0, 0.03] : index === 1 ? [0.33, 0.36] : [0.66, 0.69];
+                        const activeRange: [number, number] = index === 0 ? [0.15, 0.33] : index === 1 ? [0.48, 0.66] : [0.81, 0.98];
                         const x = useTransform(sectionProgress, slideRange, [60, 0]);
-                        const y = useTransform(sectionProgress, activeRange, [0, -100]);
+                        const y = useTransform(sectionProgress, activeRange, [0, -150]);
                         const opacity = useTransform(sectionProgress, [slideRange[0], slideRange[1]], [0, 1]);
 
                         return (
