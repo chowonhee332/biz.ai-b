@@ -949,7 +949,7 @@ const App = () => {
 
         <section id="use-cases" className="relative bg-[#000000]">
           {/* Title Area: Normal Scrolling */}
-          <div className="max-w-[1200px] mx-auto w-full px-4 md:px-6 pt-32 pb-[52px] text-center">
+          <div className="max-w-[1200px] mx-auto w-full px-4 md:px-6 pt-32 pb-[52px] text-center relative">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -958,10 +958,16 @@ const App = () => {
               className="w-full flex flex-col items-center"
             >
               <span className="text-[#0885FE] font-bold text-[14px] tracking-widest block mb-4 uppercase">Use Case</span>
-              <h2 className="text-[36px] md:text-[44px] lg:text-[58px] font-black bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent tracking-tight leading-[1.1] font-pretendard mx-auto">
+              <h2 className="text-[36px] md:text-[44px] lg:text-[58px] font-black bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent tracking-tight leading-[1.1] font-pretendard mx-auto mb-6">
                 Solution, Multi Agent <br />
                 Use Cases
               </h2>
+              <Link to="/use-cases" className="inline-flex items-center gap-2 group border border-white/20 rounded-full px-5 py-2 hover:bg-white/5 transition-colors">
+                <span className="text-white text-[15px] font-medium">전체보기</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" />
+                </svg>
+              </Link>
             </motion.div>
           </div>
 
