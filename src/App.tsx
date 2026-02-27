@@ -427,7 +427,7 @@ const ProcessSection = () => {
                   </div>
                   <div className="flex-1" />
                   <div className="min-h-[160px]">
-                    <h4 className="text-[18px] font-semibold text-gray-900 mb-4">{step.title}</h4>
+                    <h4 className="text-[16px] font-semibold text-gray-900 mb-3">{step.title}</h4>
                     <ul className="space-y-2">
                       {step.bullets.map((bullet, j) => (
                         <li key={j} className="flex items-start gap-2 text-black/80 text-[14px] leading-relaxed font-normal">
