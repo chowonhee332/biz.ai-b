@@ -910,16 +910,16 @@ const App = () => {
         <section id="use-cases" ref={useCaseRef} className="relative bg-[#000000]">
           {/* Scroll Pinned Container: Use case transition is now tied to a longer scroll length */}
           <div className="relative h-[300vh]">
-            <div className="sticky top-0 h-screen w-full flex flex-col items-start px-4 md:px-6 overflow-hidden">
-              <div className="max-w-[1200px] mx-auto w-full h-full relative flex flex-col pt-[80px]">
+            <div className="sticky top-0 h-screen w-full flex items-center justify-center px-4 md:px-6 overflow-hidden">
+              <div className="max-w-[1200px] mx-auto w-full relative flex flex-col">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.8 }}
-                  className="w-full mb-6 pt-[40px] md:pt-[80px]"
+                  className="w-full mb-12"
                 >
-                  <span className="text-[#0885FE] font-bold text-[14px] tracking-widest block mb-4 md:mb-5 uppercase">Use Case</span>
+                  <span className="text-[#0885FE] font-bold text-[14px] tracking-widest block mb-4 uppercase">Use Case</span>
                   <h2 className="text-[36px] md:text-[44px] lg:text-[58px] font-black bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent tracking-tight leading-[1.1] font-pretendard">
                     Solution, <br />
                     Multi Agent <br />
@@ -927,8 +927,8 @@ const App = () => {
                   </h2>
                 </motion.div>
 
-                <div className="w-full flex flex-col lg:flex-row items-start relative gap-8 lg:gap-0">
-                  <div className="w-full lg:w-[42%] lg:sticky lg:top-0 lg:h-screen flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16 pt-[40px] md:pt-[100px]">
+                <div className="w-full flex flex-col lg:flex-row items-center relative gap-8 lg:gap-0">
+                  <div className="w-full lg:w-[42%] flex flex-col justify-center z-20 pr-0 md:pr-12 lg:pr-16">
                     <div className="flex flex-col">
                       {useCaseItems.map((item, index) => {
                         const isActive = index === activeUseCase;
