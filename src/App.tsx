@@ -368,7 +368,7 @@ const ProcessSection = () => {
         <section id="process" className="py-32 px-6 relative overflow-hidden">
           <div className="max-w-[1200px] mx-auto relative z-10">
             <div className="text-center mb-24">
-              <p className="text-[#0885FE] text-[16px] font-semibold mb-4 tracking-wide">Why kt ds</p>
+              <p className="text-[#0885FE] text-[20px] font-semibold mb-4 tracking-wide">Why kt ds</p>
               <h2 className="text-[58px] font-black text-black mb-6 tracking-tight leading-tight">
                 왜 kt ds와 함께 해야 할까요?
               </h2>
@@ -380,10 +380,38 @@ const ProcessSection = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
               {[
-                { num: "01", title: "분석/설계", subtitle: "Retriever,\nAnalyst", desc: "데이터 협의체를 통해 데이터 분석 및 선별 이를 기반으로 RAG 및 Agent 구현에 최적화된 체계 구축", color: "text-[#0885FE]" },
-                { num: "02", title: "개발/구현", subtitle: "Writer,\nExecutor", desc: "Enterprise 맞춤형 워크플로우 생성 및 RAG 엔진 기반 지식 증강 최적화", color: "text-[#0885FE]" },
-                { num: "03", title: "검증/테스트", subtitle: "Validator,\nQuality", desc: "답변 정확도 및 안정성 검증을 위한 자동화 테스트와 멀티 레벨 QA 수행", color: "text-[#0885FE]" },
-                { num: "04", title: "운영/안정화", subtitle: "Maintainer,\nSRE", desc: "실시간 모니터링 및 성능 최적화를 통해 멈춤 없는 엔터프라이즈 AI 환경 제공", color: "text-[#0885FE]" }
+                {
+                  num: "01", title: "분석/설계", subtitle: "Retriever,\nAnalyst", color: "text-[#0885FE]",
+                  bullets: [
+                    "데이터 협의체를 통해 데이터 분석 및 선별",
+                    "이를 기반으로 RAG 및 Agent 구현에 최적화된 체계 구축",
+                    "원인 분석, 옵션 비교, 리스크/영향 평가, 계획 수립"
+                  ]
+                },
+                {
+                  num: "02", title: "개발/구현", subtitle: "Writer,\nExecutor", color: "text-[#0885FE]",
+                  bullets: [
+                    "17년 업력으로 안정성 및 보안성을 갖춘 시스템 구축",
+                    "답변/문서/코드/보고서 작성",
+                    "유연한 워크플로우 생성 기능으로 다양한 비즈니스에 최적화"
+                  ]
+                },
+                {
+                  num: "03", title: "검증/테스트", subtitle: "Validator,\nQuality", color: "text-[#0885FE]",
+                  bullets: [
+                    "답변 정확도 및 안정성 검증을 위한 자동화 테스트",
+                    "멀티 레벨 QA 수행으로 품질 보증",
+                    "실사용 시나리오 기반 성능 검증"
+                  ]
+                },
+                {
+                  num: "04", title: "운영/안정화", subtitle: "Maintainer,\nSRE", color: "text-[#0885FE]",
+                  bullets: [
+                    "실시간 모니터링 및 성능 최적화",
+                    "멈춤 없는 엔터프라이즈 AI 환경 제공",
+                    "장애 탐지 및 자동 복구 체계 운영"
+                  ]
+                },
               ].map((step, i) => (
                 <motion.div
                   key={i}
@@ -399,10 +427,15 @@ const ProcessSection = () => {
                   </div>
                   <div className="flex-1" />
                   <div className="min-h-[160px]">
-                    <h4 className="text-[18px] font-medium text-gray-900 mb-3">{step.title}</h4>
-                    <p className="text-black/60 text-[15px] leading-[1.6]">
-                      {step.desc}
-                    </p>
+                    <h4 className="text-[18px] font-semibold text-gray-900 mb-4">{step.title}</h4>
+                    <ul className="space-y-2">
+                      {step.bullets.map((bullet, j) => (
+                        <li key={j} className="flex items-start gap-2 text-black/60 text-[14px] leading-relaxed">
+                          <span className="mt-[6px] w-1.5 h-1.5 rounded-full bg-black/30 shrink-0" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </motion.div>
               ))}
