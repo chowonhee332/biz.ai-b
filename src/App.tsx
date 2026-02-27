@@ -686,21 +686,33 @@ const App = () => {
           >
             <section id="solution" className="py-32 px-6">
               <div className="max-w-[1200px] mx-auto relative">
-                <div className="text-center mb-20 font-pretendard flex flex-col items-center relative z-10">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="text-center mb-20 font-pretendard flex flex-col items-center relative z-10"
+                >
                   <h2 className="text-[58px] font-black text-black mb-6 tracking-tight leading-tight">
                     Kt ds AI Solutions
                   </h2>
-                  <p className="text-black/80 text-[18px] max-w-2xl mx-auto font-medium">
+                  <p className="text-black/80 text-[20px] max-w-2xl mx-auto font-medium">
                     AI 전략부터 운영까지, 기업 AI의 전 과정을 통합 지원합니다.
                   </p>
-                </div>
+                </motion.div>
 
 
                 {/* 그룹 1: 전사 공통 */}
                 <div className="mb-32 max-w-[1000px] mx-auto">
-                  <div className="flex items-center gap-2 mb-5 ml-4">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="flex items-center gap-2 mb-5 ml-4"
+                  >
                     <span className="text-[18px] font-normal text-gray-800">전사 공통 (General Business)</span>
-                  </div>
+                  </motion.div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3 justify-items-center">
                     {[
                       {
@@ -737,9 +749,15 @@ const App = () => {
 
                 {/* 그룹 2: IT 서비스/개발 직군 */}
                 <div className="mb-14 max-w-[1000px] mx-auto">
-                  <div className="flex items-center gap-2 mb-5 ml-4">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="flex items-center gap-2 mb-5 ml-4"
+                  >
                     <span className="text-[18px] font-normal text-gray-800">IT 서비스/개발 직군 (IT Service & Dev)</span>
-                  </div>
+                  </motion.div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3 justify-items-center">
                     {[
                       {
@@ -782,11 +800,17 @@ const App = () => {
 
         <section id="domain" className="py-20 md:py-32 px-4 md:px-6 relative overflow-hidden bg-black pb-16">
           <div className="max-w-[1200px] mx-auto">
-            <div className="text-left mb-12 md:mb-16 font-pretendard">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className="text-left mb-12 md:mb-16 font-pretendard"
+            >
               <span className="text-[#0885FE] font-bold text-[16px] md:text-[20px] mb-2 md:mb-4 block tracking-tight">Multi Agent</span>
               <h2 className="text-[36px] md:text-[44px] lg:text-[52px] font-black bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-4 md:mb-6 tracking-tight">도메인별 Multi Agent</h2>
               <p className="text-white/80 text-[16px] md:text-[18px] font-normal tracking-tight">공공/금융 등 도메인별로 KTDS의 Multi-Agent를 활용해 보세요.</p>
-            </div>
+            </motion.div>
 
             <div className="flex flex-col lg:flex-row gap-1 md:gap-2 w-full h-[600px] md:h-auto lg:h-[700px]">
               <DomainAccordionItem
@@ -830,14 +854,20 @@ const App = () => {
 
         <section id="use-cases" className="py-32 bg-[#000000] relative">
           <div className="max-w-[1200px] mx-auto w-full min-h-[100vh] lg:min-h-[150vh] relative flex flex-col items-start px-4 md:px-6">
-            <div className="w-full mb-6 pt-[40px] md:pt-[80px]">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className="w-full mb-6 pt-[40px] md:pt-[80px]"
+            >
               <span className="text-[#0885FE] font-bold text-[14px] tracking-widest block mb-4 md:mb-5 uppercase">Use Case</span>
               <h2 className="text-[36px] md:text-[44px] lg:text-[58px] font-black bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent tracking-tight leading-[1.1] font-pretendard">
                 Solution, <br />
                 Multi Agent <br />
                 Use Cases
               </h2>
-            </div>
+            </motion.div>
 
             <div className="w-full flex flex-col lg:flex-row items-start relative gap-8 lg:gap-0">
               <div className="w-full lg:w-[42%] lg:sticky lg:top-0 lg:h-screen flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16 pt-[40px] md:pt-[100px]">
