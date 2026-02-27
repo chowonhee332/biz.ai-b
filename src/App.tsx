@@ -389,7 +389,7 @@ const ProcessSection = () => {
                   ]
                 },
                 {
-                  num: "02", title: "개발/구현", subtitle: "Writer,\nExecutor", color: "text-[#0885FE]",
+                  num: "02", title: "구축", subtitle: "Writer,\nExecutor", color: "text-[#0885FE]",
                   bullets: [
                     "17년 업력으로 안정성 및 보안성을 갖춘 시스템 구축",
                     "답변/문서/코드/보고서 작성",
@@ -397,7 +397,7 @@ const ProcessSection = () => {
                   ]
                 },
                 {
-                  num: "03", title: "검증/테스트", subtitle: "Validator,\nQuality", color: "text-[#0885FE]",
+                  num: "03", title: "테스트 및 이행", subtitle: "Validator,\nQuality", color: "text-[#0885FE]",
                   bullets: [
                     "답변 정확도 및 안정성 검증을 위한 자동화 테스트",
                     "멀티 레벨 QA 수행으로 품질 보증",
@@ -405,7 +405,7 @@ const ProcessSection = () => {
                   ]
                 },
                 {
-                  num: "04", title: "운영/안정화", subtitle: "Maintainer,\nSRE", color: "text-[#0885FE]",
+                  num: "04", title: "안정화", subtitle: "Maintainer,\nSRE", color: "text-[#0885FE]",
                   bullets: [
                     "실시간 모니터링 및 성능 최적화",
                     "멈춤 없는 엔터프라이즈 AI 환경 제공",
