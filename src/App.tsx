@@ -1055,6 +1055,7 @@ const App = () => {
                 </div>
               </div>
             </div>
+          </div>
         </section>
 
         <section id="logos" className="relative py-12 bg-black overflow-hidden">
