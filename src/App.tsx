@@ -998,11 +998,11 @@ const App = () => {
                                 );
                               })()
                             ) : (
-                              // Inactive Title: Visible at low opacity
+                              // Inactive Title: Visible at medium opacity
                               <motion.h3
-                                initial={{ opacity: 0.2 }}
-                                animate={{ opacity: 0.2 }}
-                                className="text-[32px] font-bold text-white/20 tracking-tight"
+                                initial={{ opacity: 0.4 }}
+                                animate={{ opacity: 0.4 }}
+                                className="text-[32px] font-bold text-white/40 tracking-tight"
                               >
                                 {item.titlePrefix} {item.titleSuffix}
                               </motion.h3>
