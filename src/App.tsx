@@ -97,7 +97,7 @@ const SolutionCard = ({ image, title, desc, highlight }: { image: string; title:
     </div>
 
     {/* Content below the box */}
-    <div className="flex flex-col gap-3 font-pretendard px-3">
+    <div className="flex flex-col gap-3 font-pretendard px-5">
       <h4 className="text-black text-[28px] font-bold tracking-tight leading-tight">{title}</h4>
       <p className="text-black/70 text-[18px] leading-relaxed font-normal break-keep">
         {desc}
