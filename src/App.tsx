@@ -979,10 +979,10 @@ const App = () => {
                               style={{ opacity: dOpacity, y: dY }}
                               className="absolute inset-0 w-full"
                             >
-                              <h3 className="text-[28px] font-bold text-white mb-2 leading-tight">
+                              <h3 className="text-[34px] font-bold text-white mb-2 leading-tight">
                                 {item.titlePrefix} {item.titleSuffix}
                               </h3>
-                              <p className="text-[15px] text-white/70 leading-relaxed max-w-lg mb-6 font-normal">
+                              <p className="text-[16px] text-white/70 leading-relaxed max-w-lg mb-6 font-normal">
                                 {item.desc}
                               </p>
                               {item.features && (
