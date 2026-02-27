@@ -121,26 +121,27 @@ const CharacterReveal = ({ text, className, scrollProgress, range }: { text: str
   const totalLength = text.length;
   let charCounter = 0;
 
-  // Question stays fully visible once reveal is done, but parent can fade it
   return (
-    <div className={className}>
-      <div className="text-[36px] font-bold leading-[1.5] tracking-tight">
-        {lines.map((line, lineIdx) => (
-          <div key={lineIdx} className={lineIdx === lines.length - 1 ? "text-[#0885FE]" : "text-white"}>
-            {line.split('').map((char, charIdx) => {
-              const charStart = range[0] + (charCounter / totalLength) * (range[1] - range[0]);
-              const charEnd = range[0] + ((charCounter + 1) / totalLength) * (range[1] - range[0]);
-              charCounter++;
-              return (
-                <Char key={charIdx} progress={scrollProgress} range={[charStart, charEnd]}>
-                  {char}
-                </Char>
-              );
-            })}
-            {lineIdx < lines.length - 1 && (() => { charCounter++; return null; })()}
-          </div>
-        ))}
-      </div>
+    <div className={`flex flex-col gap-0 md:gap-1.5 font-pretendard ${className}`}>
+      {lines.map((line, lineIdx) => (
+        <div
+          key={lineIdx}
+          className={`flex flex-wrap text-[34px] font-bold tracking-tight leading-[1.5] ${lineIdx === lines.length - 1 ? "text-[#0885FE]" : "text-white"
+            }`}
+        >
+          {line.split('').map((char, charIdx) => {
+            const charStart = range[0] + (charCounter / totalLength) * (range[1] - range[0]);
+            const charEnd = range[0] + ((charCounter + 1) / totalLength) * (range[1] - range[0]);
+            charCounter++;
+            return (
+              <Char key={charIdx} progress={scrollProgress} range={[charStart, charEnd]}>
+                {char}
+              </Char>
+            );
+          })}
+          {lineIdx < lines.length - 1 && (() => { charCounter++; return null; })()}
+        </div>
+      ))}
     </div>
   );
 };
@@ -1021,7 +1022,9 @@ const App = () => {
                       {useCaseItems.map((item, index) => {
                         const isActive = activeUseCase === index;
                         const slideRange: [number, number] = index === 0 ? [0, 0.05] : index === 1 ? [0.33, 0.38] : [0.66, 0.71];
+                        const activeRange: [number, number] = index === 0 ? [0.05, 0.33] : index === 1 ? [0.38, 0.66] : [0.71, 1.0];
                         const x = useTransform(sectionProgress, slideRange, [60, 0]);
+                        const y = useTransform(sectionProgress, activeRange, [0, -100]);
                         const opacity = useTransform(sectionProgress, [slideRange[0], slideRange[1]], [0, 1]);
 
                         return (
@@ -1030,6 +1033,7 @@ const App = () => {
                             style={{
                               opacity: isActive ? opacity : 0,
                               x: isActive ? x : 60,
+                              y: isActive ? y : 0,
                               scale: isActive ? 1 : 0.95,
                             }}
                             className="absolute inset-0 w-full h-full flex items-center justify-center lg:justify-end"
