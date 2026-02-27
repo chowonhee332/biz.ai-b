@@ -979,9 +979,6 @@ const App = () => {
                               style={{ opacity: dOpacity, y: dY }}
                               className="absolute inset-0 w-full"
                             >
-                              <p className="text-white text-[32px] font-bold tracking-tight mb-1 font-pretendard">
-                                {String(index + 1).padStart(2, '0')}
-                              </p>
                               <h3 className="text-[28px] font-bold text-white mb-2 leading-tight">
                                 {item.titlePrefix} {item.titleSuffix}
                               </h3>
