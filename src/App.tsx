@@ -920,7 +920,7 @@ const App = () => {
                                     transition={{ delay: 0.1, duration: 0.4 }}
                                     className="bg-white/[0.04] border border-white/5 rounded-2xl p-6 mb-8 max-w-lg"
                                   >
-                                    <ul className="space-y-3">
+                                    <ul className="space-y-1">
                                       {item.features.map((feature: string, i: number) => (
                                         <li key={i} className="flex items-start gap-3 text-white/70 text-[15px] leading-relaxed">
                                           <span className="text-white/40 mt-[2px]">•</span>
