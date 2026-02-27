@@ -587,7 +587,7 @@ const App = () => {
     {
       id: "audit-agent",
       titlePrefix: "Audit Agent",
-      question: "산더미처럼 쌓인 규정과 지침,\nAI가 읽고 리스크만 딱 짚어줄 순 없나요?",
+      question: "산더미처럼 쌓인 규정과 지침,\nAI가 읽고 리스크만\n딱 짚어줄 순 없나요?",
       desc: "방대한 기업 규제 및 감사 문서를 AI가 신속히 분석하여, 법적 리스크를 사전에 파악하고 완벽한 컴플라이언스 대응을 지원합니다.",
       tags: ["자료검색", "감사/리스크"],
       themeColor: "sky",
@@ -602,7 +602,7 @@ const App = () => {
     {
       id: "meeting-agent",
       titlePrefix: "지능형 회의록 Agent",
-      question: "분명 회의는 길었는데,\n핵심 내용만 쏙쏙 뽑아볼 순 없나요?",
+      question: "분명 회의는 길었는데,\n핵심 내용만 쏙쏙\n뽑아볼 순 없나요?",
       desc: "음성 인식(STT)과 NLP를 결합하여 회의 중 나오는 화자를 구분하고, 자동으로 액션 아이템을 추출합니다.",
       tags: ["음성인식", "업무추출"],
       themeColor: "emerald",
@@ -936,71 +936,77 @@ const App = () => {
                         const isActive = index === activeUseCase;
                         return (
                           <div key={item.id} className="group py-[16px] md:py-[23px] border-b border-white/10">
-                            {(() => {
-                              // Each use case now has 3 phases: 
-                              // 1. Image slide phase (5% of section)
-                              // 2. Text reveal phase (~15% of section)
-                              // 3. Details reveal phase (~10% of section)
-                              const qRange: [number, number] = index === 0 ? [0.05, 0.2] : index === 1 ? [0.38, 0.53] : [0.71, 0.86];
-                              const dRange: [number, number] = [qRange[1] + 0.05, qRange[1] + 0.15];
+                            {isActive ? (
+                              (() => {
+                                const qRange: [number, number] = index === 0 ? [0.05, 0.2] : index === 1 ? [0.38, 0.53] : [0.71, 0.86];
+                                const dRange: [number, number] = [qRange[1] + 0.05, qRange[1] + 0.15];
 
-                              // Image slide progress
-                              const slideRange: [number, number] = index === 0 ? [0, 0.05] : index === 1 ? [0.33, 0.38] : [0.66, 0.71];
+                                const qOpacity = useTransform(sectionProgress, [dRange[0], dRange[0] + 0.05], [1, 0]);
+                                const dOpacity = useTransform(sectionProgress, dRange, [0, 1]);
+                                const dY = useTransform(sectionProgress, dRange, [20, 0]);
 
-                              const qOpacity = useTransform(sectionProgress, [dRange[0], dRange[0] + 0.05], [1, 0]);
-                              const dOpacity = useTransform(sectionProgress, dRange, [0, 1]);
-                              const dY = useTransform(sectionProgress, dRange, [20, 0]);
+                                return (
+                                  <div className="relative">
+                                    {/* Question Layer */}
+                                    <motion.div style={{ opacity: qOpacity }}>
+                                      <CharacterReveal
+                                        text={item.question}
+                                        scrollProgress={sectionProgress}
+                                        range={qRange}
+                                      />
+                                    </motion.div>
 
-                              return (
-                                <div className="relative">
-                                  <motion.div style={{ opacity: qOpacity }} className={!isActive ? "hidden" : ""}>
-                                    <CharacterReveal
-                                      text={item.question}
-                                      scrollProgress={sectionProgress}
-                                      range={qRange}
-                                    />
-                                  </motion.div>
+                                    {/* Details Layer */}
+                                    <motion.div
+                                      style={{ opacity: dOpacity, y: dY }}
+                                      className="absolute top-0 left-0 w-full"
+                                    >
+                                      <h3 className="text-[36px] font-bold text-white mb-6">
+                                        {item.titlePrefix} {item.titleSuffix}
+                                      </h3>
 
-                                  <motion.div
-                                    style={{ opacity: dOpacity, y: dY }}
-                                    className={`absolute top-0 left-0 w-full ${!isActive ? "hidden" : ""}`}
-                                  >
-                                    <h3 className="text-[36px] font-bold text-white mb-6">
-                                      {item.titlePrefix} {item.titleSuffix}
-                                    </h3>
+                                      <div className="mt-2.5">
+                                        <p className="text-[16px] text-white/80 leading-relaxed max-w-lg mb-8 whitespace-pre-line font-normal">
+                                          {item.desc}
+                                        </p>
 
-                                    <div className="mt-2.5">
-                                      <p className="text-[16px] text-white/80 leading-relaxed max-w-lg mb-8 whitespace-pre-line font-normal">
-                                        {item.desc}
-                                      </p>
+                                        {item.features && (
+                                          <div className="bg-white/[0.04] border border-white/5 rounded-2xl p-6 mb-8 max-w-lg">
+                                            <ul className="space-y-1">
+                                              {item.features.map((feature: string, i: number) => (
+                                                <li key={i} className="flex items-start gap-3 text-white/70 text-[15px] leading-relaxed">
+                                                  <span className="text-white/40 mt-[2px]">•</span>
+                                                  <span>{feature}</span>
+                                                </li>
+                                              ))}
+                                            </ul>
+                                          </div>
+                                        )}
 
-                                      {item.features && (
-                                        <div className="bg-white/[0.04] border border-white/5 rounded-2xl p-6 mb-8 max-w-lg">
-                                          <ul className="space-y-1">
-                                            {item.features.map((feature: string, i: number) => (
-                                              <li key={i} className="flex items-start gap-3 text-white/70 text-[15px] leading-relaxed">
-                                                <span className="text-white/40 mt-[2px]">•</span>
-                                                <span>{feature}</span>
-                                              </li>
+                                        {item.tags && (
+                                          <div className="flex flex-wrap gap-2.5">
+                                            {item.tags.map((tag: string, i: number) => (
+                                              <span key={i} className="px-4 py-1.5 rounded-full bg-[#0885FE]/10 border border-[#0885FE]/20 text-[14px] font-medium text-[#00AEFF] transition-none backdrop-blur-sm">
+                                                # {tag}
+                                              </span>
                                             ))}
-                                          </ul>
-                                        </div>
-                                      )}
-
-                                      {item.tags && (
-                                        <div className="flex flex-wrap gap-2.5">
-                                          {item.tags.map((tag: string, i: number) => (
-                                            <span key={i} className="px-4 py-1.5 rounded-full bg-[#0885FE]/10 border border-[#0885FE]/20 text-[14px] font-medium text-[#00AEFF] transition-none backdrop-blur-sm">
-                                              # {tag}
-                                            </span>
-                                          ))}
-                                        </div>
-                                      )}
-                                    </div>
-                                  </motion.div>
-                                </div>
-                              );
-                            })()}
+                                          </div>
+                                        )}
+                                      </div>
+                                    </motion.div>
+                                  </div>
+                                );
+                              })()
+                            ) : (
+                              // Inactive Title: Visible at low opacity
+                              <motion.h3
+                                initial={{ opacity: 0.2 }}
+                                animate={{ opacity: 0.2 }}
+                                className="text-[32px] font-bold text-white/20 tracking-tight"
+                              >
+                                {item.titlePrefix} {item.titleSuffix}
+                              </motion.h3>
+                            )}
 
 
 
