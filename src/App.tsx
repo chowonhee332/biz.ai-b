@@ -969,11 +969,13 @@ const App = () => {
                                         style={{
                                           gridArea: '1 / 1 / 2 / 2',
                                           opacity: qOpacity,
-                                          // When D starts coming in, we prevent Q from taking up space if it was hidden,
-                                          // but actually it's better to keep the grid cell size.
                                         }}
-                                        className="pb-4" // Give it some breathing room
+                                        className="pb-4"
                                       >
+                                        {/* 01 / 02 / 03 인덱스 번호 */}
+                                        <p className="text-white/50 text-[16px] font-semibold tracking-widest mb-3 font-pretendard">
+                                          {String(index + 1).padStart(2, '0')}
+                                        </p>
                                         <CharacterReveal
                                           text={item.question}
                                           scrollProgress={sectionProgress}
