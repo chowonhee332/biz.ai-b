@@ -973,7 +973,7 @@ const App = () => {
                                         className="pb-4"
                                       >
                                         {/* 01 / 02 / 03 인덱스 번호 */}
-                                        <p className="text-white/50 text-[16px] font-semibold tracking-widest mb-3 font-pretendard">
+                                        <p className="text-white/50 text-[32px] font-bold tracking-tight mb-1 font-pretendard">
                                           {String(index + 1).padStart(2, '0')}
                                         </p>
                                         <CharacterReveal
