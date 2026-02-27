@@ -116,33 +116,29 @@ const Char = ({ children, progress, range }: { children: string; progress: any; 
   return <motion.span style={{ opacity }}>{children}</motion.span>;
 };
 
-const CharacterReveal = ({ text, className, isActive }: { text: string; className?: string; isActive: boolean }) => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.85", "end 0.4"]
-  });
-
+const CharacterReveal = ({ text, className, scrollProgress, range }: { text: string; className?: string; scrollProgress: any, range: [number, number] }) => {
   const lines = text.split('\n');
   const totalLength = text.length;
   let charCounter = 0;
 
+  // Track simple opacity based on overall range for additional flexibility if needed
+  const opacity = useTransform(scrollProgress, range, [1, 1]);
+
   return (
-    <div ref={ref} className={className}>
+    <div className={className}>
       <div className="text-[28px] font-bold leading-[1.5] tracking-tight">
         {lines.map((line, lineIdx) => (
           <div key={lineIdx} className={lineIdx === lines.length - 1 ? "text-[#0885FE]" : "text-white"}>
             {line.split('').map((char, charIdx) => {
-              const start = charCounter / totalLength;
-              const end = (charCounter + 1) / totalLength;
+              const charStart = range[0] + (charCounter / totalLength) * (range[1] - range[0]);
+              const charEnd = range[0] + ((charCounter + 1) / totalLength) * (range[1] - range[0]);
               charCounter++;
               return (
-                <Char key={charIdx} progress={scrollYProgress} range={[start, end]}>
+                <Char key={charIdx} progress={scrollProgress} range={[charStart, charEnd]}>
                   {char}
                 </Char>
               );
             })}
-            {/* Add newline in counter for proper spacing calculation if needed, but text length handles it */}
             {lineIdx < lines.length - 1 && (() => { charCounter++; return null; })()}
           </div>
         ))}
@@ -165,25 +161,27 @@ const InteractiveMockup = ({ image }: { image: string }) => {
 
 const UseCaseVisual = ({ image, index, setActive, isActive }: { image: string; index: number; setActive: (idx: number) => void; isActive: boolean }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { margin: "-20% 0px -20% 0px", amount: 0.5 });
+  // The isInView logic is now handled by the parent component's scroll progress
+  // and activeUseCase state. This component will just render based on isActive prop.
+  // const isInView = useInView(ref, { margin: "-20% 0px -20% 0px", amount: 0.5 });
 
-  useEffect(() => {
-    if (isInView) setActive(index);
-  }, [isInView, index, setActive]);
+  // useEffect(() => {
+  //   if (isInView) setActive(index);
+  // }, [isInView, index, setActive]);
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={(isInView || isActive) ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{
-        type: "spring",
-        stiffness: 100,
-        damping: 30,
-        mass: 1,
-        restDelta: 0.001,
-        delay: 0.1
-      }}
+      // initial={{ opacity: 0, y: 40 }} // Initial state is now handled by parent motion.div
+      // animate={(isInView || isActive) ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }} // Animation is now handled by parent motion.div
+      // transition={{
+      //   type: "spring",
+      //   stiffness: 100,
+      //   damping: 30,
+      //   mass: 1,
+      //   restDelta: 0.001,
+      //   delay: 0.1
+      // }}
       className="w-full h-full smooth-gpu"
     >
       <InteractiveMockup image={image} />
@@ -508,6 +506,20 @@ const App = () => {
   const [activeDomain, setActiveDomain] = useState<number>(0);
   const navigate = useNavigate();
   const { scrollY, scrollYProgress } = useScroll();
+  const useCaseRef = useRef<HTMLDivElement>(null); // Keep one declaration
+  const { scrollYProgress: sectionProgress } = useScroll({
+    target: useCaseRef,
+    offset: ["start start", "end end"]
+  });
+  const [activeUseCase, setActiveUseCase] = useState(0);
+
+  // Auto-switch active Use Case based on scroll progress
+  useMotionValueEvent(sectionProgress, "change", (latest) => {
+    if (latest < 0.33) setActiveUseCase(0);
+    else if (latest < 0.66) setActiveUseCase(1);
+    else setActiveUseCase(2);
+  });
+
   const newsScrollRef = useRef<HTMLDivElement>(null);
 
   const scrollNews = (direction: 'left' | 'right') => {
@@ -536,7 +548,7 @@ const App = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const [activeUseCase, setActiveUseCase] = useState(0);
+  // const [activeUseCase, setActiveUseCase] = useState(0); // This is now managed by useMotionValueEvent
   const isScrollingRef = useRef(false);
 
   const scrollToTop = () => {
@@ -897,136 +909,152 @@ const App = () => {
           </div>
         </section>
 
-        <section id="use-cases" className="py-32 bg-[#000000] relative">
-          <div className="max-w-[1200px] mx-auto w-full min-h-[100vh] lg:min-h-[150vh] relative flex flex-col items-start px-4 md:px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
-              className="w-full mb-6 pt-[40px] md:pt-[80px]"
-            >
-              <span className="text-[#0885FE] font-bold text-[14px] tracking-widest block mb-4 md:mb-5 uppercase">Use Case</span>
-              <h2 className="text-[36px] md:text-[44px] lg:text-[58px] font-black bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent tracking-tight leading-[1.1] font-pretendard">
-                Solution, <br />
-                Multi Agent <br />
-                Use Cases
-              </h2>
-            </motion.div>
+        <section id="use-cases" ref={useCaseRef} className="relative bg-[#000000]">
+          {/* Scroll Pinned Container: Use case transition is now tied to a longer scroll length */}
+          <div className="relative h-[300vh]">
+            <div className="sticky top-0 h-screen w-full flex flex-col items-start px-4 md:px-6 overflow-hidden">
+              <div className="max-w-[1200px] mx-auto w-full h-full relative flex flex-col pt-[80px]">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.8 }}
+                  className="w-full mb-6 pt-[40px] md:pt-[80px]"
+                >
+                  <span className="text-[#0885FE] font-bold text-[14px] tracking-widest block mb-4 md:mb-5 uppercase">Use Case</span>
+                  <h2 className="text-[36px] md:text-[44px] lg:text-[58px] font-black bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent tracking-tight leading-[1.1] font-pretendard">
+                    Solution, <br />
+                    Multi Agent <br />
+                    Use Cases
+                  </h2>
+                </motion.div>
 
-            <div className="w-full flex flex-col lg:flex-row items-start relative gap-8 lg:gap-0">
-              <div className="w-full lg:w-[42%] lg:sticky lg:top-0 lg:h-screen flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16 pt-[40px] md:pt-[100px]">
-                <div className="flex flex-col">
-                  {useCaseItems.map((item, index) => {
-                    const isActive = index === activeUseCase;
-                    return (
-                      <div key={item.id} className="group py-[16px] md:py-[23px] border-b border-white/10">
-                        <AnimatePresence>
-                          {isActive && item.question && (
-                            <div className="mb-10">
-                              <CharacterReveal
-                                text={item.question}
-                                isActive={isActive}
-                              />
-                            </div>
-                          )}
-                        </AnimatePresence>
-                        <h3
-                          className={`text-[24px] md:text-[32px] tracking-tight transition-all duration-500 cursor-pointer flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 ${isActive ? 'text-white' : 'text-white/30 hover:text-white/50'}`}
-                          onClick={() => {
-                            const element = document.getElementById(`usecase-${item.id}`);
-                            if (element) {
-                              isScrollingRef.current = true;
-                              element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                              setActiveUseCase(index);
-                              setTimeout(() => {
-                                isScrollingRef.current = false;
-                              }, 1000);
-                            }
-                          }}
-                        >
-                          <span className="font-bold">{item.titlePrefix}</span>
-                          {item.titleSuffix && <span className="font-light">{item.titleSuffix}</span>}
-                        </h3>
-
-                        <AnimatePresence mode="wait">
-                          {isActive && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                              className="overflow-hidden"
+                <div className="w-full flex flex-col lg:flex-row items-start relative gap-8 lg:gap-0">
+                  <div className="w-full lg:w-[42%] lg:sticky lg:top-0 lg:h-screen flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16 pt-[40px] md:pt-[100px]">
+                    <div className="flex flex-col">
+                      {useCaseItems.map((item, index) => {
+                        const isActive = index === activeUseCase;
+                        return (
+                          <div key={item.id} className="group py-[16px] md:py-[23px] border-b border-white/10">
+                            <AnimatePresence>
+                              {isActive && item.question && (
+                                <div className="mb-10">
+                                  <CharacterReveal
+                                    text={item.question}
+                                    scrollProgress={sectionProgress}
+                                    range={index === 0 ? [0, 0.2] : index === 1 ? [0.33, 0.53] : [0.66, 0.86]}
+                                  />
+                                </div>
+                              )}
+                            </AnimatePresence>
+                            <h3
+                              className={`text-[24px] md:text-[32px] tracking-tight transition-all duration-500 cursor-pointer flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 ${isActive ? 'text-white' : 'text-white/30 hover:text-white/50'}`}
+                              onClick={() => {
+                                const element = document.getElementById(`usecase-${item.id}`);
+                                if (element) {
+                                  isScrollingRef.current = true;
+                                  element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                  setActiveUseCase(index);
+                                  setTimeout(() => {
+                                    isScrollingRef.current = false;
+                                  }, 1000);
+                                }
+                              }}
                             >
-                              <div className="mt-2.5">
-                                <motion.p
-                                  initial={{ y: 10, opacity: 0 }}
-                                  animate={{ y: 0, opacity: 1 }}
-                                  transition={{ duration: 0.3 }}
-                                  className="text-[16px] text-white/80 leading-relaxed max-w-lg mb-8 whitespace-pre-line font-normal"
+                              <span className="font-bold">{item.titlePrefix}</span>
+                              {item.titleSuffix && <span className="font-light">{item.titleSuffix}</span>}
+                            </h3>
+
+                            <AnimatePresence mode="wait">
+                              {isActive && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                                  className="overflow-hidden"
                                 >
-                                  {item.desc}
-                                </motion.p>
+                                  <div className="mt-2.5">
+                                    <motion.p
+                                      initial={{ y: 10, opacity: 0 }}
+                                      animate={{ y: 0, opacity: 1 }}
+                                      transition={{ duration: 0.3 }}
+                                      className="text-[16px] text-white/80 leading-relaxed max-w-lg mb-8 whitespace-pre-line font-normal"
+                                    >
+                                      {item.desc}
+                                    </motion.p>
 
-                                {item.features && (
-                                  <motion.div
-                                    initial={{ y: 15, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{ delay: 0.1, duration: 0.4 }}
-                                    className="bg-white/[0.04] border border-white/5 rounded-2xl p-6 mb-8 max-w-lg"
-                                  >
-                                    <ul className="space-y-1">
-                                      {item.features.map((feature: string, i: number) => (
-                                        <li key={i} className="flex items-start gap-3 text-white/70 text-[15px] leading-relaxed">
-                                          <span className="text-white/40 mt-[2px]">•</span>
-                                          <span>{feature}</span>
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </motion.div>
-                                )}
+                                    {item.features && (
+                                      <motion.div
+                                        initial={{ y: 15, opacity: 0 }}
+                                        animate={{ y: 0, opacity: 1 }}
+                                        transition={{ delay: 0.1, duration: 0.4 }}
+                                        className="bg-white/[0.04] border border-white/5 rounded-2xl p-6 mb-8 max-w-lg"
+                                      >
+                                        <ul className="space-y-1">
+                                          {item.features.map((feature: string, i: number) => (
+                                            <li key={i} className="flex items-start gap-3 text-white/70 text-[15px] leading-relaxed">
+                                              <span className="text-white/40 mt-[2px]">•</span>
+                                              <span>{feature}</span>
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      </motion.div>
+                                    )}
 
-                                {item.tags && (
-                                  <motion.div
-                                    initial={{ y: 20, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{ delay: 0.2 }}
-                                    className="flex flex-wrap gap-2.5"
-                                  >
-                                    {item.tags.map((tag: string, i: number) => {
-                                      return (
-                                        <span key={i} className="px-4 py-1.5 rounded-full bg-[#0885FE]/10 border border-[#0885FE]/20 text-[14px] font-medium text-[#00AEFF] transition-none backdrop-blur-sm">
-                                          # {tag}
-                                        </span>
-                                      );
-                                    })}
-                                  </motion.div>
-                                )}
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    );
-                  })}
+                                    {item.tags && (
+                                      <motion.div
+                                        initial={{ y: 20, opacity: 0 }}
+                                        animate={{ y: 0, opacity: 1 }}
+                                        transition={{ delay: 0.2 }}
+                                        className="flex flex-wrap gap-2.5"
+                                      >
+                                        {item.tags.map((tag: string, i: number) => {
+                                          return (
+                                            <span key={i} className="px-4 py-1.5 rounded-full bg-[#0885FE]/10 border border-[#0885FE]/20 text-[14px] font-medium text-[#00AEFF] transition-none backdrop-blur-sm">
+                                              # {tag}
+                                            </span>
+                                          );
+                                        })}
+                                      </motion.div>
+                                    )}
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="w-full lg:w-[58%] h-full flex items-center justify-end overflow-visible">
+                    <div className="w-full relative h-[60vh]">
+                      {useCaseItems.map((item, index) => (
+                        <motion.div
+                          key={index}
+                          initial={false}
+                          animate={{
+                            opacity: activeUseCase === index ? 1 : 0,
+                            scale: activeUseCase === index ? 1 : 0.95,
+                            y: activeUseCase === index ? 0 : 20
+                          }}
+                          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                          className="absolute inset-0 w-full h-full flex items-center justify-center lg:justify-end"
+                        >
+                          <UseCaseVisual
+                            image={item.image}
+                            index={index}
+                            setActive={() => { }} // Managed by sectionProgress
+                            isActive={activeUseCase === index}
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              <div className="w-full lg:w-[58%] flex flex-col gap-12 lg:gap-[30vh] pb-[10vh] lg:pb-[30vh] pt-[40px] lg:pt-[140px] items-center lg:items-end overflow-visible">
-                {useCaseItems.map((item, index) => (
-                  <div key={index} id={`usecase-${item.id}`} className="w-full scroll-mt-[20vh]">
-                    <UseCaseVisual
-                      image={item.image}
-                      index={index}
-                      setActive={handleSetActiveUseCase}
-                      isActive={activeUseCase === index}
-                    />
-                  </div>
-                ))}
-              </div>
             </div>
-
-          </div>
         </section>
 
         <section id="logos" className="relative py-12 bg-black overflow-hidden">
