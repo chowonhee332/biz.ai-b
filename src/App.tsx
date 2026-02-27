@@ -701,7 +701,7 @@ const App = () => {
                   <div className="flex items-center gap-2 mb-10 ml-4">
                     <span className="text-[20px] font-bold text-gray-800">전사 공통 (General Business)</span>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-5 justify-items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 justify-items-center">
                     {[
                       {
                         image: "/logo_1.png",
@@ -740,7 +740,7 @@ const App = () => {
                   <div className="flex items-center gap-2 mb-10 ml-4">
                     <span className="text-[20px] font-bold text-gray-800">IT 서비스/개발 직군 (IT Service & Dev)</span>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-5 justify-items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 justify-items-center">
                     {[
                       {
                         image: "/logo_3.png",
