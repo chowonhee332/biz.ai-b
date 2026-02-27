@@ -431,7 +431,7 @@ const ProcessSection = () => {
                     <ul className="space-y-2">
                       {step.bullets.map((bullet, j) => (
                         <li key={j} className="flex items-start gap-2 text-black/80 text-[14px] leading-relaxed font-normal">
-                          <span className="mt-[7px] w-1 h-1 rounded-full bg-black/25 shrink-0" />
+                          <span className="mt-[9px] w-1 h-1 rounded-full bg-black/25 shrink-0" />
                           <span>{bullet}</span>
                         </li>
                       ))}
