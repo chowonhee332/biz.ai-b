@@ -383,7 +383,7 @@ const ProcessSection = () => {
                 {
                   num: "01", title: "분석/설계", subtitle: "Retriever,\nAnalyst", color: "text-[#0885FE]",
                   bullets: [
-                    "데이터 협의체를 통해 데이터 분석 및 선별",
+                    "데이터 협의체 기반 분석 및 선별",
                     "이를 기반으로 RAG 및 Agent 구현에 최적화된 체계 구축",
                     "원인 분석, 옵션 비교, 리스크/영향 평가, 계획 수립"
                   ]
