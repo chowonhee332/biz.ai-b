@@ -593,7 +593,7 @@ const App = () => {
     {
       id: "audit-agent",
       titlePrefix: "Audit Agent",
-      question: "산더미처럼 쌓인 규정과 지침,\nAI가 읽고 리스크만\n딱 짚어줄 순 없나요?",
+      question: "국정 감사에 필요한\n방대한 자료를\n한 번에 분석해서 보고 싶어요!",
       desc: "방대한 기업 규제 및 감사 문서를 AI가 신속히 분석하여, 법적 리스크를 사전에 파악하고 완벽한 컴플라이언스 대응을 지원합니다.",
       tags: ["자료검색", "감사/리스크"],
       themeColor: "sky",
@@ -944,6 +944,11 @@ const App = () => {
                         const qRange: [number, number] = index === 0 ? [0.03, 0.10] : index === 1 ? [0.36, 0.43] : [0.69, 0.76];
                         const dRange: [number, number] = [qRange[1] + 0.02, qRange[1] + 0.05];
 
+                        // 숫자가 먼저 채워지고 (qRange의 앞 30%), 이어서 질문 텍스트 (나머지 70%)
+                        const qSpan = qRange[1] - qRange[0];
+                        const numFillEnd = qRange[0] + qSpan * 0.3;
+                        const textRange: [number, number] = [numFillEnd, qRange[1]];
+
                         // Q: 등장 → D가 시작되면 사라짐
                         const qOpacity = useTransform(sectionProgress, [qRange[0], qRange[1], dRange[0], dRange[0] + 0.02], [0, 1, 1, 0]);
                         // D: Q가 사라지면서 등장 → 다음 Q 시작 전에 사라짐
@@ -951,8 +956,8 @@ const App = () => {
                         const dOpacity = useTransform(sectionProgress, [dRange[0], dRange[1], nextStart - 0.03, nextStart], [0, 1, 1, 0]);
                         const dY = useTransform(sectionProgress, dRange, [20, 0]);
 
-                        // 숫자 오퍼시티: qRange 시작부터 dRange 끝까지 유지, 이후 사라짐
-                        const numOpacity = useTransform(sectionProgress, [qRange[0], qRange[1], nextStart - 0.03, nextStart], [0, 1, 1, 0]);
+                        // 숫자: qRange 시작부터 numFillEnd까지 채워짐, 이후 사라짐
+                        const numOpacity = useTransform(sectionProgress, [qRange[0], numFillEnd, nextStart - 0.03, nextStart], [0, 1, 1, 0]);
 
                         return (
                           <div key={item.id} className="absolute inset-0 w-full">
@@ -970,7 +975,7 @@ const App = () => {
                               <CharacterReveal
                                 text={item.question}
                                 scrollProgress={sectionProgress}
-                                range={qRange}
+                                range={textRange}
                               />
                             </motion.div>
 
