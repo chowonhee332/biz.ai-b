@@ -124,14 +124,14 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
         className={`flex flex-col sm:flex-row gap-4 ${isLeft ? 'justify-start' : 'justify-center'} mt-16`}
       >
         <Button
-          className="group bg-white text-[#000000] hover:bg-white/90 w-[160px] h-[48px] py-0 text-[15px] font-semibold rounded-full transition-all flex items-center justify-center gap-0"
+          className="group bg-white text-[#000000] hover:bg-white/90 w-[130px] h-[48px] py-0 text-[14px] font-semibold rounded-full transition-all flex items-center justify-center gap-0"
           disabled={isAnalyzing}
         >
           무료체험 신청
           <ChevronRight size={18} className="max-w-0 opacity-0 group-hover:max-w-[24px] group-hover:opacity-100 group-hover:ml-1 transition-all duration-300 overflow-hidden" />
         </Button>
         <Button
-          className="group bg-white/10 text-white border-none hover:bg-white/20 w-[160px] h-[48px] py-0 text-[15px] font-semibold rounded-full transition-all flex items-center justify-center gap-0"
+          className="group bg-white/10 text-white border-none hover:bg-white/20 w-[130px] h-[48px] py-0 text-[14px] font-semibold rounded-full transition-all flex items-center justify-center gap-0"
         >
           솔루션 문의
           <ChevronRight size={18} className="max-w-0 opacity-0 group-hover:max-w-[24px] group-hover:opacity-100 group-hover:ml-1 transition-all duration-300 overflow-hidden" />
