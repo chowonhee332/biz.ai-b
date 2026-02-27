@@ -86,23 +86,23 @@ const AnimatedCounter = ({ from, to }: { from: number; to: number }) => {
 };
 
 const SolutionCard = ({ image, title, desc, highlight }: { image: string; title: string; desc: string; highlight: string }) => (
-  <div className="flex flex-col gap-6 w-full max-w-[320px] group cursor-pointer">
+  <div className="flex flex-col gap-5 w-full max-w-[280px] group cursor-pointer">
     {/* 16:9 Thumbnail Box */}
-    <div className="w-full aspect-[16/9] rounded-[20px] bg-white flex items-center justify-center p-8 shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-black/[0.03] transition-all duration-500 group-hover:shadow-[0_20px_48px_rgba(0,0,0,0.08)] group-hover:-translate-y-1.5 overflow-hidden">
+    <div className="w-full aspect-[16/9] rounded-[20px] bg-white flex items-center justify-center p-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-black/[0.03] transition-all duration-500 group-hover:shadow-[0_20px_48px_rgba(0,0,0,0.08)] group-hover:-translate-y-1.5 overflow-hidden">
       <motion.img
         src={image}
         alt={title}
-        className="w-[180px] h-auto object-contain transition-transform duration-700 group-hover:scale-105"
+        className="w-[150px] h-auto object-contain transition-transform duration-700 group-hover:scale-105"
       />
     </div>
 
     {/* Content below the box */}
-    <div className="flex flex-col gap-3 font-pretendard px-5">
-      <h4 className="text-black text-[28px] font-bold tracking-tight leading-tight">{title}</h4>
-      <p className="text-black/70 text-[18px] leading-relaxed font-normal break-keep">
+    <div className="flex flex-col gap-2 font-pretendard px-4">
+      <h4 className="text-black text-[26px] font-bold tracking-tight leading-tight">{title}</h4>
+      <p className="text-black/70 text-[16px] leading-relaxed font-normal break-keep">
         {desc}
       </p>
-      <div className="mt-2 text-[#0885FE] font-medium text-[16px] tracking-tight">
+      <div className="mt-1 text-[#0885FE] font-medium text-[15px] tracking-tight">
         {highlight.startsWith('#') ? highlight : `# ${highlight}`}
       </div>
     </div>
@@ -697,11 +697,11 @@ const App = () => {
 
 
                 {/* 그룹 1: 전사 공통 */}
-                <div className="mb-32 max-w-[1100px] mx-auto">
-                  <div className="flex items-center gap-2 mb-10 ml-4">
+                <div className="mb-32 max-w-[900px] mx-auto">
+                  <div className="flex items-center gap-2 mb-8 ml-4">
                     <span className="text-[20px] font-bold text-gray-800">전사 공통 (General Business)</span>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 justify-items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 justify-items-center">
                     {[
                       {
                         image: "/logo_1.png",
@@ -736,11 +736,11 @@ const App = () => {
                 </div>
 
                 {/* 그룹 2: IT 서비스/개발 직군 */}
-                <div className="mb-14 max-w-[1100px] mx-auto">
-                  <div className="flex items-center gap-2 mb-10 ml-4">
+                <div className="mb-14 max-w-[900px] mx-auto">
+                  <div className="flex items-center gap-2 mb-8 ml-4">
                     <span className="text-[20px] font-bold text-gray-800">IT 서비스/개발 직군 (IT Service & Dev)</span>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 justify-items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 justify-items-center">
                     {[
                       {
                         image: "/logo_3.png",
