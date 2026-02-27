@@ -928,7 +928,7 @@ const App = () => {
 
           {/* Sticky Pinned Area: Begins after the title scrolls away */}
           <div ref={useCaseRef} className="relative h-[300vh]">
-            <div className="sticky top-0 h-screen w-full flex items-center justify-center px-4 md:px-6 overflow-hidden">
+            <div className="sticky top-0 h-screen w-full flex items-start justify-center px-4 md:px-6 overflow-hidden pt-[18vh]">
               <div className="max-w-[1200px] mx-auto w-full relative flex flex-col">
                 <div className="w-full flex flex-col lg:flex-row items-center relative gap-8 lg:gap-0">
                   <div className="w-full lg:w-[42%] flex flex-col justify-center z-20 pr-0 md:pr-12 lg:pr-16">
