@@ -86,7 +86,7 @@ const AnimatedCounter = ({ from, to }: { from: number; to: number }) => {
 };
 
 const SolutionCard = ({ image, title, desc, highlight }: { image: string; title: string; desc: string; highlight: string }) => (
-  <div className="flex flex-col gap-8 w-full max-w-[280px] group cursor-pointer">
+  <div className="flex flex-col gap-8 w-full max-w-[320px] group cursor-pointer">
     {/* 16:9 Thumbnail Box */}
     <div className="w-full aspect-[16/9] rounded-[20px] bg-white flex items-center justify-center p-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-black/[0.03] transition-all duration-500 group-hover:shadow-[0_20px_48px_rgba(0,0,0,0.08)] group-hover:-translate-y-1.5 overflow-hidden">
       <motion.img
@@ -697,7 +697,7 @@ const App = () => {
 
 
                 {/* 그룹 1: 전사 공통 */}
-                <div className="mb-32 max-w-[900px] mx-auto">
+                <div className="mb-32 max-w-[1000px] mx-auto">
                   <div className="flex items-center gap-2 mb-5 ml-4">
                     <span className="text-[18px] font-normal text-gray-800">전사 공통 (General Business)</span>
                   </div>
@@ -736,7 +736,7 @@ const App = () => {
                 </div>
 
                 {/* 그룹 2: IT 서비스/개발 직군 */}
-                <div className="mb-14 max-w-[900px] mx-auto">
+                <div className="mb-14 max-w-[1000px] mx-auto">
                   <div className="flex items-center gap-2 mb-5 ml-4">
                     <span className="text-[18px] font-normal text-gray-800">IT 서비스/개발 직군 (IT Service & Dev)</span>
                   </div>
