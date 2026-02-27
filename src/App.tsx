@@ -86,30 +86,24 @@ const AnimatedCounter = ({ from, to }: { from: number; to: number }) => {
 };
 
 const SolutionCard = ({ image, title, desc, highlight }: { image: string; title: string; desc: string; highlight: string }) => (
-  <div className="w-[320px] h-[280px] mx-auto rounded-[20px] bg-white flex items-center justify-center p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-black/[0.03] cursor-pointer transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-2 group relative overflow-hidden">
-    {/* Default Logo View */}
-    <img
-      src={image}
-      alt={title}
-      className="w-[200px] h-auto object-contain transition-all duration-700 group-hover:scale-105 group-hover:opacity-0"
-    />
-
-    {/* Hover Overlay View */}
-    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col p-10 text-left">
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-        style={{ backgroundImage: `url('/thumbnail_bg.png')` }}
+  <div className="flex flex-col gap-6 w-full max-w-[320px] group cursor-pointer">
+    {/* 16:9 Thumbnail Box */}
+    <div className="w-full aspect-[16/9] rounded-[32px] bg-white flex items-center justify-center p-8 shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-black/[0.03] transition-all duration-500 group-hover:shadow-[0_20px_48px_rgba(0,0,0,0.08)] group-hover:-translate-y-1.5 overflow-hidden">
+      <motion.img
+        src={image}
+        alt={title}
+        className="w-[180px] h-auto object-contain transition-transform duration-700 group-hover:scale-105"
       />
-      <div className="absolute inset-0 bg-black/60" />
+    </div>
 
-      <div className="relative z-10 flex flex-col h-full font-pretendard">
-        <h4 className="text-white text-[28px] font-bold mb-1.5 tracking-tight">{title}</h4>
-        <p className="text-white/80 text-[16px] leading-relaxed mb-8 break-keep font-normal">
-          {desc}
-        </p>
-        <div className="mt-auto">
-          <span className="text-[#00E5FF] font-medium text-[16px] tracking-tight">{highlight}</span>
-        </div>
+    {/* Content below the box */}
+    <div className="flex flex-col gap-3 font-pretendard px-1">
+      <h4 className="text-black text-[32px] font-bold tracking-tight leading-tight">{title}</h4>
+      <p className="text-black/70 text-[18px] leading-relaxed font-normal break-keep">
+        {desc}
+      </p>
+      <div className="mt-2 text-[#0885FE] font-medium text-[16px] tracking-tight">
+        {highlight.startsWith('#') ? highlight : `# ${highlight}`}
       </div>
     </div>
   </div>
@@ -703,11 +697,11 @@ const App = () => {
 
 
                 {/* 그룹 1: 전사 공통 */}
-                <div className="mb-20 max-w-[984px] mx-auto">
-                  <div className="flex items-center gap-2 mb-6 ml-4">
-                    <span className="text-[18px] font-bold text-gray-800">전사 공통 (General Business)</span>
+                <div className="mb-32 max-w-[1100px] mx-auto">
+                  <div className="flex items-center gap-2 mb-10 ml-4">
+                    <span className="text-[20px] font-bold text-gray-800">전사 공통 (General Business)</span>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-[12px] justify-items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 justify-items-center">
                     {[
                       {
                         image: "/logo_1.png",
@@ -742,11 +736,11 @@ const App = () => {
                 </div>
 
                 {/* 그룹 2: IT 서비스/개발 직군 */}
-                <div className="mb-14 max-w-[984px] mx-auto">
-                  <div className="flex items-center gap-2 mb-6 ml-4">
-                    <span className="text-[18px] font-bold text-gray-800">IT 서비스/개발 직군 (IT Service & Dev)</span>
+                <div className="mb-14 max-w-[1100px] mx-auto">
+                  <div className="flex items-center gap-2 mb-10 ml-4">
+                    <span className="text-[20px] font-bold text-gray-800">IT 서비스/개발 직군 (IT Service & Dev)</span>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-[12px] justify-items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 justify-items-center">
                     {[
                       {
                         image: "/logo_3.png",
@@ -794,7 +788,7 @@ const App = () => {
               <p className="text-white/80 text-[16px] md:text-[18px] font-normal tracking-tight">공공/금융 등 도메인별로 KTDS의 Multi-Agent를 활용해 보세요.</p>
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-2 md:gap-4 w-full h-[600px] md:h-auto lg:h-[700px]">
+            <div className="flex flex-col lg:flex-row gap-1 md:gap-2 w-full h-[600px] md:h-auto lg:h-[700px]">
               <DomainAccordionItem
                 title="금융"
                 agents={['Audit Agent', 'SQL Agent', 'RFP Agent']}
