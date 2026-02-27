@@ -933,12 +933,12 @@ const App = () => {
 
           {/* Sticky Pinned Area: Begins after the title scrolls away */}
           <div ref={useCaseRef} className="relative h-[600vh]">
-            <div className="sticky top-0 h-screen w-full flex items-stretch justify-center px-4 md:px-6 overflow-hidden relative">
-              <div className="max-w-[1200px] mx-auto w-full relative flex flex-col h-full">
-                <div className="w-full flex flex-col lg:flex-row items-stretch relative gap-8 lg:gap-0 h-full">
-                  <div className="w-full lg:w-[42%] flex flex-col justify-center z-20 pr-0 md:pr-12 lg:pr-16 h-full">
+            <div className="sticky top-0 h-screen w-full flex items-center justify-center px-4 md:px-6 overflow-hidden">
+              <div className="max-w-[1200px] mx-auto w-full">
+                <div className="w-full flex flex-col lg:flex-row items-center relative gap-8 lg:gap-0">
+                  <div className="w-full lg:w-[42%] flex flex-col justify-center z-20 pr-0 md:pr-12 lg:pr-16">
                     {/* 단일 슬롯: 모든 Use Case가 동일한 자리에서 교체됨 */}
-                    <div className="relative" style={{ minHeight: '60vh' }}>
+                    <div className="relative" style={{ height: '50vh' }}>
                       {useCaseItems.map((item, index) => {
                         // 각 아이템별 범위 정의 (0.33씩 3등분)
                         const qRange: [number, number] = index === 0 ? [0.03, 0.10] : index === 1 ? [0.36, 0.43] : [0.69, 0.76];
@@ -1018,9 +1018,9 @@ const App = () => {
                     </div>
                   </div>
 
-                  {/* 우측 이미지: absolute로 분리하여 항상 화면 정중앙에 위치 */}
-                  <div className="absolute top-0 right-4 md:right-6 w-[58%] h-full flex items-center justify-end overflow-visible pointer-events-none">
-                    <div className="w-full relative h-[60vh] max-w-[680px]">
+                  {/* 우측 이미지: flex 레이아웃으로 화면 정중앙 배치 */}
+                  <div className="w-full lg:w-[58%] flex items-center justify-end overflow-visible">
+                    <div className="w-full relative h-[60vh]">
                       {useCaseItems.map((item, index) => {
                         const isActive = activeUseCase === index;
                         const slideRange: [number, number] = index === 0 ? [0, 0.03] : index === 1 ? [0.33, 0.36] : [0.66, 0.69];
