@@ -23,7 +23,7 @@ export default function DomainGraph() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-3xl md:text-4xl font-bold text-[var(--color-primary)] mb-4">도메인별 Multi-Agent</h2>
-          <p className="text-[var(--color-on-surface-variant)] text-lg">공공/금융 등 도메인별로 KTDS의 Multi-Agent를 활용해 보세요.</p>
+          <p className="text-[var(--color-on-surface-variant)] text-lg">공공/금융 등 도메인별로 kt ds의 Multi-Agent를 활용해 보세요.</p>
         </div>
         <div className="relative max-w-5xl mx-auto bg-[var(--color-surface)]/60 rounded-[100px] md:rounded-[200px] p-12 md:p-24 border border-[var(--color-outline)]/10 shadow-sm min-h-[700px] flex flex-col items-center justify-center backdrop-blur-sm">
           <div className="relative w-full h-full flex flex-col items-center justify-center gap-16 md:gap-32 mt-12">

@@ -188,7 +188,7 @@ export default function NewsPage() {
 
                         <div className="flex flex-col gap-8">
                             {[
-                                { title: "Kt ds, AI Agent 도입 사례 공개", desc: "금융권부터 제조 영역까지, 실제 현장에서 활약 중인 Biz.AI의 다양한 도입 사례와 놀라운 성과를 상세히 공개합니다.", date: "Dec 22, 2025", tag: "Tech Stories", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" },
+                                { title: "kt ds, AI Agent 도입 사례 공개", desc: "금융권부터 제조 영역까지, 실제 현장에서 활약 중인 Biz.AI의 다양한 도입 사례와 놀라운 성과를 상세히 공개합니다.", date: "Dec 22, 2025", tag: "Tech Stories", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" },
                                 { title: "2025 AI Trends Report 발간", desc: "올 한 해 주목해야 할 엔터프라이즈 AI 시장의 핵심 트렌드와 기술적 변화를 심층 분석한 리포트가 발간되었습니다.", date: "Nov 30, 2025", tag: "News", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" },
                                 { title: "Biz.AI 첫 밋업 행사 성황리 개최", desc: "고객사와 개발 파트너들이 한자리에 모여 AI 에이전트의 미래를 논의했던 첫 밋업 행사의 생생한 현장을 전달합니다.", date: "Oct 12, 2025", tag: "News", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=800" },
                                 { title: "글로벌 클라우드 플랫폼 신규 파트너십", desc: "멀티 클라우드 환경에서도 더욱 안정적이고 유연한 AI 서비스가 가능하도록 글로벌 파트너십을 체결했습니다.", date: "Sep 05, 2025", tag: "Documentation", image: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=800" }

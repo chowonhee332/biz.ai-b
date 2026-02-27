@@ -2,7 +2,7 @@ export default function Stats() {
   return (
     <section id="why" className="py-24 px-6 bg-[var(--color-surface)]">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-20 text-[var(--color-on-surface)]">왜 KT DS와 함께 해야 할까요?</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-20 text-[var(--color-on-surface)]">왜 kt ds와 함께 해야 할까요?</h2>
         <div className="flex flex-col gap-6 mb-32">
           <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-12">
              <div className="w-full md:w-64 h-20 bg-[var(--color-secondary)] rounded-full flex items-center justify-center shrink-0 shadow-sm border-2 border-[var(--color-outline)]/20">

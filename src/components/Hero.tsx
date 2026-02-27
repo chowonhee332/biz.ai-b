@@ -19,7 +19,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-secondary)] text-sm font-medium mb-8 hover:border-[var(--color-text-secondary)] transition-colors cursor-pointer"
         >
           <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse" />
-          KT DS New AI Solutions
+          kt ds New AI Solutions
         </motion.div>
 
         <motion.h2 
@@ -28,7 +28,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-xl md:text-2xl font-medium mb-6 text-[var(--color-text-secondary)]"
         >
-          KT DS의 AI 솔루션은
+          kt ds의 AI 솔루션은
         </motion.h2>
         
         <motion.h1 

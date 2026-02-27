@@ -369,7 +369,7 @@ const ProcessSection = () => {
           <div className="max-w-[1200px] mx-auto relative z-10">
             <div className="text-center mb-24">
               <h2 className="text-[58px] font-black text-black mb-6 tracking-tight leading-tight">
-                왜 KT DS와 함께 해야 할까요?
+                왜 kt ds와 함께 해야 할까요?
               </h2>
               <p className="text-black/80 text-[18px] max-w-2xl mx-auto font-medium">
                 기업의 복잡한 요구사항을 기획부터 구축, 검증, 운영까지<br className="hidden md:block" />
@@ -755,7 +755,7 @@ const App = () => {
                   className="text-center mb-20 font-pretendard flex flex-col items-center relative z-10"
                 >
                   <h2 className="text-[58px] font-black text-black mb-6 tracking-tight leading-tight">
-                    Kt ds AI Solutions
+                    kt ds AI Solutions
                   </h2>
                   <p className="text-black/80 text-[20px] max-w-2xl mx-auto font-medium">
                     AI 전략부터 운영까지, 기업 AI의 전 과정을 통합 지원합니다.
@@ -870,7 +870,7 @@ const App = () => {
             >
               <span className="text-[#0885FE] font-bold text-[16px] md:text-[20px] mb-2 md:mb-4 block tracking-tight">Multi Agent</span>
               <h2 className="text-[36px] md:text-[44px] lg:text-[52px] font-black bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-4 md:mb-6 tracking-tight">도메인별 Multi Agent</h2>
-              <p className="text-white/80 text-[16px] md:text-[18px] font-normal tracking-tight">공공/금융 등 도메인별로 KTDS의 Multi-Agent를 활용해 보세요.</p>
+              <p className="text-white/80 text-[16px] md:text-[18px] font-normal tracking-tight">공공/금융 등 도메인별로 kt ds의 Multi-Agent를 활용해 보세요.</p>
             </motion.div>
 
             <div className="flex flex-col lg:flex-row gap-1 md:gap-2 w-full h-[600px] md:h-auto lg:h-[700px]">
@@ -1061,6 +1061,10 @@ const App = () => {
           </div>
         </section>
 
+
+        {/* Why kt ds - 프로세스 섹션 */}
+        <ProcessSection />
+
         <section id="logos" className="relative py-12 bg-black overflow-hidden">
           <div className="relative z-10 max-w-[1200px] mx-auto px-6 text-center">
             <div className="relative overflow-hidden w-full py-4">
@@ -1133,7 +1137,7 @@ const App = () => {
             <div className="max-w-[1000px] mx-auto relative group">
               <div className="columns-1 md:columns-2 lg:columns-3 gap-3 space-y-3">
                 {[
-                  { user: "Musa M.", role: "Figma for web design.", stars: 4.5, quote: "Kt ds의 AI 솔루션은 상상 그 이상이었습니다. No-code 기반으로 이렇게 정교한 에이전트를 만들 수 있다는 게 믿기지 않네요." },
+                  { user: "Musa M.", role: "Figma for web design.", stars: 4.5, quote: "kt ds의 AI 솔루션은 상상 그 이상이었습니다. No-code 기반으로 이렇게 정교한 에이전트를 만들 수 있다는 게 믿기지 않네요." },
                   { user: "Marcelo A.", role: "CEO and Co-Founder", stars: 5, quote: "Great marketing site building in no time. 복잡한 지식 베이스를 RAG로 구축하는 과정이 너무나 간결합니다." },
                   { user: "Jorge H.", role: "Founder", stars: 5, quote: "Web design and development brought to a new level - also friendly for non-tech people. 비전문가도 수준 높은 AI 서비스를 운영할 수 있습니다." },
                   { user: "Ayush S.", role: "Product Designer", stars: 5, quote: "Design and publish websites in minutes! And for free! 디자인 작업과 AI 로직 구현이 완벽하게 시너지를 냅니다." },
@@ -1218,7 +1222,7 @@ const App = () => {
             {[
               { title: "AI Agent Builder\nAI:ON-U 정식 출시", date: "Feb 20, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" },
               { title: "Enterprise RAG\n엔진 2.0 업데이트", date: "Jan 15, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" },
-              { title: "Kt ds, AI Agent\n도입 사례 공개", date: "Dec 22, 2025", tag: "Case Study", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" },
+              { title: "kt ds, AI Agent\n도입 사례 공개", date: "Dec 22, 2025", tag: "Case Study", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" },
               { title: "2025 AI Trends\nReport 발간", date: "Nov 30, 2025", tag: "Insight", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" },
               { title: "AI Agent Builder\nAI:ON-U 정식 출시", date: "Feb 20, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" },
               { title: "Enterprise RAG\n엔진 2.0 업데이트", date: "Jan 15, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" }
