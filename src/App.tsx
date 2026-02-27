@@ -368,6 +368,7 @@ const ProcessSection = () => {
         <section id="process" className="py-32 px-6 relative overflow-hidden">
           <div className="max-w-[1200px] mx-auto relative z-10">
             <div className="text-center mb-24">
+              <p className="text-[#0885FE] text-[16px] font-semibold mb-4 tracking-wide">Why kt ds</p>
               <h2 className="text-[58px] font-black text-black mb-6 tracking-tight leading-tight">
                 왜 kt ds와 함께 해야 할까요?
               </h2>
