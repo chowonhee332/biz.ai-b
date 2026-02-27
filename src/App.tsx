@@ -430,7 +430,7 @@ const ProcessSection = () => {
                     <h4 className="text-[18px] font-semibold text-gray-900 mb-4">{step.title}</h4>
                     <ul className="space-y-2">
                       {step.bullets.map((bullet, j) => (
-                        <li key={j} className="flex items-start gap-2 text-black/50 text-[14px] leading-relaxed font-normal">
+                        <li key={j} className="flex items-start gap-2 text-black/80 text-[14px] leading-relaxed font-normal">
                           <span className="mt-[7px] w-1 h-1 rounded-full bg-black/25 shrink-0" />
                           <span>{bullet}</span>
                         </li>
