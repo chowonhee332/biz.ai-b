@@ -109,6 +109,22 @@ const SolutionCard = ({ image, title, desc, highlight }: { image: string; title:
   </div>
 );
 
+const ScrollRevealLine = ({ children, className }: { children: React.ReactNode; className?: string }) => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 0.9", "end 0.5"]
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 1], [0.1, 1]);
+
+  return (
+    <motion.div ref={ref} style={{ opacity }} className={className}>
+      {children}
+    </motion.div>
+  );
+};
+
 const InteractiveMockup = ({ image }: { image: string }) => {
   return (
     <div className="w-full flex items-center justify-center lg:justify-end relative group/frame shrink-0 bg-transparent">
@@ -884,20 +900,12 @@ const App = () => {
                             <div className="overflow-hidden mb-10">
                               <div className="text-[28px] md:text-[34px] font-bold leading-[1.2] tracking-tight whitespace-pre-line">
                                 {item.question.split('\n').map((line, i) => (
-                                  <motion.div
+                                  <ScrollRevealLine
                                     key={i}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: false, amount: 0.8 }}
-                                    transition={{
-                                      duration: 0.8,
-                                      delay: i * 0.15,
-                                      ease: [0.21, 0.47, 0.32, 0.98]
-                                    }}
                                     className={i === item.question.split('\n').length - 1 ? "text-[#0885FE]" : "text-white"}
                                   >
                                     {line}
-                                  </motion.div>
+                                  </ScrollRevealLine>
                                 ))}
                               </div>
                             </div>
