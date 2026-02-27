@@ -881,21 +881,26 @@ const App = () => {
                       <div key={item.id} className="group py-[16px] md:py-[23px] border-b border-white/10">
                         <AnimatePresence>
                           {isActive && item.question && (
-                            <motion.div
-                              initial={{ opacity: 0, height: 0, y: -20 }}
-                              animate={{ opacity: 1, height: "auto", y: 0 }}
-                              exit={{ opacity: 0, height: 0, y: -20 }}
-                              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                              className="overflow-hidden mb-10"
-                            >
+                            <div className="overflow-hidden mb-10">
                               <div className="text-[28px] md:text-[34px] font-bold leading-[1.2] tracking-tight whitespace-pre-line">
-                                {item.question.split('\n').map((line, i, arr) => (
-                                  <div key={i} className={i === arr.length - 1 ? "text-[#0885FE]" : "text-white"}>
+                                {item.question.split('\n').map((line, i) => (
+                                  <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: false, amount: 0.8 }}
+                                    transition={{
+                                      duration: 0.8,
+                                      delay: i * 0.15,
+                                      ease: [0.21, 0.47, 0.32, 0.98]
+                                    }}
+                                    className={i === item.question.split('\n').length - 1 ? "text-[#0885FE]" : "text-white"}
+                                  >
                                     {line}
-                                  </div>
+                                  </motion.div>
                                 ))}
                               </div>
-                            </motion.div>
+                            </div>
                           )}
                         </AnimatePresence>
                         <h3
