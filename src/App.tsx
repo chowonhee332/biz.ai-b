@@ -972,10 +972,18 @@ const App = () => {
                                         }}
                                         className="pb-4"
                                       >
-                                        {/* 01 / 02 / 03 인덱스 번호 */}
-                                        <p className="text-white/50 text-[32px] font-bold tracking-tight mb-1 font-pretendard">
-                                          {String(index + 1).padStart(2, '0')}
-                                        </p>
+                                        {/* 01 / 02 / 03 인덱스 번호 — 질문 텍스트와 동일한 스크롤 오퍼시티 */}
+                                        {(() => {
+                                          const numOpacity = useTransform(sectionProgress, qRange, [0.15, 1]);
+                                          return (
+                                            <motion.p
+                                              style={{ opacity: numOpacity }}
+                                              className="text-white text-[32px] font-bold tracking-tight mb-1 font-pretendard"
+                                            >
+                                              {String(index + 1).padStart(2, '0')}
+                                            </motion.p>
+                                          );
+                                        })()}
                                         <CharacterReveal
                                           text={item.question}
                                           scrollProgress={sectionProgress}
