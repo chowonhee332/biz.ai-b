@@ -88,7 +88,7 @@ const AnimatedCounter = ({ from, to }: { from: number; to: number }) => {
 const SolutionCard = ({ image, title, desc, highlight }: { image: string; title: string; desc: string; highlight: string }) => (
   <div className="flex flex-col gap-6 w-full max-w-[320px] group cursor-pointer">
     {/* 16:9 Thumbnail Box */}
-    <div className="w-full aspect-[16/9] rounded-[32px] bg-white flex items-center justify-center p-8 shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-black/[0.03] transition-all duration-500 group-hover:shadow-[0_20px_48px_rgba(0,0,0,0.08)] group-hover:-translate-y-1.5 overflow-hidden">
+    <div className="w-full aspect-[16/9] rounded-[20px] bg-white flex items-center justify-center p-8 shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-black/[0.03] transition-all duration-500 group-hover:shadow-[0_20px_48px_rgba(0,0,0,0.08)] group-hover:-translate-y-1.5 overflow-hidden">
       <motion.img
         src={image}
         alt={title}
@@ -97,7 +97,7 @@ const SolutionCard = ({ image, title, desc, highlight }: { image: string; title:
     </div>
 
     {/* Content below the box */}
-    <div className="flex flex-col gap-3 font-pretendard px-1">
+    <div className="flex flex-col gap-3 font-pretendard px-3">
       <h4 className="text-black text-[32px] font-bold tracking-tight leading-tight">{title}</h4>
       <p className="text-black/70 text-[18px] leading-relaxed font-normal break-keep">
         {desc}
@@ -701,7 +701,7 @@ const App = () => {
                   <div className="flex items-center gap-2 mb-10 ml-4">
                     <span className="text-[20px] font-bold text-gray-800">전사 공통 (General Business)</span>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 justify-items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-5 justify-items-center">
                     {[
                       {
                         image: "/logo_1.png",
@@ -740,7 +740,7 @@ const App = () => {
                   <div className="flex items-center gap-2 mb-10 ml-4">
                     <span className="text-[20px] font-bold text-gray-800">IT 서비스/개발 직군 (IT Service & Dev)</span>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 justify-items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-5 justify-items-center">
                     {[
                       {
                         image: "/logo_3.png",
