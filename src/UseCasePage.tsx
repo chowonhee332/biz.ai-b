@@ -15,9 +15,9 @@ export default function UseCasePage() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#0a0a0a] text-white font-pretendard flex flex-col">
+        <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
             {/* GNB */}
-            <nav className="fixed w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-xl py-4 px-6 md:px-10 border-b border-white/5">
+            <nav className="fixed w-full z-50 bg-[#000000]/80 backdrop-blur-xl py-4 px-6 md:px-10 border-b border-white/5">
                 <div className="max-w-[1200px] mx-auto flex justify-between items-center px-6 md:px-0">
                     <Link to="/" className="flex items-center gap-2 shrink-0">
                         <img src="/bizai_logo.png" alt="Biz.AI Logo" className="h-6 w-auto" />
@@ -49,7 +49,7 @@ export default function UseCasePage() {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            className="lg:hidden absolute top-full left-0 right-0 bg-[#0a0a0a]/95 backdrop-blur-xl py-4 px-6 overflow-hidden border-b border-white/10"
+                            className="lg:hidden absolute top-full left-0 right-0 bg-[#000000]/95 backdrop-blur-xl py-4 px-6 overflow-hidden border-b border-white/10"
                         >
                             <div className="flex flex-col gap-4">
                                 <Link to="/" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>멀티 에이전트 플랫폼</Link>
@@ -90,7 +90,7 @@ export default function UseCasePage() {
                 {/* Case Grid Section */}
                 <div className="max-w-[1200px] mx-auto">
                     {/* Category Filter - Sticky */}
-                    <div className="sticky top-[64px] bg-[#0a0a0a] z-40 flex items-center gap-8 mb-16 border-b border-white/5 py-4 overflow-x-auto no-scrollbar whitespace-nowrap">
+                    <div className="sticky top-[64px] bg-[#000000] z-40 flex items-center gap-8 mb-16 border-b border-white/5 py-4 overflow-x-auto no-scrollbar whitespace-nowrap">
                         {["All", "데이터 분석", "보고 / 의사결정 향상", "리스크 관리 효율화", "강력한 보안", "내부 업무 처리 향상"].map((category) => (
                             <button
                                 key={category}
@@ -214,7 +214,7 @@ export default function UseCasePage() {
             </section>
 
             {/* Footer */}
-            <footer className="bg-[#0a0a0a] py-32 border-t border-white/5">
+            <footer className="bg-[#000000] py-32 border-t border-white/5">
                 <div className="max-w-[1200px] mx-auto">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 mb-24 px-6 md:px-0">
                         <div className="flex flex-col">

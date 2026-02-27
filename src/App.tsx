@@ -55,7 +55,7 @@ const StudioCard = ({ icon, title, desc }: { icon: React.ReactElement; title: st
   <Card className="p-10 rounded-3xl bg-[#111] border-white/5 hover:bg-[#1a1a1a] hover:border-white/20 transition-all duration-500 group flex flex-col items-center md:items-start text-center md:text-left shadow-2xl relative overflow-hidden">
     <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl -mr-16 -mt-16 group-hover:bg-blue-500/20 transition-colors duration-500" />
     <div className="size-16 bg-white/5 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform border border-white/10 relative z-10 text-white/80 group-hover:text-blue-400">
-      {React.cloneElement(icon, { size: 32 })}
+      {React.cloneElement(icon as any, { size: 32 })}
     </div>
     <h4 className="text-2xl font-bold text-white mb-4 relative z-10">{title}</h4>
     <p className="text-white/50 leading-relaxed font-medium relative z-10">{desc}</p>
@@ -127,9 +127,9 @@ const InteractiveMockup = ({ image }: { image: string }) => {
   );
 };
 
-const UseCaseVisual = ({ image, index, setActive }: { key?: React.Key; image: string; index: number; setActive: (idx: number) => void }) => {
+const UseCaseVisual = ({ image, index, setActive, isActive }: { image: string; index: number; setActive: (idx: number) => void; isActive: boolean }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { margin: "-15% 0px -15% 0px", amount: 0.1 });
+  const isInView = useInView(ref, { margin: "-20% 0px -20% 0px", amount: 0.5 });
 
   useEffect(() => {
     if (isInView) setActive(index);
@@ -139,7 +139,7 @@ const UseCaseVisual = ({ image, index, setActive }: { key?: React.Key; image: st
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      animate={(isInView || isActive) ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       transition={{
         type: "spring",
         stiffness: 100,
@@ -367,10 +367,10 @@ const ProcessSection = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
               {[
-                { num: "01", title: "분석/설계", subtitle: "Retriever,\nAnalyst", desc: "데이터 협의체를 통해 데이터 분석 및 선별 이를 기반으로 RAG 및 Agent 구현에 최적화된 체계 구축 원인 분석, 옵션 비교, 리스크/영향 평가, 계획 수립", color: "text-[#0885FE]" },
-                { num: "02", title: "개발/구현", subtitle: "Writer,\nExecutor", desc: "Enterprise 맞춤형 워크플로우 생성 및 RAG 엔진 기반 지식 증강 최적화 원인 분석, 옵션 비교, 리스크/영향 평가, 계획 수립", color: "text-[#0885FE]" },
-                { num: "03", title: "검증/테스트", subtitle: "Validator,\nQuality", desc: "답변 정확도 및 안정성 검증을 위한 자동화 테스트와 멀티 레벨 QA 수행 원인 분석, 옵션 비교, 리스크/영향 평가, 계획 수립", color: "text-[#0885FE]" },
-                { num: "04", title: "운영/안정화", subtitle: "Maintainer,\nSRE", desc: "실시간 모니터링 및 성능 최적화를 통해 멈춤 없는 엔터프라이즈 AI 환경 제공 원인 분석, 옵션 비교, 리스크/영향 평가, 계획 수립", color: "text-[#0885FE]" }
+                { num: "01", title: "분석/설계", subtitle: "Retriever,\nAnalyst", desc: "데이터 협의체를 통해 데이터 분석 및 선별 이를 기반으로 RAG 및 Agent 구현에 최적화된 체계 구축", color: "text-[#0885FE]" },
+                { num: "02", title: "개발/구현", subtitle: "Writer,\nExecutor", desc: "Enterprise 맞춤형 워크플로우 생성 및 RAG 엔진 기반 지식 증강 최적화", color: "text-[#0885FE]" },
+                { num: "03", title: "검증/테스트", subtitle: "Validator,\nQuality", desc: "답변 정확도 및 안정성 검증을 위한 자동화 테스트와 멀티 레벨 QA 수행", color: "text-[#0885FE]" },
+                { num: "04", title: "운영/안정화", subtitle: "Maintainer,\nSRE", desc: "실시간 모니터링 및 성능 최적화를 통해 멈춤 없는 엔터프라이즈 AI 환경 제공", color: "text-[#0885FE]" }
               ].map((step, i) => (
                 <motion.div
                   key={i}
@@ -537,11 +537,11 @@ const App = () => {
     }, 1000);
   };
 
-  const handleSetActiveUseCase = (idx: number) => {
+  const handleSetActiveUseCase = React.useCallback((idx: number) => {
     if (!isScrollingRef.current) {
       setActiveUseCase(idx);
     }
-  };
+  }, []);
 
   const useCaseItems = [
     {
@@ -550,6 +550,11 @@ const App = () => {
       titleSuffix: "WorksAI",
       desc: "AI 챗봇 기반으로 다양한 업무 처리를 지원하는 AI Agent 포털 서비스로 기업 전체 AI 서비스를 통합 관리하고 접근할 수 있는 중앙 플랫폼입니다.",
       tags: ["AI 비서+그룹웨어", "맞춤형"],
+      features: [
+        "기본적인 업무 기반에 최적화된 AI Agent 제공",
+        "업무에 필요한 에이전트를 직접 만들어 사내 공유/ 활용",
+        "그룹웨어 위젯 및 메뉴 커스텀을 통해 개인 맞춤형 컨텐츠 제공"
+      ],
       themeColor: "blue",
       icon: <Utensils className="w-8 h-8" />,
       image: "/test-1.png"
@@ -559,6 +564,11 @@ const App = () => {
       titlePrefix: "Audit Agent",
       desc: "방대한 기업 규제 및 감사 문서를 AI가 신속히 분석하여, 법적 리스크를 사전에 파악하고 완벽한 컴플라이언스 대응을 지원합니다.",
       tags: ["자료검색", "감사/리스크"],
+      features: [
+        "사내 규정 및 가이드라인 기반의 AI 감사 수행",
+        "키워드/의미 기반의 빠른 법령 및 판례 검색",
+        "감사 보고서 자동 초안 작성 및 리스크 등급 분류"
+      ],
       themeColor: "sky",
       icon: <Search className="w-8 h-8" />,
       image: "/test-2.png"
@@ -568,6 +578,11 @@ const App = () => {
       titlePrefix: "지능형 회의록 Agent",
       desc: "음성 인식(STT)과 NLP를 결합하여 회의 중 나오는 화자를 구분하고, 자동으로 액션 아이템을 추출합니다.",
       tags: ["음성인식", "업무추출"],
+      features: [
+        "실시간 음성 인식 및 화자 분리 기록",
+        "회의 내용 자동 요약 및 주요 의사결정 사항 추출",
+        "참석자 대상 회의록 자동 메일/메신저 발송 연동"
+      ],
       themeColor: "emerald",
       icon: <Monitor className="w-8 h-8" />,
       image: "/test-3.png"
@@ -864,7 +879,17 @@ const App = () => {
                       <div key={item.id} className="group py-[23px] border-b border-white/10">
                         <h3
                           className={`text-[32px] tracking-tight transition-all duration-500 cursor-pointer flex items-center gap-4 ${isActive ? 'text-white' : 'text-white/30 hover:text-white/50'}`}
-                          onClick={() => setActiveUseCase(index)}
+                          onClick={() => {
+                            const element = document.getElementById(`usecase-${item.id}`);
+                            if (element) {
+                              isScrollingRef.current = true;
+                              element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                              setActiveUseCase(index);
+                              setTimeout(() => {
+                                isScrollingRef.current = false;
+                              }, 1000);
+                            }
+                          }}
                         >
                           <span className="font-bold">{item.titlePrefix}</span>
                           {item.titleSuffix && <span className="font-light">{item.titleSuffix}</span>}
@@ -884,40 +909,45 @@ const App = () => {
                                   initial={{ y: 10, opacity: 0 }}
                                   animate={{ y: 0, opacity: 1 }}
                                   transition={{ duration: 0.3 }}
-                                  className="text-[16px] text-white/80 leading-relaxed max-w-lg mb-6 whitespace-pre-line font-normal"
+                                  className="text-[16px] text-white/80 leading-relaxed max-w-lg mb-8 whitespace-pre-line font-normal"
                                 >
                                   {item.desc}
                                 </motion.p>
+
+                                {item.features && (
+                                  <motion.div
+                                    initial={{ y: 15, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{ delay: 0.1, duration: 0.4 }}
+                                    className="bg-white/[0.04] border border-white/5 rounded-2xl p-6 mb-8 max-w-lg"
+                                  >
+                                    <ul className="space-y-3">
+                                      {item.features.map((feature: string, i: number) => (
+                                        <li key={i} className="flex items-start gap-3 text-white/70 text-[15px] leading-relaxed">
+                                          <span className="text-white/40 mt-[2px]">•</span>
+                                          <span>{feature}</span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </motion.div>
+                                )}
 
                                 {item.tags && (
                                   <motion.div
                                     initial={{ y: 20, opacity: 0 }}
                                     animate={{ y: 0, opacity: 1 }}
                                     transition={{ delay: 0.2 }}
-                                    className="flex flex-wrap gap-4 mb-8"
+                                    className="flex flex-wrap gap-2.5"
                                   >
                                     {item.tags.map((tag: string, i: number) => {
                                       return (
-                                        <span key={i} className="text-[16px] font-medium text-[#00AEFF] transition-none">
+                                        <span key={i} className="px-4 py-1.5 rounded-full bg-[#0885FE]/10 border border-[#0885FE]/20 text-[14px] font-medium text-[#00AEFF] transition-none backdrop-blur-sm">
                                           # {tag}
                                         </span>
                                       );
                                     })}
                                   </motion.div>
                                 )}
-
-
-
-                                <Link to="/use-cases">
-                                  <motion.button
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ delay: 0.6 }}
-                                    className="mt-6 w-[80px] h-[36px] rounded-lg border border-white/40 text-white text-[15px] font-medium transition-all group flex items-center justify-center gap-0 hover:border-white/60 p-0"
-                                  >
-                                    <span>더보기</span><ChevronRight size={16} className="max-w-0 opacity-0 group-hover:max-w-[18px] group-hover:opacity-100 group-hover:ml-[2px] transition-all duration-300 overflow-hidden" />
-                                  </motion.button>
-                                </Link>
                               </div>
                             </motion.div>
                           )}
@@ -930,20 +960,18 @@ const App = () => {
 
               <div className="w-full lg:w-[58%] flex flex-col gap-[30vh] pb-[30vh] pt-[140px] items-center lg:items-end overflow-visible">
                 {useCaseItems.map((item, index) => (
-                  <UseCaseVisual key={index} image={item.image} index={index} setActive={handleSetActiveUseCase} />
+                  <div key={index} id={`usecase-${item.id}`} className="w-full scroll-mt-[20vh]">
+                    <UseCaseVisual
+                      image={item.image}
+                      index={index}
+                      setActive={handleSetActiveUseCase}
+                      isActive={activeUseCase === index}
+                    />
+                  </div>
                 ))}
               </div>
             </div>
 
-            <div className="w-full flex justify-center -mt-16 relative z-30">
-              <Link to="/use-cases">
-                <Button
-                  className="w-[220px] h-[48px] text-[16px] font-medium border border-white/40 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent"
-                >
-                  <span>AI Agent / Solution 더보기</span><ChevronRight size={16} className="max-w-0 opacity-0 group-hover:max-w-[18px] group-hover:opacity-100 group-hover:ml-[2px] transition-all duration-300 overflow-hidden" />
-                </Button>
-              </Link>
-            </div>
           </div>
         </section>
 

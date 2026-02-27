@@ -37,9 +37,9 @@ export default function NewsPage() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#0a0a0a] text-white font-pretendard flex flex-col">
+        <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
             {/* 1. GNB 영역 (App.tsx와 동일하게 구성하지만 링크는 '/' 및 기타 영역 유지) */}
-            <nav className="fixed w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-xl py-4 px-6 md:px-10 border-b border-white/5">
+            <nav className="fixed w-full z-50 bg-[#000000]/80 backdrop-blur-xl py-4 px-6 md:px-10 border-b border-white/5">
                 <div className="max-w-[1200px] mx-auto flex justify-between items-center px-6 md:px-0">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2 shrink-0">
@@ -73,7 +73,7 @@ export default function NewsPage() {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            className="lg:hidden absolute top-full left-0 right-0 bg-[#0a0a0a]/95 backdrop-blur-xl py-4 px-6 overflow-hidden border-b border-white/10"
+                            className="lg:hidden absolute top-full left-0 right-0 bg-[#000000]/95 backdrop-blur-xl py-4 px-6 overflow-hidden border-b border-white/10"
                         >
                             <div className="flex flex-col gap-4">
                                 <Link to="/" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>멀티 에이전트 플랫폼</Link>
@@ -171,7 +171,7 @@ export default function NewsPage() {
                     {/* 좌측 메인 리스트 뷰 */}
                     <div className="flex-1">
                         {/* 카테고리 탭 - Sticky 적용 */}
-                        <div className="sticky top-[64px] bg-[#0a0a0a] z-40 flex items-center gap-8 mb-12 border-b border-white/5 py-4">
+                        <div className="sticky top-[64px] bg-[#000000] z-40 flex items-center gap-8 mb-12 border-b border-white/5 py-4">
                             {["All", "News", "Tech Stories", "Documentation"].map((category) => (
                                 <button
                                     key={category}
@@ -224,7 +224,7 @@ export default function NewsPage() {
             </section>
 
             {/* 3. Footer */}
-            <footer className="bg-[#0a0a0a] py-32 px-6 border-t border-white/5">
+            <footer className="bg-[#000000] py-32 px-6 border-t border-white/5">
                 <div className="max-w-[1240px] mx-auto">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 mb-24">
                         <div className="flex flex-col">

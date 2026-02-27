@@ -22,9 +22,9 @@ export default function MultiAgentPlatformPage() {
     ];
 
     return (
-        <div className="min-h-screen bg-[#0a0a0a] text-white font-pretendard flex flex-col">
+        <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
             {/* GNB */}
-            <nav className="fixed w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-xl py-4 px-6 md:px-10 border-b border-white/5">
+            <nav className="fixed w-full z-50 bg-[#000000]/80 backdrop-blur-xl py-4 px-6 md:px-10 border-b border-white/5">
                 <div className="max-w-[1200px] mx-auto flex justify-between items-center px-6 md:px-0">
                     <Link to="/" className="flex items-center gap-2 shrink-0">
                         <img src="/bizai_logo.png" alt="Biz.AI Logo" className="h-6 w-auto" />
@@ -56,7 +56,7 @@ export default function MultiAgentPlatformPage() {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            className="lg:hidden absolute top-full left-0 right-0 bg-[#0a0a0a]/95 backdrop-blur-xl py-4 px-6 overflow-hidden border-b border-white/10"
+                            className="lg:hidden absolute top-full left-0 right-0 bg-[#000000]/95 backdrop-blur-xl py-4 px-6 overflow-hidden border-b border-white/10"
                         >
                             <div className="flex flex-col gap-4">
                                 <Link to="/platform" className="text-white font-bold py-1" onClick={() => setIsMenuOpen(false)}>멀티 에이전트 플랫폼</Link>
@@ -330,7 +330,7 @@ export default function MultiAgentPlatformPage() {
             </section>
 
             {/* Footer */}
-            <footer className="bg-[#0a0a0a] border-t border-white/5 py-12 px-6">
+            <footer className="bg-[#000000] border-t border-white/5 py-12 px-6">
                 <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
                     <div className="flex flex-col gap-6">
                         <Link to="/" className="flex items-center gap-2">
