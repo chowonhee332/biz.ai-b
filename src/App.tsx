@@ -933,7 +933,7 @@ const App = () => {
 
           {/* Sticky Pinned Area: Begins after the title scrolls away */}
           <div ref={useCaseRef} className="relative h-[600vh]">
-            <div className="sticky top-0 h-screen w-full flex items-stretch justify-center px-4 md:px-6 overflow-hidden">
+            <div className="sticky top-0 h-screen w-full flex items-stretch justify-center px-4 md:px-6 overflow-hidden relative">
               <div className="max-w-[1200px] mx-auto w-full relative flex flex-col h-full">
                 <div className="w-full flex flex-col lg:flex-row items-stretch relative gap-8 lg:gap-0 h-full">
                   <div className="w-full lg:w-[42%] flex flex-col justify-center z-20 pr-0 md:pr-12 lg:pr-16 h-full">
@@ -989,7 +989,7 @@ const App = () => {
                                 <div className="bg-white/[0.04] border border-white/5 rounded-2xl p-5 mb-6 max-w-lg">
                                   <ul className="space-y-1.5">
                                     {item.features.map((feature: string, i: number) => (
-                                      <li key={i} className="flex items-start gap-3 text-white/70 text-[14px] leading-relaxed">
+                                      <li key={i} className="flex items-start gap-3 text-white/70 text-[15px] leading-relaxed">
                                         <span className="text-white/40 mt-[2px]">•</span>
                                         <span>{feature}</span>
                                       </li>
@@ -1000,7 +1000,7 @@ const App = () => {
                               {item.tags && (
                                 <div className="flex flex-wrap gap-2">
                                   {item.tags.map((tag: string, i: number) => (
-                                    <span key={i} className="px-4 py-1.5 rounded-full bg-[#0885FE]/10 border border-[#0885FE]/20 text-[13px] font-medium text-[#00AEFF] backdrop-blur-sm">
+                                    <span key={i} className="px-4 py-1.5 rounded-full bg-[#0885FE]/10 border border-[#0885FE]/20 text-[16px] font-medium text-[#00AEFF] backdrop-blur-sm">
                                       # {tag}
                                     </span>
                                   ))}
@@ -1013,8 +1013,9 @@ const App = () => {
                     </div>
                   </div>
 
-                  <div className="w-full lg:w-[58%] h-full flex items-center justify-end overflow-visible">
-                    <div className="w-full relative h-[60vh]">
+                  {/* 우측 이미지: absolute로 분리하여 항상 화면 정중앙에 위치 */}
+                  <div className="absolute top-0 right-4 md:right-6 w-[58%] h-full flex items-center justify-end overflow-visible pointer-events-none">
+                    <div className="w-full relative h-[60vh] max-w-[680px]">
                       {useCaseItems.map((item, index) => {
                         const isActive = activeUseCase === index;
                         const slideRange: [number, number] = index === 0 ? [0, 0.03] : index === 1 ? [0.33, 0.36] : [0.66, 0.69];
@@ -1032,7 +1033,7 @@ const App = () => {
                               y: isActive ? y : 0,
                               scale: isActive ? 1 : 0.95,
                             }}
-                            className="absolute inset-0 w-full h-full flex items-center justify-center lg:justify-end"
+                            className="absolute inset-0 w-full h-full flex items-center justify-end"
                           >
                             <UseCaseVisual
                               image={item.image}
