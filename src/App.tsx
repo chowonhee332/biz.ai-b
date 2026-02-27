@@ -224,19 +224,16 @@ const CTAParticles = () => {
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
-
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-40 translate-z-0" />;
 };
 
 const DomainAccordionItem = ({
-  index,
   title,
   agents,
   image,
   isActive,
   onMouseEnter
 }: {
-  index: number;
   title: string;
   agents: string[];
   image: string;
@@ -247,10 +244,10 @@ const DomainAccordionItem = ({
     <motion.div
       layout
       onMouseEnter={onMouseEnter}
-      className="relative h-[720px] overflow-hidden cursor-pointer rounded-2xl smooth-gpu"
+      className="relative h-[400px] md:h-[550px] lg:h-[700px] overflow-hidden cursor-pointer rounded-2xl smooth-gpu w-full lg:w-auto"
       style={{ willChange: 'flex, width' }}
       animate={{
-        flex: isActive ? 6 : 0.5,
+        flex: isActive ? (window.innerWidth < 1024 ? 300 : 680) : (window.innerWidth < 1024 ? 80 : 122),
       }}
       transition={{
         type: "spring",
@@ -278,52 +275,33 @@ const DomainAccordionItem = ({
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
       </div>
 
-      {/* Active State Header: Title (Top-Left) and Agents (Top-Right) */}
-      {isActive && (
-        <div className="absolute inset-x-0 top-0 p-12 flex justify-between items-start z-10 font-pretendard text-white">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <h4 className="text-white text-[32px] font-bold leading-tight">
-              {String(index + 1).padStart(2, '0')}. {title}
-            </h4>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-col gap-4 text-left pt-2"
-          >
-            {agents.map((agent, i) => (
-              <div key={i} className="flex items-center justify-start gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-white opacity-60" />
-                <span className="text-[28px] font-medium opacity-90">{agent}</span>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      )}
-
-      {/* Inactive State: Vertical Title */}
-      {!isActive && (
-        <div className="absolute inset-x-0 bottom-14 flex justify-center pointer-events-none">
+      <div className={`absolute inset-x-0 top-0 p-6 md:p-8 flex flex-col justify-start h-full ${isActive ? 'text-left' : 'text-center'}`}>
+        <div className={`flex flex-col gap-2 md:gap-4 ${isActive ? 'items-start' : 'items-center'}`}>
           <motion.div
             layout
-            className="-rotate-90 whitespace-nowrap font-pretendard origin-left absolute"
-            style={{
-              left: 'calc(50% + 10px)', // Centers the 20px font body horizontally
-              bottom: '0px'
-            }}
+            initial={false}
           >
-            <h4 className="text-white text-[20px] font-medium tracking-tight">
-              {String(index + 1).padStart(2, '0')}. {title}
+            <h4 className={`text-white font-normal transition-colors duration-500 whitespace-nowrap ${isActive ? 'text-[16px] md:text-[18px] mb-2 md:mb-4' : 'text-[16px] md:text-[18px]'}`}>
+              {title}
             </h4>
           </motion.div>
+
+          {isActive && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex flex-col gap-1 md:gap-2"
+            >
+              {agents.map((agent, i) => (
+                <div key={i} className="flex items-center">
+                  <span className="text-gray-100 text-[18px] md:text-[24px] lg:text-[28px] font-bold">{agent}</span>
+                </div>
+              ))}
+            </motion.div>
+          )}
         </div>
-      )}
+      </div>
     </motion.div>
   );
 };
@@ -808,51 +786,47 @@ const App = () => {
           </motion.div>
         </div>
 
-        <section id="domain" className="py-32 px-6 relative overflow-hidden bg-[#000000] pb-16">
+        <section id="domain" className="py-20 md:py-32 px-4 md:px-6 relative overflow-hidden bg-black pb-16">
           <div className="max-w-[1200px] mx-auto">
-            <div className="text-left mb-16 font-pretendard">
-              <h2 className="text-[58px] font-black bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-6 tracking-tight">도메인별 Multi Agent</h2>
-              <p className="text-white/80 text-[18px] font-normal tracking-tight">공공/금융 등 도메인별로 KTDS의 Multi-Agent를 활용해 보세요.</p>
+            <div className="text-left mb-12 md:mb-16 font-pretendard">
+              <span className="text-[#0885FE] font-bold text-[16px] md:text-[20px] mb-2 md:mb-4 block tracking-tight">Multi Agent</span>
+              <h2 className="text-[36px] md:text-[44px] lg:text-[52px] font-black bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-4 md:mb-6 tracking-tight">도메인별 Multi Agent</h2>
+              <p className="text-white/80 text-[16px] md:text-[18px] font-normal tracking-tight">공공/금융 등 도메인별로 KTDS의 Multi-Agent를 활용해 보세요.</p>
             </div>
 
-            <div className="flex gap-2 w-full">
+            <div className="flex flex-col lg:flex-row gap-2 md:gap-4 w-full h-[600px] md:h-auto lg:h-[700px]">
               <DomainAccordionItem
-                index={0}
                 title="금융"
                 agents={['Audit Agent', 'SQL Agent', 'RFP Agent']}
-                image="domain_finance.png"
+                image="https://images.unsplash.com/photo-1643258367012-1e1a983489e5?auto=format&fit=crop&q=80&w=1200"
                 isActive={activeDomain === 0}
                 onMouseEnter={() => setActiveDomain(0)}
               />
               <DomainAccordionItem
-                index={1}
                 title="공공기관"
                 agents={['Audit Agent', 'RFP Agent', 'SQL Agent']}
-                image="domain_public.png"
+                image="https://images.unsplash.com/photo-1665865298238-ec7a85eb3f9a?auto=format&fit=crop&q=80&w=1200"
                 isActive={activeDomain === 1}
                 onMouseEnter={() => setActiveDomain(1)}
               />
               <DomainAccordionItem
-                index={2}
                 title="일반기업"
-                agents={['SQL Agent', 'RFP Agent', 'Codebox', 'Beast AI Gateway']}
-                image="domain_enterprise.png"
+                agents={['SQL Agent', 'RFP Agent', 'Codebox', 'beast AI Gateway']}
+                image="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200"
                 isActive={activeDomain === 2}
                 onMouseEnter={() => setActiveDomain(2)}
               />
               <DomainAccordionItem
-                index={3}
                 title="미디어"
                 agents={['SQL Agent', 'TA Agent']}
-                image="domain_media.png"
+                image="https://images.unsplash.com/photo-1652166553819-f892e61fc12c?auto=format&fit=crop&q=80&w=1200"
                 isActive={activeDomain === 3}
                 onMouseEnter={() => setActiveDomain(3)}
               />
               <DomainAccordionItem
-                index={4}
                 title="통신/네트워크"
-                agents={['SQL Agent', 'Beast AI Gateway', 'Codebox']}
-                image="domain_telco.png"
+                agents={['SQL Agent', 'beast AI Gateway', 'Codebox']}
+                image="https://images.unsplash.com/photo-1680992044138-ce4864c2b962?auto=format&fit=crop&q=80&w=1200"
                 isActive={activeDomain === 4}
                 onMouseEnter={() => setActiveDomain(4)}
               />
