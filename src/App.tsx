@@ -112,13 +112,14 @@ const SolutionCard = ({ image, title, desc, highlight }: { image: string; title:
 
 
 const Char = ({ children, progress, range }: { children: string; progress: any; range: [number, number] }) => {
-  const opacity = useTransform(progress, range, [0.4, 1]);
+  // Increased contrast for 'unwritten' characters: 0.15 for better "writing" feel
+  const opacity = useTransform(progress, range, [0.15, 1]);
   return <motion.span style={{ opacity }} className="whitespace-pre">{children}</motion.span>;
 };
 
 const CharacterReveal = ({ text, className, scrollProgress, range }: { text: string; className?: string; scrollProgress: any, range: [number, number] }) => {
   const lines = text.split('\n');
-  const totalChars = text.length; // Include all characters including spaces
+  const totalChars = text.length;
   let charCounter = 0;
 
   return (
@@ -956,63 +957,73 @@ const App = () => {
 
                                 return (
                                   <div className="relative">
-                                    {/* Question Layer: Always in flow while active */}
-                                    <motion.div
-                                      style={{
-                                        opacity: qOpacity,
-                                        height: qOpacity.get() === 0 ? 0 : 'auto',
-                                        overflow: 'hidden'
-                                      }}
-                                    >
-                                      <CharacterReveal
-                                        text={item.question}
-                                        scrollProgress={sectionProgress}
-                                        range={qRange}
-                                      />
-                                    </motion.div>
+                                    {/*
+                                        Unified Container approach:
+                                        We keep Question in flow to define initial height,
+                                        but we use Details to define final height.
+                                        To prevent overlap, we use a grid where both occupy the same row/col.
+                                      */}
+                                    <div className="grid grid-cols-1 items-start">
+                                      {/* Question Layer */}
+                                      <motion.div
+                                        style={{
+                                          gridArea: '1 / 1 / 2 / 2',
+                                          opacity: qOpacity,
+                                          // When D starts coming in, we prevent Q from taking up space if it was hidden,
+                                          // but actually it's better to keep the grid cell size.
+                                        }}
+                                        className="pb-4" // Give it some breathing room
+                                      >
+                                        <CharacterReveal
+                                          text={item.question}
+                                          scrollProgress={sectionProgress}
+                                          range={qRange}
+                                        />
+                                      </motion.div>
 
-                                    {/* Details Layer: In standard flow to push subsequent items down */}
-                                    <motion.div
-                                      style={{
-                                        opacity: dOpacity,
-                                        y: dY,
-                                        marginTop: useTransform(sectionProgress, [dRange[0], dRange[1]], [-40, 0])
-                                      }}
-                                      className="w-full"
-                                    >
-                                      <h3 className="text-[36px] font-bold text-white mb-6">
-                                        {item.titlePrefix} {item.titleSuffix}
-                                      </h3>
+                                      {/* Details Layer: Shares the exact same start point as Question */}
+                                      <motion.div
+                                        style={{
+                                          gridArea: '1 / 1 / 2 / 2',
+                                          opacity: dOpacity,
+                                          y: dY,
+                                        }}
+                                        className="w-full"
+                                      >
+                                        <h3 className="text-[36px] font-bold text-white mb-6">
+                                          {item.titlePrefix} {item.titleSuffix}
+                                        </h3>
 
-                                      <div className="mt-2.5">
-                                        <p className="text-[16px] text-white/80 leading-relaxed max-w-lg mb-8 whitespace-pre-line font-normal">
-                                          {item.desc}
-                                        </p>
+                                        <div className="mt-2.5">
+                                          <p className="text-[16px] text-white/80 leading-relaxed max-w-lg mb-8 whitespace-pre-line font-normal">
+                                            {item.desc}
+                                          </p>
 
-                                        {item.features && (
-                                          <div className="bg-white/[0.04] border border-white/5 rounded-2xl p-6 mb-8 max-w-lg">
-                                            <ul className="space-y-1">
-                                              {item.features.map((feature: string, i: number) => (
-                                                <li key={i} className="flex items-start gap-3 text-white/70 text-[15px] leading-relaxed">
-                                                  <span className="text-white/40 mt-[2px]">•</span>
-                                                  <span>{feature}</span>
-                                                </li>
+                                          {item.features && (
+                                            <div className="bg-white/[0.04] border border-white/5 rounded-2xl p-6 mb-8 max-w-lg">
+                                              <ul className="space-y-1">
+                                                {item.features.map((feature: string, i: number) => (
+                                                  <li key={i} className="flex items-start gap-3 text-white/70 text-[15px] leading-relaxed">
+                                                    <span className="text-white/40 mt-[2px]">•</span>
+                                                    <span>{feature}</span>
+                                                  </li>
+                                                ))}
+                                              </ul>
+                                            </div>
+                                          )}
+
+                                          {item.tags && (
+                                            <div className="flex flex-wrap gap-2.5">
+                                              {item.tags.map((tag: string, i: number) => (
+                                                <span key={i} className="px-4 py-1.5 rounded-full bg-[#0885FE]/10 border border-[#0885FE]/20 text-[14px] font-medium text-[#00AEFF] transition-none backdrop-blur-sm">
+                                                  # {tag}
+                                                </span>
                                               ))}
-                                            </ul>
-                                          </div>
-                                        )}
-
-                                        {item.tags && (
-                                          <div className="flex flex-wrap gap-2.5">
-                                            {item.tags.map((tag: string, i: number) => (
-                                              <span key={i} className="px-4 py-1.5 rounded-full bg-[#0885FE]/10 border border-[#0885FE]/20 text-[14px] font-medium text-[#00AEFF] transition-none backdrop-blur-sm">
-                                                # {tag}
-                                              </span>
-                                            ))}
-                                          </div>
-                                        )}
-                                      </div>
-                                    </motion.div>
+                                            </div>
+                                          )}
+                                        </div>
+                                      </motion.div>
+                                    </div>
                                   </div>
                                 );
                               })()
