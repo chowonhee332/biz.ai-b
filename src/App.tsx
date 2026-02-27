@@ -86,7 +86,7 @@ const AnimatedCounter = ({ from, to }: { from: number; to: number }) => {
 };
 
 const SolutionCard = ({ image, title, desc, highlight }: { image: string; title: string; desc: string; highlight: string }) => (
-  <div className="flex flex-col gap-8 w-full max-w-[320px] group cursor-pointer">
+  <div className="flex flex-col gap-8 w-[320px] group cursor-pointer">
     {/* 16:9 Thumbnail Box */}
     <div className="w-full aspect-[16/9] rounded-[20px] bg-white flex items-center justify-center p-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-black/[0.03] transition-all duration-500 group-hover:shadow-[0_20px_48px_rgba(0,0,0,0.08)] group-hover:-translate-y-1.5 overflow-hidden">
       <motion.img
