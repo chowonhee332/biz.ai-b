@@ -909,7 +909,7 @@ const App = () => {
 
         <section id="use-cases" className="relative bg-[#000000]">
           {/* Title Area: Normal Scrolling */}
-          <div className="max-w-[1200px] mx-auto w-full px-4 md:px-6 pt-32 pb-16 text-center">
+          <div className="max-w-[1200px] mx-auto w-full px-4 md:px-6 pt-32 pb-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -927,7 +927,7 @@ const App = () => {
 
           {/* Sticky Pinned Area: Begins after the title scrolls away */}
           <div ref={useCaseRef} className="relative h-[300vh]">
-            <div className="sticky top-0 h-screen w-full flex items-start justify-center px-4 md:px-6 overflow-hidden pt-[18vh]">
+            <div className="sticky top-0 h-screen w-full flex items-start justify-center px-4 md:px-6 overflow-hidden pt-[10vh]">
               <div className="max-w-[1200px] mx-auto w-full relative flex flex-col">
                 <div className="w-full flex flex-col lg:flex-row items-start relative gap-8 lg:gap-0">
                   <div className="w-full lg:w-[42%] flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16">
