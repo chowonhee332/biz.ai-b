@@ -20,9 +20,9 @@ const NoiseFilter = () => (
 const EngravedIcon = ({ children }: { children: React.ReactNode }) => {
     return (
         <div
-            className="text-black/80 flex items-center justify-center w-full h-full"
+            className="text-[#050505] flex items-center justify-center w-full h-full opacity-95"
             style={{
-                filter: 'drop-shadow(0px 1.5px 1px rgba(255, 255, 255, 0.15))',
+                filter: 'drop-shadow(1px 1.5px 1px rgba(255, 255, 255, 0.15))',
             }}
         >
             {children}
@@ -31,33 +31,30 @@ const EngravedIcon = ({ children }: { children: React.ReactNode }) => {
 };
 
 // Reusable 3D Tile Component providing true thickness
-const Thick3DTile = ({ children, thickness = 15, ...props }: any) => {
-    // We create multiple layers stacked on the Z-axis to simulate physical depth.
-    // The top layer gets the main gradient and content, the bottom layer provides shadow,
-    // and the middle ones act as the "sides".
+const Thick3DTile = ({ children, thickness = 24, ...props }: any) => {
     return (
         <motion.div {...props} style={{ transformStyle: 'preserve-3d', ...props.style }}>
             {/* Base/Bottom Shadow Layer */}
             <div
-                className="absolute inset-0 rounded-[30px] md:rounded-[40px] bg-black shadow-[0_40px_80px_rgba(0,0,0,0.8)]"
-                style={{ transform: `translateZ(-${thickness}px)`, filter: 'blur(4px)' }}
+                className="absolute inset-0 rounded-[32px] md:rounded-[48px] bg-black shadow-[0_30px_60px_rgba(0,0,0,0.9)]"
+                style={{ transform: `translateZ(-${thickness}px)`, filter: 'blur(8px)' }}
             />
 
             {/* Extrusion / Sides (Stacked layers) */}
             {Array.from({ length: thickness }).map((_, i) => (
                 <div
                     key={i}
-                    className="absolute inset-0 rounded-[30px] md:rounded-[40px] bg-[#111] border border-white/5"
+                    className="absolute inset-0 rounded-[32px] md:rounded-[48px] bg-[#181818]"
                     style={{ transform: `translateZ(-${i}px)` }}
                 />
             ))}
 
             {/* Top Surface Layer */}
             <div
-                className="absolute inset-0 rounded-[30px] md:rounded-[40px] overflow-hidden bg-gradient-to-br from-[#2a2a2a] via-[#111111] to-[#010101] flex items-center justify-center border-t border-white/10"
+                className="absolute inset-0 rounded-[32px] md:rounded-[48px] overflow-hidden bg-gradient-to-br from-[#2f2f2f] via-[#111111] to-[#010101] flex items-center justify-center border-t border-white/10"
                 style={{
                     transform: 'translateZ(0px)',
-                    boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.2), inset 1px 0 2px rgba(255,255,255,0.1)'
+                    boxShadow: 'inset 0 4px 8px rgba(255,255,255,0.1), inset 1px 0 2px rgba(255,255,255,0.1)'
                 }}
             >
                 <NoiseFilter />
@@ -73,58 +70,58 @@ export default function HeroFloatingTiles() {
     // 5개의 타일을 원형으로 배치하되, 첨부된 이미지와 일치하도록 위치, 가파른 각도 조절
     const tiles = [
         {
-            id: 1, // 10시 방향 (화살표 꺾인 아이콘)
-            icon: <CornerRightUp size={64} strokeWidth={2} />,
-            initialRotation: { rotateX: 45, rotateY: 15, rotateZ: -25 },
-            yAnim: [-8, 8, -8],
+            id: 1, // Arrow (Top Right)
+            icon: <CornerRightUp size={72} strokeWidth={2.5} />,
+            initialRotation: { rotateX: -25, rotateY: -35, rotateZ: 0 },
+            yAnim: [-4, 4, -4],
             delay: 0,
-            style: { top: '8%', left: '8%', zIndex: 10 },
-            thickness: 18
+            style: { top: '10%', left: '46%', zIndex: 10 },
+            thickness: 24
         },
         {
-            id: 2, // 2시 방향 (점 9개 아이콘)
-            icon: <Grip size={64} strokeWidth={2} />,
-            initialRotation: { rotateX: 40, rotateY: -20, rotateZ: 30 },
-            yAnim: [8, -8, 8],
+            id: 2, // Grip (Right)
+            icon: <Grip size={72} strokeWidth={2.5} />,
+            initialRotation: { rotateX: 30, rotateY: -45, rotateZ: -10 },
+            yAnim: [4, -4, 4],
             delay: 0.5,
-            style: { top: '-5%', left: '55%', zIndex: 5 },
-            thickness: 16
+            style: { top: '30%', left: '60%', zIndex: 20 },
+            thickness: 24
         },
         {
-            id: 3, // 4시 방향 (물결 M 로고 모양 모방)
-            icon: <svg width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 22l5-5 5 5 10-10V2H12l-5 5-5-5z" /></svg>,
-            initialRotation: { rotateX: 20, rotateY: -45, rotateZ: 15 },
-            yAnim: [-10, 10, -10],
+            id: 3, // M (Bottom Right)
+            icon: <svg width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 22l5-5 5 5 10-10V2H12l-5 5-5-5z" /></svg>,
+            initialRotation: { rotateX: 40, rotateY: -20, rotateZ: 10 },
+            yAnim: [-5, 5, -5],
             delay: 1,
-            style: { top: '35%', left: '68%', zIndex: 20 },
-            thickness: 20
+            style: { top: '56%', left: '50%', zIndex: 30 },
+            thickness: 24
         },
         {
-            id: 4, // 6시 방향 (별표 들어간 원 로고)
-            icon: <Sparkles size={64} strokeWidth={1.5} />,
-            initialRotation: { rotateX: -30, rotateY: 15, rotateZ: -10 },
-            yAnim: [10, -10, 10],
+            id: 4, // Sparkles (Bottom Left)
+            icon: <Sparkles size={72} strokeWidth={2} />,
+            initialRotation: { rotateX: 45, rotateY: 25, rotateZ: -15 },
+            yAnim: [5, -5, 5],
             delay: 1.5,
-            style: { top: '65%', left: '45%', zIndex: 30 },
-            thickness: 22
+            style: { top: '52%', left: '20%', zIndex: 40 },
+            thickness: 24
         },
         {
-            id: 5, // 8시 방향 (육면체 큐브 아이콘)
-            icon: <Box size={64} strokeWidth={2} />,
-            initialRotation: { rotateX: -25, rotateY: 35, rotateZ: -20 },
-            yAnim: [-9, 9, -9],
+            id: 5, // Box (Top Left)
+            icon: <Box size={72} strokeWidth={2.5} />,
+            initialRotation: { rotateX: -30, rotateY: 45, rotateZ: 25 },
+            yAnim: [-6, 6, -6],
             delay: 2,
-            style: { top: '55%', left: '10%', zIndex: 25 },
-            thickness: 20
+            style: { top: '22%', left: '16%', zIndex: 50 },
+            thickness: 24
         },
     ];
 
     return (
-        <div className="relative w-full aspect-square max-w-[600px] mx-auto flex items-center justify-center perspective-[1200px]">
+        <div className="relative w-full aspect-square max-w-[650px] mx-auto flex items-center justify-center perspective-[1200px]">
             {tiles.map((tile) => (
                 <Thick3DTile
                     key={tile.id}
-                    className="absolute w-40 h-40 md:w-48 md:h-48"
+                    className="absolute w-44 h-44 md:w-56 md:h-56"
                     thickness={tile.thickness}
                     style={tile.style}
                     initial={{
