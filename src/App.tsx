@@ -10,7 +10,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import ParticleEngine from './components/ParticleEngine';
 import HeroContent from './components/HeroContent';
-import HeroFloatingTiles from './components/HeroFloatingTiles';
 import { LightRays } from './components/LightRays';
 import Silk from './components/Silk';
 import Aurora from './components/Aurora';
@@ -740,12 +739,16 @@ const App = () => {
               className="hidden lg:block absolute left-[55%] top-1/2 -translate-y-1/2 w-[720px] z-10 pointer-events-none"
             >
               <motion.div
-                className="relative flex items-center justify-center min-h-[600px]"
+                className="relative"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
               >
                 <div className="absolute -inset-20 bg-blue-500/5 rounded-full blur-[100px] z-0" />
-                <div className="relative z-10 w-full h-full scale-[1.2] lg:scale-[1.4] -translate-x-12">
-                  <HeroFloatingTiles />
-                </div>
+                <img
+                  src="/banner.png"
+                  alt="Biz.AI Hero"
+                  className="w-full h-auto object-contain relative z-10 opacity-90 shadow-2xl"
+                />
               </motion.div>
             </motion.div>
           </div>
