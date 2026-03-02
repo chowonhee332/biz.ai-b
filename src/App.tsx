@@ -117,7 +117,7 @@ const Char = ({ children, progress, range }: { children: string; progress: any; 
   return <motion.span style={{ opacity }} className="whitespace-pre">{children}</motion.span>;
 };
 
-const CharacterReveal = ({ text, className, scrollProgress, range }: { text: string; className?: string; scrollProgress: any, range: [number, number] }) => {
+const CharacterReveal = ({ text, className, scrollProgress, range, highlightIndex }: { text: string; className?: string; scrollProgress: any, range: [number, number], highlightIndex?: number }) => {
   const lines = text.split('\n');
   const totalChars = text.length;
   let charCounter = 0;
@@ -127,7 +127,7 @@ const CharacterReveal = ({ text, className, scrollProgress, range }: { text: str
       {lines.map((line, lineIdx) => (
         <div
           key={lineIdx}
-          className={`flex flex-wrap text-[34px] font-bold tracking-tight leading-[1.3] ${lineIdx === lines.length - 1 ? "text-[#0885FE]" : "text-white"
+          className={`flex flex-wrap text-[34px] font-bold tracking-tight leading-[1.3] ${lineIdx === (highlightIndex ?? lines.length - 1) ? "text-[#0885FE]" : "text-white"
             }`}
         >
           {line.split('').map((char, charIdx) => {
@@ -648,6 +648,7 @@ const App = () => {
       desc: "음성 인식(STT)과 NLP를 결합하여 회의 중 나오는 화자를 구분하고, 자동으로 액션 아이템을 추출합니다.",
       tags: ["음성인식", "업무추출"],
       themeColor: "emerald",
+      highlightIndex: 1,
       features: [
         "실시간 음성 인식 및 화자 분리 기록",
         "회의 내용 자동 요약 및 주요 의사결정 사항 추출",
@@ -1012,6 +1013,7 @@ const App = () => {
                                 text={item.question}
                                 scrollProgress={sectionProgress}
                                 range={textRange}
+                                highlightIndex={item.highlightIndex}
                               />
                             </motion.div>
 
