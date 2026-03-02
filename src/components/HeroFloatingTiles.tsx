@@ -21,10 +21,10 @@ const NoiseFilter = () => (
 const EngravedIcon = ({ children }: { children: React.ReactNode }) => {
     return (
         <div
-            className="text-[#010101] flex items-center justify-center w-full h-full opacity-90"
+            className="text-[#000] flex items-center justify-center w-full h-full opacity-90"
             style={{
                 // Deep inner shadow for engraving depth + sharp white highlight (specular) on the opposite edge
-                filter: 'drop-shadow(1px 1.5px 0.5px rgba(200, 220, 255, 0.2)) drop-shadow(-1px -1px 2px rgba(0, 0, 0, 0.9))',
+                filter: 'drop-shadow(1px 1.5px 0.5px rgba(255, 255, 255, 0.25)) drop-shadow(-1px -1px 2px rgba(0, 0, 0, 0.9))',
             }}
         >
             {children}
@@ -38,30 +38,30 @@ const Thick3DTile = ({ children, thickness = 22, ...props }: any) => {
         <motion.div {...props} style={{ transformStyle: 'preserve-3d', ...props.style }}>
             {/* Base/Bottom Shadow Layer */}
             <div
-                className="absolute inset-0 rounded-[36px] md:rounded-[48px] bg-[#000] shadow-[0_45px_100px_rgba(0,0,0,1)]"
+                className="absolute inset-0 rounded-[32px] md:rounded-[44px] bg-[#000] shadow-[0_45px_100px_rgba(0,0,0,1)]"
                 style={{ transform: `translateZ(-${thickness}px)`, filter: 'blur(10px)' }}
             />
 
-            {/* Extrusion / Sides (Stacked layers) - Dark metallic sheen */}
+            {/* Extrusion / Sides (Stacked layers) - Distinct grey metallic sheen */}
             {Array.from({ length: thickness }).map((_, i) => (
                 <div
                     key={i}
-                    className="absolute inset-0 rounded-[36px] md:rounded-[48px] bg-[#0a0d14]"
+                    className="absolute inset-0 rounded-[32px] md:rounded-[44px] bg-[#1a1c23]"
                     style={{
                         transform: `translateZ(-${i}px)`,
                         // Simulate rim lighting on the edges of the 3D block
-                        boxShadow: i === 0 ? 'none' : 'inset 1px 1px 1px rgba(180,210,255,0.06), inset -1px -1px 1px rgba(0,0,0,1)'
+                        boxShadow: i === 0 ? 'none' : 'inset 1px 1px 1px rgba(255,255,255,0.08), inset -1px -1px 2px rgba(0,0,0,1)'
                     }}
                 />
             ))}
 
-            {/* Top Surface Layer - Dark metallic gradient with heavy noise */}
+            {/* Top Surface Layer - Visible dark metallic grey with noise */}
             <div
-                className="absolute inset-0 rounded-[36px] md:rounded-[48px] overflow-hidden bg-gradient-to-br from-[#1a2333] via-[#090b0e] to-[#010102] flex items-center justify-center border-t border-l border-white/20"
+                className="absolute inset-0 rounded-[32px] md:rounded-[44px] overflow-hidden bg-gradient-to-br from-[#3b4351] via-[#1b1f28] to-[#0c0e12] flex items-center justify-center border-t border-l border-white/20"
                 style={{
                     transform: 'translateZ(0px)',
                     // Soft inner glow to simulate specular highlight on rounded edges
-                    boxShadow: 'inset 0 4px 15px rgba(255,255,255,0.1), inset 1.5px 0 4px rgba(255,255,255,0.08), inset -2px -2px 10px rgba(0,0,0,0.9)'
+                    boxShadow: 'inset 0 4px 15px rgba(255,255,255,0.15), inset 1.5px 0 4px rgba(255,255,255,0.1), inset -2px -2px 10px rgba(0,0,0,0.9)'
                 }}
             >
                 <NoiseFilter />
@@ -69,11 +69,11 @@ const Thick3DTile = ({ children, thickness = 22, ...props }: any) => {
                 <div
                     className="absolute inset-0 opacity-40 mix-blend-color-dodge pointer-events-none"
                     style={{
-                        background: 'radial-gradient(circle at 30% 30%, rgba(180, 200, 255, 0.15) 0%, transparent 60%)'
+                        background: 'radial-gradient(circle at 30% 30%, rgba(200, 220, 255, 0.15) 0%, transparent 60%)'
                     }}
                 />
-                <div className="relative z-10 w-[60%] h-[60%] flex items-center justify-center mix-blend-multiply opacity-90 absolute inset-0 bg-black rounded-full filter blur-[12px] scale-75 translate-y-3"></div>
-                <div className="relative z-20 w-[65%] h-[65%] flex items-center justify-center">
+                <div className="absolute w-[60%] h-[60%] flex items-center justify-center mix-blend-multiply opacity-95 bg-black rounded-[20px] blur-[8px] translate-y-2"></div>
+                <div className="relative z-20 w-[60%] h-[60%] flex items-center justify-center">
                     <EngravedIcon>
                         {children}
                     </EngravedIcon>
@@ -86,51 +86,50 @@ const Thick3DTile = ({ children, thickness = 22, ...props }: any) => {
 export default function HeroFloatingTiles() {
     // 5개의 타일 
     // 이미지에 보여진 완벽한 겹침 순서(Z-Index)와 앵글(rotateX, rotateY)을 구현.
-    // Dollar(TopLeft) & Check(BottomRight)가 위쪽 레이어, 중간이 Shield & Framer, 가장 밑이 Dots.
     const tiles = [
         {
             id: 1, // Top (Framer) -> Overlapped by Dollar and Shield
             icon: <svg width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path d="M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8l-8-8z" /></svg>,
-            initialRotation: { rotateX: 20, rotateY: 35, rotateZ: -10 },
+            initialRotation: { rotateX: 25, rotateY: 20, rotateZ: -5 },
             yAnim: [-4, 4, -4],
             delay: 0,
-            style: { top: '3%', left: '42%', zIndex: 10 },
+            style: { top: '3%', left: '44%', zIndex: 10 },
             thickness: 20
         },
         {
             id: 2, // Right (Shield) -> Overlaps Framer, Overlapped by Check
-            icon: <svg width="110%" height="110%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4" /></svg>,
-            initialRotation: { rotateX: -15, rotateY: 35, rotateZ: -15 },
+            icon: <svg width="110%" height="110%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M14 16l-4-4 4-4" /></svg>,
+            initialRotation: { rotateX: -20, rotateY: 25, rotateZ: -10 },
             yAnim: [4, -4, 4],
             delay: 0.5,
-            style: { top: '32%', left: '60%', zIndex: 30 },
+            style: { top: '32%', left: '60%', zIndex: 20 },
             thickness: 18
         },
         {
             id: 3, // Bottom Right (Check) -> Topmost over Shield and Dots
-            icon: <svg width="120%" height="120%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>,
-            initialRotation: { rotateX: -30, rotateY: 15, rotateZ: 5 },
+            icon: <svg width="120%" height="120%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>,
+            initialRotation: { rotateX: -35, rotateY: 20, rotateZ: 5 },
             yAnim: [-5, 5, -5],
             delay: 1,
-            style: { top: '60%', left: '42%', zIndex: 50 },
+            style: { top: '60%', left: '42%', zIndex: 40 },
             thickness: 20
         },
         {
-            id: 4, // Bottom Left (Grip/Dots) -> Lowest, overlapped by Dollar and Check
-            icon: <svg width="90%" height="90%" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="5" r="2.5" /><circle cx="12" cy="5" r="2.5" /><circle cx="19" cy="5" r="2.5" /><circle cx="5" cy="12" r="2.5" /><circle cx="12" cy="12" r="2.5" /><circle cx="19" cy="12" r="2.5" /><circle cx="5" cy="19" r="2.5" /><circle cx="12" cy="19" r="2.5" /><circle cx="19" cy="19" r="2.5" /></svg>,
-            initialRotation: { rotateX: -25, rotateY: -30, rotateZ: 15 },
+            id: 4, // Bottom Left (Flower/Dots) -> Lowest, overlapped by Dollar and Check
+            icon: <svg width="90%" height="90%" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" /></svg>,
+            initialRotation: { rotateX: -30, rotateY: -25, rotateZ: 20 },
             yAnim: [5, -5, 5],
             delay: 1.5,
-            style: { top: '55%', left: '10%', zIndex: 20 },
+            style: { top: '55%', left: '10%', zIndex: 10 },
             thickness: 18
         },
         {
             id: 5, // Top Left (Dollar) -> Topmost over Dots and Framer
-            icon: <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>,
-            initialRotation: { rotateX: 20, rotateY: -25, rotateZ: 10 },
+            icon: <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>,
+            initialRotation: { rotateX: 25, rotateY: -25, rotateZ: -10 },
             yAnim: [-6, 6, -6],
             delay: 2,
-            style: { top: '22%', left: '6%', zIndex: 40 },
+            style: { top: '22%', left: '8%', zIndex: 30 },
             thickness: 18
         },
     ];
@@ -140,7 +139,7 @@ export default function HeroFloatingTiles() {
             {tiles.map((tile) => (
                 <Thick3DTile
                     key={tile.id}
-                    className="absolute w-44 h-44 md:w-[220px] md:h-[220px]"
+                    className="absolute w-40 h-40 md:w-[210px] md:h-[210px]"
                     thickness={tile.thickness}
                     style={tile.style}
                     initial={{
