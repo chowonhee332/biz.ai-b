@@ -977,7 +977,7 @@ const App = () => {
                     <div className="relative" style={{ height: '50vh' }}>
                       {useCaseItems.map((item, index) => {
                         // 각 아이템별 범위 정의 (0.33씩 3등분)
-                        const qRange: [number, number] = index === 0 ? [0.03, 0.10] : index === 1 ? [0.36, 0.43] : [0.69, 0.76];
+                        const qRange: [number, number] = index === 0 ? [0.00, 0.07] : index === 1 ? [0.33, 0.40] : [0.66, 0.73];
                         const dRange: [number, number] = [qRange[1] + 0.02, qRange[1] + 0.05];
 
                         // 숫자가 먼저 채워지고 (qRange의 앞 30%), 이어서 질문 텍스트 (나머지 70%)
@@ -1063,7 +1063,7 @@ const App = () => {
                     <div className="w-full relative h-[60vh]">
                       {useCaseItems.map((item, index) => {
                         const isActive = activeUseCase === index;
-                        const slideRange: [number, number] = index === 0 ? [0, 0.03] : index === 1 ? [0.33, 0.36] : [0.66, 0.69];
+                        const slideRange: [number, number] = index === 0 ? [0.07, 0.10] : index === 1 ? [0.40, 0.43] : [0.73, 0.76];
                         const activeRange: [number, number] = index === 0 ? [0.15, 0.33] : index === 1 ? [0.48, 0.66] : [0.81, 0.98];
                         const x = useTransform(sectionProgress, slideRange, [60, 0]);
                         const y = useTransform(sectionProgress, activeRange, [0, -150]);
