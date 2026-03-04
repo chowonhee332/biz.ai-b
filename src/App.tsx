@@ -592,22 +592,22 @@ const StudioSection = () => {
             {
               title: "Agent 개발",
               desc: "AI Agent 개발을 위한 통합 개발 환경과 도구를 제공합니다.",
-              icon: <Code className="text-white/80" strokeWidth={1.5} size={20} />
+              icon: <Monitor className="text-white/80" fill="currentColor" strokeWidth={0} size={22} />
             },
             {
               title: "Core Agent",
               desc: "사전 개발된 Core Agent를 활용하여 빠른 프로토타이핑이 가능합니다.",
-              icon: <Cpu className="text-white/80" strokeWidth={1.5} size={20} />
+              icon: <Cpu className="text-white/80" fill="currentColor" strokeWidth={0} size={22} />
             },
             {
               title: "Use Case 패키징",
               desc: "Use case 단위로 패키징된 솔루션을 통해 즉시 배포할 수 있습니다.",
-              icon: <Layers className="text-white/80" strokeWidth={1.5} size={20} />
+              icon: <Layers className="text-white/80" fill="currentColor" strokeWidth={0} size={22} />
             },
             {
               title: "Delivery 가이드",
               desc: "AI 아키텍처 소개 및 배포 가이드를 통해 안정적인 운영을 지원합니다.",
-              icon: <BookOpen className="text-white/80" strokeWidth={1.5} size={20} />
+              icon: <BookOpen className="text-white/80" fill="currentColor" strokeWidth={0} size={22} />
             }
           ].map((item, i) => (
             <motion.div
@@ -618,7 +618,7 @@ const StudioSection = () => {
               transition={{ delay: i * 0.1, duration: 0.5 }}
               className="rounded-[20px] border border-white/20 p-8 pt-4 transition-all duration-300 group hover:border-white/30"
             >
-              <div className="size-10 rounded-full border border-white/20 flex items-center justify-center mb-8 group-hover:bg-white/5 transition-colors">
+              <div className="size-10 flex items-center justify-center mb-8 group-hover:bg-white/5 rounded-full transition-colors">
                 {item.icon}
               </div>
               <h3 className="text-white text-[20px] font-bold mb-2 tracking-tight">{item.title}</h3>
