@@ -143,7 +143,7 @@ const CharacterReveal = ({ text, className, scrollProgress, range, highlightInde
         return (
           <div
             key={lineIdx}
-            className={`flex flex-wrap text-[32px] md:text-[50px] lg:text-[64px] font-bold tracking-tight leading-[1.3] ${colorClass}`}
+            className={`flex flex-wrap text-[32px] md:text-[40px] font-bold tracking-tight leading-[1.3] ${colorClass}`}
           >
             {line.split('').map((char, charIdx) => {
               const charStart = range[0] + (charCounter / totalChars) * (range[1] - range[0]);
