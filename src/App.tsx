@@ -1385,7 +1385,7 @@ const App = () => {
                   { user: "Nidhi B.", role: "Content Writer", stars: 4.5, quote: "The road to no-code interface designing has been made easy with applications like Framer." },
                   { user: "Leo A.", role: "Amazing tool for no-code modern web design and publishing", stars: 5, quote: "엔터프라이즈 AI의 패러다임을 바꿀 만한 강력한 도구입니다!" },
                 ].slice(0, isMobile ? 4 : undefined).map((post, i) => (
-                  <div key={i} className="break-inside-avoid bg-white/[0.01] border border-white/5 rounded-[20px] p-7 hover:border-white/20 transition-all duration-300 group/card">
+                  <div key={i} className="break-inside-avoid bg-white/[0.01] border border-white/10 rounded-[20px] p-7 hover:border-white/20 transition-all duration-300 group/card">
                     <div className="mb-4">
                       <div className="text-white font-bold text-[18px] mb-1">{post.user}</div>
                       <div className="text-white/40 text-[14px] font-medium leading-tight mb-4">{post.role}</div>
