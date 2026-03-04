@@ -22,7 +22,7 @@ export default function UseCases() {
                     >
                         <p className="text-lg md:text-xl font-medium mb-12 text-center text-[var(--color-on-surface)] bg-[var(--color-surface-variant)] px-6 py-3 rounded-2xl">🧐 “회사에서 사용하는 수많은 메뉴를 사내 최적화하여, 한 곳에서 모아 볼 수는 없나요?”</p>
                         <div className="grid md:grid-cols-2 gap-12 items-center w-full">
-                            <div className="order-2 md:order-1">
+                            <div className="order-1">
                                 <span className="text-[var(--color-primary)] font-bold text-sm mb-2 block">기업의 모든 것을 한 곳에서</span>
                                 <div className="flex items-center gap-2 mb-6">
                                     <h3 className="text-3xl font-bold text-[var(--color-on-surface)]">AI Portal</h3>
@@ -42,7 +42,7 @@ export default function UseCases() {
                                     <Tag text="사내 데이터 연동" />
                                 </div>
                             </div>
-                            <div className="order-1 md:order-2 bg-[var(--color-surface-variant)] rounded-[2rem] p-4 shadow-inner border border-[var(--color-outline)]/10 h-64 md:h-96 flex items-center justify-center text-[var(--color-on-surface-variant)] italic">
+                            <div className="order-2 bg-[var(--color-surface-variant)] rounded-[2rem] p-4 shadow-inner border border-[var(--color-outline)]/10 h-64 md:h-96 flex items-center justify-center text-[var(--color-on-surface-variant)] italic">
                                 {/* Placeholder for image */}
                                 <div className="text-center opacity-50">Image Placeholder</div>
                             </div>
@@ -89,8 +89,9 @@ export default function UseCases() {
                         transition={{ duration: 0.5 }}
                         className="flex flex-col items-center"
                     >
-                        <div className="grid md:grid-cols-2 gap-12 items-center w-full mt-12">
-                            <div className="pr-4">
+                        <p className="text-lg md:text-xl font-medium mb-12 text-center text-[var(--color-on-surface)] bg-[var(--color-surface-variant)] px-6 py-3 rounded-2xl italic">📝 “너무나 긴 회의시간.... 핵심 내용만 쏙쏙 뽑아볼 순 없나요?”</p>
+                        <div className="grid md:grid-cols-2 gap-12 items-center w-full">
+                            <div className="order-1">
                                 <span className="text-[var(--color-primary)] font-bold text-sm mb-2 block">성능, 편의성, 보안을 모두 갖춘</span>
                                 <div className="flex items-center gap-2 mb-6">
                                     <h3 className="text-4xl font-bold text-[var(--color-on-surface)] tracking-tight">지능형 회의록 Agent</h3>
@@ -105,7 +106,7 @@ export default function UseCases() {
                                     <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)]"></div><span>다국어 회의 지원</span></li>
                                 </ul>
                             </div>
-                            <div className="relative flex justify-center items-center">
+                            <div className="order-2 relative flex justify-center items-center">
                                 <div className="bg-[var(--color-surface-variant)] rounded-[2rem] p-4 shadow-inner border border-[var(--color-outline)]/10 w-full h-64 md:h-96 flex flex-col items-center justify-center">
                                     <Monitor size={80} className="text-[var(--color-outline)] mb-4" />
                                     <div className="text-[var(--color-on-surface-variant)] italic text-sm text-center px-10"></div>

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 
 export default function MultiAgentPlatformPage() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [activeTab, setActiveTab] = useState("Codebox");
+    const [activeTab, setActiveTab] = useState("AI Portal");
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -25,49 +25,52 @@ export default function MultiAgentPlatformPage() {
         <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
             {/* GNB */}
             <nav className="fixed w-full z-50 bg-[#000000]/80 backdrop-blur-xl py-4 px-6 md:px-10 border-b border-white/5">
-                <div className="max-w-[1200px] mx-auto flex justify-between items-center px-6 md:px-0">
+                <div className="max-w-[1200px] mx-auto flex justify-between items-center">
+                    {/* Logo */}
                     <Link to="/" className="flex items-center gap-2 shrink-0">
                         <img src="/bizai_logo.png" alt="Biz.AI Logo" className="h-6 w-auto" />
-                        <span className="text-xl font-bold text-white tracking-tight hidden sm:inline">Biz.AI</span>
+                        <span className="text-xl font-bold text-white tracking-tighter hidden sm:inline">Biz.AI</span>
                     </Link>
 
-                    <div className="hidden lg:flex items-center gap-8 text-white/90 text-[14px] font-medium">
+                    <div className="hidden lg:flex items-center gap-8 text-white/90 text-[14px] font-medium tracking-tight">
                         <Link to="/platform" className="text-white font-semibold transition-colors">멀티 에이전트 플랫폼</Link>
                         <Link to="/use-cases" className="hover:text-white transition-colors">고객 사례</Link>
                         <Link to="/news" className="hover:text-white transition-colors">새로운 소식</Link>
                     </div>
 
+                    {/* Right: CTA Buttons */}
                     <div className="flex items-center gap-3">
-                        <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10">
-                            kt ds <ExternalLink size={14} />
+                        <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10 group">
+                            <img src="/kt ds_단색형_White.png" alt="kt ds" className="h-4 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                         </Button>
-                        <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard">
-                            AI Agent 스튜디오 <ExternalLink size={14} />
+                        <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard group">
+                            AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                         </Button>
-                        <button className="lg:hidden text-white p-2 smooth-gpu" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                        <button className="lg:hidden text-white p-2 smooth-gpu" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
                             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
                     </div>
                 </div>
 
+                {/* Mobile Menu */}
                 <AnimatePresence>
                     {isMenuOpen && (
                         <motion.div
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            className="lg:hidden absolute top-full left-0 right-0 bg-[#000000]/95 backdrop-blur-xl py-4 px-6 overflow-hidden border-b border-white/10"
+                            className="lg:hidden absolute top-full left-0 right-0 bg-[#000000]/80 backdrop-blur-xl py-4 px-6 overflow-hidden border-b border-white/10"
                         >
                             <div className="flex flex-col gap-4">
                                 <Link to="/platform" className="text-white font-bold py-1" onClick={() => setIsMenuOpen(false)}>멀티 에이전트 플랫폼</Link>
                                 <Link to="/use-cases" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>고객 사례</Link>
                                 <Link to="/news" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>새로운 소식</Link>
                                 <div className="pt-2 mt-2 border-t border-white/10 flex flex-col gap-2">
-                                    <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start">
-                                        kt ds <ExternalLink size={14} />
+                                    <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group">
+                                        <img src="/kt ds_단색형_White.png" alt="kt ds" className="h-4 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                                     </Button>
-                                    <Button size="sm" className="bg-white text-black hover:bg-white/90 w-full justify-center font-semibold">
-                                        AI Agent 스튜디오 <ExternalLink size={14} />
+                                    <Button size="sm" className="bg-white text-black hover:bg-white/90 w-full justify-center font-semibold group">
+                                        AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                                     </Button>
                                 </div>
                             </div>
@@ -77,25 +80,25 @@ export default function MultiAgentPlatformPage() {
             </nav>
 
             {/* Content Body */}
-            <section className="pt-48 pb-32 flex-1">
+            < section className="pt-48 pb-32 flex-1" >
                 {/* Header Section */}
-                <div className="max-w-[1200px] mx-auto mb-20 px-6 lg:px-0">
+                < div className="max-w-[1200px] mx-auto mb-20 px-6 lg:px-0" >
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                     >
-                        <h1 className="text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
+                        <h1 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
                             Multi-Agent Platform
                         </h1>
                         <p className="text-white/70 text-[18px] max-w-2xl font-medium leading-relaxed">
                             Biz.AI의 멀티 에이전트 플랫폼은 각 산업 분야에 최적화된 전문 AI 에이전트들을 통해 비즈니스 혁신을 지원합니다.
                         </p>
                     </motion.div>
-                </div>
+                </div >
 
                 {/* Grid Layout: Sidebar + Main Content */}
-                <div className="max-w-[1200px] mx-auto px-6 lg:px-0">
+                < div className="max-w-[1200px] mx-auto px-6 lg:px-0" >
                     <div className="flex flex-col lg:flex-row gap-20">
                         {/* Sidebar (LNB) */}
                         <aside className="lg:w-[220px] shrink-0">
@@ -326,11 +329,11 @@ export default function MultiAgentPlatformPage() {
                             </div>
                         </main>
                     </div>
-                </div>
-            </section>
+                </div >
+            </section >
 
             {/* Footer */}
-            <footer className="bg-[#000000] border-t border-white/5 py-12 px-6">
+            < footer className="bg-[#000000] border-t border-white/5 py-12 px-6" >
                 <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
                     <div className="flex flex-col gap-6">
                         <Link to="/" className="flex items-center gap-2">
@@ -376,7 +379,7 @@ export default function MultiAgentPlatformPage() {
                         Contact: bizai@ktds.com | 02-1234-5678
                     </p>
                 </div>
-            </footer>
-        </div>
+            </footer >
+        </div >
     );
 }
