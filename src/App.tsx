@@ -52,7 +52,7 @@ import {
 // Sub-components (Moved to top for hoisting/scoping clarity)
 
 const StudioCard = ({ icon, title, desc }: { icon: React.ReactElement; title: string; desc: string }) => (
-  <Card className="p-10 rounded-3xl bg-[#111] border-white/20 hover:bg-[#1a1a1a] hover:border-white/30 transition-all duration-500 group flex flex-col items-center md:items-start text-center md:text-left shadow-2xl relative overflow-hidden">
+  <Card className="p-10 rounded-[20px] bg-[#111] border-white/20 hover:bg-[#1a1a1a] hover:border-white/30 transition-all duration-500 group flex flex-col items-center md:items-start text-center md:text-left shadow-2xl relative overflow-hidden text-left break-keep">
     <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl -mr-16 -mt-16 group-hover:bg-blue-500/20 transition-colors duration-500" />
     <div className="size-16 bg-white/5 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform border border-white/20 relative z-10 text-white/80 group-hover:text-blue-400">
       {React.cloneElement(icon as any, { size: 32 })}
@@ -554,7 +554,7 @@ const StudioSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative h-[440px] w-full rounded-[40px] border border-white/5 overflow-hidden group mb-16"
+          className="relative h-[440px] w-full rounded-[20px] border border-white/5 overflow-hidden group mb-5"
         >
           {/* LightRays 배경 - 박스 없이 전체로 활용 */}
           <div className="absolute inset-0 z-0">
@@ -616,7 +616,7 @@ const StudioSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="rounded-[32px] border border-white/20 p-8 pt-4 transition-all duration-300 group hover:border-white/30"
+              className="rounded-[20px] border border-white/20 p-8 pt-4 transition-all duration-300 group hover:border-white/30"
             >
               <div className="size-10 rounded-full border border-white/20 flex items-center justify-center mb-8 group-hover:bg-white/5 transition-colors">
                 {item.icon}
