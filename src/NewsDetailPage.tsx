@@ -22,7 +22,7 @@ export default function NewsDetailPage() {
     return (
         <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
             {/* GNB (Header) */}
-            <nav className="fixed w-full z-50 bg-[#000000]/80 backdrop-blur-xl py-4 px-6 md:px-10 border-b border-white/5">
+            <nav className="fixed w-full z-50 bg-[#000000] py-4 px-6 md:px-10 border-b border-white/5">
                 <div className="max-w-[1200px] mx-auto flex justify-between items-center">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2 shrink-0">
@@ -58,7 +58,7 @@ export default function NewsDetailPage() {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            className="lg:hidden absolute top-full left-0 right-0 bg-[#000000]/80 backdrop-blur-xl py-4 px-6 overflow-hidden border-b border-white/10"
+                            className="lg:hidden absolute top-full left-0 right-0 bg-[#000000] py-4 px-6 overflow-hidden border-b border-white/10"
                         >
                             <div className="flex flex-col gap-4">
                                 <Link to="/platform" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>멀티 에이전트 플랫폼</Link>
