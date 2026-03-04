@@ -20,6 +20,7 @@ export default function NewsPage() {
     const [activeCategory, setActiveCategory] = useState("All");
     const newsScrollRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
+    const [scrolled, setScrolled] = useState(false);
 
     const scrollNews = (direction: 'left' | 'right') => {
         if (newsScrollRef.current) {
@@ -34,12 +35,17 @@ export default function NewsPage() {
     // Scroll to top on mount
     useEffect(() => {
         window.scrollTo(0, 0);
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
         <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
             {/* 1. GNB 영역 (App.tsx와 동일하게 구성하지만 링크는 '/' 및 기타 영역 유지) */}
-            <nav className="fixed w-full z-50 bg-[#000000] py-4 px-6 md:px-10 border-b border-white/5">
+            <nav className={`fixed w-full z-50 bg-[#000000] py-4 px-6 md:px-10 transition-colors duration-300 ${scrolled ? 'border-b border-white/20' : 'border-b border-transparent'}`}>
                 <div className="max-w-[1200px] mx-auto flex justify-between items-center">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2 shrink-0">
@@ -172,17 +178,24 @@ export default function NewsPage() {
                     {/* 좌측 메인 리스트 뷰 */}
                     <div className="flex-1">
                         {/* 카테고리 탭 - Sticky 적용 */}
-                        <div className="sticky top-[64px] bg-[#000000] z-40 flex items-center gap-8 mb-12 border-b border-white/5 py-4">
+                        <div className="sticky top-[64px] bg-[#000000] z-40 flex items-center gap-8 mb-12 border-b border-white/20 h-[66px]">
                             {["All", "News", "Tech Stories", "Documentation"].map((category) => (
                                 <button
                                     key={category}
                                     onClick={() => setActiveCategory(category)}
-                                    className={`text-[18px] font-bold transition-colors ${activeCategory === category
-                                        ? "text-white"
+                                    className={`relative h-full text-[18px] font-normal transition-colors flex items-center px-1 ${activeCategory === category
+                                        ? "text-blue-500"
                                         : "text-white/30 hover:text-white/60"
                                         }`}
                                 >
                                     {category}
+                                    {activeCategory === category && (
+                                        <motion.div
+                                            layoutId="activeCategoryNews"
+                                            className="absolute bottom-0 left-0 right-0 h-[2px] bg-blue-500"
+                                            transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                        />
+                                    )}
                                 </button>
                             ))}
                         </div>

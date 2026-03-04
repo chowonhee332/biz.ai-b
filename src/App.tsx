@@ -639,6 +639,7 @@ const App = () => {
   const [activeDomain, setActiveDomain] = useState<number>(0);
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -689,6 +690,7 @@ const App = () => {
   useEffect(() => {
     const handleScroll = () => {
       setShowTopBtn(window.scrollY > 500);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -771,7 +773,7 @@ const App = () => {
     <div className="min-h-screen bg-[#000000] text-white font-sans">
       {/* GNB - Global Navigation Bar */}
       <nav
-        className="fixed w-full z-50 bg-[#000000] py-4 px-6 md:px-10 border-b border-white/5"
+        className={`fixed w-full z-50 bg-[#000000] py-4 px-6 md:px-10 transition-colors duration-300 ${scrolled ? 'border-b border-white/20' : 'border-b border-transparent'}`}
       >
         <div className="max-w-[1200px] mx-auto flex justify-between items-center">
           {/* Logo */}

@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'motion/react';
 
 export default function UseCaseDetailPage() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
     const item = location.state?.news || {
         title: "글로벌 금융사 A사 AI 기반 여신 심사 자동화",
@@ -34,18 +35,22 @@ export default function UseCaseDetailPage() {
             }
         );
 
-        sections.forEach((id) => {
-            const el = document.getElementById(id);
-            if (el) observers.observe(el);
-        });
+        window.addEventListener('scroll', handleScroll);
 
-        return () => observers.disconnect();
+        return () => {
+            observers.disconnect();
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, []);
+
+    const handleScroll = () => {
+        setScrolled(window.scrollY > 20);
+    };
 
     return (
         <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
             {/* GNB */}
-            <nav className="fixed w-full z-50 bg-[#000000] py-4 px-6 md:px-10 border-b border-white/5">
+            <nav className={`fixed w-full z-50 bg-[#000000] py-4 px-6 md:px-10 transition-colors duration-300 ${scrolled ? 'border-b border-white/20' : 'border-b border-transparent'}`}>
                 <div className="max-w-[1200px] mx-auto flex justify-between items-center">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2 shrink-0">

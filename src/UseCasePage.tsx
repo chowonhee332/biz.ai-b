@@ -9,15 +9,21 @@ export default function UseCasePage() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeCategory, setActiveCategory] = useState("All");
     const navigate = useNavigate();
+    const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
         <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
             {/* GNB */}
-            <nav className="fixed w-full z-50 bg-[#000000] py-4 px-6 md:px-10 border-b border-white/5">
+            <nav className={`fixed w-full z-50 bg-[#000000] py-4 px-6 md:px-10 transition-colors duration-300 ${scrolled ? 'border-b border-white/20' : 'border-b border-transparent'}`}>
                 <div className="max-w-[1200px] mx-auto flex justify-between items-center">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2 shrink-0">
@@ -93,15 +99,22 @@ export default function UseCasePage() {
                 {/* Case Grid Section */}
                 < div className="max-w-[1200px] mx-auto" >
                     {/* Category Filter - Sticky */}
-                    < div className="sticky top-[64px] bg-[#000000] z-40 flex items-center gap-8 mb-16 border-b border-white/5 py-4 overflow-x-auto no-scrollbar whitespace-nowrap" >
+                    <div className="sticky top-[64px] bg-[#000000] z-40 flex items-center gap-8 mb-16 border-b border-white/20 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap">
                         {
                             ["All", "데이터 분석", "보고 / 의사결정 향상", "리스크 관리 효율화", "강력한 보안", "내부 업무 처리 향상"].map((category) => (
                                 <button
                                     key={category}
                                     onClick={() => setActiveCategory(category)}
-                                    className={`text-[18px] font-bold transition-colors shrink-0 ${activeCategory === category ? "text-white" : "text-white/30 hover:text-white/60"}`}
+                                    className={`relative h-full text-[18px] font-normal transition-colors shrink-0 flex items-center px-1 ${activeCategory === category ? "text-blue-500" : "text-white/30 hover:text-white/60"}`}
                                 >
                                     {category}
+                                    {activeCategory === category && (
+                                        <motion.div
+                                            layoutId="activeCategory"
+                                            className="absolute bottom-0 left-0 right-0 h-[2px] bg-blue-500"
+                                            transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                        />
+                                    )}
                                 </button>
                             ))
                         }

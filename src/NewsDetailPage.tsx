@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'motion/react';
 
 export default function NewsDetailPage() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
     const news = location.state?.news || {
         title: "카카오, '사이좋은 AI 포럼' 통해 미래세대 위한 AI 시민성 교육 담론 주도",
@@ -17,12 +18,17 @@ export default function NewsDetailPage() {
     // Scroll to top on mount
     useEffect(() => {
         window.scrollTo(0, 0);
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
         <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
             {/* GNB (Header) */}
-            <nav className="fixed w-full z-50 bg-[#000000] py-4 px-6 md:px-10 border-b border-white/5">
+            <nav className={`fixed w-full z-50 bg-[#000000] py-4 px-6 md:px-10 transition-colors duration-300 ${scrolled ? 'border-b border-white/20' : 'border-b border-transparent'}`}>
                 <div className="max-w-[1200px] mx-auto flex justify-between items-center">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2 shrink-0">
