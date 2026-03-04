@@ -65,13 +65,13 @@ export default function MultiAgentPlatformPage() {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            className="lg:hidden absolute top-full left-0 right-0 bg-[#000000] py-4 px-6 overflow-hidden border-b border-white/10"
+                            className="lg:hidden absolute top-full left-0 right-0 bg-[#000000] py-4 px-6 overflow-hidden border-b border-white/20"
                         >
                             <div className="flex flex-col gap-4">
                                 <Link to="/platform" className="text-white font-bold py-1" onClick={() => setIsMenuOpen(false)}>멀티 에이전트 플랫폼</Link>
                                 <Link to="/use-cases" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>고객 사례</Link>
                                 <Link to="/news" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>새로운 소식</Link>
-                                <div className="pt-2 mt-2 border-t border-white/10 flex flex-col gap-2">
+                                <div className="pt-2 mt-2 border-t border-white/20 flex flex-col gap-2">
                                     <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group">
                                         <img src="/ktds_white.png" alt="kt ds" className="h-4 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                                     </Button>
@@ -339,7 +339,7 @@ export default function MultiAgentPlatformPage() {
             </section >
 
             {/* Footer */}
-            < footer className="bg-[#000000] border-t border-white/5 py-12 px-6" >
+            <footer className="bg-[#000000] border-t border-white/20 py-12 px-6">
                 <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
                     <div className="flex flex-col gap-6">
                         <Link to="/" className="flex items-center gap-2">
