@@ -143,7 +143,7 @@ const CharacterReveal = ({ text, className, scrollProgress, range, highlightInde
         return (
           <div
             key={lineIdx}
-            className={`flex flex-wrap text-[32px] md:text-[40px] font-bold tracking-tight leading-[1.3] ${colorClass}`}
+            className={`flex flex-wrap text-[32px] md:text-[50px] lg:text-[64px] font-bold tracking-tight leading-[1.3] ${colorClass}`}
           >
             {line.split('').map((char, charIdx) => {
               const charStart = range[0] + (charCounter / totalChars) * (range[1] - range[0]);
@@ -1169,7 +1169,7 @@ const App = () => {
                             >
                               <motion.p
                                 style={{ opacity: numOpacity }}
-                                className="text-white/40 text-[18px] lg:text-[22px] font-medium tracking-tight mb-6 font-pretendard"
+                                className="text-white text-[18px] lg:text-[24px] font-medium tracking-tight mb-6 font-pretendard"
                               >
                                 {String(index + 1).padStart(2, '0')}. Painpoint
                               </motion.p>
