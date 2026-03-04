@@ -97,15 +97,15 @@ export default function UseCasePage() {
                 </div >
 
                 {/* Case Grid Section */}
-                < div className="max-w-[1200px] mx-auto" >
-                    {/* Category Filter - Sticky */}
-                    <div className="sticky top-[64px] bg-[#000000] z-40 flex items-center gap-8 mb-16 border-b border-white/20 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap">
+                {/* Category Filter - Sticky 영역 (풀 너비 라인) */}
+                <div className="sticky top-[64px] bg-[#000000] z-40 border-b border-white/20 mb-16">
+                    <div className="max-w-[1200px] mx-auto flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap px-6 md:px-0">
                         {
                             ["All", "데이터 분석", "보고 / 의사결정 향상", "리스크 관리 효율화", "강력한 보안", "내부 업무 처리 향상"].map((category) => (
                                 <button
                                     key={category}
                                     onClick={() => setActiveCategory(category)}
-                                    className={`relative h-full text-[18px] font-normal transition-colors shrink-0 flex items-center px-1 ${activeCategory === category ? "text-blue-500" : "text-white/30 hover:text-white/60"}`}
+                                    className={`relative h-full text-[16px] font-normal transition-colors shrink-0 flex items-center px-1 ${activeCategory === category ? "text-blue-500" : "text-white/30 hover:text-white/60"}`}
                                 >
                                     {category}
                                     {activeCategory === category && (
@@ -118,7 +118,10 @@ export default function UseCasePage() {
                                 </button>
                             ))
                         }
-                    </div >
+                    </div>
+                </div>
+
+                < div className="max-w-[1200px] mx-auto" >
 
                     {/* Card Grid */}
                     < div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" >

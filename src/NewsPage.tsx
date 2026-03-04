@@ -174,31 +174,34 @@ export default function NewsPage() {
                     </div>
                 </div >
 
+                {/* 카테고리 탭 - Sticky 적용 (풀 너비 라인) */}
+                <div className="sticky top-[64px] bg-[#000000] z-40 border-b border-white/20 mb-12">
+                    <div className="max-w-[1200px] mx-auto flex items-center gap-8 h-[66px] px-6 md:px-0">
+                        {["All", "News", "Tech Stories", "Documentation"].map((category) => (
+                            <button
+                                key={category}
+                                onClick={() => setActiveCategory(category)}
+                                className={`relative h-full text-[16px] font-normal transition-colors flex items-center px-1 ${activeCategory === category
+                                    ? "text-blue-500"
+                                    : "text-white/30 hover:text-white/60"
+                                    }`}
+                            >
+                                {category}
+                                {activeCategory === category && (
+                                    <motion.div
+                                        layoutId="activeCategoryNews"
+                                        className="absolute bottom-0 left-0 right-0 h-[2px] bg-blue-500"
+                                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                    />
+                                )}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
                 <div className="max-w-[1200px] mx-auto">
                     {/* 좌측 메인 리스트 뷰 */}
                     <div className="flex-1">
-                        {/* 카테고리 탭 - Sticky 적용 */}
-                        <div className="sticky top-[64px] bg-[#000000] z-40 flex items-center gap-8 mb-12 border-b border-white/20 h-[66px]">
-                            {["All", "News", "Tech Stories", "Documentation"].map((category) => (
-                                <button
-                                    key={category}
-                                    onClick={() => setActiveCategory(category)}
-                                    className={`relative h-full text-[18px] font-normal transition-colors flex items-center px-1 ${activeCategory === category
-                                        ? "text-blue-500"
-                                        : "text-white/30 hover:text-white/60"
-                                        }`}
-                                >
-                                    {category}
-                                    {activeCategory === category && (
-                                        <motion.div
-                                            layoutId="activeCategoryNews"
-                                            className="absolute bottom-0 left-0 right-0 h-[2px] bg-blue-500"
-                                            transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                                        />
-                                    )}
-                                </button>
-                            ))}
-                        </div>
 
                         <div className="flex flex-col gap-8">
                             {[
