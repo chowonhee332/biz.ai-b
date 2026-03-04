@@ -183,7 +183,7 @@ export default function NewsPage() {
                                 onClick={() => setActiveCategory(category)}
                                 className={`relative h-full text-[16px] font-normal transition-colors flex items-center px-1 ${activeCategory === category
                                     ? "text-blue-500"
-                                    : "text-white/30 hover:text-white/60"
+                                    : "text-white/60 hover:text-white"
                                     }`}
                             >
                                 {category}
