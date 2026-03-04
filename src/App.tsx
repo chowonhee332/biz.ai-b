@@ -830,8 +830,6 @@ const App = () => {
       {/* Hero Section */}
       <section id="hero" className="relative z-20 h-screen flex items-center justify-center overflow-clip bg-[#000000] font-poppins">
 
-
-        {/* Content Area - Constrained to 1200px */}
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 flex items-center h-full">
           <div className="w-full flex flex-col lg:flex-row items-center relative">
             {/* Left Content */}
