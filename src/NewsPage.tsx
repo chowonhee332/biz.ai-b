@@ -181,7 +181,7 @@ export default function NewsPage() {
                             <button
                                 key={category}
                                 onClick={() => setActiveCategory(category)}
-                                className={`relative h-full text-[16px] font-normal transition-colors flex items-center px-1 ${activeCategory === category
+                                className={`relative h-full text-[16px] font-medium transition-colors flex items-center px-1 ${activeCategory === category
                                     ? "text-blue-500"
                                     : "text-white/60 hover:text-white"
                                     }`}

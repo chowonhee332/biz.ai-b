@@ -105,7 +105,7 @@ export default function UseCasePage() {
                                 <button
                                     key={category}
                                     onClick={() => setActiveCategory(category)}
-                                    className={`relative h-full text-[16px] font-normal transition-colors shrink-0 flex items-center px-1 ${activeCategory === category ? "text-blue-500" : "text-white/60 hover:text-white"}`}
+                                    className={`relative h-full text-[16px] font-medium transition-colors shrink-0 flex items-center px-1 ${activeCategory === category ? "text-blue-500" : "text-white/60 hover:text-white"}`}
                                 >
                                     {category}
                                     {activeCategory === category && (
