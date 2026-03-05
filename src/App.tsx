@@ -1227,7 +1227,7 @@ const App = () => {
                               )}
                               {item.features && (
                                 <div className="border-y border-white/20 py-10 mb-6 max-w-lg">
-                                  <ul className="space-y-5">
+                                  <ul className="space-y-3">
                                     {item.features.map((feature: string, i: number) => (
                                       <li key={i} className="flex items-start gap-4 text-white text-[16px] leading-snug font-normal">
                                         <div className="w-1 h-1 rounded-full bg-white mt-[10px] shrink-0" />
