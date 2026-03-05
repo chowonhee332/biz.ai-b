@@ -1231,7 +1231,7 @@ const App = () => {
                                     {item.features.map((feature: string, i: number) => (
                                       <li key={i} className="flex items-start gap-4 text-white text-[16px] leading-snug font-normal">
                                         <div className="w-1 h-1 rounded-full bg-white mt-[10px] shrink-0" />
-                                        <span>{feature}</span>
+                                        <span className="bg-gradient-to-r from-white to-[#B9D9FF] bg-clip-text text-transparent">{feature}</span>
                                       </li>
                                     ))}
                                   </ul>
