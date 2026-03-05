@@ -6,13 +6,46 @@ import { Button } from '@/components/ui/button';
 import { Linkedin, Youtube } from 'lucide-react';
 
 const HIGHLIGHT_NEWS = [
-    { title: "AI Agent Builder\nAI:ON-U 정식 출시", date: "Feb 20, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" },
-    { title: "Enterprise RAG\n엔진 2.0 업데이트", date: "Jan 15, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" },
-    { title: "멀티 에이전트 시스템\n혁신적 성과 달성", date: "Jan 03, 2026", tag: "Tech", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" },
-    { title: "Biz.AI 글로벌 파트너스\n서밋 2026 성공적 개최", date: "Dec 18, 2025", tag: "Event", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=800" },
-    { title: "데이터 보안\n최상위 등급 획득", date: "Nov 25, 2025", tag: "Company", image: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=800" },
-    { title: "차세대 언어 모델\n도입 및 기술 검증 완료", date: "Nov 10, 2025", tag: "Insight", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" },
-    { title: "2025 AI 혁신 어워드\n올해의 제품상 수상", date: "Oct 30, 2025", tag: "Award", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800" },
+    {
+        title: "kt ds, BC카드와 AI 기반\n자동화 통합보안관제 플랫폼 구축",
+        date: "2025/12/24",
+        tag: "News",
+        solution: "-",
+        link: "https://www.etnews.com/20251223000037",
+        image: "https://img.etnews.com/news/article/2025/12/22/news-p.v1.20251222.cf4baa668f8d4ead865462b43805380c_P2.jpg"
+    },
+    {
+        title: "한국표준협회, kt ds에\nAI 품질·신뢰성 평가 인증 수여",
+        date: "2025/10/27",
+        tag: "News",
+        solution: "AI 솔루션 3종",
+        link: "https://www.dailysmart.co.kr/news/articleView.html?idxno=115054",
+        image: "https://cdn.dailysmart.co.kr/news/photo/202510/115054_114643_39.jpg"
+    },
+    {
+        title: "KT DS, 폐쇄망에서도 쓰는\nAI 코드 어시스턴트 개발",
+        date: "2025/07/08",
+        tag: "News",
+        solution: "코드박스",
+        link: "https://zdnet.co.kr/view/?no=20250708200606",
+        image: "https://image.zdnet.co.kr/2025/07/08/65bf5e3563cf2d49e53588eb72950582.png"
+    },
+    {
+        title: "KT DS, AI 에이전트로\n기업 AX 돕는다",
+        date: "2025/07/02",
+        tag: "News",
+        solution: "Beast AI",
+        link: "https://it.chosun.com/news/articleView.html?idxno=2023092143480",
+        image: "https://cdn.it.chosun.com/news/photo/202507/2023092143480_420058_5410.jpg"
+    },
+    {
+        title: "KT DS \"AI 게이트웨이로 기업\n시스템과 AI 에이전트 쉽게 연결\"",
+        date: "2025/07/02",
+        tag: "News",
+        solution: "Beast AI",
+        link: "https://www.yna.co.kr/view/AKR20250702048800017",
+        image: "https://img0.yna.co.kr/etc/inner/KR/2025/07/02/AKR20250702048800017_01_i_P4.jpg"
+    }
 ];
 
 export default function NewsPage() {
@@ -152,7 +185,13 @@ export default function NewsPage() {
                                 transition={{ delay: i * 0.1, duration: 0.5 }}
                                 viewport={{ once: true }}
                                 className="group cursor-pointer shrink-0 w-[380px]"
-                                onClick={() => navigate('/news/1', { state: { news } })}
+                                onClick={() => {
+                                    if (news.link) {
+                                        window.open(news.link, '_blank');
+                                    } else {
+                                        navigate('/news/1', { state: { news } });
+                                    }
+                                }}
                             >
                                 {/* 썸네일: 380 * 240 사이즈 */}
                                 <div className="relative w-full aspect-[380/240] rounded-2xl overflow-hidden mb-5 bg-zinc-900 border border-white/5 shadow-2xl">
@@ -167,7 +206,11 @@ export default function NewsPage() {
                                 <div className="pt-2 px-1 flex-1 flex flex-col">
                                     <span className="text-blue-400 text-[14px] font-bold mb-3">{news.tag}</span>
                                     <h3 className="text-white text-[24px] font-bold leading-snug whitespace-pre-line group-hover:text-blue-400 transition-colors mb-4">{news.title}</h3>
-                                    <span className="text-white/40 text-[14px] font-medium mt-auto">{news.date}</span>
+                                    <div className="flex items-center text-white/40 text-[14px] font-medium mt-auto">
+                                        <span>{news.solution}</span>
+                                        <span className="mx-2 text-[4px] opacity-50">●</span>
+                                        <span>{news.date}</span>
+                                    </div>
                                 </div>
                             </motion.div>
                         ))}
@@ -205,14 +248,106 @@ export default function NewsPage() {
 
                         <div className="flex flex-col gap-8">
                             {[
-                                { title: "kt ds, AI Agent 도입 사례 공개", desc: "금융권부터 제조 영역까지, 실제 현장에서 활약 중인 Biz.AI의 다양한 도입 사례와 놀라운 성과를 상세히 공개합니다.", date: "Dec 22, 2025", tag: "Tech Stories", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" },
-                                { title: "2025 AI Trends Report 발간", desc: "올 한 해 주목해야 할 엔터프라이즈 AI 시장의 핵심 트렌드와 기술적 변화를 심층 분석한 리포트가 발간되었습니다.", date: "Nov 30, 2025", tag: "News", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" },
-                                { title: "Biz.AI 첫 밋업 행사 성황리 개최", desc: "고객사와 개발 파트너들이 한자리에 모여 AI 에이전트의 미래를 논의했던 첫 밋업 행사의 생생한 현장을 전달합니다.", date: "Oct 12, 2025", tag: "News", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=800" },
-                                { title: "글로벌 클라우드 플랫폼 신규 파트너십", desc: "멀티 클라우드 환경에서도 더욱 안정적이고 유연한 AI 서비스가 가능하도록 글로벌 파트너십을 체결했습니다.", date: "Sep 05, 2025", tag: "Documentation", image: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=800" }
-                            ].map((news, i) => (
+                                {
+                                    title: "kt ds, BC카드와 AI 기반 자동화 통합보안관제 플랫폼 구축",
+                                    desc: "kt ds가 BC카드에 AI 기반의 자동화된 통합보안관제 플랫폼을 구축하여 금융권 관제의 최적화 모델을 제시했습니다.",
+                                    date: "2025/12/24",
+                                    tag: "News",
+                                    solution: "-",
+                                    link: "https://www.etnews.com/20251223000037",
+                                    image: "https://img.etnews.com/news/article/2025/12/22/news-p.v1.20251222.cf4baa668f8d4ead865462b43805380c_P2.jpg"
+                                },
+                                {
+                                    title: "한국표준협회, kt ds에 AI 품질·신뢰성 평가 인증 수여",
+                                    desc: "kt ds의 AI 솔루션 3종(AI:ON-U, BEAST AI Gateway, Intelligent ESB)이 품질 및 데이터 신뢰성을 공식 인정받아 AI+ 인증을 획득했습니다.",
+                                    date: "2025/10/27",
+                                    tag: "News",
+                                    solution: "AI 솔루션 3종",
+                                    link: "https://www.dailysmart.co.kr/news/articleView.html?idxno=115054",
+                                    image: "https://cdn.dailysmart.co.kr/news/photo/202510/115054_114643_39.jpg"
+                                },
+                                {
+                                    title: "KT DS, 폐쇄망에서도 쓰는 AI 코드 어시스턴트 개발",
+                                    desc: "KT DS가 외부망과 단절된 폐쇄망 환경에서 바로 활용할 수 있는 AI 코드 어시스턴트 시스템 ‘코드박스-B.T.S’ 개발을 완료했습니다.",
+                                    date: "2025/07/08",
+                                    tag: "News",
+                                    solution: "코드박스",
+                                    link: "https://zdnet.co.kr/view/?no=20250708200606",
+                                    image: "https://image.zdnet.co.kr/2025/07/08/65bf5e3563cf2d49e53588eb72950582.png"
+                                },
+                                {
+                                    title: "KT DS, AI 에이전트로 기업 AX 돕는다",
+                                    desc: "코딩 없이 AI를 도입하여 이메일 거래내역 발송 등 내부 시스템과 자동 연동되는 기업 AX의 혁신 사례가 공개되었습니다.",
+                                    date: "2025/07/02",
+                                    tag: "News",
+                                    solution: "Beast AI",
+                                    link: "https://it.chosun.com/news/articleView.html?idxno=2023092143480",
+                                    image: "https://cdn.it.chosun.com/news/photo/202507/2023092143480_420058_5410.jpg"
+                                },
+                                {
+                                    title: "KT DS \"AI 게이트웨이로 기업 시스템과 AI 에이전트 쉽게 연결\"",
+                                    desc: "KT DS가 응용 프로그램 인터페이스(API) 게이트웨이 'BEAST'에 'AI 게이트웨이' 기능을 추가하여 AX 지원을 강화합니다.",
+                                    date: "2025/07/02",
+                                    tag: "News",
+                                    solution: "Beast AI",
+                                    link: "https://www.yna.co.kr/view/AKR20250702048800017",
+                                    image: "https://img0.yna.co.kr/etc/inner/KR/2025/07/02/AKR20250702048800017_01_i_P4.jpg"
+                                },
+                                {
+                                    title: "KT DS, '클라우드위즈'로 iF 디자인 어워드 2025 본상 수상",
+                                    desc: "kt ds의 대표 CMP 솔루션 '클라우드위즈'가 세계 3대 디자인 상인 iF 디자인 어워드에서 2개 부문 본상을 수상했습니다.",
+                                    date: "2025/04/29",
+                                    tag: "News",
+                                    solution: "CloudWiz",
+                                    link: "https://www.etnews.com/20250429000079",
+                                    image: "https://img.etnews.com/news/article/2025/04/29/news-p.v1.20250429.6ef7feb2ac78480aa41d6d35e3ad7700_P1.jpg"
+                                },
+                                {
+                                    title: "kt ds “'Works AI'로 구성원 업무 효율 향상과 AI 생활화 지원”",
+                                    desc: "kt ds의 'Works AI'는 MS 애저 네이티브 및 AI 기술을 활용하여 구성원들의 업무 효율을 획기적으로 향상시킨 업무 포털입니다.",
+                                    date: "2025/03/31",
+                                    tag: "News",
+                                    solution: "Works AI",
+                                    link: "https://www.etnews.com/20250328000136",
+                                    image: "https://img.etnews.com/news/article/2025/03/28/news-p.v1.20250328.4d46aad34a124f11be2786e667cc9ea4_P1.jpg"
+                                },
+                                {
+                                    title: "KT DS, ABC랩 출시 \"SaaS로 AI 사전검증 지원\"",
+                                    desc: "비용과 보안 걱정 없이 온라인에서 손쉽게 생성형 AI PoC를 진행할 수 있는 'ABC랩' 서비스가 정식 출시되었습니다.",
+                                    date: "2025/03/12",
+                                    tag: "News",
+                                    solution: "ABC Lab",
+                                    link: "https://zdnet.co.kr/view/?no=20250312145934",
+                                    image: "https://image.zdnet.co.kr/2025/03/12/08c78f3eab7a71840585879d07162172.jpg"
+                                },
+                                {
+                                    title: "AI 생활화를 위한 kt ds 만의 그룹웨어: Works AI",
+                                    desc: "kt ds 구성원들은 출근과 동시에 AI가 추천해 주는 업무와 지식을 확인하며 진정한 AI 생활화를 경험하고 있습니다.",
+                                    date: "2024/12/12",
+                                    tag: "Tech Stories",
+                                    solution: "Works AI",
+                                    link: "https://blog.naver.com/ktds_official/223691208730",
+                                    image: "https://blogthumb.pstatic.net/MjAyNDEyMTJfOTUg/MDAxNzMzOTg3MTU1Njk5.dGwww3I9v16JUbufq3U5OpY2C47CACtuwWv7kAUiNd8g.A5XsHcNVcZ8dvUq_tbq5vEFpqnowZNNEHkPfYVVoPIsg.JPEG/%BA%ED%B7%CE%B1%D7_%BD%E6%B3%D7%C0%CF_%BE%E7%BD%C4_%281%29.jpg?type=w2"
+                                },
+                                {
+                                    title: "kt ds, 사내용 MS 애저 기반 '웍스AI' 오픈",
+                                    desc: "MS 애저 기반의 사내 협업 시스템 '웍스AI'를 통해 사내 정보와 외부 데이터를 결합한 스마트한 업무 환경을 구축했습니다.",
+                                    date: "2024/11/29",
+                                    tag: "News",
+                                    solution: "Works AI",
+                                    link: "https://www.aitimes.com/news/articleView.html?idxno=165782",
+                                    image: "https://cdn.aitimes.com/news/photo/202411/165782_180045_5537.png"
+                                }
+                            ].map((news: any, i) => (
                                 <motion.div
                                     key={i}
-                                    onClick={() => navigate(`/news/${i + 1}`, { state: { news } })}
+                                    onClick={() => {
+                                        if (news.link) {
+                                            window.open(news.link, '_blank');
+                                        } else {
+                                            navigate(`/news/${i + 1}`, { state: { news } });
+                                        }
+                                    }}
                                     initial={{ opacity: 0, x: -20 }}
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
@@ -223,7 +358,11 @@ export default function NewsPage() {
                                         <span className="text-blue-400 text-[14px] font-bold mb-3">{news.tag}</span>
                                         <h3 className="text-white text-[24px] font-bold leading-snug mb-3 group-hover:text-blue-400 transition-colors">{news.title}</h3>
                                         <p className="text-white/60 text-[16px] leading-relaxed line-clamp-2 mb-6">{news.desc}</p>
-                                        <span className="text-white/40 text-[14px] font-medium mt-auto">{news.date}</span>
+                                        <div className="flex items-center text-white/40 text-[14px] font-medium mt-auto">
+                                            <span>{news.solution}</span>
+                                            <span className="mx-2 text-[4px] opacity-50">●</span>
+                                            <span>{news.date}</span>
+                                        </div>
                                     </div>
 
                                     <div className="w-full sm:w-[240px] shrink-0 aspect-video rounded-2xl overflow-hidden bg-zinc-900 border border-white/5">

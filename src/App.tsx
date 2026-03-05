@@ -1248,7 +1248,7 @@ const App = () => {
                                 className="w-[100px] h-[48px] text-[16px] font-medium border border-white/20 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent"
                                 onClick={() => navigate('/use-cases')}
                               >
-                                <span className="group-hover:-translate-x-1 transition-transform duration-300">더보기</span>
+                                <span className="group-hover:-translate-x-1 transition-transform duration-300">전체보기</span>
                                 <ChevronRight size={18} className="max-w-0 opacity-0 group-hover:max-w-[20px] group-hover:opacity-100 group-hover:ml-1 transition-all duration-300 overflow-hidden" />
                               </button>
                             </motion.div>
@@ -1474,13 +1474,87 @@ const App = () => {
             className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-12 pl-[calc(max(24px,(100vw-1200px)/2+24px))] pr-6"
           >
             {[
-              { title: "AI Agent Builder\nAI:ON-U 정식 출시", date: "Feb 20, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" },
-              { title: "Enterprise RAG\n엔진 2.0 업데이트", date: "Jan 15, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" },
-              { title: "kt ds, AI Agent\n도입 사례 공개", date: "Dec 22, 2025", tag: "Case Study", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" },
-              { title: "2025 AI Trends\nReport 발간", date: "Nov 30, 2025", tag: "Insight", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" },
-              { title: "AI Agent Builder\nAI:ON-U 정식 출시", date: "Feb 20, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" },
-              { title: "Enterprise RAG\n엔진 2.0 업데이트", date: "Jan 15, 2026", tag: "Product", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" }
-            ].map((news, i) => (
+              {
+                title: "kt ds, BC카드와 AI 기반\n자동화 통합보안관제 플랫폼 구축",
+                date: "2025/12/24",
+                tag: "News",
+                solution: "-",
+                link: "https://www.etnews.com/20251223000037",
+                image: "https://img.etnews.com/news/article/2025/12/22/news-p.v1.20251222.cf4baa668f8d4ead865462b43805380c_P2.jpg"
+              },
+              {
+                title: "한국표준협회, kt ds에\nAI 품질·신뢰성 평가 인증 수여",
+                date: "2025/10/27",
+                tag: "News",
+                solution: "AI 솔루션 3종",
+                link: "https://www.dailysmart.co.kr/news/articleView.html?idxno=115054",
+                image: "https://cdn.dailysmart.co.kr/news/photo/202510/115054_114643_39.jpg"
+              },
+              {
+                title: "KT DS, 폐쇄망에서도 쓰는\nAI 코드 어시스턴트 개발",
+                date: "2025/07/08",
+                tag: "News",
+                solution: "코드박스",
+                link: "https://zdnet.co.kr/view/?no=20250708200606",
+                image: "https://image.zdnet.co.kr/2025/07/08/65bf5e3563cf2d49e53588eb72950582.png"
+              },
+              {
+                title: "KT DS, AI 에이전트로 기업 AX 돕는다",
+                date: "2025/07/02",
+                tag: "News",
+                solution: "Beast AI",
+                link: "https://it.chosun.com/news/articleView.html?idxno=2023092143480",
+                image: "https://cdn.it.chosun.com/news/photo/202507/2023092143480_420058_5410.jpg"
+              },
+              {
+                title: "KT DS \"AI 게이트웨이로 기업\n시스템과 AI 에이전트 쉽게 연결\"",
+                date: "2025/07/02",
+                tag: "News",
+                solution: "Beast AI",
+                link: "https://www.yna.co.kr/view/AKR20250702048800017",
+                image: "https://img0.yna.co.kr/etc/inner/KR/2025/07/02/AKR20250702048800017_01_i_P4.jpg"
+              },
+              {
+                title: "KT DS, '클라우드위즈'로\niF 디자인 어워드 2025 본상 수상",
+                date: "2025/04/29",
+                tag: "News",
+                solution: "CloudWiz",
+                link: "https://www.etnews.com/20250429000079",
+                image: "https://img.etnews.com/news/article/2025/04/29/news-p.v1.20250429.6ef7feb2ac78480aa41d6d35e3ad7700_P1.jpg"
+              },
+              {
+                title: "kt ds “'Works AI'로 구성원\n업무 효율 향상과 AI 생활화 지원”",
+                date: "2025/03/31",
+                tag: "News",
+                solution: "Works AI",
+                link: "https://www.etnews.com/20250328000136",
+                image: "https://img.etnews.com/news/article/2025/03/28/news-p.v1.20250328.4d46aad34a124f11be2786e667cc9ea4_P1.jpg"
+              },
+              {
+                title: "KT DS, ABC랩 출시\n\"SaaS로 AI 사전검증 지원\"",
+                date: "2025/03/12",
+                tag: "News",
+                solution: "ABC Lab",
+                link: "https://zdnet.co.kr/view/?no=20250312145934",
+                image: "https://image.zdnet.co.kr/2025/03/12/08c78f3eab7a71840585879d07162172.jpg"
+              },
+              {
+                title: "AI 생활화를 위한 kt ds 만의\n그룹웨어: Works AI",
+                date: "2024/12/12",
+                tag: "Tech Stories",
+                solution: "Works AI",
+                link: "https://blog.naver.com/ktds_official/223691208730",
+                image: "https://blogthumb.pstatic.net/MjAyNDEyMTJfOTUg/MDAxNzMzOTg3MTU1Njk5.dGwww3I9v16JUbufq3U5OpY2C47CACtuwWv7kAUiNd8g.A5XsHcNVcZ8dvUq_tbq5vEFpqnowZNNEHkPfYVVoPIsg.JPEG/%BA%ED%B7%CE%B1%D7_%BD%E6%B3%D7%C0%CF_%BE%E7%BD%C4_%281%29.jpg?type=w2"
+              },
+              {
+                title: "kt ds, 사내용 MS 애저 기반\n'웍스AI' 오픈",
+                date: "2024/11/29",
+                tag: "News",
+                solution: "Works AI",
+                link: "https://www.aitimes.com/news/articleView.html?idxno=165782",
+                image: "https://cdn.aitimes.com/news/photo/202411/165782_180045_5537.png"
+              }
+            ].map((news: any, i) => (
               <motion.div
                 key={i}
                 initial={{ y: 20, opacity: 0 }}
@@ -1488,7 +1562,13 @@ const App = () => {
                 transition={{ delay: i * 0.1, duration: 0.5 }}
                 viewport={{ once: true }}
                 className="group cursor-pointer shrink-0 w-[380px]"
-                onClick={() => navigate(`/news/${(i % 4) + 1}`, { state: { news } })}
+                onClick={() => {
+                  if (news.link) {
+                    window.open(news.link, '_blank');
+                  } else {
+                    navigate(`/news/${(i % 4) + 1}`, { state: { news } });
+                  }
+                }}
               >
                 {/* 썸네일: 380 * 240 사이즈 */}
                 <div className="relative w-full aspect-[380/240] rounded-2xl overflow-hidden mb-5 bg-zinc-900 border border-white/5 shadow-2xl">
@@ -1507,7 +1587,11 @@ const App = () => {
                   <h3 className="text-white text-[24px] font-bold leading-snug mb-3 whitespace-pre-line group-hover:text-blue-400 transition-colors">
                     {news.title}
                   </h3>
-                  <span className="text-white/40 text-[14px] font-medium">{news.date}</span>
+                  <div className="flex items-center text-white/40 text-[14px] font-medium">
+                    <span>{news.solution}</span>
+                    <span className="mx-2 text-[4px] opacity-50">●</span>
+                    <span>{news.date}</span>
+                  </div>
                 </div>
               </motion.div>
             ))}
