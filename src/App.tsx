@@ -1142,6 +1142,7 @@ const App = () => {
                         const dRange: [number, number] = [qRange[1] + 0.02, qRange[1] + 0.06];
                         const nextStart = index < 2 ? (index === 0 ? 0.33 : 0.66) : 1.0;
                         const exitRange: [number, number] = [nextStart - 0.08, nextStart - 0.02];
+                        const isActive = activeUseCase === index;
 
                         // 라인 애니메이션: 솔루션 등장 완료(dRange[1])부터 퇴장 시작(exitRange[0])까지 채워짐
                         const lineScaleX = useTransform(sectionProgress, [dRange[1], exitRange[0]], [0, 1]);
@@ -1152,16 +1153,19 @@ const App = () => {
                         const textRange: [number, number] = [numFillEnd, qRange[1]];
 
                         // Q: 등장 → D가 시작되면 사라짐
-                        const qOpacity = useTransform(sectionProgress, [qRange[0], qRange[1], dRange[0], dRange[0] + 0.02], [0, 1, 1, 0]);
+                        const qOpacity = useTransform(sectionProgress, [qRange[0] - 0.01, qRange[0], dRange[1], dRange[1] + 0.02], [0, 1, 1, 0]);
                         // D: Q가 사라지면서 등장 → 다음 Q 시작 전에 사라짐
                         const dOpacity = useTransform(sectionProgress, [dRange[0], dRange[1], nextStart - 0.03, nextStart], [0, 1, 1, 0]);
                         const dY = useTransform(sectionProgress, dRange, [20, 0]);
 
-                        // 숫자: qRange 시작부터 numFillEnd까지 채워짐, 이후 사라짐
-                        const numOpacity = useTransform(sectionProgress, [qRange[0], numFillEnd, nextStart - 0.03, nextStart], [0, 1, 1, 0]);
+                        // 숫자: qRange 시작부터 즉시 100% (다만 내부 CharacterReveal이 0.4 -> 1 조절), 이후 사라짐
+                        const numOpacity = useTransform(sectionProgress, [qRange[0] - 0.01, qRange[0], nextStart - 0.03, nextStart], [0, 1, 1, 0]);
 
                         return (
-                          <div key={item.id} className="absolute inset-0 w-full">
+                          <div key={item.id} className="absolute inset-0 w-full" style={{
+                            pointerEvents: isActive ? 'auto' : 'none',
+                            zIndex: isActive ? 50 : 0
+                          }}>
                             {/* 번호 + 질문 레이어 */}
                             <motion.div
                               style={{ opacity: qOpacity }}
