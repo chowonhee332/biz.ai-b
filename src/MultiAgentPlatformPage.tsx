@@ -30,7 +30,7 @@ export default function MultiAgentPlatformPage() {
     return (
         <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
             {/* GNB */}
-            <nav className={`fixed w-full z-50 bg-[#000000] py-4 px-6 md:px-10 transition-colors duration-300 ${scrolled ? 'border-b border-white/20' : 'border-b border-transparent'}`}>
+            <nav className={`fixed w-full z-50 bg-black/[0.85] backdrop-blur-sm py-4 px-6 md:px-10 transition-colors duration-300 ${scrolled ? 'border-b border-white/20' : 'border-b border-transparent'}`}>
                 <div className="max-w-[1200px] mx-auto flex justify-between items-center">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2 shrink-0">
@@ -47,12 +47,12 @@ export default function MultiAgentPlatformPage() {
                     {/* Right: CTA Buttons */}
                     <div className="flex items-center gap-3">
                         <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10 group">
-                            <img src="/ktds_white.png" alt="kt ds" className="h-4 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+                            <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                         </Button>
                         <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard group">
                             AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                         </Button>
-                        <button className="lg:hidden text-white p-2 smooth-gpu" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
+                        <button className="cursor-pointer lg:hidden text-white p-2 smooth-gpu" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
                             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
                     </div>
@@ -65,17 +65,17 @@ export default function MultiAgentPlatformPage() {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            className="lg:hidden absolute top-full left-0 right-0 bg-[#000000] py-4 px-6 overflow-hidden border-b border-white/20"
+                            className="lg:hidden absolute top-full left-0 right-0 bg-[#000000] py-4 px-6 md:px-10 overflow-hidden border-b border-white/20"
                         >
                             <div className="flex flex-col gap-4">
                                 <Link to="/platform" className="text-white font-bold py-1" onClick={() => setIsMenuOpen(false)}>멀티 에이전트 플랫폼</Link>
                                 <Link to="/use-cases" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>고객 사례</Link>
                                 <Link to="/news" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>새로운 소식</Link>
                                 <div className="pt-2 mt-2 border-t border-white/20 flex flex-col gap-2">
-                                    <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group">
-                                        <img src="/ktds_white.png" alt="kt ds" className="h-4 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+                                    <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group hover:bg-transparent px-0 py-1 h-auto text-[16px]">
+                                        <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                                     </Button>
-                                    <Button size="sm" className="bg-white text-black hover:bg-white/90 w-full justify-center font-semibold group">
+                                    <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start font-medium group px-0 py-1 h-auto text-[16px]">
                                         AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                                     </Button>
                                 </div>
@@ -86,9 +86,9 @@ export default function MultiAgentPlatformPage() {
             </nav>
 
             {/* Content Body */}
-            < section className="pt-48 pb-32 flex-1" >
+            <section className="pt-48 pb-32 flex-1 px-6 md:px-10">
                 {/* Header Section */}
-                < div className="max-w-[1200px] mx-auto mb-20 px-6 lg:px-0" >
+                <div className="max-w-[1200px] mx-auto mb-20">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -101,19 +101,41 @@ export default function MultiAgentPlatformPage() {
                             Biz.AI의 멀티 에이전트 플랫폼은 각 산업 분야에 최적화된 전문 AI 에이전트들을 통해 비즈니스 혁신을 지원합니다.
                         </p>
                     </motion.div>
-                </div >
+                </div>
 
                 {/* Grid Layout: Sidebar + Main Content */}
-                < div className="max-w-[1200px] mx-auto px-6 lg:px-0" >
+                <div className="max-w-[1200px] mx-auto">
+                    {/* Mobile Tabs (LNB for Mobile) */}
+                    <div className="lg:hidden sticky top-[72px] bg-black/[0.85] backdrop-blur-sm z-40 border-b border-white/20 mb-12 -mx-6 md:-mx-10 px-6 md:px-10">
+                        <div className="flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap">
+                            {sidebarItems.map((item) => (
+                                <button
+                                    key={item}
+                                    onClick={() => setActiveTab(item)}
+                                    className={`relative h-full text-[16px] font-bold transition-all shrink-0 flex items-center px-1 cursor-pointer ${activeTab === item ? "text-blue-500" : "text-white/30 hover:text-white/60"}`}
+                                >
+                                    {item}
+                                    {activeTab === item && (
+                                        <motion.div
+                                            layoutId="activePlatformTab"
+                                            className="absolute bottom-0 left-0 right-0 h-[3px] bg-blue-500 rounded-full"
+                                            transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                        />
+                                    )}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
                     <div className="flex flex-col lg:flex-row gap-20">
-                        {/* Sidebar (LNB) */}
-                        <aside className="lg:w-[220px] shrink-0">
+                        {/* Sidebar (LNB) - Desktop Only */}
+                        <aside className="hidden lg:block lg:w-[220px] shrink-0">
                             <ul className="flex flex-col gap-8 sticky top-[100px] border-l border-white/5 py-2">
                                 {sidebarItems.map((item) => (
                                     <li key={item}>
                                         <button
                                             onClick={() => setActiveTab(item)}
-                                            className={`pl-8 relative text-[18px] font-bold transition-all text-left w-full ${activeTab === item ? "text-white" : "text-white/30 hover:text-white/60"}`}
+                                            className={`pl-8 relative text-[18px] font-bold transition-all text-left w-full cursor-pointer ${activeTab === item ? "text-white" : "text-white/30 hover:text-white/60"}`}
                                         >
                                             {activeTab === item && <div className="absolute left-[-1.5px] top-0 bottom-0 w-[3px] bg-[#3B82F6] rounded-full" />}
                                             {item}
@@ -263,7 +285,7 @@ export default function MultiAgentPlatformPage() {
                                                         <p className="text-[#0885FE] font-bold">{item.result}</p>
                                                     </div>
                                                 </div>
-                                                <button className="mt-4 text-white/40 text-[12px] flex items-center gap-1 hover:text-white transition-all">자세히 보기 <ChevronRight size={12} /></button>
+                                                <button className="cursor-pointer mt-4 text-white/40 text-[12px] flex items-center gap-1 hover:text-white transition-all cursor-pointer">자세히 보기 <ChevronRight size={12} /></button>
                                             </div>
                                         ))}
                                     </div>
@@ -294,7 +316,7 @@ export default function MultiAgentPlatformPage() {
                                             <div key={i} className="bg-white/5 rounded-2xl p-6 border border-white/5 hover:border-[#0885FE]/30 transition-all cursor-pointer group">
                                                 <h4 className="text-[16px] font-bold text-white mb-2 group-hover:text-[#0885FE] transition-colors uppercase">{plan.name}</h4>
                                                 <p className="text-white/40 text-[13px] mb-4">{plan.price}</p>
-                                                <button className="text-[#0885FE] text-[13px] font-bold flex items-center gap-1">자세히 보기 <ChevronRight size={12} /></button>
+                                                <button className="cursor-pointer text-[#0885FE] text-[13px] font-bold flex items-center gap-1 cursor-pointer">자세히 보기 <ChevronRight size={12} /></button>
                                             </div>
                                         ))}
                                     </div>
@@ -335,8 +357,8 @@ export default function MultiAgentPlatformPage() {
                             </div>
                         </main>
                     </div>
-                </div >
-            </section >
+                </div>
+            </section>
 
             {/* Footer */}
             <footer className="bg-[#000000] border-t border-white/20 py-12 px-6">
@@ -385,7 +407,7 @@ export default function MultiAgentPlatformPage() {
                         Contact: bizai@ktds.com | 02-1234-5678
                     </p>
                 </div>
-            </footer >
-        </div >
+            </footer>
+        </div>
     );
 }

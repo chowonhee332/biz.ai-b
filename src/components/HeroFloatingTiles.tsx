@@ -26,7 +26,7 @@ const EngravedIcon = ({ children }: { children: React.ReactNode }) => {
                 // Deep inner shadow for engraving depth + sharp white highlight (specular) on the opposite edge
                 filter: 'drop-shadow(1px 1.5px 0.5px rgba(255, 255, 255, 0.25)) drop-shadow(-1px -1px 2px rgba(0, 0, 0, 0.9))',
             }}
-        >
+>
             {children}
         </div>
     );
@@ -63,7 +63,7 @@ const Thick3DTile = ({ children, thickness = 22, ...props }: any) => {
                     // Soft inner glow to simulate specular highlight on rounded edges
                     boxShadow: 'inset 0 4px 15px rgba(255,255,255,0.15), inset 1.5px 0 4px rgba(255,255,255,0.1), inset -2px -2px 10px rgba(0,0,0,0.9)'
                 }}
-            >
+>
                 <NoiseFilter />
                 {/* Center diffuse light */}
                 <div
@@ -165,7 +165,7 @@ export default function HeroFloatingTiles() {
                         rotateY: { duration: 8, repeat: Infinity, ease: 'easeInOut', delay: tile.delay },
                         rotateZ: { duration: 9, repeat: Infinity, ease: 'easeInOut', delay: tile.delay },
                     }}
-                >
+>
                     {tile.icon}
                 </Thick3DTile>
             ))}

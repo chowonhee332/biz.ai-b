@@ -8,7 +8,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY> 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -69,7 +69,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             className="absolute top-20 left-4 right-4 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl p-4 shadow-2xl overflow-hidden z-50"
-          >
+>
             <div className="flex flex-col gap-4">
               <a href="#solution" className="text-[var(--color-text-secondary)] hover:text-white font-medium px-2 py-1">AI Agent 제품군</a>
               <a href="#domain" className="text-[var(--color-text-secondary)] hover:text-white font-medium px-2 py-1">AI 솔루션</a>

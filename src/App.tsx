@@ -577,7 +577,7 @@ const StudioSection = () => {
               쉽게 개발 가능한 AI 아키텍처와 Delivery 가이드를 제공합니다.
             </p>
 
-            <button className="w-[120px] h-[48px] text-[16px] font-medium border border-white/20 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent">
+            <button className="cursor-pointer w-[120px] h-[48px] text-[16px] font-medium border border-white/20 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent">
               <span>체험하기</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="max-w-0 opacity-0 group-hover:max-w-[18px] group-hover:opacity-100 group-hover:ml-[4px] transition-all duration-300 overflow-hidden">
                 <path d="M7 17L17 7M17 7H7M17 7V17" />
@@ -794,12 +794,12 @@ const App = () => {
           {/* Right: CTA Buttons */}
           <div className="flex items-center gap-3">
             <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10 group">
-              <img src="/ktds_white.png" alt="kt ds" className="h-4 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+              <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
             </Button>
             <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard group">
               AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
             </Button>
-            <button className="lg:hidden text-white p-2 smooth-gpu cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
+            <button className="cursor-pointer lg:hidden text-white p-2 smooth-gpu" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -812,17 +812,17 @@ const App = () => {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="lg:hidden absolute top-full left-0 right-0 bg-[#000000] py-4 px-6 overflow-hidden border-b border-white/20"
+              className="lg:hidden absolute top-full left-0 right-0 bg-[#000000] py-4 px-6 md:px-10 overflow-hidden border-b border-white/20"
             >
               <div className="flex flex-col gap-4">
                 <Link to="/" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>멀티 에이전트 플랫폼</Link>
                 <Link to="/use-cases" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>고객 사례</Link>
                 <Link to="/news" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>새로운 소식</Link>
                 <div className="pt-2 mt-2 border-t border-white/20 flex flex-col gap-2">
-                  <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group">
-                    <img src="/ktds_white.png" alt="kt ds" className="h-4 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+                  <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group hover:bg-transparent px-0 py-1 h-auto text-[16px]">
+                    <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                   </Button>
-                  <Button size="sm" className="bg-white text-black hover:bg-white/90 w-full justify-center font-semibold group">
+                  <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start font-medium group px-0 py-1 h-auto text-[16px]">
                     AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                   </Button>
                 </div>
@@ -911,7 +911,7 @@ const App = () => {
 
 
                 {/* 그룹 1: 전사 공통 */}
-                <div className="mb-32 max-w-[1104px] mx-auto">
+                <div className="mb-32 max-w-[1024px] mx-auto">
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -957,7 +957,7 @@ const App = () => {
                 </div>
 
                 {/* 그룹 2: IT 서비스/개발 직군 */}
-                <div className="mb-14 max-w-[1104px] mx-auto">
+                <div className="mb-14 max-w-[1024px] mx-auto">
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -1133,7 +1133,7 @@ const App = () => {
             </div>
 
             {/* Desktop Layout (Sticky & Transitions) */}
-            <div className="hidden lg:flex sticky top-0 h-screen w-full items-center justify-center px-4 md:px-6 overflow-hidden">
+            <div className="hidden lg:flex sticky top-0 h-screen w-full items-center justify-center px-4 md:px-6 md:px-10 overflow-hidden">
               <div className="max-w-[1200px] mx-auto w-full h-full">
                 <div className="w-full flex flex-col lg:flex-row items-center relative gap-8 lg:gap-0 h-full">
                   <div className="w-full lg:w-[42%] flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16 self-start pt-[20vh] h-full relative">
@@ -1245,7 +1245,7 @@ const App = () => {
                               className="absolute bottom-[10vh] left-0 pointer-events-auto"
                             >
                               <button
-                                className="w-[100px] h-[48px] text-[16px] font-medium border border-white/20 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent cursor-pointer"
+                                className="w-[100px] h-[48px] text-[16px] font-medium border border-white/20 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent"
                                 onClick={() => navigate('/use-cases')}
                               >
                                 <span className="group-hover:-translate-x-1 transition-transform duration-300">더보기</span>
@@ -1454,13 +1454,13 @@ const App = () => {
               <div className="flex gap-3 mb-2">
                 <button
                   onClick={() => scrollNews('left')}
-                  className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all bg-white/5 hover:bg-white/10 cursor-pointer"
+                  className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all bg-white/5 hover:bg-white/10"
                 >
                   <ChevronLeft size={24} />
                 </button>
                 <button
                   onClick={() => scrollNews('right')}
-                  className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all bg-white/5 hover:bg-white/10 cursor-pointer"
+                  className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all bg-white/5 hover:bg-white/10"
                 >
                   <ChevronRight size={24} />
                 </button>
@@ -1516,7 +1516,7 @@ const App = () => {
           {/* 더보기 버튼: 중앙 정렬 */}
           <div className="flex justify-center mt-8">
             <Link to="/news">
-              <button className="w-[120px] h-[48px] text-[16px] font-medium border border-white/20 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent">
+              <button className="cursor-pointer w-[120px] h-[48px] text-[16px] font-medium border border-white/20 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent">
                 <span>전체보기</span><ChevronRight size={16} className="max-w-0 opacity-0 group-hover:max-w-[18px] group-hover:opacity-100 group-hover:ml-[2px] transition-all duration-300 overflow-hidden" />
               </button>
             </Link>
@@ -1700,7 +1700,7 @@ const App = () => {
             </div>
           </div>
         </footer>
-      </div >
+      </div>
 
       <AnimatePresence>
         {showTopBtn && (
@@ -1711,14 +1711,14 @@ const App = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={scrollToTop}
-            className="fixed bottom-8 right-8 z-[100] w-[48px] h-[48px] flex items-center justify-center bg-[#000000]/60 text-white hover:bg-[#000000]/80 rounded-full transition-all border border-white/20 backdrop-blur-md shadow-xl"
+            className="fixed bottom-8 right-8 z-[100] w-[48px] h-[48px] flex items-center justify-center bg-[#000000]/60 text-white hover:bg-[#000000]/80 rounded-full transition-all border border-white/20 backdrop-blur-sm shadow-xl"
             aria-label="맨 위로 가기"
           >
             <ArrowUp size={24} strokeWidth={2.5} />
           </motion.button>
         )}
       </AnimatePresence>
-    </div >
+    </div>
   );
 };
 

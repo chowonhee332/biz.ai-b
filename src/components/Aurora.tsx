@@ -31,7 +31,7 @@ float snoise(vec2 v){
   );
   vec2 i  = floor(v + dot(v, C.yy));
   vec2 x0 = v - i + dot(i, C.xx);
-  vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+  vec2 i1 = (x0.x> x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
   vec4 x12 = x0.xyxy + C.xxzz;
   x12.xy -= i1;
   i = mod(i, 289.0);
@@ -71,7 +71,7 @@ struct ColorStop {
 
 #define COLOR_RAMP(colors, factor, finalColor) {              \
   int index = 0;                                            \
-  for (int i = 0; i < 2; i++) {                               \
+  for (int i = 0; i <2; i++) {                               \
      ColorStop currentColor = colors[i];                    \
      bool isInBetween = currentColor.position <= factor;    \
      index = int(mix(float(index), float(i), float(isInBetween))); \

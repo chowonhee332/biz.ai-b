@@ -8,7 +8,7 @@ const SolutionItem = ({ type, tag, title, desc, icon }: { type: 'top' | 'bottom'
     viewport={{ once: true }}
     transition={{ duration: 0.5 }}
     className="group relative flex flex-col items-center bg-[var(--color-surface)] border border-[var(--color-border)] rounded-3xl p-8 hover:border-[var(--color-text-secondary)] transition-all duration-300 hover:shadow-2xl hover:shadow-[var(--color-accent)]/10"
-  >
+>
     <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-surface-hover)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl pointer-events-none" />
     
     <div className="relative z-10 flex flex-col items-center text-center h-full">

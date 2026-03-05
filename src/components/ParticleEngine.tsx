@@ -11,7 +11,7 @@ const GATHER_DURATION = 4;
 
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 const easeInOutCubic = (t: number) =>
-  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  t <0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
 // 화면 가장자리에서 흩어진 시작 위치
 const getStartPos = () => {
@@ -114,7 +114,7 @@ export default function ParticleEngine({ scrollYProgress, className = '', mode =
       const baseRadius = Math.max(0.01, gaussRandom(RING_CENTER, RING_SIGMA));
       const radius = baseRadius * (1 + distortion);
 
-      const isGlow = Math.random() < 0.15; // More bright points for richness
+      const isGlow = Math.random() <0.15; // More bright points for richness
       return {
         startX: start.x,
         startY: start.y,
@@ -126,9 +126,9 @@ export default function ParticleEngine({ scrollYProgress, className = '', mode =
         twinkleSpeed: 0.4 + Math.random() * 1.4,
         twinkleOffset: Math.random() * Math.PI * 2,
         delay: 0,
-        color: Math.random() < 0.85
+        color: Math.random() <0.85
           ? `190, 230, 255` // Bright vibrant blue
-          : Math.random() < 0.5
+          : Math.random() <0.5
             ? `255, 255, 255` // Pure white
             : `150, 190, 255`, // Rich sky blue
       };
@@ -192,11 +192,11 @@ export default function ParticleEngine({ scrollYProgress, className = '', mode =
 
       // REMOVED ctx.shadowBlur - This was the performance killer
 
-      for (let i = 0; i < particles.length; i++) {
+      for (let i = 0; i <particles.length; i++) {
         const p = particles[i];
         const progress = Math.max(0, Math.min(1, (elapsed - p.delay * GATHER_DURATION) / GATHER_DURATION));
         // Use a faster easing for performance
-        const eased = progress < 0.5 ? 2 * progress * progress : 1 - ((-2 * progress + 2) ** 2) / 2;
+        const eased = progress <0.5 ? 2 * progress * progress : 1 - ((-2 * progress + 2) ** 2) / 2;
 
         p.angle += p.orbitSpeed * (0.005 + 0.015 * eased);
 
@@ -223,7 +223,7 @@ export default function ParticleEngine({ scrollYProgress, className = '', mode =
         let offsetX = 0;
         let offsetY = 0;
 
-        if (distSq < mouseRadiusSq) {
+        if (distSq <mouseRadiusSq) {
           const dist = Math.sqrt(distSq);
           const force = (1 - dist / MOUSE_RADIUS) * MOUSE_INFLUENCE * eased;
           offsetX = dx * force;
@@ -263,7 +263,7 @@ export default function ParticleEngine({ scrollYProgress, className = '', mode =
     <motion.div
       className={`absolute inset-0 pointer-events-none overflow-hidden ${className}`}
       style={{ opacity: containerOpacity }}
-    >
+>
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"

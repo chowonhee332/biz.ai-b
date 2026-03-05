@@ -19,7 +19,7 @@ export default function UseCases() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                         className="flex flex-col items-center"
-                    >
+>
                         <p className="text-lg md:text-xl font-medium mb-12 text-center text-[var(--color-on-surface)] bg-[var(--color-surface-variant)] px-6 py-3 rounded-2xl">🧐 “회사에서 사용하는 수많은 메뉴를 사내 최적화하여, 한 곳에서 모아 볼 수는 없나요?”</p>
                         <div className="grid md:grid-cols-2 gap-12 items-center w-full">
                             <div className="order-1">
@@ -56,7 +56,7 @@ export default function UseCases() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                         className="flex flex-col items-center"
-                    >
+>
                         <p className="text-lg md:text-xl font-medium mb-12 text-center text-[var(--color-on-surface)] bg-[var(--color-surface-variant)] px-6 py-3 rounded-2xl italic">😭 “(국정)감사에 필요한 방대한 자료를 한 번에 분석해서 보고 싶어요”</p>
                         <div className="grid md:grid-cols-2 gap-12 items-center w-full">
                             <div className="bg-[var(--color-surface-variant)] rounded-[2rem] p-4 shadow-inner border border-[var(--color-outline)]/10 h-64 md:h-96 flex items-center justify-center text-[var(--color-on-surface-variant)] italic">
@@ -88,7 +88,7 @@ export default function UseCases() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                         className="flex flex-col items-center"
-                    >
+>
                         <p className="text-lg md:text-xl font-medium mb-12 text-center text-[var(--color-on-surface)] bg-[var(--color-surface-variant)] px-6 py-3 rounded-2xl italic">📝 “너무나 긴 회의시간.... 핵심 내용만 쏙쏙 뽑아볼 순 없나요?”</p>
                         <div className="grid md:grid-cols-2 gap-12 items-center w-full">
                             <div className="order-1">

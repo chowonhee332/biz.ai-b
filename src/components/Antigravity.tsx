@@ -81,10 +81,10 @@ const AntigravityInner = ({
     const points = [];
     const step = 2; // 샘플링 간격
 
-    for (let y = 0; y < canvas.height; y += step) {
-      for (let x = 0; x < canvas.width; x += step) {
+    for (let y = 0; y <canvas.height; y += step) {
+      for (let x = 0; x <canvas.width; x += step) {
         const index = (y * canvas.width + x) * 4;
-        if (imageData[index] > 128) {
+        if (imageData[index]> 128) {
           // Normalize to -0.5 ~ 0.5
           points.push({
             x: (x / canvas.width - 0.5) * 1.5,
@@ -104,7 +104,7 @@ const AntigravityInner = ({
     const colors = Array.isArray(color) ? color : [color, color];
     const threeColors = colors.map(c => new THREE.Color(c));
 
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i <count; i++) {
       const t = Math.random() * 100;
       const factor = 20 + Math.random() * 100;
       const speed = 0.01 + Math.random() / 200;
@@ -168,7 +168,7 @@ const AntigravityInner = ({
 
       let targetPos = { x: mx, y: my, z: mz * depthFactor };
 
-      if (dist < magnetRadius) {
+      if (dist <magnetRadius) {
         const angle = Math.atan2(dy, dx) + globalRotation;
         const wave = Math.sin(t * waveSpeed + angle) * (0.5 * waveAmplitude);
         const deviation = randomRadiusOffset * (5 / (fieldStrength + 0.1));
@@ -192,7 +192,7 @@ const AntigravityInner = ({
       );
 
       let scaleFactor = 1;
-      if (currentDistToMouse < magnetRadius) {
+      if (currentDistToMouse <magnetRadius) {
         const distFromRing = Math.abs(currentDistToMouse - ringRadius);
         scaleFactor = 1 - distFromRing / 15;
         scaleFactor = Math.max(0.3, Math.min(1, scaleFactor));

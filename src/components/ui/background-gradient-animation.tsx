@@ -95,7 +95,7 @@ export const BackgroundGradientAnimation = ({
                 "h-full w-full relative overflow-hidden top-0 left-0 bg-[linear-gradient(40deg,var(--gradient-background-start),var(--gradient-background-end))]",
                 containerClassName
             )}
-        >
+>
             <svg className="hidden">
                 <defs>
                     <filter id="blurMe">
@@ -120,7 +120,7 @@ export const BackgroundGradientAnimation = ({
                     "gradients-container h-full w-full blur-lg",
                     isSafari ? "blur-2xl" : "[filter:url(#blurMe)_blur(40px)]"
                 )}
-            >
+>
                 <div
                     className={cn(
                         `absolute [background:radial-gradient(circle_at_center,_var(--first-color)_0,_var(--first-color)_50%)_no-repeat]`,
@@ -129,7 +129,7 @@ export const BackgroundGradientAnimation = ({
                         `animate-first`,
                         `opacity-100`
                     )}
-                ></div>
+></div>
                 <div
                     className={cn(
                         `absolute [background:radial-gradient(circle_at_center,_rgba(var(--second-color),_0.8)_0,_rgba(var(--second-color),_0)_50%)_no-repeat]`,
@@ -138,7 +138,7 @@ export const BackgroundGradientAnimation = ({
                         `animate-second`,
                         `opacity-100`
                     )}
-                ></div>
+></div>
                 <div
                     className={cn(
                         `absolute [background:radial-gradient(circle_at_center,_rgba(var(--third-color),_0.8)_0,_rgba(var(--third-color),_0)_50%)_no-repeat]`,
@@ -147,7 +147,7 @@ export const BackgroundGradientAnimation = ({
                         `animate-third`,
                         `opacity-100`
                     )}
-                ></div>
+></div>
                 <div
                     className={cn(
                         `absolute [background:radial-gradient(circle_at_center,_rgba(var(--fourth-color),_0.8)_0,_rgba(var(--fourth-color),_0)_50%)_no-repeat]`,
@@ -156,7 +156,7 @@ export const BackgroundGradientAnimation = ({
                         `animate-fourth`,
                         `opacity-70`
                     )}
-                ></div>
+></div>
                 <div
                     className={cn(
                         `absolute [background:radial-gradient(circle_at_center,_rgba(var(--fifth-color),_0.8)_0,_rgba(var(--fifth-color),_0)_50%)_no-repeat]`,
@@ -165,7 +165,7 @@ export const BackgroundGradientAnimation = ({
                         `animate-fifth`,
                         `opacity-100`
                     )}
-                ></div>
+></div>
 
                 {interactive && (
                     <div
@@ -176,7 +176,7 @@ export const BackgroundGradientAnimation = ({
                             `[mix-blend-mode:var(--blending-value)] w-full h-full -top-1/2 -left-1/2`,
                             `opacity-70`
                         )}
-                    ></div>
+></div>
                 )}
             </div>
         </div>

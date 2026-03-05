@@ -28,7 +28,7 @@ export default function NewsDetailPage() {
     return (
         <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
             {/* GNB (Header) */}
-            <nav className={`fixed w-full z-50 bg-[#000000] py-4 px-6 md:px-10 transition-colors duration-300 ${scrolled ? 'border-b border-white/20' : 'border-b border-transparent'}`}>
+            <nav className={`fixed w-full z-50 bg-black/[0.85] backdrop-blur-sm py-4 px-6 md:px-10 transition-colors duration-300 ${scrolled ? 'border-b border-white/20' : 'border-b border-transparent'}`}>
                 <div className="max-w-[1200px] mx-auto flex justify-between items-center">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2 shrink-0">
@@ -46,12 +46,12 @@ export default function NewsDetailPage() {
                     {/* Right: CTA Buttons */}
                     <div className="flex items-center gap-3">
                         <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10 group">
-                            <img src="/ktds_white.png" alt="kt ds" className="h-4 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+                            <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                         </Button>
                         <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard group">
                             AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                         </Button>
-                        <button className="lg:hidden text-white p-2 smooth-gpu" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
+                        <button className="cursor-pointer lg:hidden text-white p-2 smooth-gpu" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
                             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
                     </div>
@@ -64,17 +64,17 @@ export default function NewsDetailPage() {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            className="lg:hidden absolute top-full left-0 right-0 bg-[#000000] py-4 px-6 overflow-hidden border-b border-white/10"
+                            className="lg:hidden absolute top-full left-0 right-0 bg-[#000000] py-4 px-6 md:px-10 overflow-hidden border-b border-white/10"
                         >
                             <div className="flex flex-col gap-4">
                                 <Link to="/platform" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>멀티 에이전트 플랫폼</Link>
                                 <Link to="/use-cases" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>고객 사례</Link>
                                 <Link to="/news" className="text-white font-semibold py-1" onClick={() => setIsMenuOpen(false)}>새로운 소식</Link>
                                 <div className="pt-2 mt-2 border-t border-white/10 flex flex-col gap-2">
-                                    <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group">
-                                        <img src="/ktds_white.png" alt="kt ds" className="h-4 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+                                    <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group hover:bg-transparent px-0 py-1 h-auto text-[16px]">
+                                        <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                                     </Button>
-                                    <Button size="sm" className="bg-white text-black hover:bg-white/90 w-full justify-center font-semibold group">
+                                    <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start font-medium group px-0 py-1 h-auto text-[16px]">
                                         AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                                     </Button>
                                 </div>
@@ -85,7 +85,7 @@ export default function NewsDetailPage() {
             </nav>
 
             {/* 1. News Detail Header (Article Title Info) */}
-            < section className="pt-48 pb-16 px-6" >
+            <section className="pt-48 pb-16 px-6 md:px-10">
                 <div className="max-w-[900px] mx-auto text-center flex flex-col items-center">
                     {/* Category & Date */}
                     <div className="flex items-center gap-3 mb-6 text-white/50 text-[15px] font-medium tracking-wide">
@@ -99,10 +99,10 @@ export default function NewsDetailPage() {
                         {news.title}
                     </h1>
                 </div>
-            </section >
+            </section>
 
             {/* 2. Hero Image */}
-            < div className="w-full px-0 sm:px-6 mb-20 max-w-[1400px] mx-auto" >
+            <div className="w-full px-6 md:px-10 mb-20 max-w-[1400px] mx-auto">
                 <div className="w-full aspect-[21/9] sm:aspect-[24/9] md:aspect-[2.5/1] overflow-hidden sm:rounded-[32px] bg-zinc-900 border border-white/5">
                     <img
                         src={news.image}
@@ -110,10 +110,10 @@ export default function NewsDetailPage() {
                         className="w-full h-full object-cover"
                     />
                 </div>
-            </div >
+            </div>
 
             {/* 3. Main Article Content */}
-            < main className="max-w-[800px] mx-auto px-6 pb-32 flex-1" >
+            <main className="max-w-[800px] mx-auto px-6 md:px-10 pb-32 flex-1">
                 <article className="prose prose-invert prose-lg max-w-none prose-p:text-white/80 prose-p:leading-[1.8] prose-p:font-medium text-[17px] md:text-[19px]">
                     <p className="mb-8">
                         Biz.AI는 기업의 AI 에이전트 도입을 돕기 위해 진행된 첫 번째 대규모 밋업 행사를 서울 코엑스에서 성공적으로 개최했다고 밝혔다. 이번 행사는 금융, 제조, 공공 등 다양한 산업군의 디지털 전환(DX) 담당자 및 개발자 약 500여 명이 참석한 가운데 뜨거운 관심 속에 진행되었다.
@@ -137,17 +137,17 @@ export default function NewsDetailPage() {
                         Biz.AI는 이번 밋업을 시작으로 매 분기 정기적인 기술 세미나와 파트너스 데이를 개최하여, 국내 멀티 에이전트 생태계 확장에 적극적으로 나설 계획이다.
                     </p>
                 </article>
-            </main >
+            </main>
 
             {/* Footer */}
-            < footer className="bg-[#000000] py-24 px-6 border-t border-white/5" >
+            <footer className="bg-[#000000] py-24 px-6 border-t border-white/5">
                 <div className="max-w-[1200px] mx-auto text-center">
                     <p className="text-white/40 text-[14px] font-medium leading-relaxed">
                         © 2026 kt ds. All rights reserved. <br />
                         본 페이지는 Biz.AI 시스템 데모를 위해 구성되었습니다.
                     </p>
                 </div>
-            </footer >
-        </div >
+            </footer>
+        </div>
     );
 }

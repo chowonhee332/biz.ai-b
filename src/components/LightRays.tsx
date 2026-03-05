@@ -207,7 +207,7 @@ float rayStrength(vec2 raySource, vec2 rayRefDirection, vec2 coord,
   float lengthFalloff = clamp((maxDistance - distance) / maxDistance, 0.0, 1.0);
   
   float fadeFalloff = clamp((iResolution.x * fadeDistance - distance) / (iResolution.x * fadeDistance), 0.5, 1.0);
-  float pulse = pulsating > 0.5 ? (0.8 + 0.2 * sin(iTime * speed * 3.0)) : 1.0;
+  float pulse = pulsating> 0.5 ? (0.8 + 0.2 * sin(iTime * speed * 3.0)) : 1.0;
 
   float baseStrength = clamp(
     (0.45 + 0.15 * sin(distortedAngle * seedA + iTime * speed)) +
@@ -222,7 +222,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
   vec2 coord = vec2(fragCoord.x, iResolution.y - fragCoord.y);
   
   vec2 finalRayDir = rayDir;
-  if (mouseInfluence > 0.0) {
+  if (mouseInfluence> 0.0) {
     vec2 mouseScreenPos = mousePos * iResolution.xy;
     vec2 mouseDirection = normalize(mouseScreenPos - rayPos);
     finalRayDir = normalize(mix(rayDir, mouseDirection, mouseInfluence));
@@ -237,7 +237,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
   fragColor = rays1 * 0.8 + rays2 * 0.6;
 
-  if (noiseAmount > 0.0) {
+  if (noiseAmount> 0.0) {
     float n = noise(coord * 0.01 + iTime * 0.1);
     fragColor.rgb *= (1.0 - noiseAmount + noiseAmount * n);
   }
@@ -312,7 +312,7 @@ void main() {
 
                 uniforms.iTime.value = t * 0.001;
 
-                if (followMouse && mouseInfluence > 0.0) {
+                if (followMouse && mouseInfluence> 0.0) {
                     const smoothing = 0.92;
 
                     smoothMouseRef.current.x = smoothMouseRef.current.x * smoothing + mouseRef.current.x * (1 - smoothing);
