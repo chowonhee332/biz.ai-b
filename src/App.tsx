@@ -163,7 +163,7 @@ const CharacterReveal = ({ text, className, scrollProgress, range, highlightInde
   );
 };
 
-const InteractiveMockup = ({ image, frameImage, initialMouseX = -0.75, cursorColor = "#0066FF" }: { image: string; frameImage: string; initialMouseX?: number; cursorColor?: string }) => {
+const InteractiveMockup = ({ image, frameImage, initialMouseX = -0.75, cursorColor = "#0066FF", cursorName = "Biz.AI" }: { image: string; frameImage: string; initialMouseX?: number; cursorColor?: string; cursorName?: string }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(initialMouseX);
   const mouseY = useMotionValue(0.3);
@@ -246,7 +246,7 @@ const InteractiveMockup = ({ image, frameImage, initialMouseX = -0.75, cursorCol
             className="ml-6 -mt-1 px-3 py-1 text-white text-[12px] font-bold rounded-lg shadow-lg border border-white/20 whitespace-nowrap"
             style={{ backgroundColor: cursorColor }}
           >
-            Biz.AI
+            {cursorName}
           </div>
         </motion.div>
       </div>
@@ -254,7 +254,7 @@ const InteractiveMockup = ({ image, frameImage, initialMouseX = -0.75, cursorCol
   );
 };
 
-const UseCaseVisual = ({ image, frameImage, initialMouseX, cursorColor, index, setActive, isActive }: { image: string; frameImage: string; initialMouseX: number; cursorColor: string; index: number; setActive: (idx: number) => void; isActive: boolean }) => {
+const UseCaseVisual = ({ image, frameImage, initialMouseX, cursorColor, cursorName, index, setActive, isActive }: { image: string; frameImage: string; initialMouseX: number; cursorColor: string; cursorName: string; index: number; setActive: (idx: number) => void; isActive: boolean }) => {
   const ref = useRef(null);
   // The isInView logic is now handled by the parent component's scroll progress
   // and activeUseCase state. This component will just render based on isActive prop.
@@ -279,7 +279,7 @@ const UseCaseVisual = ({ image, frameImage, initialMouseX, cursorColor, index, s
       // }}
       className="w-full h-full smooth-gpu"
     >
-      <InteractiveMockup image={image} frameImage={frameImage} initialMouseX={initialMouseX} cursorColor={cursorColor} />
+      <InteractiveMockup image={image} frameImage={frameImage} initialMouseX={initialMouseX} cursorColor={cursorColor} cursorName={cursorName} />
     </motion.div>
   );
 };
@@ -733,7 +733,8 @@ const App = () => {
         "그룹웨어 위젯 및 메뉴 커스텀을 통해 개인 맞춤 컨텐츠 제공"
       ],
       icon: <Utensils className="w-8 h-8" />,
-      image: "/works.png"
+      image: "/works.png",
+      cursorName: "WorksAI"
     },
     {
       id: "audit-agent",
@@ -749,7 +750,8 @@ const App = () => {
         "감사 보고서 자동 초안 작성 및 리스크 등급 분류"
       ],
       icon: <Search className="w-8 h-8" />,
-      image: "/works.png"
+      image: "/works.png",
+      cursorName: "Audit"
     },
     {
       id: "meeting-agent",
@@ -765,7 +767,8 @@ const App = () => {
         "참석자 대상 회의록 자동 메일/메신저 발송 연동"
       ],
       icon: <Monitor className="w-8 h-8" />,
-      image: "/works.png"
+      image: "/works.png",
+      cursorName: "지능형 회의록"
     }
   ];
 
@@ -1296,6 +1299,7 @@ const App = () => {
                               frameImage={index === 0 ? "/test-1.png" : index === 1 ? "/test-2.png" : "/test-3.png"}
                               initialMouseX={index === 0 ? 0.75 : -0.75}
                               cursorColor={item.themeColor === 'sky' ? '#0EA5E9' : item.themeColor === 'emerald' ? '#10B981' : '#0066FF'}
+                              cursorName={item.cursorName}
                               index={index}
                               setActive={() => { }}
                               isActive={isActive}
@@ -1308,14 +1312,6 @@ const App = () => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="w-full relative z-20 flex justify-center pb-24 pt-8">
-            <Link to="/use-cases">
-              <button className="w-[120px] h-[48px] text-[16px] font-medium border border-white/20 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent">
-                <span>전체보기</span>
-                <ChevronRight size={16} className="max-w-0 opacity-0 group-hover:max-w-[18px] group-hover:opacity-100 group-hover:ml-[2px] transition-all duration-300 overflow-hidden" />
-              </button>
-            </Link>
           </div>
         </section>
 
