@@ -592,7 +592,7 @@ const StudioSection = () => {
             {
               title: "Agent 개발",
               desc: "AI Agent 개발을 위한 통합 개발 환경과 도구를 제공합니다.",
-              icon: <Monitor className="text-white" fill="currentColor" strokeWidth={0} size={24} />
+              icon: <Code className="text-white" strokeWidth={2.5} size={24} />
             },
             {
               title: "Core Agent",
