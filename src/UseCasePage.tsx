@@ -23,7 +23,7 @@ export default function UseCasePage() {
     return (
         <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
             {/* GNB */}
-            <nav className={`fixed w-full z-50 bg-black/90 backdrop-blur-sm py-4 px-6 md:px-10 transition-colors duration-300 ${scrolled ? 'border-b border-white/20' : 'border-b border-transparent'}`}>
+            <nav className={`fixed w-full z-50 bg-black/[0.85] backdrop-blur-sm py-4 px-6 md:px-10 transition-colors duration-300 ${scrolled ? 'border-b border-white/20' : 'border-b border-transparent'}`}>
                 <div className="max-w-[1200px] mx-auto flex justify-between items-center">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2 shrink-0">
@@ -98,7 +98,7 @@ export default function UseCasePage() {
 
                 {/* Case Grid Section */}
                 {/* Category Filter - Sticky 영역 (풀 너비 라인) */}
-                <div className="sticky top-[64px] bg-black/90 backdrop-blur-sm z-40 border-b border-white/20 mb-16">
+                <div className="sticky top-[64px] bg-black/[0.85] backdrop-blur-sm z-40 border-b border-white/20 mb-16">
                     <div className="max-w-[1200px] mx-auto flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap px-6 md:px-0">
                         {
                             ["All", "데이터 분석", "보고 / 의사결정 향상", "리스크 관리 효율화", "강력한 보안", "내부 업무 처리 향상"].map((category) => (

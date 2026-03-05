@@ -45,7 +45,7 @@ export default function NewsPage() {
     return (
         <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
             {/* 1. GNB 영역 (App.tsx와 동일하게 구성하지만 링크는 '/' 및 기타 영역 유지) */}
-            <nav className={`fixed w-full z-50 bg-black/90 backdrop-blur-sm py-4 px-6 md:px-10 transition-colors duration-300 ${scrolled ? 'border-b border-white/20' : 'border-b border-transparent'}`}>
+            <nav className={`fixed w-full z-50 bg-black/[0.85] backdrop-blur-sm py-4 px-6 md:px-10 transition-colors duration-300 ${scrolled ? 'border-b border-white/20' : 'border-b border-transparent'}`}>
                 <div className="max-w-[1200px] mx-auto flex justify-between items-center">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2 shrink-0">
@@ -175,7 +175,7 @@ export default function NewsPage() {
                 </div >
 
                 {/* 카테고리 탭 - Sticky 적용 (풀 너비 라인) */}
-                <div className="sticky top-[64px] bg-black/90 backdrop-blur-sm z-40 border-b border-white/20 mb-12">
+                <div className="sticky top-[64px] bg-black/[0.85] backdrop-blur-sm z-40 border-b border-white/20 mb-12">
                     <div className="max-w-[1200px] mx-auto flex items-center gap-8 h-[66px] px-6 md:px-0">
                         {["All", "News", "Tech Stories", "Documentation"].map((category) => (
                             <button
