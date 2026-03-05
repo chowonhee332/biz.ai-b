@@ -1169,7 +1169,7 @@ const App = () => {
                             >
                               <motion.p
                                 style={{ opacity: numOpacity }}
-                                className="text-white text-[18px] lg:text-[24px] font-medium tracking-tight mb-6 font-pretendard"
+                                className="text-white text-[18px] lg:text-[20px] font-medium tracking-tight mb-6 font-pretendard"
                               >
                                 {String(index + 1).padStart(2, '0')}. Painpoint
                               </motion.p>
