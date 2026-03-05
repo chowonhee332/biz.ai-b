@@ -1135,7 +1135,7 @@ const App = () => {
                 <div className="w-full flex flex-col lg:flex-row items-center relative gap-8 lg:gap-0 h-full">
                   <div className="w-full lg:w-[42%] flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16 self-start pt-[60px] h-full relative">
                     {/* 단일 슬롯: 모든 Use Case가 동일한 자리에서 교체됨 */}
-                    <div className="relative" style={{ height: '50vh' }}>
+                    <div className="relative h-full">
                       {useCaseItems.map((item, index) => {
                         // 각 아이템별 범위 정의 - 솔루션 체류 시간을 늘리기 위해 dRange를 앞당김
                         const qRange: [number, number] = index === 0 ? [0.0, 0.12] : index === 1 ? [0.33, 0.45] : [0.66, 0.78];
@@ -1233,7 +1233,7 @@ const App = () => {
                             {/* 버튼 영역: 텍스트 영역과 별도로 하단 고정 배치 */}
                             <motion.div
                               style={{ opacity: dOpacity }}
-                              className="absolute bottom-[200px] left-0 pointer-events-auto"
+                              className="absolute bottom-[10vh] left-0 pointer-events-auto"
                             >
                               <button
                                 className="w-[124px] h-[48px] text-[16px] font-medium border border-white/20 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent"
