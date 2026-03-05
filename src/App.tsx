@@ -1142,7 +1142,7 @@ const App = () => {
                       {useCaseItems.map((item, index) => {
                         // 각 아이템별 범위 정의 - 솔루션 체류 시간을 늘리기 위해 dRange를 앞당김
                         const qRange: [number, number] = index === 0 ? [0.0, 0.12] : index === 1 ? [0.33, 0.45] : [0.66, 0.78];
-                        const dRange: [number, number] = [qRange[1] + 0.02, qRange[1] + 0.06];
+                        const dRange: [number, number] = [qRange[1] + 0.08, qRange[1] + 0.12];
                         const nextStart = index < 2 ? (index === 0 ? 0.33 : 0.66) : 1.0;
                         const exitRange: [number, number] = [nextStart - 0.08, nextStart - 0.02];
                         const isActive = activeUseCase === index;
@@ -1155,8 +1155,8 @@ const App = () => {
                         const numFillEnd = qRange[0] + qSpan * 0.3;
                         const textRange: [number, number] = [numFillEnd, qRange[1]];
 
-                        // Q: 등장 → D가 시작되면 사라짐
-                        const qOpacity = useTransform(sectionProgress, [qRange[0] - 0.01, qRange[0], dRange[1], dRange[1] + 0.02], [0, 1, 1, 0]);
+                        // Q: 등장 → D가 시작되면 사라짐 (Cross-fade 적용하여 겹침 방지)
+                        const qOpacity = useTransform(sectionProgress, [qRange[0] - 0.01, qRange[0], dRange[0], dRange[1]], [0, 1, 1, 0]);
                         // D: Q가 사라지면서 등장 → 다음 Q 시작 전에 사라짐
                         const dOpacity = useTransform(sectionProgress, [dRange[0], dRange[1], nextStart - 0.03, nextStart], [0, 1, 1, 0]);
                         const dY = useTransform(sectionProgress, dRange, [20, 0]);
@@ -1265,12 +1265,12 @@ const App = () => {
                         const isActive = activeUseCase === index;
                         // 텍스트 레이어와 동기화된 범위 계산
                         const qRange: [number, number] = index === 0 ? [0.0, 0.12] : index === 1 ? [0.33, 0.45] : [0.66, 0.78];
-                        const dRange: [number, number] = [qRange[1] + 0.02, qRange[1] + 0.06];
+                        const dRange: [number, number] = [qRange[1] + 0.08, qRange[1] + 0.12];
                         const nextStart = index < 2 ? (index === 0 ? 0.33 : 0.66) : 1.0;
                         const exitRange: [number, number] = [nextStart - 0.08, nextStart - 0.02];
 
-                        // 1단계 (진입): 텍스트(Painpoint)가 먼저 나오고, 이후 지연되어 우측에서 중앙으로 등장 (지연 타이밍 적용)
-                        const entryStart = qRange[1] - 0.02;
+                        // 1단계 (진입): 텍스트(Painpoint)가 먼저 나오고, 읽을 시간을 가진 뒤 등장 (지연 타이밍 적용)
+                        const entryStart = dRange[0] - 0.04;
                         const entryEnd = dRange[1];
                         const x = useTransform(sectionProgress, [entryStart, entryEnd], [400, 0]);
 
