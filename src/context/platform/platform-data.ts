@@ -31,7 +31,7 @@ export const PLATFORM_PAGE_CONFIG = {
     ],
     products: {
         "AI Portal": {
-            title: "사내 지식 기반의 스마트 워크스페이스 'AI Portal (WorksAI)'",
+            title: "지식 기반의 스마트 워크스페이스 'AI Portal (WorksAI)'",
             description: [
                 "사내 흩어져 있는 문서를 지능적으로 학습하여 가장 직접적인 답변을 제공하는 기업 전용 포털입니다.",
                 "임직원들이 필요한 정보를 찾는 시간을 혁신적으로 단축하며, 보안이 검증된 환경을 제공합니다.",

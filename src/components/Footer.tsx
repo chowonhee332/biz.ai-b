@@ -1,59 +1,56 @@
-import { Linkedin, Youtube, Mail } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
+// 모든 페이지에서 공통으로 사용하는 푸터 컴포넌트
 export default function Footer() {
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <footer className="bg-[var(--color-on-surface)] text-[var(--color-surface-variant)] py-20 px-6 border-t border-[var(--color-outline)]/10">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-5 gap-12 mb-20">
-          <div className="col-span-2">
-            <div className="flex items-center gap-2 mb-8"><span className="text-3xl font-black text-[var(--color-surface)] tracking-tighter uppercase">kt ds</span></div>
-            <p className="text-sm leading-relaxed mb-8 max-w-xs">비즈니스를 위한 엔터프라이즈급 AI Agent 플랫폼<br />Biz.AI와 함께 데이터 혁신을 시작하세요.</p>
-            <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-[var(--color-surface)]/10 flex items-center justify-center hover:bg-[var(--color-surface)]/20 transition-colors"><Linkedin size={18} /></a>
-              <a href="#" className="w-10 h-10 rounded-full bg-[var(--color-surface)]/10 flex items-center justify-center hover:bg-[var(--color-surface)]/20 transition-colors"><Youtube size={18} /></a>
-              <a href="#" className="w-10 h-10 rounded-full bg-[var(--color-surface)]/10 flex items-center justify-center hover:bg-[var(--color-surface)]/20 transition-colors"><Mail size={18} /></a>
-            </div>
-          </div>
-          <div>
-            <h5 className="text-[var(--color-surface)] font-bold mb-8 uppercase text-xs tracking-widest">AI 솔루션</h5>
-            <ul className="space-y-4 text-sm font-medium">
-              <li><a href="#" className="hover:text-[var(--color-surface)] transition-colors">고객지원·VOC 자동화</a></li>
-              <li><a href="#" className="hover:text-[var(--color-surface)] transition-colors">데이터 기반 의사결정</a></li>
-              <li><a href="#" className="hover:text-[var(--color-surface)] transition-colors">내부 운영·업무 자동화</a></li>
-              <li><a href="#" className="hover:text-[var(--color-surface)] transition-colors">기획·보고·문서 업무</a></li>
-              <li><a href="#" className="hover:text-[var(--color-surface)] transition-colors">리스크·품질 관리</a></li>
-            </ul>
-          </div>
-          <div>
-            <h5 className="text-[var(--color-surface)] font-bold mb-8 uppercase text-xs tracking-widest">제품</h5>
-            <ul className="space-y-4 text-sm font-medium">
-              <li><a href="#" className="hover:text-[var(--color-surface)] transition-colors">데이터 Agent</a></li>
-              <li><a href="#" className="hover:text-[var(--color-surface)] transition-colors">분류·분석 Agent</a></li>
-              <li><a href="#" className="hover:text-[var(--color-surface)] transition-colors">리포트·문서 Agent</a></li>
-              <li><a href="#" className="hover:text-[var(--color-surface)] transition-colors">운영·지원 Agent</a></li>
-              <li><a href="#" className="hover:text-[var(--color-surface)] transition-colors">AI Agent 스튜디오</a></li>
-            </ul>
-          </div>
-          <div>
-            <h5 className="text-[var(--color-surface)] font-bold mb-8 uppercase text-xs tracking-widest">회사</h5>
-            <ul className="space-y-4 text-sm font-medium">
-              <li><a href="#" className="hover:text-[var(--color-surface)] transition-colors">우수 사례</a></li>
-              <li><a href="#" className="hover:text-[var(--color-surface)] transition-colors">가격 안내</a></li>
-              <li><a href="#" className="hover:text-[var(--color-surface)] transition-colors">문서</a></li>
-              <li><a href="#" className="hover:text-[var(--color-surface)] transition-colors">고객 지원</a></li>
-              <li><a href="#" className="hover:text-[var(--color-surface)] transition-colors">파트너십</a></li>
-            </ul>
-          </div>
+    <footer className="bg-[#000000] border-t border-white/10 py-10 px-6 md:px-10 relative">
+      <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+        {/* 좌측: 로고 + 주소 */}
+        <div className="flex flex-col gap-3">
+          <span className="text-[22px] font-black text-white tracking-tight">kt ds</span>
+          <p className="text-white/40 text-[13px] font-medium">
+            (06707) 서울 서초구 효령로 176, 02-523-7029
+          </p>
         </div>
-        <div className="pt-8 border-t border-[var(--color-surface)]/10 flex flex-col md:flex-row justify-between items-center gap-6 text-[11px] font-bold uppercase tracking-wider">
-          <p>© 2026 AI Biz Portal. All rights reserved.</p>
-          <div className="flex gap-8">
-            <a href="#" className="hover:text-[var(--color-surface)] transition-colors">개인정보처리방침</a>
-            <a href="#" className="hover:text-[var(--color-surface)] transition-colors">이용약관</a>
-            <a href="#" className="hover:text-[var(--color-surface)] transition-colors">보안정책</a>
+
+        {/* 우측: 링크 + 카피라이트 */}
+        <div className="flex flex-col items-start md:items-end gap-3">
+          <div className="flex items-center gap-6 text-white/50 text-[13px] font-medium">
+            <a href="#" className="hover:text-white transition-colors">사이트맵</a>
+            <a href="#" className="hover:text-white transition-colors">공지사항</a>
+            <a href="#" className="hover:text-white transition-colors">개인정보처리방침</a>
+            <a href="#" className="hover:text-white transition-colors">이용약관</a>
           </div>
+          <p className="text-white/30 text-[12px]">© 2026 AI Biz Portal. All rights reserved.</p>
         </div>
       </div>
+
+      {/* 상단으로 스크롤 버튼 */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 cursor-pointer z-50"
+          aria-label="맨 위로"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 15l-6-6-6 6" />
+          </svg>
+        </button>
+      )}
     </footer>
   );
 }

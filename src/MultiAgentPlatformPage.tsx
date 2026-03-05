@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ExternalLink, ChevronRight, PlayCircle, Download, Linkedin, Youtube } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { PLATFORM_PAGE_CONFIG } from '@/context/platform-data';
+import { PLATFORM_PAGE_CONFIG } from '@/context/platform/platform-data';
+import Footer from '@/components/Footer';
 
 export default function MultiAgentPlatformPage() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,9 +41,11 @@ export default function MultiAgentPlatformPage() {
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10 group">
-                            <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
-                        </Button>
+                        <a href="https://www.ktds.com/" target="_blank" rel="noopener noreferrer">
+                            <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10 group">
+                                <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+                            </Button>
+                        </a>
                         <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard group">
                             AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                         </Button>
@@ -65,9 +68,11 @@ export default function MultiAgentPlatformPage() {
                                 <Link to="/use-cases" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>고객 사례</Link>
                                 <Link to="/news" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>새로운 소식</Link>
                                 <div className="pt-2 mt-2 border-t border-white/20 flex flex-col gap-2">
-                                    <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group hover:bg-transparent px-0 py-1 h-auto text-[16px]">
-                                        <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
-                                    </Button>
+                                    <a href="https://www.ktds.com/" target="_blank" rel="noopener noreferrer" className="w-full">
+                                        <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group hover:bg-transparent px-0 py-1 h-auto text-[16px] w-full">
+                                            <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+                                        </Button>
+                                    </a>
                                     <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start font-medium group px-0 py-1 h-auto text-[16px]">
                                         AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                                     </Button>
@@ -217,39 +222,9 @@ export default function MultiAgentPlatformPage() {
                 </div>
             </section>
 
-            <footer className="bg-[#000000] border-t border-white/20 py-12 px-6">
-                <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
-                    <div className="flex flex-col gap-6">
-                        <Link to="/" className="flex items-center gap-2">
-                            <img src="/bizai_logo.png" alt="Biz.AI Logo" className="h-6 w-auto" />
-                            <span className="text-xl font-bold text-white tracking-tight">Biz.AI</span>
-                        </Link>
-                        <p className="text-white/40 text-sm max-w-sm leading-relaxed font-pretendard">
-                            kt ds의 Biz.AI는 기업 환경에 최적화된 안전하고 효율적인 AI 에이전트 구축 플랫폼을 제공합니다.
-                        </p>
-                        <div className="flex gap-4">
-                            <a href="#" className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 transition-all group border border-white/5"><Linkedin className="w-5 h-5 text-white/40 group-hover:text-white" /></a>
-                            <a href="#" className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 transition-all group border border-white/5"><Youtube className="w-5 h-5 text-white/40 group-hover:text-white" /></a>
-                        </div>
-                    </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-12">
-                        <div className="flex flex-col gap-4">
-                            <h4 className="text-white font-bold text-[14px] font-pretendard uppercase tracking-wider mb-2">Platform</h4>
-                            <Link to="/platform" className="text-white/40 hover:text-white text-[13px] transition-colors font-pretendard">멀티 에이전트 플랫폼</Link>
-                            <Link to="/news" className="text-white/40 hover:text-white text-[13px] transition-colors font-pretendard">새로운 소식</Link>
-                        </div>
-                        <div className="flex flex-col gap-4">
-                            <h4 className="text-white font-bold text-[14px] font-pretendard uppercase tracking-wider mb-2">Company</h4>
-                            <a href="#" className="text-white/40 hover:text-white text-[13px] transition-colors font-pretendard">제품 소개서</a>
-                            <Link to="/use-cases" className="text-white/40 hover:text-white text-[13px] transition-colors font-pretendard">고객 사례</Link>
-                        </div>
-                        <div className="flex flex-col gap-4">
-                            <h4 className="text-white font-bold text-[14px] font-pretendard uppercase tracking-wider mb-2">Legal</h4>
-                            <a href="#" className="text-white/40 hover:text-white text-[13px] transition-colors font-pretendard">개인정보처리방침</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            {/* Footer */}
+            <Footer />
         </div>
     );
 }
+

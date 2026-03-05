@@ -5,6 +5,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Linkedin, Youtube } from 'lucide-react';
 
+import { USE_CASES, USE_CASE_CATEGORIES } from '@/context/use-cases/use-case-data';
+import Footer from '@/components/Footer';
+
 export default function UseCasePage() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeCategory, setActiveCategory] = useState("All");
@@ -39,9 +42,11 @@ export default function UseCasePage() {
 
                     {/* Right: CTA Buttons */}
                     <div className="flex items-center gap-3">
-                        <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10 group">
-                            <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
-                        </Button>
+                        <a href="https://www.ktds.com/" target="_blank" rel="noopener noreferrer">
+                            <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10 group">
+                                <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+                            </Button>
+                        </a>
                         <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard group">
                             AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                         </Button>
@@ -65,9 +70,11 @@ export default function UseCasePage() {
                                 <Link to="/use-cases" className="text-white font-bold py-1" onClick={() => setIsMenuOpen(false)}>고객 사례</Link>
                                 <Link to="/news" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>새로운 소식</Link>
                                 <div className="pt-2 mt-2 border-t border-white/20 flex flex-col gap-2">
-                                    <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group hover:bg-transparent px-0 py-1 h-auto text-[16px]">
-                                        <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
-                                    </Button>
+                                    <a href="https://www.ktds.com/" target="_blank" rel="noopener noreferrer" className="w-full">
+                                        <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group hover:bg-transparent px-0 py-1 h-auto text-[16px] w-full">
+                                            <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+                                        </Button>
+                                    </a>
                                     <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start font-medium group px-0 py-1 h-auto text-[16px]">
                                         AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                                     </Button>
@@ -96,28 +103,28 @@ export default function UseCasePage() {
                     </motion.div>
                 </div>
 
-                {/* Case Grid Section */}
-                {/* Category Filter - Sticky 영역 (풀 너비 라인) */}
-                <div className="sticky top-[72px] lg:top-[64px] bg-black/[0.85] backdrop-blur-sm z-40 border-b border-white/20 mb-16">
+                {/* 카테고리 탭 - Sticky 적용 (풀 너비 라인) */}
+                <div className="sticky top-[72px] lg:top-[64px] bg-black/[0.85] backdrop-blur-sm z-40 border-b border-white/20 mb-12">
                     <div className="max-w-[1200px] mx-auto flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap">
-                        {
-                            ["All", "데이터 분석", "보고 / 의사결정 향상", "리스크 관리 효율화", "강력한 보안", "내부 업무 처리 향상"].map((category) => (
-                                <button
-                                    key={category}
-                                    onClick={() => setActiveCategory(category)}
-                                    className={`relative h-full text-[16px] font-medium transition-colors shrink-0 flex items-center px-1 cursor-pointer ${activeCategory === category ? "text-blue-500" : "text-white/60 hover:text-white"}`}
-                                >
-                                    {category}
-                                    {activeCategory === category && (
-                                        <motion.div
-                                            layoutId="activeCategory"
-                                            className="absolute bottom-0 left-0 right-0 h-[2px] bg-blue-500"
-                                            transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                                        />
-                                    )}
-                                </button>
-                            ))
-                        }
+                        {USE_CASE_CATEGORIES.map((category) => (
+                            <button
+                                key={category}
+                                onClick={() => setActiveCategory(category)}
+                                className={`relative h-full text-[16px] font-medium transition-colors flex items-center px-1 cursor-pointer ${activeCategory === category
+                                    ? "text-blue-500"
+                                    : "text-white/60 hover:text-white"
+                                    }`}
+                            >
+                                {category}
+                                {activeCategory === category && (
+                                    <motion.div
+                                        layoutId="activeCategoryUseCase"
+                                        className="absolute bottom-0 left-0 right-0 h-[2px] bg-blue-500"
+                                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                    />
+                                )}
+                            </button>
+                        ))}
                     </div>
                 </div>
 
@@ -126,80 +133,7 @@ export default function UseCasePage() {
                     {/* Card Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                         {
-                            [
-                                {
-                                    title: "공공·기업용 AI Gateway 구축",
-                                    industry: "공공/기업",
-                                    tag: "Beast AI Gateway",
-                                    category: "강력한 보안",
-                                    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800",
-                                    date: "Feb 2026",
-                                    desc: "전사 AI 활용을 단일 게이트웨이로 통합하고, AI 사용 비용 30~50% 절감 및 민감정보 유출 위험을 제로 수준으로 감소시켰습니다."
-                                },
-                                {
-                                    title: "국정감사 AI Agent 구축",
-                                    industry: "공공",
-                                    tag: "감사 대응 Agent",
-                                    category: "내부 업무 처리 향상",
-                                    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=800",
-                                    date: "Jan 2026",
-                                    desc: "답변서 생성 시간 80% 단축, 문서 탐색 시간 90% 단축으로 국정감사 대응의 속도·정확도·품질을 혁신했습니다."
-                                },
-                                {
-                                    title: "공공기관 데이터 분석 챗봇 구축",
-                                    industry: "공공기관",
-                                    tag: "AI:ON-U",
-                                    category: "데이터 분석",
-                                    image: "https://images.unsplash.com/photo-1504868584819-f8e8b496d74b?auto=format&fit=crop&q=80&w=800",
-                                    date: "Jan 2026",
-                                    desc: "자연어 기반 데이터 분석 플랫폼으로 민원 처리 시간 80% 단축, 보고서 작성 시간을 3일에서 30분으로 혁신했습니다."
-                                },
-                                {
-                                    title: "AI 회의록 구축 사례",
-                                    industry: "기업",
-                                    tag: "AI 회의록",
-                                    category: "내부 업무 처리 향상",
-                                    image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80&w=800",
-                                    date: "Dec 2025",
-                                    desc: "화자 분리와 겹침 발화 처리로 회의록 작성 시간 85% 단축, 온프레미스 보안으로 회의 생산성의 기준을 바꿨습니다."
-                                },
-                                {
-                                    title: "Works AI 도입 사례",
-                                    industry: "기업",
-                                    tag: "Works AI",
-                                    category: "보고 / 의사결정 향상",
-                                    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
-                                    date: "Nov 2025",
-                                    desc: "사내 AI Agent Portal로 업무 처리 클릭 수 대폭 감소, CSAT 40% 향상, 전사 업무 혁신을 실현했습니다."
-                                },
-                                {
-                                    title: "Cloud TR 엔지니어링 솔루션 적용 사례",
-                                    industry: "통신·ICT",
-                                    tag: "Codebox",
-                                    category: "데이터 분석",
-                                    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
-                                    date: "Oct 2025",
-                                    desc: "대규모 레거시 전환 공수 48% 절감, 전환율 100% 달성으로 Cloud 전환 경쟁력을 강화했습니다."
-                                },
-                                {
-                                    title: "CloudWiz 멀티클라우드 운영혁신 사례",
-                                    industry: "제조",
-                                    tag: "Cloudwiz",
-                                    category: "강력한 보안",
-                                    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800",
-                                    date: "Sep 2025",
-                                    desc: "멀티클라우드 비용 30% 절감, 운영 생산성 2배 향상으로 비용·보안·운영 자동화를 실현했습니다."
-                                },
-                                {
-                                    title: "AI:ON-U 지능형 검색 챗봇 구축",
-                                    industry: "금융",
-                                    tag: "AI:ON-U",
-                                    category: "데이터 분석",
-                                    image: "https://images.unsplash.com/photo-1551288049-bbda38a10ad1?auto=format&fit=crop&q=80&w=800",
-                                    date: "Aug 2025",
-                                    desc: "상담 응답 시간 80% 단축, 리포트 리드타임 수일에서 30분으로 혁신한 금융 지능형 검색 플랫폼입니다."
-                                }
-                            ].filter(item => activeCategory === "All" || item.category === activeCategory).map((item, i) => (
+                            USE_CASES.filter(item => activeCategory === "All" || item.category === activeCategory).map((item, i) => (
                                 <motion.div
                                     key={i}
                                     onClick={() => navigate(`/use-cases/${i + 1}`, { state: { news: item } })}
@@ -237,59 +171,8 @@ export default function UseCasePage() {
             </section>
 
             {/* Footer */}
-            <footer className="bg-[#000000] py-32 border-t border-white/20">
-                <div className="max-w-[1200px] mx-auto">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 mb-24 px-6 md:px-0">
-                        <div className="flex flex-col">
-                            <div className="mb-8">
-                                <h4 className="text-[22px] font-bold text-white tracking-tight">kt ds</h4>
-                            </div>
-                            <p className="text-white/80 text-[16px] leading-relaxed mb-10 break-keep font-medium">
-                                비즈니스를 위한 엔터프라이즈급<br />
-                                AI Agent 플랫폼
-                            </p>
-                            <div className="flex gap-4 mt-auto">
-                                <a href="#" className="text-white/40 hover:text-white transition-all"><Linkedin size={22} strokeWidth={1.5} /></a>
-                                <a href="#" className="text-white/40 hover:text-white transition-all"><Youtube size={22} strokeWidth={1.5} /></a>
-                            </div>
-                        </div>
-
-                        <div className="flex flex-col gap-6">
-                            <h4 className="text-white font-bold text-[16px]">Solutions</h4>
-                            <div className="flex flex-col gap-4 text-white/60 text-[15px]">
-                                <a href="#" className="hover:text-white transition-colors">AI Agent Builder</a>
-                                <a href="#" className="hover:text-white transition-colors">Enterprise RAG</a>
-                                <a href="#" className="hover:text-white transition-colors">Multi-Agent System</a>
-                            </div>
-                        </div>
-
-                        <div className="flex flex-col gap-6">
-                            <h4 className="text-white font-bold text-[16px]">Product</h4>
-                            <div className="flex flex-col gap-4 text-white/60 text-[15px]">
-                                <a href="#" className="hover:text-white transition-colors">Features</a>
-                                <a href="#" className="hover:text-white transition-colors">Pricing</a>
-                                <a href="#" className="hover:text-white transition-colors">Case Studies</a>
-                            </div>
-                        </div>
-
-                        <div className="flex flex-col gap-6">
-                            <h4 className="text-white font-bold text-[16px]">Company</h4>
-                            <div className="flex flex-col gap-4 text-white/60 text-[15px]">
-                                <a href="#" className="hover:text-white transition-colors">About</a>
-                                <a href="#" className="hover:text-white transition-colors">Blog</a>
-                                <a href="#" className="hover:text-white transition-colors">Contact</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/10 gap-4 px-6 md:px-0">
-                        <p className="text-white/40 text-[14px]">© 2026 kt ds. All rights reserved.</p>
-                        <div className="flex items-center gap-6 text-white/40 text-[14px]">
-                            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 }
+

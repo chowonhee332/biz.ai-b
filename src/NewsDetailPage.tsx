@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, ExternalLink } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { AnimatePresence, motion } from 'motion/react';
+import Footer from '@/components/Footer';
 
 export default function NewsDetailPage() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navigate = useNavigate();
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
     const news = location.state?.news || {
@@ -45,9 +47,11 @@ export default function NewsDetailPage() {
 
                     {/* Right: CTA Buttons */}
                     <div className="flex items-center gap-3">
-                        <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10 group">
-                            <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
-                        </Button>
+                        <a href="https://www.ktds.com/" target="_blank" rel="noopener noreferrer">
+                            <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10 group">
+                                <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+                            </Button>
+                        </a>
                         <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard group">
                             AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                         </Button>
@@ -71,9 +75,11 @@ export default function NewsDetailPage() {
                                 <Link to="/use-cases" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>고객 사례</Link>
                                 <Link to="/news" className="text-white font-semibold py-1" onClick={() => setIsMenuOpen(false)}>새로운 소식</Link>
                                 <div className="pt-2 mt-2 border-t border-white/10 flex flex-col gap-2">
-                                    <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group hover:bg-transparent px-0 py-1 h-auto text-[16px]">
-                                        <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
-                                    </Button>
+                                    <a href="https://www.ktds.com/" target="_blank" rel="noopener noreferrer" className="w-full">
+                                        <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group hover:bg-transparent px-0 py-1 h-auto text-[16px] w-full">
+                                            <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+                                        </Button>
+                                    </a>
                                     <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start font-medium group px-0 py-1 h-auto text-[16px]">
                                         AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                                     </Button>
@@ -115,39 +121,26 @@ export default function NewsDetailPage() {
             {/* 3. Main Article Content */}
             <main className="max-w-[800px] mx-auto px-6 md:px-10 pb-32 flex-1">
                 <article className="prose prose-invert prose-lg max-w-none prose-p:text-white/80 prose-p:leading-[1.8] prose-p:font-medium text-[17px] md:text-[19px]">
-                    <p className="mb-8">
-                        Biz.AI는 기업의 AI 에이전트 도입을 돕기 위해 진행된 첫 번째 대규모 밋업 행사를 서울 코엑스에서 성공적으로 개최했다고 밝혔다. 이번 행사는 금융, 제조, 공공 등 다양한 산업군의 디지털 전환(DX) 담당자 및 개발자 약 500여 명이 참석한 가운데 뜨거운 관심 속에 진행되었다.
-                    </p>
-                    <p className="mb-8">
-                        이날 기조연설에 나선 Biz.AI 대표이사 조원희는 "지금은 단일 AI 모델의 성능을 넘어, 여러 AI 에이전트가 협력하며 실제 비즈니스 가치를 창출하는 Multi-Agent 시대"라며 "Biz.AI 플랫폼은 복잡한 기업 환경에서도 빠르고 안전하게 에이전트를 구성하고 배포할 수 있는 최적의 솔루션을 제공한다"고 강조했다.
-                    </p>
-                    <h3 className="text-white text-[28px] font-bold mt-16 mb-6">차세대 AI 에이전트 빌더, AI:ON-U 시연</h3>
-                    <p className="mb-8">
-                        행사의 가장 큰 주목을 받은 세션은 하반기 정식 출시되는 'AI:ON-U' 플랫폼의 라이브 시연이었다. 코딩 지식이 없는 현업 실무자도 단 3분 만에 사내 규정 문서와 실시간 데이터에 접근하는 맞춤형 AI 비서를 생성하는 과정이 공개되며 참석자들의 탄성을 자아냈다.
-                    </p>
-                    <p className="mb-8">
-                        특히, 환각(Hallucination) 현상을 최소화하기 위한 자체 RAG(검색 증강 생성) 최적화 기술과, 기업의 민감 데이터를 완벽히 보호하는 온프레미스/프라이빗 클라우드 지원 아키텍처는 보수적인 금융 및 공공 부문 담당자들에게 큰 호응을 얻었다.
-                    </p>
-                    <div className="my-14 border-l-4 border-blue-500 pl-6 py-2 bg-white/5 rounded-r-2xl">
-                        <p className="text-white text-[20px] font-bold leading-relaxed mb-0">
-                            "AI:ON-U는 단순히 똑똑한 챗봇이 아닙니다. 회사의 ERP, 그룹웨어와 연동되어 직접 결재를 기안하고 리포트를 작성하는 '진짜 일하는 동료'가 될 것입니다."
-                        </p>
-                    </div>
-                    <p className="mb-8">
-                        Biz.AI는 이번 밋업을 시작으로 매 분기 정기적인 기술 세미나와 파트너스 데이를 개최하여, 국내 멀티 에이전트 생태계 확장에 적극적으로 나설 계획이다.
-                    </p>
+                    {news.content ? (
+                        <p className="mb-8 whitespace-pre-wrap">{news.content}</p>
+                    ) : (
+                        <p className="mb-8 font-medium italic opacity-50">상세 내용이 준비 중입니다.</p>
+                    )}
                 </article>
+
+                {/* 목록보기 버튼 */}
+                <div className="mt-16 pt-10 border-t border-white/10 flex justify-center">
+                    <button
+                        onClick={() => navigate('/news')}
+                        className="group flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 text-white/70 hover:text-white hover:border-white/50 transition-all duration-300 text-[15px] font-medium cursor-pointer"
+                    >
+                        목록보기
+                    </button>
+                </div>
             </main>
 
             {/* Footer */}
-            <footer className="bg-[#000000] py-24 px-6 border-t border-white/5">
-                <div className="max-w-[1200px] mx-auto text-center">
-                    <p className="text-white/40 text-[14px] font-medium leading-relaxed">
-                        © 2026 kt ds. All rights reserved. <br />
-                        본 페이지는 Biz.AI 시스템 데모를 위해 구성되었습니다.
-                    </p>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 }
