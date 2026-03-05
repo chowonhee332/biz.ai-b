@@ -1136,7 +1136,7 @@ const App = () => {
             <div className="hidden lg:flex sticky top-0 h-screen w-full items-center justify-center px-4 md:px-6 overflow-hidden">
               <div className="max-w-[1200px] mx-auto w-full h-full">
                 <div className="w-full flex flex-col lg:flex-row items-center relative gap-8 lg:gap-0 h-full">
-                  <div className="w-full lg:w-[42%] flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16 self-start pt-[200px] h-full relative">
+                  <div className="w-full lg:w-[42%] flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16 self-start pt-[20vh] h-full relative">
                     {/* 단일 슬롯: 모든 Use Case가 동일한 자리에서 교체됨 */}
                     <div className="relative h-full">
                       {useCaseItems.map((item, index) => {
