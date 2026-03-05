@@ -1246,7 +1246,7 @@ const App = () => {
                             >
                               <button
                                 className="w-[100px] h-[48px] text-[16px] font-medium border border-white/20 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent"
-                                onClick={() => navigate(item.id === 'meeting-agent' ? '/news/1' : item.id === 'works-ai' ? '/platform' : '/use-cases')}
+                                onClick={() => navigate('/use-cases')}
                               >
                                 <span className="group-hover:-translate-x-1 transition-transform duration-300">더보기</span>
                                 <ChevronRight size={18} className="max-w-0 opacity-0 group-hover:max-w-[20px] group-hover:opacity-100 group-hover:ml-1 transition-all duration-300 overflow-hidden" />
