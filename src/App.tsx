@@ -1130,10 +1130,10 @@ const App = () => {
             </div>
 
             {/* Desktop Layout (Sticky & Transitions) */}
-            <div className="hidden lg:flex sticky top-0 h-screen w-full items-center justify-center px-4 md:px-6 overflow-hidden">
+            <div className="hidden lg:flex sticky top-0 h-screen w-full items-start justify-center px-4 md:px-6 overflow-hidden pt-[240px]">
               <div className="max-w-[1200px] mx-auto w-full">
                 <div className="w-full flex flex-col lg:flex-row items-center relative gap-8 lg:gap-0">
-                  <div className="w-full lg:w-[42%] flex flex-col justify-center z-20 pr-0 md:pr-12 lg:pr-16">
+                  <div className="w-full lg:w-[42%] flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16">
                     {/* 단일 슬롯: 모든 Use Case가 동일한 자리에서 교체됨 */}
                     <div className="relative" style={{ height: '50vh' }}>
                       {useCaseItems.map((item, index) => {
@@ -1236,7 +1236,7 @@ const App = () => {
                   </div>
 
                   {/* 우측 이미지: flex 레이아웃으로 화면 정중앙 배치 */}
-                  <div className="w-full lg:w-[58%] flex items-center justify-end overflow-visible">
+                  <div className="w-full lg:w-[58%] flex items-start justify-end overflow-visible">
                     <div className="w-full relative h-[80vh]">
                       {useCaseItems.map((item, index) => {
                         const isActive = activeUseCase === index;
