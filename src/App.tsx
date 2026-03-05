@@ -1190,10 +1190,17 @@ const App = () => {
                               style={{ opacity: dOpacity, y: dY }}
                               className="absolute inset-0 w-full"
                             >
-                              {/* 숫자: 설명 레이어에서도 유지 */}
-                              <p className="text-white text-[20px] font-normal tracking-tight mb-4 font-pretendard">
-                                {String(index + 1).padStart(2, '0')}. Solution
-                              </p>
+                              <div className="flex items-center gap-4 mb-4 w-full max-w-lg">
+                                <p className="text-white text-[20px] font-normal tracking-tight font-pretendard">
+                                  {String(index + 1).padStart(2, '0')}
+                                </p>
+                                <div className="flex-1 h-[2px] bg-white/10 relative overflow-hidden">
+                                  <motion.div
+                                    style={{ scaleX: lineScaleX, originX: 0 }}
+                                    className="absolute inset-0 bg-white shadow-[0_0_10px_white]"
+                                  />
+                                </div>
+                              </div>
 
                               <h3 className="text-[40px] text-white mb-2 leading-tight">
                                 <span className="font-bold">{item.titlePrefix}</span>{" "}
@@ -1225,11 +1232,6 @@ const App = () => {
                                       </li>
                                     ))}
                                   </ul>
-                                  {/* Progress Line integrated into the bottom border */}
-                                  <motion.div
-                                    style={{ scaleX: lineScaleX, originX: 0 }}
-                                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-white shadow-[0_0_10px_rgba(255,255,255,0.3)]"
-                                  />
                                 </div>
                               )}
                             </motion.div>
@@ -1243,8 +1245,8 @@ const App = () => {
                                 className="w-[100px] h-[48px] text-[16px] font-medium border border-white/20 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent"
                                 onClick={() => navigate(item.id === 'meeting-agent' ? '/news/1' : item.id === 'works-ai' ? '/platform' : '/use-cases')}
                               >
-                                <span className="translate-x-1.5 group-hover:translate-x-0 transition-transform duration-300">더보기</span>
-                                <ChevronRight size={18} className="max-w-0 opacity-0 group-hover:max-w-[20px] group-hover:opacity-100 group-hover:ml-2 transition-all duration-300 overflow-hidden" />
+                                <span className="group-hover:-translate-x-1 transition-transform duration-300">더보기</span>
+                                <ChevronRight size={18} className="max-w-0 opacity-0 group-hover:max-w-[20px] group-hover:opacity-100 group-hover:ml-1 transition-all duration-300 overflow-hidden" />
                               </button>
                             </motion.div>
                           </div>
