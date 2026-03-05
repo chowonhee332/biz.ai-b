@@ -21,28 +21,28 @@ export default function UseCasePage() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
+        <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex cursor-pointer-col">
             {/* GNB */}
             <nav className={`fixed w-full z-50 bg-black/[0.85] backdrop-blur-sm py-4 px-6 md:px-10 transition-colors duration-300 ${scrolled ? 'border-b border-white/20' : 'border-b border-transparent'}`}>
-                <div className="max-w-[1200px] mx-auto flex justify-between items-center">
+                <div className="max-w-[1200px] mx-auto flex cursor-pointer justify-between items-center">
                     {/* Logo */}
-                    <Link to="/" className="flex items-center gap-2 shrink-0">
+                    <Link to="/" className="flex cursor-pointer items-center gap-2 shrink-0">
                         <img src="/bizai_logo.png" alt="Biz.AI Logo" className="h-6 w-auto" />
                         <span className="text-xl font-bold text-white tracking-tighter hidden sm:inline">Biz.AI</span>
                     </Link>
 
-                    <div className="hidden lg:flex items-center gap-8 text-white/90 text-[14px] font-medium tracking-tight">
+                    <div className="hidden lg:flex cursor-pointer items-center gap-8 text-white/90 text-[14px] font-medium tracking-tight">
                         <Link to="/platform" className="hover:text-white transition-colors">멀티 에이전트 플랫폼</Link>
                         <Link to="/use-cases" className="text-white font-semibold transition-colors">고객 사례</Link>
                         <Link to="/news" className="hover:text-white transition-colors">새로운 소식</Link>
                     </div>
 
                     {/* Right: CTA Buttons */}
-                    <div className="flex items-center gap-3">
-                        <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10 group">
+                    <div className="flex cursor-pointer items-center gap-3">
+                        <Button variant="ghost" size="sm" className="hidden md:flex cursor-pointer text-white/90 hover:text-white hover:bg-white/10 group">
                             <img src="/ktds_white.png" alt="kt ds" className="h-4 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                         </Button>
-                        <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard group">
+                        <Button size="sm" className="hidden md:flex cursor-pointer bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard group">
                             AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                         </Button>
                         <button className="lg:hidden text-white p-2 smooth-gpu" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
@@ -60,11 +60,11 @@ export default function UseCasePage() {
                             exit={{ height: 0, opacity: 0 }}
                             className="lg:hidden absolute top-full left-0 right-0 bg-[#000000] py-4 px-6 overflow-hidden border-b border-white/20"
                         >
-                            <div className="flex flex-col gap-4">
+                            <div className="flex flex cursor-pointer-col gap-4">
                                 <Link to="/platform" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>멀티 에이전트 플랫폼</Link>
                                 <Link to="/use-cases" className="text-white font-bold py-1" onClick={() => setIsMenuOpen(false)}>고객 사례</Link>
                                 <Link to="/news" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>새로운 소식</Link>
-                                <div className="pt-2 mt-2 border-t border-white/20 flex flex-col gap-2">
+                                <div className="pt-2 mt-2 border-t border-white/20 flex flex cursor-pointer-col gap-2">
                                     <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group">
                                         <img src="/ktds_white.png" alt="kt ds" className="h-4 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                                     </Button>
@@ -79,7 +79,7 @@ export default function UseCasePage() {
             </nav>
 
             {/* Content Body */}
-            < section className="pt-48 pb-32 flex-1" >
+            < section className="pt-48 pb-32 flex cursor-pointer-1" >
                 {/* Header Section */}
                 < div className="max-w-[1200px] mx-auto mb-20" >
                     <motion.div
@@ -99,7 +99,7 @@ export default function UseCasePage() {
                 {/* Case Grid Section */}
                 {/* Category Filter - Sticky 영역 (풀 너비 라인) */}
                 <div className="sticky top-[64px] bg-black/[0.85] backdrop-blur-sm z-40 border-b border-white/20 mb-16">
-                    <div className="max-w-[1200px] mx-auto flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap px-6 md:px-0">
+                    <div className="max-w-[1200px] mx-auto flex cursor-pointer items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap px-6 md:px-0">
                         {
                             ["All", "데이터 분석", "보고 / 의사결정 향상", "리스크 관리 효율화", "강력한 보안", "내부 업무 처리 향상"].map((category) => (
                                 <button
@@ -207,13 +207,13 @@ export default function UseCasePage() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.05, duration: 0.5 }}
-                                    className="group cursor-pointer flex flex-col"
+                                    className="group cursor-pointer flex flex cursor-pointer-col"
                                 >
                                     <div className="relative aspect-video rounded-3xl overflow-hidden mb-6 bg-zinc-900 border border-white/5">
                                         <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                                     </div>
-                                    <div className="flex flex-col gap-3">
+                                    <div className="flex flex cursor-pointer-col gap-3">
                                         <span className="text-blue-500 text-[15px] font-medium transition-colors">
                                             {item.industry}
                                         </span>
@@ -240,7 +240,7 @@ export default function UseCasePage() {
             <footer className="bg-[#000000] py-32 border-t border-white/20">
                 <div className="max-w-[1200px] mx-auto">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 mb-24 px-6 md:px-0">
-                        <div className="flex flex-col">
+                        <div className="flex flex cursor-pointer-col">
                             <div className="mb-8">
                                 <h4 className="text-[22px] font-bold text-white tracking-tight">kt ds</h4>
                             </div>
@@ -248,42 +248,42 @@ export default function UseCasePage() {
                                 비즈니스를 위한 엔터프라이즈급<br />
                                 AI Agent 플랫폼
                             </p>
-                            <div className="flex gap-4 mt-auto">
+                            <div className="flex cursor-pointer gap-4 mt-auto">
                                 <a href="#" className="text-white/40 hover:text-white transition-all"><Linkedin size={22} strokeWidth={1.5} /></a>
                                 <a href="#" className="text-white/40 hover:text-white transition-all"><Youtube size={22} strokeWidth={1.5} /></a>
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-6">
+                        <div className="flex flex cursor-pointer-col gap-6">
                             <h4 className="text-white font-bold text-[16px]">Solutions</h4>
-                            <div className="flex flex-col gap-4 text-white/60 text-[15px]">
+                            <div className="flex flex cursor-pointer-col gap-4 text-white/60 text-[15px]">
                                 <a href="#" className="hover:text-white transition-colors">AI Agent Builder</a>
                                 <a href="#" className="hover:text-white transition-colors">Enterprise RAG</a>
                                 <a href="#" className="hover:text-white transition-colors">Multi-Agent System</a>
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-6">
+                        <div className="flex flex cursor-pointer-col gap-6">
                             <h4 className="text-white font-bold text-[16px]">Product</h4>
-                            <div className="flex flex-col gap-4 text-white/60 text-[15px]">
+                            <div className="flex flex cursor-pointer-col gap-4 text-white/60 text-[15px]">
                                 <a href="#" className="hover:text-white transition-colors">Features</a>
                                 <a href="#" className="hover:text-white transition-colors">Pricing</a>
                                 <a href="#" className="hover:text-white transition-colors">Case Studies</a>
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-6">
+                        <div className="flex flex cursor-pointer-col gap-6">
                             <h4 className="text-white font-bold text-[16px]">Company</h4>
-                            <div className="flex flex-col gap-4 text-white/60 text-[15px]">
+                            <div className="flex flex cursor-pointer-col gap-4 text-white/60 text-[15px]">
                                 <a href="#" className="hover:text-white transition-colors">About</a>
                                 <a href="#" className="hover:text-white transition-colors">Blog</a>
                                 <a href="#" className="hover:text-white transition-colors">Contact</a>
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/10 gap-4 px-6 md:px-0">
+                    <div className="flex flex-col md:flex cursor-pointer-row items-center justify-between pt-8 border-t border-white/10 gap-4 px-6 md:px-0">
                         <p className="text-white/40 text-[14px]">© 2026 kt ds. All rights reserved.</p>
-                        <div className="flex items-center gap-6 text-white/40 text-[14px]">
+                        <div className="flex cursor-pointer items-center gap-6 text-white/40 text-[14px]">
                             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
                             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
                         </div>

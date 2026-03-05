@@ -43,28 +43,28 @@ export default function NewsPage() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
+        <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex cursor-pointer-col">
             {/* 1. GNB 영역 (App.tsx와 동일하게 구성하지만 링크는 '/' 및 기타 영역 유지) */}
             <nav className={`fixed w-full z-50 bg-black/[0.85] backdrop-blur-sm py-4 px-6 md:px-10 transition-colors duration-300 ${scrolled ? 'border-b border-white/20' : 'border-b border-transparent'}`}>
-                <div className="max-w-[1200px] mx-auto flex justify-between items-center">
+                <div className="max-w-[1200px] mx-auto flex cursor-pointer justify-between items-center">
                     {/* Logo */}
-                    <Link to="/" className="flex items-center gap-2 shrink-0">
+                    <Link to="/" className="flex cursor-pointer items-center gap-2 shrink-0">
                         <img src="/bizai_logo.png" alt="Biz.AI Logo" className="h-6 w-auto" />
                         <span className="text-xl font-bold text-white tracking-tighter hidden sm:inline">Biz.AI</span>
                     </Link>
 
-                    <div className="hidden lg:flex items-center gap-8 text-white/90 text-[14px] font-medium tracking-tight">
+                    <div className="hidden lg:flex cursor-pointer items-center gap-8 text-white/90 text-[14px] font-medium tracking-tight">
                         <Link to="/platform" className="hover:text-white transition-colors">멀티 에이전트 플랫폼</Link>
                         <Link to="/use-cases" className="hover:text-white transition-colors">고객 사례</Link>
                         <Link to="/news" className="text-white font-semibold transition-colors">새로운 소식</Link>
                     </div>
 
                     {/* Right: CTA Buttons */}
-                    <div className="flex items-center gap-3">
-                        <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10 group">
+                    <div className="flex cursor-pointer items-center gap-3">
+                        <Button variant="ghost" size="sm" className="hidden md:flex cursor-pointer text-white/90 hover:text-white hover:bg-white/10 group">
                             <img src="/ktds_white.png" alt="kt ds" className="h-4 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                         </Button>
-                        <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard group">
+                        <Button size="sm" className="hidden md:flex cursor-pointer bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard group">
                             AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                         </Button>
                         <button className="lg:hidden text-white p-2 smooth-gpu" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
@@ -82,11 +82,11 @@ export default function NewsPage() {
                             exit={{ height: 0, opacity: 0 }}
                             className="lg:hidden absolute top-full left-0 right-0 bg-[#000000] py-4 px-6 overflow-hidden border-b border-white/20"
                         >
-                            <div className="flex flex-col gap-4">
+                            <div className="flex flex cursor-pointer-col gap-4">
                                 <Link to="/platform" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>멀티 에이전트 플랫폼</Link>
                                 <Link to="/use-cases" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>고객 사례</Link>
                                 <Link to="/news" className="text-white font-bold py-1" onClick={() => setIsMenuOpen(false)}>새로운 소식</Link>
-                                <div className="pt-2 mt-2 border-t border-white/20 flex flex-col gap-2">
+                                <div className="pt-2 mt-2 border-t border-white/20 flex flex cursor-pointer-col gap-2">
                                     <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group">
                                         <img src="/ktds_white.png" alt="kt ds" className="h-4 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                                     </Button>
@@ -101,11 +101,11 @@ export default function NewsPage() {
             </nav>
 
             {/* 2. 본문 컨텐츠 시작 */}
-            < section className="pt-48 pb-32 flex-1" >
+            < section className="pt-48 pb-32 flex cursor-pointer-1" >
                 {/* 헤더 영역: 상단 타이틀 + 설명 */}
                 < div className="max-w-[1200px] mx-auto mb-20" >
-                    <div className="flex justify-between items-end">
-                        <div className="flex flex-col items-start text-left">
+                    <div className="flex cursor-pointer justify-between items-end">
+                        <div className="flex flex cursor-pointer-col items-start text-left">
                             <motion.div
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -121,16 +121,16 @@ export default function NewsPage() {
                         </div>
 
                         {/* 내비게이션 버튼 */}
-                        <div className="flex gap-3 mb-2">
+                        <div className="flex cursor-pointer gap-3 mb-2">
                             <button
                                 onClick={() => scrollNews('left')}
-                                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all bg-white/5 hover:bg-white/10"
+                                className="w-12 h-12 rounded-full border border-white/10 flex cursor-pointer items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all bg-white/5 hover:bg-white/10"
                             >
                                 <ChevronLeft size={24} />
                             </button>
                             <button
                                 onClick={() => scrollNews('right')}
-                                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all bg-white/5 hover:bg-white/10"
+                                className="w-12 h-12 rounded-full border border-white/10 flex cursor-pointer items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all bg-white/5 hover:bg-white/10"
                             >
                                 <ChevronRight size={24} />
                             </button>
@@ -142,7 +142,7 @@ export default function NewsPage() {
                 < div className="mb-24" >
                     <div
                         ref={newsScrollRef}
-                        className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-12 pl-[calc(max(24px,(100vw-1240px)/2+24px))] pr-6"
+                        className="flex cursor-pointer gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-12 pl-[calc(max(24px,(100vw-1240px)/2+24px))] pr-6"
                     >
                         {HIGHLIGHT_NEWS.map((news, i) => (
                             <motion.div
@@ -151,7 +151,7 @@ export default function NewsPage() {
                                 whileInView={{ y: 0, opacity: 1 }}
                                 transition={{ delay: i * 0.1, duration: 0.5 }}
                                 viewport={{ once: true }}
-                                className="group cursor-pointer shrink-0 w-[380px]"
+                                className="cursor-pointer shrink-0 w-[380px]"
                                 onClick={() => navigate('/news/1', { state: { news } })}
                             >
                                 {/* 썸네일: 380 * 240 사이즈 */}
@@ -164,7 +164,7 @@ export default function NewsPage() {
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40" />
                                 </div>
-                                <div className="pt-2 px-1 flex-1 flex flex-col">
+                                <div className="pt-2 px-1 flex-1 flex flex cursor-pointer-col">
                                     <span className="text-blue-400 text-[14px] font-bold mb-3">{news.tag}</span>
                                     <h3 className="text-white text-[24px] font-bold leading-snug whitespace-pre-line group-hover:text-blue-400 transition-colors mb-4">{news.title}</h3>
                                     <span className="text-white/40 text-[14px] font-medium mt-auto">{news.date}</span>
@@ -176,7 +176,7 @@ export default function NewsPage() {
 
                 {/* 카테고리 탭 - Sticky 적용 (풀 너비 라인) */}
                 <div className="sticky top-[64px] bg-black/[0.85] backdrop-blur-sm z-40 border-b border-white/20 mb-12">
-                    <div className="max-w-[1200px] mx-auto flex items-center gap-8 h-[66px] px-6 md:px-0">
+                    <div className="max-w-[1200px] mx-auto flex cursor-pointer items-center gap-8 h-[66px] px-6 md:px-0">
                         {["All", "News", "Tech Stories", "Documentation"].map((category) => (
                             <button
                                 key={category}
@@ -201,9 +201,9 @@ export default function NewsPage() {
 
                 <div className="max-w-[1200px] mx-auto">
                     {/* 좌측 메인 리스트 뷰 */}
-                    <div className="flex-1">
+                    <div className="flex cursor-pointer-1">
 
-                        <div className="flex flex-col gap-8">
+                        <div className="flex flex cursor-pointer-col gap-8">
                             {[
                                 { title: "kt ds, AI Agent 도입 사례 공개", desc: "금융권부터 제조 영역까지, 실제 현장에서 활약 중인 Biz.AI의 다양한 도입 사례와 놀라운 성과를 상세히 공개합니다.", date: "Dec 22, 2025", tag: "Tech Stories", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" },
                                 { title: "2025 AI Trends Report 발간", desc: "올 한 해 주목해야 할 엔터프라이즈 AI 시장의 핵심 트렌드와 기술적 변화를 심층 분석한 리포트가 발간되었습니다.", date: "Nov 30, 2025", tag: "News", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" },
@@ -217,9 +217,9 @@ export default function NewsPage() {
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.1, duration: 0.5 }}
-                                    className="group flex flex-col-reverse sm:flex-row gap-8 items-center py-8 rounded-3xl bg-transparent transition-all cursor-pointer"
+                                    className="group flex flex-col-reverse sm:flex cursor-pointer-row gap-8 items-center py-8 rounded-3xl bg-transparent transition-all cursor-pointer"
                                 >
-                                    <div className="flex-1 w-full flex flex-col">
+                                    <div className="flex-1 w-full flex flex cursor-pointer-col">
                                         <span className="text-blue-400 text-[14px] font-bold mb-3">{news.tag}</span>
                                         <h3 className="text-white text-[24px] font-bold leading-snug mb-3 group-hover:text-blue-400 transition-colors">{news.title}</h3>
                                         <p className="text-white/60 text-[16px] leading-relaxed line-clamp-2 mb-6">{news.desc}</p>
@@ -244,7 +244,7 @@ export default function NewsPage() {
             <footer className="bg-[#000000] py-32 px-6 border-t border-white/20">
                 <div className="max-w-[1240px] mx-auto">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 mb-24">
-                        <div className="flex flex-col">
+                        <div className="flex flex cursor-pointer-col">
                             <div className="mb-8">
                                 <h4 className="text-[22px] font-bold text-white tracking-tight">kt ds</h4>
                             </div>
@@ -252,7 +252,7 @@ export default function NewsPage() {
                                 비즈니스를 위한 엔터프라이즈급<br />
                                 AI Agent 플랫폼
                             </p>
-                            <div className="flex gap-4 mt-auto">
+                            <div className="flex cursor-pointer gap-4 mt-auto">
                                 <a href="#" className="text-white/40 hover:text-white transition-all">
                                     <Linkedin size={22} strokeWidth={1.5} />
                                 </a>
@@ -268,27 +268,27 @@ export default function NewsPage() {
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-6">
+                        <div className="flex flex cursor-pointer-col gap-6">
                             <h4 className="text-white font-bold text-[16px]">Solutions</h4>
-                            <div className="flex flex-col gap-4">
+                            <div className="flex flex cursor-pointer-col gap-4">
                                 <a href="#" className="text-white/60 hover:text-white text-[15px] font-medium transition-colors">AI Agent Builder</a>
                                 <a href="#" className="text-white/60 hover:text-white text-[15px] font-medium transition-colors">Enterprise RAG</a>
                                 <a href="#" className="text-white/60 hover:text-white text-[15px] font-medium transition-colors">Multi-Agent System</a>
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-6">
+                        <div className="flex flex cursor-pointer-col gap-6">
                             <h4 className="text-white font-bold text-[16px]">Product</h4>
-                            <div className="flex flex-col gap-4">
+                            <div className="flex flex cursor-pointer-col gap-4">
                                 <a href="#" className="text-white/60 hover:text-white text-[15px] font-medium transition-colors">Features</a>
                                 <a href="#" className="text-white/60 hover:text-white text-[15px] font-medium transition-colors">Pricing</a>
                                 <a href="#" className="text-white/60 hover:text-white text-[15px] font-medium transition-colors">Case Studies</a>
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-6">
+                        <div className="flex flex cursor-pointer-col gap-6">
                             <h4 className="text-white font-bold text-[16px]">Company</h4>
-                            <div className="flex flex-col gap-4">
+                            <div className="flex flex cursor-pointer-col gap-4">
                                 <a href="#" className="text-white/60 hover:text-white text-[15px] font-medium transition-colors">About</a>
                                 <a href="#" className="text-white/60 hover:text-white text-[15px] font-medium transition-colors">Blog</a>
                                 <a href="#" className="text-white/60 hover:text-white text-[15px] font-medium transition-colors">Contact</a>
@@ -296,11 +296,11 @@ export default function NewsPage() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/10 gap-4">
+                    <div className="flex flex-col md:flex cursor-pointer-row items-center justify-between pt-8 border-t border-white/10 gap-4">
                         <p className="text-white/40 text-[14px]">
                             © 2026 kt ds. All rights reserved.
                         </p>
-                        <div className="flex items-center gap-6">
+                        <div className="flex cursor-pointer items-center gap-6">
                             <a href="#" className="text-white/40 hover:text-white text-[14px] transition-colors">Privacy Policy</a>
                             <a href="#" className="text-white/40 hover:text-white text-[14px] transition-colors">Terms of Service</a>
                         </div>

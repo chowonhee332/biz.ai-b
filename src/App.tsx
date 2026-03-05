@@ -799,7 +799,7 @@ const App = () => {
             <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard group">
               AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
             </Button>
-            <button className="lg:hidden text-white p-2 smooth-gpu" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
+            <button className="lg:hidden text-white p-2 smooth-gpu cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -1226,11 +1226,11 @@ const App = () => {
                                 </div>
                               )}
                               {item.features && (
-                                <div className="bg-white/[0.04] border border-white/20 rounded-lg p-5 mb-6 max-w-lg relative overflow-hidden">
-                                  <ul className="space-y-1.5 peer">
+                                <div className="border-y border-white/10 py-10 mb-6 max-w-lg">
+                                  <ul className="space-y-5">
                                     {item.features.map((feature: string, i: number) => (
-                                      <li key={i} className="flex items-start gap-3 text-white text-[16px] leading-relaxed">
-                                        <span className="text-white mt-[2px]">•</span>
+                                      <li key={i} className="flex items-start gap-4 text-white text-[18px] leading-snug font-normal">
+                                        <div className="w-1 h-1 rounded-full bg-white mt-[10px] shrink-0" />
                                         <span>{feature}</span>
                                       </li>
                                     ))}
@@ -1245,7 +1245,7 @@ const App = () => {
                               className="absolute bottom-[10vh] left-0 pointer-events-auto"
                             >
                               <button
-                                className="w-[100px] h-[48px] text-[16px] font-medium border border-white/20 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent"
+                                className="w-[100px] h-[48px] text-[16px] font-medium border border-white/20 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent cursor-pointer"
                                 onClick={() => navigate('/use-cases')}
                               >
                                 <span className="group-hover:-translate-x-1 transition-transform duration-300">더보기</span>
@@ -1454,13 +1454,13 @@ const App = () => {
               <div className="flex gap-3 mb-2">
                 <button
                   onClick={() => scrollNews('left')}
-                  className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all bg-white/5 hover:bg-white/10"
+                  className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all bg-white/5 hover:bg-white/10 cursor-pointer"
                 >
                   <ChevronLeft size={24} />
                 </button>
                 <button
                   onClick={() => scrollNews('right')}
-                  className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all bg-white/5 hover:bg-white/10"
+                  className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all bg-white/5 hover:bg-white/10 cursor-pointer"
                 >
                   <ChevronRight size={24} />
                 </button>
@@ -1577,7 +1577,7 @@ const App = () => {
                               >
                                 <button
                                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                                  className="w-full py-8 flex items-center justify-between text-left group"
+                                  className="w-full py-8 flex items-center justify-between text-left group cursor-pointer"
                                 >
                                   <span className={`text-[20px] font-bold tracking-tight transition-colors duration-300 ${isOpen ? 'text-white' : 'text-white/60 group-hover:text-white/90'}`}>
                                     {item.q}
