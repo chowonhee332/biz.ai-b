@@ -86,9 +86,9 @@ export default function UseCasePage() {
             </nav>
 
             {/* Content Body */}
-            <section className="pt-48 pb-32 flex-1 px-6 md:px-10">
+            <section className="pt-48 pb-32 flex-1">
                 {/* Header Section */}
-                <div className="max-w-[1200px] mx-auto mb-20">
+                <div className="max-w-[1280px] mx-auto px-6 md:px-10 mb-20">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -105,7 +105,7 @@ export default function UseCasePage() {
 
                 {/* 카테고리 탭 - Sticky 적용 (풀 너비 라인) */}
                 <div className="sticky top-[72px] lg:top-[64px] bg-black/[0.85] backdrop-blur-sm z-40 border-b border-white/20 mb-12">
-                    <div className="max-w-[1200px] mx-auto flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap">
+                    <div className="max-w-[1280px] mx-auto px-6 md:px-10 flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap">
                         {USE_CASE_CATEGORIES.map((category) => (
                             <button
                                 key={category}
@@ -128,7 +128,7 @@ export default function UseCasePage() {
                     </div>
                 </div>
 
-                <div className="max-w-[1200px] mx-auto">
+                <div className="max-w-[1280px] mx-auto px-6 md:px-10">
 
                     {/* Card Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">

@@ -14,6 +14,7 @@ export default function NewsPage() {
     const newsScrollRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
     const [scrolled, setScrolled] = useState(false);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
 
     const scrollNews = (direction: 'left' | 'right') => {
         if (newsScrollRef.current) {
@@ -22,6 +23,12 @@ export default function NewsPage() {
                 left: direction === 'left' ? -scrollAmount : scrollAmount,
                 behavior: 'smooth'
             });
+        }
+    };
+
+    const handleNewsScroll = () => {
+        if (newsScrollRef.current) {
+            setCanScrollLeft(newsScrollRef.current.scrollLeft > 10);
         }
     };
 
@@ -98,9 +105,9 @@ export default function NewsPage() {
             </nav>
 
             {/* 2. 본문 컨텐츠 시작 */}
-            <section className="pt-48 pb-32 flex-1 px-6 md:px-10">
+            <section className="pt-48 pb-32 flex-1">
                 {/* 헤더 영역: 상단 타이틀 + 설명 */}
-                <div className="max-w-[1200px] mx-auto mb-20">
+                <div className="max-w-[1280px] mx-auto px-6 md:px-10 mb-20">
                     <div className="flex justify-between items-end">
                         <div className="flex flex-col items-start text-left">
                             <motion.div
@@ -118,18 +125,21 @@ export default function NewsPage() {
                         </div>
 
                         {/* 내비게이션 버튼 */}
-                        <div className="flex gap-3 mb-2">
+                        <div className="flex gap-2.5 mb-2">
                             <button
                                 onClick={() => scrollNews('left')}
-                                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all bg-white/5 hover:bg-white/10"
+                                disabled={!canScrollLeft}
+                                className={`w-9 h-9 rounded-full flex items-center justify-center transition-all active:scale-95 shadow-lg ${canScrollLeft
+                                    ? "bg-white text-black hover:bg-white/90 cursor-pointer"
+                                    : "bg-white/20 text-white/30 cursor-not-allowed shadow-none"}`}
                             >
-                                <ChevronLeft size={24} />
+                                <ChevronLeft size={20} strokeWidth={2.5} />
                             </button>
                             <button
                                 onClick={() => scrollNews('right')}
-                                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all bg-white/5 hover:bg-white/10"
+                                className="w-9 h-9 rounded-full bg-white flex items-center justify-center text-black hover:bg-white/90 transition-all active:scale-95 shadow-lg cursor-pointer"
                             >
-                                <ChevronRight size={24} />
+                                <ChevronRight size={20} strokeWidth={2.5} />
                             </button>
                         </div>
                     </div>
@@ -139,7 +149,8 @@ export default function NewsPage() {
                 <div className="mb-24">
                     <div
                         ref={newsScrollRef}
-                        className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-12 pl-[max(0px,calc((100vw-1280px)/2))]"
+                        onScroll={handleNewsScroll}
+                        className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-12 pl-[max(1.5rem,calc((100vw-1280px)/2+1.5rem))] md:pl-[max(2.5rem,calc((100vw-1280px)/2+2.5rem))]"
                     >
                         {HIGHLIGHT_NEWS.map((news, i) => (
                             <motion.div
@@ -179,7 +190,7 @@ export default function NewsPage() {
 
                 {/* 카테고리 탭 - Sticky 적용 (풀 너비 라인) */}
                 <div className="sticky top-[72px] lg:top-[64px] bg-black/[0.85] backdrop-blur-sm z-40 border-b border-white/20 mb-12">
-                    <div className="max-w-[1200px] mx-auto flex items-center gap-8 h-[66px]">
+                    <div className="max-w-[1280px] mx-auto px-6 md:px-10 flex items-center gap-8 h-[66px]">
                         {NEWS_CATEGORIES.map((category) => (
                             <button
                                 key={category}
@@ -202,7 +213,7 @@ export default function NewsPage() {
                     </div>
                 </div>
 
-                <div className="max-w-[1200px] mx-auto">
+                <div className="max-w-[1280px] mx-auto px-6 md:px-10">
                     {/* 좌측 메인 리스트 뷰 */}
                     <div className="flex-1">
 
