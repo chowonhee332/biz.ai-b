@@ -1615,7 +1615,7 @@ const App = () => {
 
         {/* CTA 배너 - Full Width (Premium Aurora Style) 복구 */}
         <div className="w-full py-0">
-          <section className="relative h-[500px] w-full overflow-hidden flex items-center justify-center bg-black border-y border-white/20">
+          <section className="relative h-[500px] w-full overflow-hidden flex items-center justify-center bg-black">
             <div className="absolute inset-0 z-0 flex items-center justify-center opacity-60">
               <Silk
                 speed={5}
