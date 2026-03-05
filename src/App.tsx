@@ -1191,8 +1191,9 @@ const App = () => {
                                 {String(index + 1).padStart(2, '0')}. Solution
                               </p>
 
-                              <h3 className="text-[40px] font-bold text-white mb-2 leading-tight">
-                                {item.titlePrefix} {item.titleSuffix}
+                              <h3 className="text-[40px] text-white mb-2 leading-tight">
+                                <span className="font-bold">{item.titlePrefix}</span>{" "}
+                                <span className="font-normal">{item.titleSuffix}</span>
                               </h3>
                               <p className="text-[16px] text-white/80 leading-relaxed max-w-lg mb-3 font-normal">
                                 {item.desc}
