@@ -1240,7 +1240,7 @@ const App = () => {
                               className="absolute bottom-[10vh] left-0 pointer-events-auto"
                             >
                               <button
-                                className="w-[124px] h-[48px] text-[16px] font-medium border border-white/20 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent"
+                                className="w-[100px] h-[48px] text-[16px] font-medium border border-white/20 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent"
                                 onClick={() => navigate(item.id === 'meeting-agent' ? '/news/1' : item.id === 'works-ai' ? '/platform' : '/use-cases')}
                               >
                                 <span className="translate-x-1.5 group-hover:translate-x-0 transition-transform duration-300">더보기</span>
