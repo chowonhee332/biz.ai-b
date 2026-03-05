@@ -1244,9 +1244,7 @@ const App = () => {
                                 onClick={() => navigate(item.id === 'meeting-agent' ? '/news/1' : item.id === 'works-ai' ? '/platform' : '/use-cases')}
                               >
                                 <span className="translate-x-1.5 group-hover:translate-x-0 transition-transform duration-300">더보기</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="max-w-0 opacity-0 group-hover:max-w-[20px] group-hover:opacity-100 group-hover:ml-2 transition-all duration-300 overflow-hidden">
-                                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                                </svg>
+                                <ChevronRight size={18} className="max-w-0 opacity-0 group-hover:max-w-[20px] group-hover:opacity-100 group-hover:ml-2 transition-all duration-300 overflow-hidden" />
                               </button>
                             </motion.div>
                           </div>
