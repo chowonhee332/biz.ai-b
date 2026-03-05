@@ -578,7 +578,7 @@ const StudioSection = () => {
             </p>
 
             <button className="w-[120px] h-[48px] text-[16px] font-medium border border-white/20 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent">
-              <span>더보기</span>
+              <span>체험하기</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="max-w-0 opacity-0 group-hover:max-w-[18px] group-hover:opacity-100 group-hover:ml-[4px] transition-all duration-300 overflow-hidden">
                 <path d="M7 17L17 7M17 7H7M17 7V17" />
               </svg>
