@@ -88,7 +88,7 @@ const AnimatedCounter = ({ from, to }: { from: number; to: number }) => {
 const SolutionCard = ({ number, image, title, desc, highlight, isLarge }: { number: string; image: string; title: string; desc: string; highlight: string; isLarge?: boolean }) => (
   <div className="bg-white rounded-[20px] p-10 flex flex-col w-full min-w-[280px] h-[424px] group cursor-pointer shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_48px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-2 font-pretendard relative overflow-hidden">
     {/* Index Number */}
-    <div className="text-black text-[24px] font-bold leading-none mb-3">{number}</div>
+    <div className="text-black text-[20px] font-bold leading-none mb-3">{number}</div>
 
     {/* Title & Description Group */}
     <div className="flex flex-col gap-4 mb-6">
