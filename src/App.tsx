@@ -1133,7 +1133,7 @@ const App = () => {
             <div className="hidden lg:flex sticky top-0 h-screen w-full items-center justify-center px-4 md:px-6 overflow-hidden">
               <div className="max-w-[1200px] mx-auto w-full">
                 <div className="w-full flex flex-col lg:flex-row items-center relative gap-8 lg:gap-0 h-full">
-                  <div className="w-full lg:w-[42%] flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16 self-start pt-[100px]">
+                  <div className="w-full lg:w-[42%] flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16 self-start pt-[60px]">
                     {/* 단일 슬롯: 모든 Use Case가 동일한 자리에서 교체됨 */}
                     <div className="relative" style={{ height: '50vh' }}>
                       {useCaseItems.map((item, index) => {
@@ -1228,6 +1228,15 @@ const App = () => {
                                   />
                                 </div>
                               )}
+                              <button
+                                className="w-[120px] h-[48px] text-[16px] font-medium border border-white/20 bg-transparent text-white rounded-lg transition-all group flex items-center justify-center p-0 hover:border-white/60 hover:bg-transparent"
+                                onClick={() => navigate(item.id === 'meeting-agent' ? '/news/1' : item.id === 'works-ai' ? '/platform' : '/use-cases')}
+                              >
+                                <span>더보기</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="max-w-0 opacity-0 group-hover:max-w-[18px] group-hover:opacity-100 group-hover:ml-[4px] transition-all duration-300 overflow-hidden">
+                                  <path d="M7 17L17 7M17 7H7M17 7V17" />
+                                </svg>
+                              </button>
                             </motion.div>
                           </div>
                         );
