@@ -1632,7 +1632,7 @@ const App = () => {
                 viewport={{ once: false }}
                 transition={{ duration: 1, ease: "easeOut" }}
               >
-                <h2 className="text-white text-[36px] lg:text-[58px] font-bold mb-10 tracking-tighter leading-[1.2] drop-shadow-[0_0_25px_rgba(255,255,255,0.2)]">
+                <h2 className="text-white text-[32px] lg:text-[52px] font-bold mb-10 tracking-tighter leading-[1.2] drop-shadow-[0_0_25px_rgba(255,255,255,0.2)]">
                   Biz.AI와 함께<br />
                   AI 혁신을 지금 실행하세요.
                 </h2>
