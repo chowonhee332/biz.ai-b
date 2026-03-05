@@ -597,17 +597,17 @@ const StudioSection = () => {
             {
               title: "Core Agent",
               desc: "사전 개발된 Core Agent를 활용하여 빠른 프로토타이핑이 가능합니다.",
-              icon: <Cpu className="text-white" fill="currentColor" strokeWidth={0} size={24} />
+              icon: <Cpu className="text-white" strokeWidth={2.5} size={24} />
             },
             {
               title: "Use Case 패키징",
               desc: "Use case 단위로 패키징된 솔루션을 통해 즉시 배포할 수 있습니다.",
-              icon: <Layers className="text-white" fill="currentColor" strokeWidth={0} size={24} />
+              icon: <Layers className="text-white" strokeWidth={2.5} size={24} />
             },
             {
               title: "Delivery 가이드",
               desc: "AI 아키텍처 소개 및 배포 가이드를 통해 안정적인 운영을 지원합니다.",
-              icon: <BookOpen className="text-white" fill="currentColor" strokeWidth={0} size={24} />
+              icon: <BookOpen className="text-white" strokeWidth={2.5} size={24} />
             }
           ].map((item, i) => (
             <motion.div
