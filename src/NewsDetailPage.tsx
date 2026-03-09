@@ -11,10 +11,10 @@ export default function NewsDetailPage() {
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
     const news = location.state?.news || {
-        title: "카카오, '사이좋은 AI 포럼' 통해 미래세대 위한 AI 시민성 교육 담론 주도",
-        date: "2026년 02월 25일",
-        tag: "뉴스",
-        image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=2500"
+        타이틀: "카카오, '사이좋은 AI 포럼' 통해 미래세대 위한 AI 시민성 교육 담론 주도",
+        날짜: "2026년 02월 25일",
+        태그: "뉴스",
+        이미지: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=2500"
     };
 
     // Scroll to top on mount
@@ -95,14 +95,14 @@ export default function NewsDetailPage() {
                 <div className="max-w-[900px] mx-auto text-center flex flex-col items-center">
                     {/* Category & Date */}
                     <div className="flex items-center gap-3 mb-6 text-white/50 text-[15px] font-medium tracking-wide">
-                        <span>{news.tag}</span>
+                        <span>{news.태그}</span>
                         <span className="text-xs">|</span>
-                        <span>{news.date}</span>
+                        <span>{news.날짜}</span>
                     </div>
 
                     {/* Main Title */}
                     <h1 className="text-[36px] md:text-[50px] font-bold text-white mb-10 leading-snug break-keep tracking-tight">
-                        {news.title}
+                        {news.타이틀}
                     </h1>
                 </div>
             </section>
@@ -111,7 +111,7 @@ export default function NewsDetailPage() {
             <div className="w-full px-6 md:px-10 mb-20 max-w-[1400px] mx-auto">
                 <div className="w-full aspect-[21/9] sm:aspect-[24/9] md:aspect-[2.5/1] overflow-hidden sm:rounded-[32px] bg-zinc-900 border border-white/5">
                     <img
-                        src={news.image}
+                        src={news.이미지}
                         alt="Event Detail"
                         className="w-full h-full object-cover"
                     />
@@ -121,8 +121,8 @@ export default function NewsDetailPage() {
             {/* 3. Main Article Content */}
             <main className="max-w-[800px] mx-auto px-6 md:px-10 pb-32 flex-1">
                 <article className="prose prose-invert prose-lg max-w-none prose-p:text-white/80 prose-p:leading-[1.8] prose-p:font-medium text-[17px] md:text-[19px]">
-                    {news.content ? (
-                        <p className="mb-8 whitespace-pre-wrap">{news.content}</p>
+                    {news.내용 ? (
+                        <p className="mb-8 whitespace-pre-wrap">{news.내용}</p>
                     ) : (
                         <p className="mb-8 font-medium italic opacity-50">상세 내용이 준비 중입니다.</p>
                     )}

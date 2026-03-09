@@ -10,10 +10,10 @@ export default function UseCaseDetailPage() {
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
     const item = location.state?.news || {
-        title: "글로벌 금융사 A사 AI 기반 여신 심사 자동화",
-        date: "2026년 02월",
-        category: "Finance",
-        image: "https://images.unsplash.com/photo-1554224155-16974a4ea2c5?auto=format&fit=crop&q=80&w=2500"
+        타이틀: "글로벌 금융사 A사 AI 기반 여신 심사 자동화",
+        날짜: "2026년 02월",
+        카테고리: "보고 / 의사결정 향상",
+        이미지: "https://images.unsplash.com/photo-1554224155-16974a4ea2c5?auto=format&fit=crop&q=80&w=2500"
     };
 
     const [activeSection, setActiveSection] = useState<string>("introduction");
@@ -114,12 +114,12 @@ export default function UseCaseDetailPage() {
             <section className="pt-48 pb-16 px-6 md:px-10">
                 <div className="max-w-[900px] mx-auto text-center flex flex-col items-center">
                     <div className="flex items-center gap-3 mb-6 text-white/50 text-[15px] font-medium tracking-wide">
-                        <span>{item.category}</span>
+                        <span>{item.카테고리}</span>
                         <span className="text-xs">|</span>
-                        <span>{item.date}</span>
+                        <span>{item.날짜}</span>
                     </div>
                     <h1 className="text-[36px] md:text-[50px] font-bold text-white mb-10 leading-snug break-keep tracking-tight">
-                        {item.title}
+                        {item.타이틀}
                     </h1>
                 </div>
             </section>
@@ -127,7 +127,7 @@ export default function UseCaseDetailPage() {
             {/* Hero Image */}
             <div className="w-full px-6 md:px-10 mb-24 max-w-[1200px] mx-auto">
                 <div className="w-full aspect-[21/9] sm:aspect-[24/9] md:aspect-[2.5/1] overflow-hidden sm:rounded-[32px] bg-zinc-900 border border-white/5">
-                    <img src={item.image} alt="Case Study Hero" className="w-full h-full object-cover" />
+                    <img src={item.이미지} alt="Case Study Hero" className="w-full h-full object-cover" />
                 </div>
             </div>
 

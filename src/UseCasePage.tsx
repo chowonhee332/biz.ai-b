@@ -10,7 +10,7 @@ import Footer from '@/components/Footer';
 
 export default function UseCasePage() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [activeCategory, setActiveCategory] = useState("All");
+    const [activeCategory, setActiveCategory] = useState(USE_CASE_CATEGORIES[0]);
     const navigate = useNavigate();
     const [scrolled, setScrolled] = useState(false);
 
@@ -133,7 +133,7 @@ export default function UseCasePage() {
                     {/* Card Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                         {
-                            USE_CASES.filter(item => activeCategory === "All" || item.category === activeCategory).map((item, i) => (
+                            USE_CASES.filter(item => activeCategory === "전체" || item.카테고리 === activeCategory).map((item, i) => (
                                 <motion.div
                                     key={i}
                                     onClick={() => navigate(`/use-cases/${i + 1}`, { state: { news: item } })}
@@ -144,22 +144,22 @@ export default function UseCasePage() {
                                     className="group cursor-pointer flex flex-col"
                                 >
                                     <div className="relative aspect-video rounded-3xl overflow-hidden mb-6 bg-zinc-900 border border-white/5">
-                                        <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                        <img src={item.이미지} alt={item.타이틀} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                                     </div>
                                     <div className="flex flex-col gap-3">
                                         <span className="text-blue-500 text-[15px] font-medium transition-colors">
-                                            {item.industry}
+                                            {item.산업군}
                                         </span>
                                         <h3 className="text-white text-[22px] font-bold leading-tight group-hover:text-blue-400 transition-colors whitespace-pre-line">
-                                            {item.title}
+                                            {item.타이틀}
                                         </h3>
                                         <p className="text-white/50 text-[15px] leading-relaxed line-clamp-2">
-                                            {item.desc}
+                                            {item.설명}
                                         </p>
                                         <div className="mt-1">
                                             <span className="px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-[13px] font-bold text-blue-400 inline-block">
-                                                {item.tag}
+                                                {item.태그}
                                             </span>
                                         </div>
                                     </div>

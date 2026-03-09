@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import ParticleEngine from './components/ParticleEngine';
 import HeroContent from './components/HeroContent';
 import { LightRays } from './components/LightRays';
+import { HIGHLIGHT_NEWS, REGULAR_NEWS } from '@/context/news/news-data';
 import Silk from './components/Silk';
 import Aurora from './components/Aurora';
 import Antigravity from './components/Antigravity';
@@ -101,7 +102,7 @@ const SolutionCard = ({ number, image, title, desc, highlight, isLarge }: { numb
     </div>
 
     {/* Highlight Tag */}
-    <div className="text-[#0885FE] font-medium text-[16px] tracking-tight">
+    <div className="text-[#1A75FF] font-medium text-[16px] tracking-tight">
       {highlight.startsWith('#') ? highlight : `# ${highlight}`}
     </div>
 
@@ -138,7 +139,7 @@ const CharacterReveal = ({ text, className, scrollProgress, range, highlightInde
         // Blue highlight from the specified highlightIndex to the end.
         // If no index is provided, only the last line is highlighted.
         const isHighlight = lineIdx >= (highlightIndex ?? lines.length - 1);
-        const colorClass = isHighlight ? "text-[#0885FE]" : "text-white";
+        const colorClass = isHighlight ? "text-[#1A75FF]" : "text-white";
 
         return (
           <div
@@ -465,7 +466,7 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
         <section id="process" className="py-32 relative overflow-hidden px-6">
           <div className="max-w-[1200px] mx-auto relative z-10">
             <div className="text-center mb-24 px-6 md:px-0">
-              <p className="text-[#0885FE] text-[18px] font-semibold mb-4 tracking-wide">Why kt ds</p>
+              <p className="text-[#1A75FF] text-[18px] font-semibold mb-4 tracking-wide">Why kt ds</p>
               <h2 className="text-[36px] lg:text-[58px] font-bold text-black mb-6 tracking-tight leading-tight">
                 왜 kt ds와 함께 해야 할까요?
               </h2>
@@ -478,7 +479,7 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 {
-                  num: "01", title: "분석/설계", subtitle: "Retriever,\nAnalyst", color: "text-[#0885FE]",
+                  num: "01", title: "분석/설계", subtitle: "Retriever,\nAnalyst", color: "text-[#1A75FF]",
                   bullets: [
                     "데이터 협의체 기반 분석 및 선별",
                     "이를 기반으로 RAG 및 Agent 구현에 최적화된 체계 구축",
@@ -486,7 +487,7 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
                   ]
                 },
                 {
-                  num: "02", title: "구축", subtitle: "Writer,\nExecutor", color: "text-[#0885FE]",
+                  num: "02", title: "구축", subtitle: "Writer,\nExecutor", color: "text-[#1A75FF]",
                   bullets: [
                     "17년 업력으로 안정성 및 보안성을 갖춘 시스템 구축",
                     "답변/문서/코드/보고서 작성",
@@ -494,7 +495,7 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
                   ]
                 },
                 {
-                  num: "03", title: "테스트 및 이행", subtitle: "Validator,\nQuality", color: "text-[#0885FE]",
+                  num: "03", title: "테스트 및 이행", subtitle: "Validator,\nQuality", color: "text-[#1A75FF]",
                   bullets: [
                     "단계적인 성능 검증 및 최적화",
                     "검증, 규정/정책/보안/품질 체크, 근거 링크",
@@ -502,7 +503,7 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
                   ]
                 },
                 {
-                  num: "04", title: "안정화", subtitle: "Maintainer,\nSRE", color: "text-[#0885FE]",
+                  num: "04", title: "안정화", subtitle: "Maintainer,\nSRE", color: "text-[#1A75FF]",
                   bullets: [
                     "KPI/SLA/SLO 모니터링, 이상탐지, 알림/에스컬레이션",
                     "의사결정 근거·승인·변경 이력 기록(감사 대응)",
@@ -1020,7 +1021,7 @@ const App = () => {
               transition={{ duration: 0.8 }}
               className="text-left mb-12 md:mb-16 font-pretendard"
             >
-              <span className="text-[#0885FE] font-bold text-[16px] md:text-[20px] mb-2 md:mb-4 block tracking-tight">Multi Agent</span>
+              <span className="text-[#1A75FF] font-bold text-[16px] md:text-[20px] mb-2 md:mb-4 block tracking-tight">Multi Agent</span>
               <h2 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-4 md:mb-6 tracking-tight">도메인별 Multi Agent</h2>
               <p className="text-white/80 text-[16px] md:text-[18px] font-normal tracking-tight">공공/금융 등 도메인별로 kt ds의 Multi-Agent를 활용해 보세요.</p>
             </motion.div>
@@ -1075,7 +1076,7 @@ const App = () => {
               transition={{ duration: 0.8 }}
               className="w-full flex flex-col items-center"
             >
-              <span className="text-[#0885FE] font-bold text-[14px] tracking-widest block mb-4 uppercase">Use Case</span>
+              <span className="text-[#1A75FF] font-bold text-[14px] tracking-widest block mb-4 uppercase">Use Case</span>
               <h2 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent tracking-tight leading-[1.1] font-pretendard mx-auto">
                 Solution, Multi Agent <br />
                 Use Cases
@@ -1102,7 +1103,7 @@ const App = () => {
                   {/* Solution + Visual Group */}
                   <div className="bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-6 flex flex-col gap-8">
                     <div className="flex flex-col gap-4">
-                      <p className="text-[#0885FE] text-[15px] font-semibold tracking-tight">
+                      <p className="text-[#1A75FF] text-[15px] font-semibold tracking-tight">
                         {String(index + 1).padStart(2, '0')}. Solution
                       </p>
                       <h4 className="text-[24px] font-bold text-white leading-tight">
@@ -1115,7 +1116,7 @@ const App = () => {
                         <ul className="space-y-2">
                           {item.features.map((feature, i) => (
                             <li key={i} className="flex items-start gap-3 text-white/90 text-[14px] leading-relaxed">
-                              <span className="text-[#0885FE] mt-[2px]">•</span>
+                              <span className="text-[#1A75FF] mt-[2px]">•</span>
                               <span className="break-keep">{feature}</span>
                             </li>
                           ))}
@@ -1380,7 +1381,7 @@ const App = () => {
                 <div key={i} className="flex flex-col items-start font-pretendard">
                   <div className="text-[80px] font-medium text-white tracking-tighter leading-none mb-12">
                     <AnimatedCounter from={0} to={stat.value} />
-                    <span className="text-[#0885FE] ml-1">{stat.suffix}</span>
+                    <span className="text-[#1A75FF] ml-1">{stat.suffix}</span>
                   </div>
                   <span className="text-white text-[18px] font-bold mb-1">{stat.label}</span>
                   <p className="text-white/80 text-[16px] leading-relaxed font-normal break-keep">{stat.sub}</p>
@@ -1477,88 +1478,7 @@ const App = () => {
             ref={newsScrollRef}
             className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-12 pl-[calc(max(24px,(100vw-1200px)/2+24px))] pr-6"
           >
-            {[
-              {
-                title: "kt ds, BC카드와 AI 기반\n자동화 통합보안관제 플랫폼 구축",
-                date: "2025/12/24",
-                tag: "News",
-                solution: "-",
-                link: "https://www.etnews.com/20251223000037",
-                image: "https://img.etnews.com/news/article/2025/12/22/news-p.v1.20251222.cf4baa668f8d4ead865462b43805380c_P2.jpg"
-              },
-              {
-                title: "한국표준협회, kt ds에\nAI 품질·신뢰성 평가 인증 수여",
-                date: "2025/10/27",
-                tag: "News",
-                solution: "AI 솔루션 3종",
-                link: "https://www.dailysmart.co.kr/news/articleView.html?idxno=115054",
-                image: "https://cdn.dailysmart.co.kr/news/photo/202510/115054_114643_39.jpg"
-              },
-              {
-                title: "KT DS, 폐쇄망에서도 쓰는\nAI 코드 어시스턴트 개발",
-                date: "2025/07/08",
-                tag: "News",
-                solution: "코드박스",
-                link: "https://zdnet.co.kr/view/?no=20250708200606",
-                image: "https://image.zdnet.co.kr/2025/07/08/65bf5e3563cf2d49e53588eb72950582.png"
-              },
-              {
-                title: "KT DS, AI 에이전트로 기업 AX 돕는다",
-                date: "2025/07/02",
-                tag: "News",
-                solution: "Beast AI",
-                link: "https://it.chosun.com/news/articleView.html?idxno=2023092143480",
-                image: "https://cdn.it.chosun.com/news/photo/202507/2023092143480_420058_5410.jpg"
-              },
-              {
-                title: "KT DS \"AI 게이트웨이로 기업\n시스템과 AI 에이전트 쉽게 연결\"",
-                date: "2025/07/02",
-                tag: "News",
-                solution: "Beast AI",
-                link: "https://www.yna.co.kr/view/AKR20250702048800017",
-                image: "https://img0.yna.co.kr/etc/inner/KR/2025/07/02/AKR20250702048800017_01_i_P4.jpg"
-              },
-              {
-                title: "KT DS, '클라우드위즈'로\niF 디자인 어워드 2025 본상 수상",
-                date: "2025/04/29",
-                tag: "News",
-                solution: "CloudWiz",
-                link: "https://www.etnews.com/20250429000079",
-                image: "https://img.etnews.com/news/article/2025/04/29/news-p.v1.20250429.6ef7feb2ac78480aa41d6d35e3ad7700_P1.jpg"
-              },
-              {
-                title: "kt ds “'Works AI'로 구성원\n업무 효율 향상과 AI 생활화 지원”",
-                date: "2025/03/31",
-                tag: "News",
-                solution: "Works AI",
-                link: "https://www.etnews.com/20250328000136",
-                image: "https://img.etnews.com/news/article/2025/03/28/news-p.v1.20250328.4d46aad34a124f11be2786e667cc9ea4_P1.jpg"
-              },
-              {
-                title: "KT DS, ABC랩 출시\n\"SaaS로 AI 사전검증 지원\"",
-                date: "2025/03/12",
-                tag: "News",
-                solution: "ABC Lab",
-                link: "https://zdnet.co.kr/view/?no=20250312145934",
-                image: "https://image.zdnet.co.kr/2025/03/12/08c78f3eab7a71840585879d07162172.jpg"
-              },
-              {
-                title: "AI 생활화를 위한 kt ds 만의\n그룹웨어: Works AI",
-                date: "2024/12/12",
-                tag: "Tech Stories",
-                solution: "Works AI",
-                link: "https://blog.naver.com/ktds_official/223691208730",
-                image: "https://blogthumb.pstatic.net/MjAyNDEyMTJfOTUg/MDAxNzMzOTg3MTU1Njk5.dGwww3I9v16JUbufq3U5OpY2C47CACtuwWv7kAUiNd8g.A5XsHcNVcZ8dvUq_tbq5vEFpqnowZNNEHkPfYVVoPIsg.JPEG/%BA%ED%B7%CE%B1%D7_%BD%E6%B3%D7%C0%CF_%BE%E7%BD%C4_%281%29.jpg?type=w2"
-              },
-              {
-                title: "kt ds, 사내용 MS 애저 기반\n'웍스AI' 오픈",
-                date: "2024/11/29",
-                tag: "News",
-                solution: "Works AI",
-                link: "https://www.aitimes.com/news/articleView.html?idxno=165782",
-                image: "https://cdn.aitimes.com/news/photo/202411/165782_180045_5537.png"
-              }
-            ].map((news: any, i) => (
+            {[...HIGHLIGHT_NEWS, ...REGULAR_NEWS].slice(0, 8).map((news: any, i) => (
               <motion.div
                 key={i}
                 initial={{ y: 20, opacity: 0 }}
@@ -1567,34 +1487,29 @@ const App = () => {
                 viewport={{ once: true }}
                 className="group cursor-pointer shrink-0 w-[380px]"
                 onClick={() => {
-                  if (news.link) {
-                    window.open(news.link, '_blank');
-                  } else {
-                    navigate(`/news/${(i % 4) + 1}`, { state: { news } });
-                  }
+                  navigate(`/news/${i + 1}`, { state: { news } });
                 }}
               >
                 {/* 썸네일: 380 * 240 사이즈 */}
                 <div className="relative w-full aspect-[380/240] rounded-2xl overflow-hidden mb-5 bg-zinc-900 border border-white/5 shadow-2xl">
                   <motion.img
-                    src={news.image}
-                    alt={news.title}
+                    src={news.이미지}
+                    alt={news.타이틀}
                     className="w-full h-full object-cover transition-all duration-700"
                     whileHover={{ scale: 1.1 }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40" />
                 </div>
 
-                {/* 텍스트 */}
                 <div className="flex flex-col px-1">
-                  <span className="text-blue-400 text-[14px] font-bold mb-3">{news.tag}</span>
+                  <span className="text-blue-400 text-[14px] font-bold mb-3">{news.태그}</span>
                   <h3 className="text-white text-[24px] font-bold leading-snug mb-3 whitespace-pre-line group-hover:text-blue-400 transition-colors">
-                    {news.title}
+                    {news.타이틀}
                   </h3>
                   <div className="flex items-center text-white/40 text-[14px] font-medium">
-                    <span>{news.solution}</span>
+                    <span>{news.솔루션}</span>
                     <span className="mx-2 text-[4px] opacity-50">●</span>
-                    <span>{news.date}</span>
+                    <span>{news.날짜}</span>
                   </div>
                 </div>
               </motion.div>

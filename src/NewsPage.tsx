@@ -10,7 +10,7 @@ import Footer from '@/components/Footer';
 
 export default function NewsPage() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [activeCategory, setActiveCategory] = useState("All");
+    const [activeCategory, setActiveCategory] = useState("전체");
     const newsScrollRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
     const [scrolled, setScrolled] = useState(false);
@@ -167,20 +167,20 @@ export default function NewsPage() {
                                 {/* 썸네일: 380 * 240 사이즈 */}
                                 <div className="relative w-full aspect-[380/240] rounded-2xl overflow-hidden mb-5 bg-zinc-900 border border-white/5 shadow-2xl">
                                     <motion.img
-                                        src={news.image}
-                                        alt={news.title}
+                                        src={news.이미지}
+                                        alt={news.타이틀}
                                         className="w-full h-full object-cover transition-all duration-700"
                                         whileHover={{ scale: 1.1 }}
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40" />
                                 </div>
                                 <div className="pt-2 px-1 flex-1 flex flex-col">
-                                    <span className="text-blue-400 text-[14px] font-bold mb-3">{news.tag}</span>
-                                    <h3 className="text-white text-[24px] font-bold leading-snug whitespace-pre-line group-hover:text-blue-400 transition-colors mb-4">{news.title}</h3>
+                                    <span className="text-blue-400 text-[14px] font-bold mb-3">{news.태그}</span>
+                                    <h3 className="text-white text-[24px] font-bold leading-snug whitespace-pre-line group-hover:text-blue-400 transition-colors mb-4">{news.타이틀}</h3>
                                     <div className="flex items-center text-white/40 text-[14px] font-medium mt-auto">
-                                        <span>{news.solution}</span>
+                                        <span>{news.솔루션}</span>
                                         <span className="mx-2 text-[4px] opacity-50">●</span>
-                                        <span>{news.date}</span>
+                                        <span>{news.날짜}</span>
                                     </div>
                                 </div>
                             </motion.div>
@@ -218,7 +218,7 @@ export default function NewsPage() {
                     <div className="flex-1">
 
                         <div className="flex flex-col gap-8">
-                            {REGULAR_NEWS.filter(news => activeCategory === "All" || news.tag === activeCategory || (activeCategory === "Tech Stories" && news.tag === "Tech Stories")).map((news: any, i) => (
+                            {[...HIGHLIGHT_NEWS, ...REGULAR_NEWS].filter(news => activeCategory === "전체" || news.태그 === activeCategory).map((news: any, i) => (
                                 <motion.div
                                     key={i}
                                     onClick={() => {
@@ -231,20 +231,20 @@ export default function NewsPage() {
                                     className="group flex flex-col-reverse sm:flex-row gap-8 items-center py-8 rounded-3xl bg-transparent transition-all cursor-pointer"
                                 >
                                     <div className="flex-1 w-full flex flex-col">
-                                        <span className="text-blue-400 text-[14px] font-bold mb-3">{news.tag}</span>
-                                        <h3 className="text-white text-[24px] font-bold leading-snug mb-3 group-hover:text-blue-400 transition-colors">{news.title}</h3>
-                                        <p className="text-white/60 text-[16px] leading-relaxed line-clamp-2 mb-6">{news.desc}</p>
+                                        <span className="text-blue-400 text-[14px] font-bold mb-3">{news.태그}</span>
+                                        <h3 className="text-white text-[24px] font-bold leading-snug mb-3 group-hover:text-blue-400 transition-colors">{news.타이틀}</h3>
+                                        <p className="text-white/60 text-[16px] leading-relaxed line-clamp-2 mb-6">{news.설명}</p>
                                         <div className="flex items-center text-white/40 text-[14px] font-medium mt-auto">
-                                            <span>{news.solution}</span>
+                                            <span>{news.솔루션}</span>
                                             <span className="mx-2 text-[4px] opacity-50">●</span>
-                                            <span>{news.date}</span>
+                                            <span>{news.날짜}</span>
                                         </div>
                                     </div>
 
                                     <div className="w-full sm:w-[240px] shrink-0 aspect-video rounded-2xl overflow-hidden bg-zinc-900 border border-white/5">
                                         <img
-                                            src={news.image}
-                                            alt={news.title}
+                                            src={news.이미지}
+                                            alt={news.타이틀}
                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         />
                                     </div>
