@@ -93,14 +93,19 @@ export default function Navbar({ activePage }: NavbarProps) {
                 </Link>
               ))}
               <div className="h-px bg-border-light my-2" />
-              <div className="flex flex-col gap-3">
-                <a href="https://www.ktds.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-text-secondary/60 font-medium py-2">
-                  <img src="/ktds_white.png" alt="kt ds" className="h-4 w-auto opacity-70" />
-                  <span className="text-[15px]">kt ds 홈페이지</span>
+              <div className="flex flex-col gap-5">
+                <a href="https://www.ktds.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-text-secondary/60 font-medium py-1">
+                  <span className="text-[16px]">kt ds 홈페이지</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
                 </a>
-                <Button className="w-full bg-text-primary text-bg-main font-bold h-12 rounded-xl text-[15px]">
-                  AI Agent 스튜디오 바로가기
-                </Button>
+                <a href="#" className="flex items-center gap-1.5 text-text-secondary/60 font-medium py-1">
+                  <span className="text-[16px]">AI Agent 스튜디오</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </a>
               </div>
             </div>
           </motion.div>

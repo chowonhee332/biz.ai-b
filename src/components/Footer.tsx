@@ -17,7 +17,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#000000] border-t border-white/10 py-10 px-6 md:px-10 relative">
+    <footer className="bg-bg-main border-t border-border-light py-10 container-responsive relative">
       <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row md:items-start md:justify-between gap-6">
         {/* 좌측: 로고 + 주소 */}
         <div className="flex flex-col gap-3">
@@ -43,7 +43,7 @@ export default function Footer() {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 cursor-pointer z-50"
+          className="fixed bottom-8 right-8 w-10 h-10 rounded-full bg-bg-surface border border-border-light flex items-center justify-center text-text-primary hover:bg-bg-active transition-all duration-300 cursor-pointer z-50"
           aria-label="맨 위로"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

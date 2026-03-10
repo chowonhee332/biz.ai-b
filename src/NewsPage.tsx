@@ -173,10 +173,10 @@ export default function NewsPage() {
                                     onClick={() => {
                                         navigate(`/news/${i + 1}`, { state: { news } });
                                     }}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ delay: i * 0.1, duration: 0.5 }}
+                                    transition={{ delay: i * 0.05, duration: 0.4 }}
                                     className="group flex flex-col-reverse sm:flex-row gap-8 items-center py-8 rounded-3xl bg-transparent transition-all cursor-pointer"
                                 >
                                     <div className="flex-1 w-full flex flex-col">

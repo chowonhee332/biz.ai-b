@@ -87,9 +87,9 @@ export const USE_CASES: UseCaseItem[] = [
 export const USE_CASE_CATEGORIES = ["전체", "데이터 분석", "보고 / 의사결정 향상", "리스크 관리 효율화", "강력한 보안", "내부 업무 처리 향상"];
 
 export const USE_CASE_CATEGORY_COLORS: Record<string, { text: string; bg: string; border: string }> = {
-    "데이터 분석": { text: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
-    "보고 / 의사결정 향상": { text: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
-    "리스크 관리 효율화": { text: "text-sky-400", bg: "bg-sky-500/10", border: "border-sky-500/20" },
-    "강력한 보안": { text: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20" },
-    "내부 업무 처리 향상": { text: "text-blue-500", bg: "bg-blue-500/10", border: "border-blue-500/20" }
+    "데이터 분석": { text: "text-emerald", bg: "bg-emerald/10", border: "border-emerald/20" },
+    "보고 / 의사결정 향상": { text: "text-brand-secondary", bg: "bg-brand-primary/10", border: "border-brand-primary/20" },
+    "리스크 관리 효율화": { text: "text-sky", bg: "bg-sky/10", border: "border-sky/20" },
+    "강력한 보안": { text: "text-purple", bg: "bg-purple/10", border: "border-purple/20" },
+    "내부 업무 처리 향상": { text: "text-brand-primary", bg: "bg-brand-primary/10", border: "border-brand-primary/20" }
 };

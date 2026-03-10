@@ -86,7 +86,7 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
         transition={{ duration: 0.6, delay: 0.3 }}
         className={`flex mb-6 ${isLeft ? 'justify-start' : 'justify-center'} w-full`}
       >
-        <div className="relative inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 backdrop-blur-sm overflow-hidden">
+        <div className="relative inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm overflow-hidden">
           <motion.span
             className="relative font-normal text-[13px] tracking-[0.05em] font-pretendard bg-clip-text text-transparent bg-[length:200%_100%]"
             style={{
@@ -114,23 +114,23 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
               className={`text-4xl md:text-5xl lg:text-[64px] font-[600] mb-4 md:mb-6 leading-[1.1] tracking-tight w-full max-w-5xl flex flex-col ${isLeft ? 'items-start' : 'items-center'}`}
             >
               <span className={`block whitespace-nowrap ${isLeft ? 'text-left' : 'text-center'}`}>
-                <span className="bg-gradient-to-br from-[#C1DCEF] via-white to-white bg-clip-text text-transparent">
+                <span className="bg-gradient-to-br from-brand-secondary via-text-primary to-text-primary bg-clip-text text-transparent">
                   {lines[0]}
                 </span>
-                {!done && lines.length === 1 && <span className="inline-block w-[3px] h-[0.85em] bg-blue-600 ml-1 align-middle animate-pulse" />}
+                {!done && lines.length === 1 && <span className="inline-block w-[3px] h-[0.85em] bg-brand-primary ml-1 align-middle animate-pulse" />}
               </span>
               <span className={`block whitespace-nowrap ${isLeft ? 'text-left' : 'text-center'}`}>
-                <span className="bg-gradient-to-br from-[#C1DCEF] via-white to-white bg-clip-text text-transparent">
+                <span className="bg-gradient-to-br from-brand-secondary via-text-primary to-text-primary bg-clip-text text-transparent">
                   {lines[1] ?? ''}
                 </span>
-                {!done && lines.length === 2 && <span className="inline-block w-[3px] h-[0.85em] bg-blue-600 ml-1 align-middle animate-pulse" />}
+                {!done && lines.length === 2 && <span className="inline-block w-[3px] h-[0.85em] bg-brand-primary ml-1 align-middle animate-pulse" />}
               </span>
             </h1>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: done ? 1 : 0 }}
               transition={{ duration: 0.5 }}
-              className={`text-[18px] lg:text-[16px] font-normal text-white/60 max-w-[85vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl w-full leading-relaxed whitespace-pre-line ${isLeft ? 'text-left' : 'text-center'} px-1`}
+              className={`text-[18px] lg:text-[16px] font-normal text-text-secondary max-w-[85vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl w-full leading-relaxed whitespace-pre-line ${isLeft ? 'text-left' : 'text-center'} px-1`}
             >
               {slide.sub}
             </motion.p>
@@ -146,7 +146,7 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
               setIndex(i);
               startRotation();
             }}
-            className={`h-1.5 w-1.5 rounded-full transition-all duration-500 ${i === index ? "bg-white" : "bg-white/20 hover:bg-white/40"
+            className={`h-1.5 w-1.5 rounded-full transition-all duration-500 ${i === index ? "bg-text-primary" : "bg-text-primary/20 hover:bg-text-primary/40"
               }`}
             aria-label={`Slide ${i + 1}`}
           />
@@ -160,7 +160,7 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
         className={`flex flex-col sm:flex-row gap-4 ${isLeft ? 'justify-start' : 'justify-center'} mt-12`}
       >
         <Button
-          className="group bg-white text-[#000000] hover:bg-white/90 w-[130px] h-[48px] py-0 text-[15px] font-semibold rounded-full transition-all flex items-center justify-center gap-0"
+          className="group bg-text-primary text-bg-main hover:bg-text-primary/90 w-[130px] h-[48px] py-0 text-[15px] font-semibold rounded-full transition-all flex items-center justify-center gap-0"
           disabled={isAnalyzing}
         >
           무료체험 신청

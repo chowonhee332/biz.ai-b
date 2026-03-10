@@ -26,7 +26,7 @@ const EngravedIcon = ({ children }: { children: React.ReactNode }) => {
                 // Deep inner shadow for engraving depth + sharp white highlight (specular) on the opposite edge
                 filter: 'drop-shadow(1px 1.5px 0.5px rgba(255, 255, 255, 0.25)) drop-shadow(-1px -1px 2px rgba(0, 0, 0, 0.9))',
             }}
->
+        >
             {children}
         </div>
     );
@@ -46,24 +46,24 @@ const Thick3DTile = ({ children, thickness = 22, ...props }: any) => {
             {Array.from({ length: thickness }).map((_, i) => (
                 <div
                     key={i}
-                    className="absolute inset-0 rounded-[32px] md:rounded-[44px] bg-[#1a1c23]"
+                    className="absolute inset-0 rounded-[32px] md:rounded-[44px] bg-metal-base"
                     style={{
                         transform: `translateZ(-${i}px)`,
                         // Simulate rim lighting on the edges of the 3D block
-                        boxShadow: i === 0 ? 'none' : 'inset 1px 1px 1px rgba(255,255,255,0.08), inset -1px -1px 2px rgba(0,0,0,1)'
+                        boxShadow: i === 0 ? 'none' : 'inset 1px 1px 1px var(--color-metal-rim), inset -1px -1px 2px rgba(0,0,0,1)'
                     }}
                 />
             ))}
 
             {/* Top Surface Layer - Visible dark metallic grey with noise */}
             <div
-                className="absolute inset-0 rounded-[32px] md:rounded-[44px] overflow-hidden bg-gradient-to-br from-[#3b4351] via-[#1b1f28] to-[#0c0e12] flex items-center justify-center border-t border-l border-white/20"
+                className="absolute inset-0 rounded-[32px] md:rounded-[44px] overflow-hidden bg-gradient-to-br from-metal-gradient-start to-metal-gradient-end flex items-center justify-center border-t border-l border-border-light"
                 style={{
                     transform: 'translateZ(0px)',
                     // Soft inner glow to simulate specular highlight on rounded edges
                     boxShadow: 'inset 0 4px 15px rgba(255,255,255,0.15), inset 1.5px 0 4px rgba(255,255,255,0.1), inset -2px -2px 10px rgba(0,0,0,0.9)'
                 }}
->
+            >
                 <NoiseFilter />
                 {/* Center diffuse light */}
                 <div
@@ -165,7 +165,7 @@ export default function HeroFloatingTiles() {
                         rotateY: { duration: 8, repeat: Infinity, ease: 'easeInOut', delay: tile.delay },
                         rotateZ: { duration: 9, repeat: Infinity, ease: 'easeInOut', delay: tile.delay },
                     }}
->
+                >
                     {tile.icon}
                 </Thick3DTile>
             ))}
