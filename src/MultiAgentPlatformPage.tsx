@@ -124,24 +124,23 @@ export default function MultiAgentPlatformPage() {
 
                                     <div className="mb-16">
                                         <h3 className="text-[15px] font-bold text-[#1A75FF] mb-6 tracking-wider uppercase">주요기능</h3>
-                                        <div className="bg-white/[0.03] backdrop-blur-sm rounded-[20px] p-8 border border-white/10 space-y-6">
+                                        <div className="bg-white/[0.03] backdrop-blur-sm rounded-[20px] p-8 border border-white/10 space-y-[28px]">
                                             {currentContent.주요기능.map((feature, i) => {
                                                 const [title, ...descParts] = feature.split(':');
                                                 const description = descParts.join(':').trim();
                                                 return (
-                                                    <div key={i} className="flex gap-4 items-start group/item">
-                                                        <ChevronRight className="mt-1 size-5 text-[#1A75FF] shrink-0 opacity-40 group-hover/item:opacity-100 transition-opacity" strokeWidth={3} />
-                                                        <div className="flex flex-col gap-2">
-                                                            <div className="text-white text-[17px] font-bold leading-tight">
+                                                    <div key={i} className="flex flex-col gap-3 group/item">
+                                                        <div className="flex items-center gap-3">
+                                                            <div className="w-1 h-5 bg-[#1A75FF] rounded-full" />
+                                                            <div className="text-white text-[18px] font-bold leading-tight">
                                                                 {title.trim()}
                                                             </div>
-                                                            {description && (
-                                                                <div className="flex gap-2 text-white/60 text-[15px] leading-relaxed font-medium pl-1">
-                                                                    <span className="text-[#1A75FF]/60 font-bold">{'>'}</span>
-                                                                    <span className="break-keep">{description}</span>
-                                                                </div>
-                                                            )}
                                                         </div>
+                                                        {description && (
+                                                            <div className="pl-4 text-white/50 text-[15px] leading-relaxed font-medium break-keep">
+                                                                {description}
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 );
                                             })}
