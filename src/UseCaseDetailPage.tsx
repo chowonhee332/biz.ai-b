@@ -79,7 +79,7 @@ export default function UseCaseDetailPage() {
 
             {/* Hero Image */}
             <div className="w-full mb-24 max-w-[1200px] mx-auto px-6 md:px-0">
-                <div className="w-full aspect-[21/9] sm:aspect-[24/9] md:aspect-[2.5/1] overflow-hidden rounded-3xl bg-zinc-900 border border-white/5 shadow-2xl">
+                <div className="w-full aspect-[21/9] sm:aspect-[24/9] md:aspect-[2.5/1] overflow-hidden rounded-[20px] bg-zinc-900 border border-white/5 shadow-2xl">
                     <img src={item.이미지} alt="Case Study Hero" className="w-full h-full object-cover" />
                 </div>
             </div>
@@ -110,7 +110,7 @@ export default function UseCaseDetailPage() {
                                 )}
 
                                 {section.list && (
-                                    <div className="bg-white/5 rounded-3xl p-8 border border-white/10 mb-6">
+                                    <div className="bg-white/5 rounded-[20px] p-8 border border-white/10 mb-6">
                                         <ul className="flex flex-col gap-4">
                                             {section.list.map((li: string, idx: number) => (
                                                 <li key={idx} className="flex items-start gap-3 text-white/80">
@@ -127,7 +127,7 @@ export default function UseCaseDetailPage() {
                                 {section.items && (
                                     <div className="grid grid-cols-1 gap-4">
                                         {section.items.map((it: any, idx: number) => (
-                                            <div key={idx} className="p-8 rounded-3xl bg-white/5 border border-white/10 relative group transition-all">
+                                            <div key={idx} className="p-8 rounded-[20px] bg-white/5 border border-white/10 relative group transition-all">
                                                 <div className="flex flex-col gap-3 relative z-10">
                                                     <div className="flex items-center gap-3 text-white text-[18px] font-bold">
                                                         <div className="size-6 rounded-full bg-[#1A75FF] flex items-center justify-center text-[10px] shadow-lg shadow-blue-500/20 text-white leading-none">{(idx + 1).toString().padStart(2, '0')}</div>

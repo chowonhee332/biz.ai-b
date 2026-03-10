@@ -196,6 +196,16 @@ export const PLATFORM_PAGE_CONFIG = {
                     상세링크: "#"
                 }
             ],
+            소개영상: [
+                {
+                    타이틀: "Works AI 소개영상('25.3 MS AI Tour)",
+                    URL: "https://youtu.be/wDBYyDwThJE?si=Ny5Pyb6sB4Av8apb"
+                },
+                {
+                    타이틀: "Works AI Desktop 소개 영상",
+                    URL: "https://www.youtube.com/watch?v=8uz26Ae6HDE"
+                }
+            ],
             오퍼링: [
                 { 타이틀: "AI 회의록 Cloud", 설명: "간편한 클라우드 기반 음성 기록 서버", 상세링크: "#" },
                 { 타이틀: "AI 회의록 Appliance", 설명: "사내 보안을 위한 구축형 전용 하드웨어", 상세링크: "#" }
@@ -212,17 +222,13 @@ export const PLATFORM_PAGE_CONFIG = {
                 }
             ],
             메인이미지: "/works.png",
-            소개영상: [
-                {
-                    타이틀: "AI 회의록 실시간 화자 분리 시연",
-                    URL: "https://example.com/meeting-demo.mp4"
-                }
-            ],
+
             관련리소스: [
                 { 타이틀: "AI 회의록 제품 소개서", 파일타입: "PDF", URL: "#" },
                 { 타이틀: "AI 회의록 사용법 가이드", 파일타입: "PDF", URL: "#" }
             ]
         },
+
         "AI:ON-U": {
             타이틀: "노코드로 만드는 비즈니스 에이전트 빌더 'AI:ON-U'",
             설명: "전문적인 코딩 지식 없이도 드래그 앤 드롭 방식으로 우리 회사만의 AI 에이전트를 만들 수 있습니다.",
@@ -290,10 +296,15 @@ export const PLATFORM_PAGE_CONFIG = {
             메인이미지: "/works.png",
             소개영상: [
                 {
-                    타이틀: "노코드로 5분 만에 에이전트 만들기",
-                    URL: "https://example.com/aion-demo.mp4"
+                    타이틀: "Works AI 소개영상('25.3 MS AI Tour)",
+                    URL: "https://youtu.be/wDBYyDwThJE?si=Ny5Pyb6sB4Av8apb"
+                },
+                {
+                    타이틀: "Works AI Desktop 소개 영상",
+                    URL: "https://www.youtube.com/watch?v=8uz26Ae6HDE"
                 }
             ],
+
             관련리소스: [
                 { 타이틀: "AI:ON-U 제품 소개서", 파일타입: "PDF", URL: "#" },
                 { 타이틀: "AI:ON-U 플랫폼 가이드", 파일타입: "PDF", URL: "#" }
@@ -366,8 +377,12 @@ export const PLATFORM_PAGE_CONFIG = {
             메인이미지: "/works.png",
             소개영상: [
                 {
-                    타이틀: "Codebox 폐쇄망 보안 개발 시연",
-                    URL: "https://example.com/codebox-demo.mp4"
+                    타이틀: "Works AI 소개영상('25.3 MS AI Tour)",
+                    URL: "https://youtu.be/wDBYyDwThJE?si=Ny5Pyb6sB4Av8apb"
+                },
+                {
+                    타이틀: "Works AI Desktop 소개 영상",
+                    URL: "https://www.youtube.com/watch?v=8uz26Ae6HDE"
                 }
             ],
             관련리소스: [
@@ -442,8 +457,12 @@ export const PLATFORM_PAGE_CONFIG = {
             메인이미지: "/works.png",
             소개영상: [
                 {
-                    타이틀: "실시간 개인정보 필터링 시연",
-                    URL: "https://example.com/beast-demo.mp4"
+                    타이틀: "Works AI 소개영상('25.3 MS AI Tour)",
+                    URL: "https://youtu.be/wDBYyDwThJE?si=Ny5Pyb6sB4Av8apb"
+                },
+                {
+                    타이틀: "Works AI Desktop 소개 영상",
+                    URL: "https://www.youtube.com/watch?v=8uz26Ae6HDE"
                 }
             ],
             관련리소스: [
@@ -518,8 +537,12 @@ export const PLATFORM_PAGE_CONFIG = {
             메인이미지: "/works.png",
             소개영상: [
                 {
-                    타이틀: "CloudWiz 인텔리전트 대시보드 투어",
-                    URL: "https://example.com/cloudwiz-demo.mp4"
+                    타이틀: "Works AI 소개영상('25.3 MS AI Tour)",
+                    URL: "https://youtu.be/wDBYyDwThJE?si=Ny5Pyb6sB4Av8apb"
+                },
+                {
+                    타이틀: "Works AI Desktop 소개 영상",
+                    URL: "https://www.youtube.com/watch?v=8uz26Ae6HDE"
                 }
             ],
             관련리소스: [
@@ -548,6 +571,16 @@ export const PLATFORM_PAGE_CONFIG = {
             ],
             주요활용시나리오: [
                 { 타이틀: "국정감사 예상 질의서를 급하게 작성해야 하는 경우", 설명: "과거 데이터를 통한 초안 즉시 생성" }
+            ],
+            소개영상: [
+                {
+                    타이틀: "Works AI 소개영상('25.3 MS AI Tour)",
+                    URL: "https://youtu.be/wDBYyDwThJE?si=Ny5Pyb6sB4Av8apb"
+                },
+                {
+                    타이틀: "Works AI Desktop 소개 영상",
+                    URL: "https://www.youtube.com/watch?v=8uz26Ae6HDE"
+                }
             ],
             고객사례: [],
             오퍼링: [],

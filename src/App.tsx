@@ -57,7 +57,7 @@ import {
 const StudioCard = ({ icon, title, desc }: { icon: React.ReactElement; title: string; desc: string }) => (
   <Card className="p-10 rounded-[20px] bg-[#111] border-white/20 hover:bg-[#1a1a1a] hover:border-white/30 transition-all duration-500 group flex flex-col items-center md:items-start text-center md:text-left shadow-2xl relative overflow-hidden text-left break-keep">
     <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl -mr-16 -mt-16 group-hover:bg-blue-500/20 transition-colors duration-500" />
-    <div className="size-16 bg-white/5 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform border border-white/20 relative z-10 text-white/80 group-hover:text-blue-400">
+    <div className="size-16 bg-white/5 rounded-[20px] flex items-center justify-center mb-8 group-hover:scale-110 transition-transform border border-white/20 relative z-10 text-white/80 group-hover:text-blue-400">
       {React.cloneElement(icon as any, { size: 32 })}
     </div>
     <h4 className="text-2xl font-bold text-white mb-4 relative z-10">{title}</h4>
@@ -1044,7 +1044,7 @@ const App = () => {
                   </div>
 
                   {/* Solution + Visual Group */}
-                  <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-[2.5rem] p-6 flex flex-col gap-8">
+                  <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-[20px] p-6 flex flex-col gap-8">
                     <div className="flex flex-col gap-4">
                       <p className="text-[#1A75FF] text-[15px] font-semibold tracking-tight">
                         {String(index + 1).padStart(2, '0')}. Solution
@@ -1055,7 +1055,7 @@ const App = () => {
                       <p className="text-white/70 text-[15px] leading-relaxed break-keep font-normal">
                         {item.desc}
                       </p>
-                      <div className="bg-white/[0.04] border border-white/10 rounded-2xl p-4">
+                      <div className="bg-white/[0.04] border border-white/10 rounded-[20px] p-4">
                         <ul className="space-y-2">
                           {item.features.map((feature, i) => (
                             <li key={i} className="flex items-start gap-3 text-white/90 text-[14px] leading-relaxed">
@@ -1068,7 +1068,7 @@ const App = () => {
                     </div>
 
                     {/* Visual Preview */}
-                    <div className="relative aspect-video rounded-2xl overflow-hidden bg-zinc-900 border border-white/5 shadow-2xl">
+                    <div className="relative aspect-video rounded-[20px] overflow-hidden bg-zinc-900 border border-white/5 shadow-2xl">
                       <img
                         src={index === 0 ? "/test-1.png" : index === 1 ? "/test-2.png" : "/test-3.png"}
                         alt={item.titlePrefix}
@@ -1434,7 +1434,7 @@ const App = () => {
                 }}
               >
                 {/* 썸네일: 380 * 240 사이즈 */}
-                <div className="relative w-full aspect-[380/240] rounded-2xl overflow-hidden mb-5 bg-zinc-900 border border-white/5 shadow-2xl">
+                <div className="relative w-full aspect-[380/240] rounded-[20px] overflow-hidden mb-5 bg-zinc-900 border border-white/5 shadow-2xl">
                   <motion.img
                     src={news.이미지}
                     alt={news.타이틀}

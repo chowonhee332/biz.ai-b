@@ -87,7 +87,7 @@ export default function UseCasePage() {
                                     transition={{ delay: i * 0.05, duration: 0.5 }}
                                     className="group cursor-pointer flex flex-col"
                                 >
-                                    <div className="relative aspect-video rounded-3xl overflow-hidden mb-6 bg-zinc-900 border border-white/5">
+                                    <div className="relative aspect-video rounded-[20px] overflow-hidden mb-6 bg-zinc-900 border border-white/5">
                                         <img
                                             src={item.이미지}
                                             alt={item.타이틀}
