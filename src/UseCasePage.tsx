@@ -25,14 +25,14 @@ export default function UseCasePage() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
+        <div className="min-h-screen bg-bg-main text-text-primary font-pretendard flex flex-col">
             {/* GNB */}
             <Navbar activePage="use-cases" />
 
             {/* Content Body */}
             <section className="pt-48 pb-32 flex-1">
                 {/* Header Section */}
-                <div className="max-w-[1200px] mx-auto px-6 md:px-0 mb-20">
+                <div className="max-w-[1280px] mx-auto container-responsive mb-20">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -41,29 +41,29 @@ export default function UseCasePage() {
                         <h1 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
                             Use Cases
                         </h1>
-                        <p className="text-white/70 text-[18px] max-w-2xl font-medium leading-relaxed">
+                        <p className="text-text-secondary text-[18px] max-w-2xl font-medium leading-relaxed">
                             다양한 산업 분야에서 Biz.AI를 통해 실현된 혁신 사례를 소개합니다.
                         </p>
                     </motion.div>
                 </div>
 
                 {/* 카테고리 탭 - Sticky 적용 (풀 너비 라인) */}
-                <div className="sticky top-[72px] lg:top-[64px] bg-black/[0.85] backdrop-blur-sm z-40 border-b border-white/20 mb-12">
-                    <div className="max-w-[1200px] mx-auto px-6 md:px-0 flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap">
+                <div className="sticky top-[72px] lg:top-[64px] bg-bg-main/85 backdrop-blur-sm z-40 border-b border-border-light mb-12">
+                    <div className="max-w-[1280px] mx-auto container-responsive flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap">
                         {USE_CASE_CATEGORIES.map((category) => (
                             <button
                                 key={category}
                                 onClick={() => setActiveCategory(category)}
                                 className={`relative h-full text-[15px] font-medium transition-colors flex items-center px-1 cursor-pointer ${activeCategory === category
-                                    ? "text-blue-500"
-                                    : "text-white/60 hover:text-white"
+                                    ? "text-brand-primary"
+                                    : "text-text-secondary/60 hover:text-text-primary"
                                     }`}
                             >
                                 {category}
                                 {activeCategory === category && (
                                     <motion.div
                                         layoutId="activeCategoryUseCase"
-                                        className="absolute bottom-0 left-0 right-0 h-[3px] bg-blue-500 rounded-full"
+                                        className="absolute bottom-0 left-0 right-0 h-[3px] bg-brand-primary rounded-full"
                                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                                     />
                                 )}
@@ -72,7 +72,7 @@ export default function UseCasePage() {
                     </div>
                 </div>
 
-                <div className="max-w-[1200px] mx-auto px-6 md:px-0">
+                <div className="max-w-[1280px] mx-auto container-responsive">
 
                     {/* Card Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -87,7 +87,7 @@ export default function UseCasePage() {
                                     transition={{ delay: i * 0.05, duration: 0.5 }}
                                     className="group cursor-pointer flex flex-col"
                                 >
-                                    <div className="relative aspect-video rounded-[20px] overflow-hidden mb-6 bg-zinc-900 border border-white/5">
+                                    <div className="relative aspect-video rounded-[20px] overflow-hidden mb-6 bg-bg-surface border border-border-light">
                                         <img
                                             src={item.이미지}
                                             alt={item.타이틀}
@@ -104,7 +104,7 @@ export default function UseCasePage() {
                                         <h3 className={`text-white text-[22px] font-bold leading-tight transition-colors whitespace-pre-line group-hover:${USE_CASE_CATEGORY_COLORS[item.카테고리]?.text || 'text-blue-400'}`}>
                                             {item.타이틀}
                                         </h3>
-                                        <p className="text-white/50 text-[15px] leading-relaxed line-clamp-2">
+                                        <p className="text-text-secondary text-[15px] leading-relaxed line-clamp-2">
                                             {item.설명}
                                         </p>
                                         <div className="mt-1">

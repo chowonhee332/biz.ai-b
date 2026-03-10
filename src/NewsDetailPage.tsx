@@ -20,7 +20,7 @@ export default function NewsDetailPage() {
 
     const getTagColor = (tag: string) => {
         if (tag === "기술 이야기") return "text-emerald-500";
-        return "text-blue-400";
+        return "text-brand-secondary";
     };
 
     // Scroll to top on mount
@@ -34,18 +34,18 @@ export default function NewsDetailPage() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
+        <div className="min-h-screen bg-bg-main text-text-primary font-pretendard flex flex-col">
             {/* GNB (Header) */}
             <Navbar activePage="news" />
 
             {/* 1. News Detail Header (Article Title Info) */}
             <section className="pt-48 pb-16">
-                <div className="max-w-[1200px] mx-auto px-6 md:px-0 text-center flex flex-col items-center">
+                <div className="max-w-[1280px] mx-auto container-responsive text-center flex flex-col items-center">
                     <div className="max-w-[900px] flex flex-col items-center">
                         {/* Category & Date */}
-                        <div className="flex items-center gap-3 mb-6 text-white/60 text-[14px] font-medium tracking-wide">
+                        <div className="flex items-center gap-3 mb-6 text-text-secondary/60 text-[16px] font-medium tracking-wide">
                             <span className={`${getTagColor(news.태그)} font-bold`}>{news.태그}</span>
-                            <span className="text-xs">|</span>
+                            <span className="text-sm">|</span>
                             <span>{news.날짜}</span>
                         </div>
 
@@ -53,13 +53,33 @@ export default function NewsDetailPage() {
                         <h1 className="text-[36px] md:text-[50px] font-bold text-white mb-8 leading-snug break-keep tracking-tight">
                             {news.타이틀}
                         </h1>
+
+                        {/* Reporter & Original Link */}
+                        <div className="flex flex-wrap items-center justify-center gap-4 text-[16px] font-medium">
+                            {news.언론사 && (
+                                <div className="text-text-secondary/80 flex items-center gap-2">
+                                    <span className="opacity-60">[{news.언론사}]</span>
+                                    <span>{news.기자 || "기자"}</span>
+                                </div>
+                            )}
+                            <span className="text-text-secondary/30 text-xs">|</span>
+                            <a
+                                href={news.링크}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-1.5 text-brand-primary hover:text-brand-primary/80 transition-colors"
+                            >
+                                <span>기사보기</span>
+                                <ExternalLink size={16} />
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>
 
             {/* 2. Hero Image */}
-            <div className="w-full mb-16 max-w-[1200px] mx-auto px-6 md:px-0">
-                <div className="w-full aspect-[21/9] sm:aspect-[24/9] md:aspect-[2.5/1] overflow-hidden rounded-3xl bg-zinc-900 border border-white/5 shadow-2xl">
+            <div className="w-full mb-16 max-w-[1280px] mx-auto container-responsive">
+                <div className="w-full aspect-[21/9] sm:aspect-[24/9] md:aspect-[2.5/1] overflow-hidden rounded-3xl bg-bg-surface border border-border-light shadow-2xl">
                     <img
                         src={news.이미지}
                         alt="Event Detail"
@@ -69,8 +89,8 @@ export default function NewsDetailPage() {
             </div>
 
             {/* 3. Main Article Content */}
-            <main className="max-w-[1200px] mx-auto px-6 md:px-0 pb-32 flex-1 flex flex-col items-center">
-                <article className="prose prose-invert prose-lg max-w-[800px] prose-p:text-white/80 prose-p:leading-[1.8] prose-p:font-medium text-[16px]">
+            <main className="max-w-[1280px] mx-auto container-responsive pb-32 flex-1 flex flex-col items-center">
+                <article className="prose prose-invert prose-lg max-w-[800px] prose-p:text-text-secondary prose-p:leading-[1.8] prose-p:font-medium text-[16px]">
                     {news.내용 ? (
                         <p className="mb-8 whitespace-pre-wrap">{news.내용}</p>
                     ) : (
@@ -79,10 +99,10 @@ export default function NewsDetailPage() {
                 </article>
 
                 {/* 목록보기 버튼 */}
-                <div className="mt-16 pt-10 border-t border-white/10 flex justify-center">
+                <div className="mt-16 pt-10 border-t border-border-light flex justify-center">
                     <button
                         onClick={() => navigate('/news')}
-                        className="group flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 text-white/70 hover:text-white hover:border-white/50 transition-all duration-300 text-[14px] font-medium cursor-pointer"
+                        className="group flex items-center gap-2 px-6 py-3 rounded-full border border-border-light text-text-secondary/70 hover:text-text-primary hover:border-border-active transition-all duration-300 text-[14px] font-medium cursor-pointer"
                     >
                         목록보기
                     </button>

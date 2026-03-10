@@ -49,14 +49,14 @@ export default function NewsPage() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
+        <div className="min-h-screen bg-bg-main text-text-primary font-pretendard flex flex-col">
             {/* 1. GNB 영역 (App.tsx와 동일하게 구성하지만 링크는 '/' 및 기타 영역 유지) */}
             <Navbar activePage="news" />
 
             {/* 2. 본문 컨텐츠 시작 */}
             <section className="pt-48 pb-32 flex-1">
                 {/* 헤더 영역: 상단 타이틀 + 설명 */}
-                <div className="max-w-[1200px] mx-auto px-6 md:px-0 mb-20">
+                <div className="max-w-[1280px] mx-auto container-responsive mb-20">
                     <div className="flex justify-between items-end">
                         <div className="flex flex-col items-start text-left">
                             <motion.div
@@ -99,7 +99,7 @@ export default function NewsPage() {
                     <div
                         ref={newsScrollRef}
                         onScroll={handleNewsScroll}
-                        className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-12 pl-[max(1.5rem,calc((100vw-1200px)/2))] md:pl-[max(0rem,calc((100vw-1200px)/2))]"
+                        className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-12 pl-[max(1.25rem,calc((100vw-1200px)/2))]"
                     >
                         {HIGHLIGHT_NEWS.map((news, i) => (
                             <motion.div
@@ -138,8 +138,8 @@ export default function NewsPage() {
                 </div>
 
                 {/* 카테고리 탭 - Sticky 적용 (풀 너비 라인) */}
-                <div className="sticky top-[72px] lg:top-[64px] bg-black/[0.85] backdrop-blur-sm z-40 border-b border-white/20 mb-12">
-                    <div className="max-w-[1200px] mx-auto px-6 md:px-0 flex items-center gap-8 h-[66px]">
+                <div className="sticky top-[72px] lg:top-[64px] bg-bg-main/85 backdrop-blur-sm z-40 border-b border-border-light mb-12">
+                    <div className="max-w-[1280px] mx-auto container-responsive flex items-center gap-8 h-[66px]">
                         {NEWS_CATEGORIES.map((category) => (
                             <button
                                 key={category}
@@ -162,7 +162,7 @@ export default function NewsPage() {
                     </div>
                 </div>
 
-                <div className="max-w-[1200px] mx-auto px-6 md:px-0">
+                <div className="max-w-[1280px] mx-auto container-responsive">
                     {/* 좌측 메인 리스트 뷰 */}
                     <div className="flex-1">
 

@@ -55,13 +55,13 @@ import {
 // Sub-components (Moved to top for hoisting/scoping clarity)
 
 const StudioCard = ({ icon, title, desc }: { icon: React.ReactElement; title: string; desc: string }) => (
-  <Card className="p-10 rounded-[20px] bg-[#111] border-white/20 hover:bg-[#1a1a1a] hover:border-white/30 transition-all duration-500 group flex flex-col items-center md:items-start text-center md:text-left shadow-2xl relative overflow-hidden text-left break-keep">
-    <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl -mr-16 -mt-16 group-hover:bg-blue-500/20 transition-colors duration-500" />
-    <div className="size-16 bg-white/5 rounded-[20px] flex items-center justify-center mb-8 group-hover:scale-110 transition-transform border border-white/20 relative z-10 text-white/80 group-hover:text-blue-400">
+  <Card className="p-10 rounded-[20px] bg-bg-surface border-border-light hover:bg-bg-active hover:border-border-active transition-all duration-500 group flex flex-col items-center md:items-start text-center md:text-left shadow-2xl relative overflow-hidden text-left break-keep">
+    <div className="absolute top-0 right-0 w-32 h-32 bg-bg-surface/50 rounded-full blur-2xl -mr-16 -mt-16 group-hover:bg-brand-primary/20 transition-colors duration-500" />
+    <div className="size-16 bg-bg-surface/50 rounded-[20px] flex items-center justify-center mb-8 group-hover:scale-110 transition-transform border border-border-light relative z-10 text-text-primary/80 group-hover:text-brand-primary">
       {React.cloneElement(icon as any, { size: 32 })}
     </div>
-    <h4 className="text-2xl font-bold text-white mb-4 relative z-10">{title}</h4>
-    <p className="text-white/50 leading-relaxed font-medium relative z-10">{desc}</p>
+    <h4 className="text-2xl font-bold text-text-primary mb-4 relative z-10">{title}</h4>
+    <p className="text-text-dim leading-relaxed font-medium relative z-10">{desc}</p>
   </Card>
 );
 
@@ -141,7 +141,7 @@ const CharacterReveal = ({ text, className, scrollProgress, range, highlightInde
         // Blue highlight from the specified highlightIndex to the end.
         // If no index is provided, only the last line is highlighted.
         const isHighlight = lineIdx >= (highlightIndex ?? lines.length - 1);
-        const colorClass = isHighlight ? "text-[#1A75FF]" : "text-white";
+        const colorClass = isHighlight ? "text-brand-primary" : "text-text-primary";
 
         return (
           <div
@@ -166,7 +166,7 @@ const CharacterReveal = ({ text, className, scrollProgress, range, highlightInde
   );
 };
 
-const InteractiveMockup = ({ image, frameImage, initialMouseX = -0.75, cursorColor = "#0066FF", cursorName = "Biz.AI" }: { image: string; frameImage: string; initialMouseX?: number; cursorColor?: string; cursorName?: string }) => {
+const InteractiveMockup = ({ image, frameImage, initialMouseX = -0.75, cursorColor = "var(--color-brand-primary)", cursorName = "Biz.AI" }: { image: string; frameImage: string; initialMouseX?: number; cursorColor?: string; cursorName?: string }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(initialMouseX);
   const mouseY = useMotionValue(0.3);
@@ -439,7 +439,7 @@ const DomainAccordionItem = ({
 };
 
 const Tag = ({ text }: { text: string }) => (
-  <Badge variant="outline" className="border-blue-500 text-blue-500 rounded-full px-4 py-1.5 font-medium whitespace-nowrap">
+  <Badge variant="outline" className="border-brand-primary text-brand-primary rounded-full px-4 py-1.5 font-medium whitespace-nowrap">
     {text}
   </Badge>
 );
@@ -467,8 +467,8 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
       >
         <section id="process" className="py-32 relative overflow-hidden px-6">
           <div className="max-w-[1200px] mx-auto relative z-10">
-            <div className="text-center mb-24 px-6 md:px-0">
-              <p className="text-[#1A75FF] text-[18px] font-semibold mb-4 tracking-wide">Why kt ds</p>
+            <div className="text-center mb-24 container-responsive">
+              <p className="text-brand-primary text-[18px] font-semibold mb-4 tracking-wide">Why kt ds</p>
               <h2 className="text-[36px] lg:text-[58px] font-bold text-black mb-6 tracking-tight leading-tight">
                 왜 kt ds와 함께 해야 할까요?
               </h2>
@@ -481,7 +481,7 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 {
-                  num: "01", title: "분석/설계", subtitle: "Retriever,\nAnalyst", color: "text-[#1A75FF]",
+                  num: "01", title: "분석/설계", subtitle: "Retriever,\nAnalyst", color: "text-brand-primary",
                   bullets: [
                     "데이터 협의체 기반 분석 및 선별",
                     "이를 기반으로 RAG 및 Agent 구현에 최적화된 체계 구축",
@@ -489,7 +489,7 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
                   ]
                 },
                 {
-                  num: "02", title: "구축", subtitle: "Writer,\nExecutor", color: "text-[#1A75FF]",
+                  num: "02", title: "구축", subtitle: "Writer,\nExecutor", color: "text-brand-primary",
                   bullets: [
                     "17년 업력으로 안정성 및 보안성을 갖춘 시스템 구축",
                     "답변/문서/코드/보고서 작성",
@@ -497,7 +497,7 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
                   ]
                 },
                 {
-                  num: "03", title: "테스트 및 이행", subtitle: "Validator,\nQuality", color: "text-[#1A75FF]",
+                  num: "03", title: "테스트 및 이행", subtitle: "Validator,\nQuality", color: "text-brand-primary",
                   bullets: [
                     "단계적인 성능 검증 및 최적화",
                     "검증, 규정/정책/보안/품질 체크, 근거 링크",
@@ -505,7 +505,7 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
                   ]
                 },
                 {
-                  num: "04", title: "안정화", subtitle: "Maintainer,\nSRE", color: "text-[#1A75FF]",
+                  num: "04", title: "안정화", subtitle: "Maintainer,\nSRE", color: "text-brand-primary",
                   bullets: [
                     "KPI/SLA/SLO 모니터링, 이상탐지, 알림/에스컬레이션",
                     "의사결정 근거·승인·변경 이력 기록(감사 대응)",
@@ -549,7 +549,7 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
 
 const StudioSection = () => {
   return (
-    <section id="studio-v2" className="bg-[#000000] py-32 px-6">
+    <section id="studio-v2" className="bg-bg-main py-32 px-6">
       <div className="max-w-[1200px] mx-auto">
         {/* 메인 배너 카드 */}
         <motion.div
@@ -557,7 +557,7 @@ const StudioSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative h-[440px] w-full rounded-[20px] border border-white/5 overflow-hidden group mb-5"
+          className="relative h-[440px] w-full rounded-[20px] border border-border-light overflow-hidden group mb-5"
         >
           {/* LightRays 배경 - 박스 없이 전체로 활용 */}
           <div className="absolute inset-0 z-0">
@@ -572,10 +572,10 @@ const StudioSection = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent z-[1]" />
 
           <div className="relative z-10 pl-20 h-full flex flex-col justify-center max-w-2xl font-pretendard">
-            <h2 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-4 tracking-tight leading-tight">
+            <h2 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-text-primary via-text-primary via-[40%] to-brand-secondary bg-clip-text text-transparent mb-4 tracking-tight leading-tight">
               AI Agent Studio
             </h2>
-            <p className="text-white/80 text-[18px] leading-relaxed break-keep font-normal mb-8 max-w-xl">
+            <p className="text-text-secondary text-[18px] leading-relaxed break-keep font-normal mb-8 max-w-xl">
               필요한 Agent, Tool, MCP를 빠르게 확인하고 시작하세요.<br />
               쉽게 개발 가능한 AI 아키텍처와 Delivery 가이드를 제공합니다.
             </p>
@@ -619,13 +619,13 @@ const StudioSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="rounded-[20px] border border-white/20 p-8 pt-4 transition-all duration-300 group hover:border-white/30"
+              className="rounded-[20px] border border-border-light p-8 pt-4 transition-all duration-300 group hover:border-border-active"
             >
-              <div className="size-10 flex items-center justify-center mb-8 group-hover:bg-white/5 rounded-full transition-colors">
+              <div className="size-10 flex items-center justify-center mb-8 group-hover:bg-bg-surface rounded-full transition-colors">
                 {item.icon}
               </div>
-              <h3 className="text-white text-[20px] font-bold mb-2 tracking-tight">{item.title}</h3>
-              <p className="text-white/60 text-[15px] leading-relaxed break-keep font-normal">
+              <h3 className="text-text-primary text-[20px] font-bold mb-2 tracking-tight">{item.title}</h3>
+              <p className="text-text-secondary text-[15px] leading-relaxed break-keep font-normal">
                 {item.desc}
               </p>
             </motion.div>
@@ -776,14 +776,14 @@ const App = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#000000] text-white font-sans">
+    <div className="min-h-screen bg-bg-main text-text-primary font-sans">
       {/* GNB - Global Navigation Bar */}
       <Navbar activePage="home" />
 
       {/* Hero Section */}
       <section id="hero" className="relative z-20 h-screen flex items-center justify-center overflow-clip bg-[#000000] font-poppins">
 
-        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-0 flex items-center h-full">
+        <div className="relative z-10 w-full max-w-[1280px] mx-auto container-responsive flex items-center h-full">
           <div className="w-full flex flex-col lg:flex-row items-center relative">
             {/* Left Content */}
             <div className="w-full lg:max-w-[800px] relative z-20">
@@ -841,7 +841,7 @@ const App = () => {
             className={`bg-[#F3F5FC] border-black/5 relative z-20 overflow-hidden mb-20 smooth-gpu ${isMobile ? 'border-none' : 'border'}`}
           >
             <section id="solution" className="py-32">
-              <div className="max-w-[1200px] mx-auto px-6 md:px-0 relative">
+              <div className="max-w-[1280px] mx-auto container-responsive relative">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -956,7 +956,7 @@ const App = () => {
         </div>
 
         <section id="domain" className="py-20 md:py-32 relative overflow-hidden bg-black pb-16">
-          <div className="max-w-[1200px] mx-auto px-6 md:px-0">
+          <div className="max-w-[1280px] mx-auto container-responsive">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1011,7 +1011,7 @@ const App = () => {
 
         <section id="use-cases" className="relative bg-[#000000]">
           {/* Title Area: Normal Scrolling */}
-          <div className="max-w-[1200px] mx-auto w-full px-6 md:px-0 pt-32 pb-0 text-center relative">
+          <div className="max-w-[1280px] mx-auto w-full container-responsive pt-32 pb-0 text-center relative">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1268,7 +1268,7 @@ const App = () => {
         <ProcessSection isMobile={isMobile} />
 
         <section id="logos" className="relative py-12 bg-black overflow-hidden">
-          <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-0 text-center">
+          <div className="relative z-10 max-w-[1280px] mx-auto container-responsive text-center">
             <div className="relative overflow-hidden w-full py-4">
               <motion.div
                 className="flex items-center gap-x-20 whitespace-nowrap"
@@ -1303,7 +1303,7 @@ const App = () => {
         </section>
 
         <section id="stats" className="py-32 bg-[#000000]">
-          <div className="max-w-[1200px] mx-auto px-6 md:px-0">
+          <div className="max-w-[1280px] mx-auto container-responsive">
             <div className="text-center mb-32">
 
               <h2 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-6 tracking-tight">
@@ -1387,7 +1387,7 @@ const App = () => {
         {/* 새로운 소식 섹션: 우측 블리드(Bleed) 레이아웃 */}
         <section id="news" className="py-32 bg-[#000000] relative">
           {/* 헤더 영역: 컨테이너 내부 */}
-          <div className="max-w-[1200px] mx-auto px-6 md:px-0 mb-16">
+          <div className="max-w-[1280px] mx-auto container-responsive mb-16">
             <div className="flex justify-between items-center">
               <div className="flex flex-col items-start text-left">
                 <h2 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
@@ -1419,15 +1419,14 @@ const App = () => {
           {/* 뉴스 카드 리스트: 타이틀 정렬 + 우측 블리드 */}
           <div
             ref={newsScrollRef}
-            className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-12 pl-[max(1.5rem,calc((100vw-1200px)/2))] md:pl-[max(0rem,calc((100vw-1200px)/2))] pr-6"
+            className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-12 pr-6"
+            style={{
+              paddingLeft: `calc(max(0px, (100% - 1200px) / 2) + var(--responsive-padding))`
+            }}
           >
             {[...HIGHLIGHT_NEWS, ...REGULAR_NEWS].slice(0, 8).map((news: any, i) => (
               <motion.div
                 key={i}
-                initial={{ y: 20, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                viewport={{ once: true }}
                 className="group cursor-pointer shrink-0 w-[380px]"
                 onClick={() => {
                   navigate(`/news/${i + 1}`, { state: { news } });
@@ -1444,7 +1443,7 @@ const App = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40" />
                 </div>
 
-                <div className="flex flex-col px-1">
+                <div className="flex flex-col" style={{ paddingLeft: 'var(--responsive-padding)' }}>
                   <span className="text-blue-400 text-[14px] font-bold mb-3">{news.태그}</span>
                   <h3 className="text-white text-[24px] font-bold leading-snug mb-3 whitespace-pre-line group-hover:text-blue-400 transition-colors">
                     {news.타이틀}
@@ -1471,7 +1470,7 @@ const App = () => {
 
         {/* FAQ 섹션 */}
         <section id="faq" className="py-24 bg-[#000000] relative overflow-hidden">
-          <div className="max-w-[1200px] mx-auto px-6 md:px-0">
+          <div className="max-w-[1280px] mx-auto container-responsive">
             <div className="flex flex-col lg:flex-row gap-20">
               {/* 왼쪽: 헤더 */}
               <div className="lg:w-1/3">

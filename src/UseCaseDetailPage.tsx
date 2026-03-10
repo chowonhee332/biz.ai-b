@@ -61,13 +61,13 @@ export default function UseCaseDetailPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
+        <div className="min-h-screen bg-bg-main text-text-primary font-pretendard flex flex-col">
             {/* GNB */}
             <Navbar activePage="use-cases" />
 
             {/* Header */}
             <section className="pt-48 pb-16">
-                <div className="max-w-[1200px] mx-auto px-6 md:px-0 text-center flex flex-col items-center">
+                <div className="max-w-[1280px] mx-auto container-responsive text-center flex flex-col items-center">
                     <div className="flex items-center gap-3 mb-6 text-white/50 text-[14px] font-medium tracking-wide">
                         <span>{item.카테고리}</span>
                     </div>
@@ -78,43 +78,49 @@ export default function UseCaseDetailPage() {
             </section>
 
             {/* Hero Image */}
-            <div className="w-full mb-24 max-w-[1200px] mx-auto px-6 md:px-0">
+            <div className="w-full mb-24 max-w-[1280px] mx-auto container-responsive">
                 <div className="w-full aspect-[21/9] sm:aspect-[24/9] md:aspect-[2.5/1] overflow-hidden rounded-[20px] bg-zinc-900 border border-white/5 shadow-2xl">
                     <img src={item.이미지} alt="Case Study Hero" className="w-full h-full object-cover" />
                 </div>
             </div>
 
             {/* Main Content with Sticky ToC */}
-            <main className="max-w-[1200px] mx-auto px-6 md:px-0 pb-48 flex flex-col lg:flex-row gap-20 relative">
+            <main className="max-w-[1280px] mx-auto container-responsive pb-48 flex flex-col lg:flex-row gap-20 relative">
                 {/* Left: Article Content */}
                 <div className="flex-1 lg:max-w-[840px]">
                     <article className="flex flex-col gap-16 font-pretendard">
                         {sections.map((section: any, idx: number) => (
                             <section key={section.id} id={section.id} className="flex flex-col scroll-mt-32">
                                 {section.title && (
-                                    <h2 className={`${section.subtitle_level === 1 ? 'text-[28px] text-blue-400' : 'text-[32px] text-white'} font-bold border-b border-white/10 pb-4 mb-6 flex items-center gap-3`}>
+                                    <h2 className={`${section.subtitle_level === 1 ? 'text-[24px] text-brand-secondary' : 'text-[28px] text-text-primary'} font-bold border-b border-border-light pb-4 mb-6 flex items-center gap-3`}>
                                         {section.title}
                                     </h2>
                                 )}
 
                                 {section.header && (
-                                    <div className="text-[20px] font-bold text-white/90 mb-6 italic pl-4 border-l-4 border-blue-500/50">
+                                    <div className="text-[20px] font-bold text-text-primary/90 mb-6 italic pl-4 border-l-4 border-brand-primary/50">
                                         {section.header}
                                     </div>
                                 )}
 
-                                {section.content && (
-                                    <div className="text-white/80 text-[16px] leading-relaxed mb-6 break-keep whitespace-pre-line font-medium">
+                                {section.id === 'summary' ? (
+                                    <div className="mt-8 p-6 rounded-[20px] bg-brand-primary/10 border border-brand-primary/30 group transition-all duration-300 hover:bg-brand-primary/[0.15]">
+                                        <div className="text-brand-secondary text-[16px] leading-relaxed break-keep font-medium">
+                                            {section.content}
+                                        </div>
+                                    </div>
+                                ) : section.content && (
+                                    <div className="text-text-secondary text-[16px] leading-relaxed mb-6 break-keep whitespace-pre-line font-medium">
                                         {section.content}
                                     </div>
                                 )}
 
                                 {section.list && (
-                                    <div className="bg-white/5 rounded-[20px] p-8 border border-white/10 mb-6">
+                                    <div className="bg-bg-surface rounded-[20px] p-8 border border-border-light mb-6 font-pretendard">
                                         <ul className="flex flex-col gap-4">
                                             {section.list.map((li: string, idx: number) => (
-                                                <li key={idx} className="flex items-start gap-3 text-white/80">
-                                                    <ChevronRight className="mt-1.5 size-4 text-white/30 shrink-0" strokeWidth={3} />
+                                                <li key={idx} className="flex items-start gap-4 text-text-secondary">
+                                                    <ChevronRight className="mt-1.5 size-4 text-text-dim shrink-0" strokeWidth={3} />
                                                     <div className="text-[16px] font-medium leading-relaxed break-keep">
                                                         {li}
                                                     </div>
@@ -125,16 +131,16 @@ export default function UseCaseDetailPage() {
                                 )}
 
                                 {section.items && (
-                                    <div className="grid grid-cols-1 gap-4">
+                                    <div className="grid grid-cols-1 gap-4 font-pretendard mb-6">
                                         {section.items.map((it: any, idx: number) => (
-                                            <div key={idx} className="p-8 rounded-[20px] bg-white/5 border border-white/10 relative group transition-all">
-                                                <div className="flex flex-col gap-3 relative z-10">
-                                                    <div className="flex items-center gap-3 text-white text-[18px] font-bold">
-                                                        <div className="size-6 rounded-full bg-[#1A75FF] flex items-center justify-center text-[10px] shadow-lg shadow-blue-500/20 text-white leading-none">{(idx + 1).toString().padStart(2, '0')}</div>
+                                            <div key={idx} className="p-8 rounded-[20px] bg-bg-surface border border-border-light relative group transition-all">
+                                                <div className="flex flex-col gap-4 relative z-10">
+                                                    <div className="flex items-center gap-3 text-text-primary text-[18px] font-bold">
+                                                        <div className="size-6 rounded-full bg-brand-primary flex items-center justify-center text-[10px] shadow-lg shadow-brand-primary/20 text-white leading-none">{(idx + 1).toString().padStart(2, '0')}</div>
                                                         {it.타이틀}
                                                     </div>
                                                     <div className="pl-9">
-                                                        <p className="text-white/80 text-[14px] leading-relaxed break-keep font-medium">
+                                                        <p className="text-text-secondary text-[15px] leading-relaxed break-keep font-medium">
                                                             {it.설명}
                                                         </p>
                                                     </div>
@@ -149,7 +155,7 @@ export default function UseCaseDetailPage() {
                                         {section.quotes.map((q: any, idx: number) => (
                                             <div key={idx} className="relative pl-12">
                                                 <span className="absolute left-0 top-0 text-6xl text-blue-500/20 font-serif">“</span>
-                                                <div className="text-[18px] md:text-[20px] font-medium text-white/90 leading-snug mb-4 break-keep">
+                                                <div className="text-[16px] font-medium text-white/90 leading-snug mb-4 break-keep">
                                                     {q.text}
                                                 </div>
                                                 <div className="text-blue-400 font-bold">— {q.author}</div>
@@ -159,8 +165,10 @@ export default function UseCaseDetailPage() {
                                 )}
 
                                 {section.footer && (
-                                    <div className="mt-8 text-white/60 text-[16px] italic border-l-4 border-blue-500/30 pl-6 py-2 break-keep">
-                                        {section.footer}
+                                    <div className="mt-8 p-6 rounded-[20px] bg-brand-primary/10 border border-brand-primary/30 group transition-all duration-300 hover:bg-brand-primary/[0.15]">
+                                        <div className="text-brand-secondary text-[16px] leading-relaxed break-keep font-medium">
+                                            {section.content}
+                                        </div>
                                     </div>
                                 )}
                             </section>
