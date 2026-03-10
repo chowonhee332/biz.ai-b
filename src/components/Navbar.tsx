@@ -28,20 +28,20 @@ export default function Navbar({ activePage }: NavbarProps) {
 
   return (
     <nav className={`fixed w-full z-50 bg-bg-main/80 backdrop-blur-md py-4 transition-all duration-300 ${scrolled ? 'border-b border-border-light shadow-lg' : 'border-b border-transparent'}`}>
-      <div className="max-w-[1280px] mx-auto container-responsive flex justify-between items-center">
+      <div className="max-w-[1280px] mx-auto container-responsive flex items-center">
         {/* Logo - Always visible */}
         <Link to="/" className="flex items-center gap-2 shrink-0">
           <img src="/bizai_logo.png" alt="Biz.AI Logo" className="h-6 w-auto" />
           <span className="text-xl font-bold text-text-primary tracking-tighter">Biz.AI</span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-10 text-text-secondary text-[15px] font-bold tracking-tight">
+        {/* Desktop Navigation - 정중앙 */}
+        <div className="hidden lg:flex items-center gap-10 text-[15px] tracking-tight absolute left-1/2 -translate-x-1/2">
           {navLinks.map((link) => (
             <Link
               key={link.id}
               to={link.path}
-              className={`transition-colors hover:text-text-primary relative group ${activePage === link.id ? 'text-brand-primary font-bold' : 'text-text-secondary font-medium'}`}
+              className={`transition-colors hover:text-white ${activePage === link.id ? 'text-white font-bold' : 'text-text-secondary font-medium'}`}
             >
               {link.name}
             </Link>
@@ -49,7 +49,7 @@ export default function Navbar({ activePage }: NavbarProps) {
         </div>
 
         {/* CTA Buttons */}
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3 ml-auto">
           <a href="https://www.ktds.com/" target="_blank" rel="noopener noreferrer">
             <Button variant="ghost" size="sm" className="text-text-secondary hover:text-text-primary hover:bg-bg-active group h-9">
               <img src="/ktds_white.png" alt="kt ds" className="h-4 w-auto object-contain opacity-50 group-hover:opacity-100 transition-opacity" />
@@ -67,7 +67,7 @@ export default function Navbar({ activePage }: NavbarProps) {
         </div>
 
         {/* Mobile Menu Button - Shown only below 1024px */}
-        <button className="lg:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <button className="lg:hidden ml-auto text-white p-2 hover:bg-white/10 rounded-lg transition-colors" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>

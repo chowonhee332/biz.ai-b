@@ -138,16 +138,18 @@ export default function MultiAgentPlatformPage() {
                                         </div>
                                     </div>
 
-                                    <div id="section-target" className="mb-10 scroll-mt-32">
+                                    <div id="section-target" className="mb-10 pt-10 border-t border-border-light/30 scroll-mt-32">
                                         <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">주요 고객군</h3>
-                                        <p className="text-text-secondary text-[16px] font-medium leading-relaxed">{currentContent.주요고객군}</p>
+                                        <div className="pl-4 border-l-2 border-brand-primary/40">
+                                            <p className="text-text-secondary text-[16px] font-medium leading-relaxed">{currentContent.주요고객군}</p>
+                                        </div>
                                     </div>
 
-                                    <div id="section-values" className="mb-10 scroll-mt-32">
+                                    <div id="section-values" className="mb-10 pt-10 border-t border-border-light/30 scroll-mt-32">
                                         <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">핵심가치</h3>
                                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                             {currentContent.핵심가치.map((item, i) => (
-                                                <div key={i} className="bg-bg-surface/50 backdrop-blur-sm rounded-[20px] p-5 border border-border-light hover:border-text-primary/20 transition-all group">
+                                                <div key={i} className="bg-bg-surface/50 backdrop-blur-sm rounded-[20px] p-5 border border-border-light">
                                                     <h4 className="text-[16px] font-bold text-text-primary mb-2">{item.타이틀}</h4>
                                                     <p className="text-text-secondary/60 text-[14px] leading-relaxed font-medium">{item.설명}</p>
                                                 </div>
@@ -155,22 +157,22 @@ export default function MultiAgentPlatformPage() {
                                         </div>
                                     </div>
 
-                                    <div id="section-features" className="mb-10 scroll-mt-32">
+                                    <div id="section-features" className="mb-10 pt-10 border-t border-border-light/30 scroll-mt-32">
                                         <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">주요기능</h3>
-                                        <div className="bg-bg-surface/50 backdrop-blur-sm rounded-[20px] p-5 border border-border-light space-y-[18px]">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             {currentContent.주요기능.map((feature, i) => {
                                                 const [title, ...descParts] = feature.split(':');
                                                 const description = descParts.join(':').trim();
                                                 return (
-                                                    <div key={i} className="flex flex-col gap-3 group/item">
+                                                    <div key={i} className="bg-bg-surface/50 rounded-[16px] p-5 border border-border-light flex flex-col gap-2">
                                                         <div className="flex items-center gap-3">
-                                                            <div className="w-1 h-5 bg-brand-primary rounded-full" />
-                                                            <div className="text-text-primary text-[18px] font-bold leading-tight">
+                                                            <div className="w-0.5 h-5 bg-brand-primary rounded-full shrink-0" />
+                                                            <div className="text-text-primary text-[16px] font-bold leading-tight">
                                                                 {title.trim()}
                                                             </div>
                                                         </div>
                                                         {description && (
-                                                            <div className="pl-4 text-text-dim text-[15px] leading-relaxed font-medium break-keep">
+                                                            <div className="pl-4 text-text-dim text-[14px] leading-relaxed font-medium break-keep">
                                                                 {description}
                                                             </div>
                                                         )}
@@ -181,33 +183,11 @@ export default function MultiAgentPlatformPage() {
                                     </div>
 
                                     {currentContent.주요특징이미지 && currentContent.주요특징이미지.length > 0 && (
-                                        <div id="section-screenshots" className="mb-10 scroll-mt-32">
-                                            <div className="bg-white/[0.03] backdrop-blur-sm rounded-[20px] p-5 border border-white/10">
-                                                <div className="flex justify-between items-start mb-6 gap-4">
-                                                    <div className="flex-1">
-                                                        <h4 className="text-[18px] font-bold text-white mb-2">{currentContent.주요특징이미지[currentImageIndex].타이틀}</h4>
-                                                        <p className="text-white/60 text-[14px] leading-relaxed break-keep font-medium">{currentContent.주요특징이미지[currentImageIndex].설명}</p>
-                                                    </div>
-                                                    {currentContent.주요특징이미지.length > 1 && (
-                                                        <div className="flex gap-1.5 shrink-0 pt-1">
-                                                            <button
-                                                                onClick={() => setCurrentImageIndex((prev) => Math.max(0, prev - 1))}
-                                                                disabled={currentImageIndex === 0}
-                                                                className={`size-10 rounded-full bg-white/10 flex items-center justify-center text-white transition-all ${currentImageIndex === 0 ? 'opacity-20 cursor-not-allowed' : 'hover:bg-white/20'}`}
-                                                            >
-                                                                <ChevronLeft className="size-5" strokeWidth={3} />
-                                                            </button>
-                                                            <button
-                                                                onClick={() => setCurrentImageIndex((prev) => Math.min(currentContent.주요특징이미지!.length - 1, prev + 1))}
-                                                                disabled={currentImageIndex === currentContent.주요특징이미지.length - 1}
-                                                                className={`size-10 rounded-full bg-white flex items-center justify-center text-black transition-all shadow-lg ${currentImageIndex === currentContent.주요특징이미지.length - 1 ? 'opacity-20 cursor-not-allowed' : 'hover:bg-white/90'}`}
-                                                            >
-                                                                <ChevronRight className="size-5" strokeWidth={3} />
-                                                            </button>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                                <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black/20">
+                                        <div id="section-screenshots" className="mb-10 pt-10 border-t border-border-light/30 scroll-mt-32">
+                                            <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">주요특징</h3>
+                                            <div className="rounded-[20px] overflow-hidden border border-white/10 bg-white/[0.03]">
+                                                {/* Image with overlaid arrows */}
+                                                <div className="relative">
                                                     <AnimatePresence mode="wait">
                                                         <motion.img
                                                             key={currentImageIndex}
@@ -217,33 +197,57 @@ export default function MultiAgentPlatformPage() {
                                                             transition={{ duration: 0.3 }}
                                                             src={currentContent.주요특징이미지[currentImageIndex].이미지URL}
                                                             alt={currentContent.주요특징이미지[currentImageIndex].타이틀}
-                                                            className="w-full h-auto"
+                                                            className="w-full h-auto block"
                                                         />
                                                     </AnimatePresence>
+                                                    {currentContent.주요특징이미지.length > 1 && (
+                                                        <>
+                                                            <button
+                                                                onClick={() => setCurrentImageIndex((prev) => Math.max(0, prev - 1))}
+                                                                disabled={currentImageIndex === 0}
+                                                                className={`absolute left-3 top-1/2 -translate-y-1/2 size-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-white transition-all border border-white/10 ${currentImageIndex === 0 ? 'opacity-20 cursor-not-allowed' : 'hover:bg-black/60'}`}
+                                                            >
+                                                                <ChevronLeft className="size-5" strokeWidth={3} />
+                                                            </button>
+                                                            <button
+                                                                onClick={() => setCurrentImageIndex((prev) => Math.min(currentContent.주요특징이미지!.length - 1, prev + 1))}
+                                                                disabled={currentImageIndex === currentContent.주요특징이미지.length - 1}
+                                                                className={`absolute right-3 top-1/2 -translate-y-1/2 size-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-white transition-all border border-white/10 ${currentImageIndex === currentContent.주요특징이미지.length - 1 ? 'opacity-20 cursor-not-allowed' : 'hover:bg-black/60'}`}
+                                                            >
+                                                                <ChevronRight className="size-5" strokeWidth={3} />
+                                                            </button>
+                                                        </>
+                                                    )}
+                                                </div>
+                                                {/* Caption below image */}
+                                                <div className="p-5 flex items-start justify-between gap-4 border-t border-white/5">
+                                                    <div className="flex-1">
+                                                        <h4 className="text-[17px] font-bold text-white mb-1.5">{currentContent.주요특징이미지[currentImageIndex].타이틀}</h4>
+                                                        <p className="text-white/50 text-[14px] leading-relaxed break-keep font-medium">{currentContent.주요특징이미지[currentImageIndex].설명}</p>
+                                                    </div>
+                                                    {currentContent.주요특징이미지.length > 1 && (
+                                                        <span className="text-[13px] text-white/30 font-medium shrink-0 pt-0.5">{currentImageIndex + 1} / {currentContent.주요특징이미지.length}</span>
+                                                    )}
                                                 </div>
                                             </div>
                                         </div>
                                     )}
 
                                     {currentContent.특장점 && currentContent.특장점.length > 0 && (
-                                        <div id="section-advantages" className="mb-10 scroll-mt-32">
+                                        <div id="section-advantages" className="mb-10 pt-10 border-t border-border-light/30 scroll-mt-32">
                                             <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">특장점</h3>
-                                            <div className="bg-brand-primary/[0.03] backdrop-blur-sm rounded-[20px] p-5 border border-brand-primary/20 space-y-5">
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 {currentContent.특장점.map((item, i) => (
-                                                    <div key={i} className="flex flex-col gap-3">
-                                                        <div className="flex items-center gap-4">
-                                                            <div className="size-6 rounded-full bg-brand-primary flex items-center justify-center shadow-lg shadow-brand-primary/20">
-                                                                <span className="text-[10px] font-bold text-text-primary">{(i + 1).toString().padStart(2, '0')}</span>
-                                                            </div>
-                                                            <h4 className="text-[18px] font-bold text-text-primary leading-tight">
-                                                                {item.타이틀.replace(/^\d+\.\s*/, '')}
-                                                            </h4>
+                                                    <div key={i} className="bg-bg-surface/50 rounded-[16px] p-5 border border-border-light flex flex-col gap-3">
+                                                        <div className="size-6 rounded-full bg-brand-primary flex items-center justify-center shadow-lg shadow-brand-primary/20">
+                                                            <span className="text-[10px] font-bold text-text-primary">{(i + 1).toString().padStart(2, '0')}</span>
                                                         </div>
-                                                        <div className="pl-10">
-                                                            <p className="text-text-secondary/70 text-[14px] leading-relaxed break-keep font-medium">
-                                                                {item.설명}
-                                                            </p>
-                                                        </div>
+                                                        <h4 className="text-[16px] font-bold text-text-primary leading-tight">
+                                                            {item.타이틀.replace(/^\d+\.\s*/, '')}
+                                                        </h4>
+                                                        <p className="text-text-secondary/70 text-[14px] leading-relaxed break-keep font-medium">
+                                                            {item.설명}
+                                                        </p>
                                                     </div>
                                                 ))}
                                             </div>
@@ -251,12 +255,12 @@ export default function MultiAgentPlatformPage() {
                                     )}
 
                                     {currentContent.주요활용시나리오 && currentContent.주요활용시나리오.length > 0 && (
-                                        <div id="section-scenarios" className="mb-12 scroll-mt-32">
+                                        <div id="section-scenarios" className="mb-12 pt-10 border-t border-border-light/30 scroll-mt-32">
                                             <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">이렇게 활용하세요</h3>
                                             <div className="grid grid-cols-1 gap-4">
                                                 {currentContent.주요활용시나리오.map((item, i) => (
                                                     <div key={i} className="bg-bg-surface backdrop-blur-sm rounded-[20px] p-5 border border-border-light">
-                                                        <h4 className="text-[20px] font-bold text-text-primary mb-6 underline underline-offset-8 decoration-border-light">{item.타이틀}</h4>
+                                                        <h4 className="text-[20px] font-bold text-text-primary mb-6">{item.타이틀}</h4>
                                                         <div className="flex items-start gap-4 text-text-secondary">
                                                             <div className="flex-1">
                                                                 {item.설명.split('\n').map((line, idx) => {
@@ -269,17 +273,22 @@ export default function MultiAgentPlatformPage() {
                                                                     if (isSubHeader) {
                                                                         const colonIndex = trimmedLine.indexOf(':');
                                                                         const hasContentAfterColon = colonIndex !== -1 && trimmedLine.substring(colonIndex + 1).trim().length > 0;
+                                                                        const isAsIs = /^As-Is/i.test(trimmedLine);
+                                                                        const isEffect = /^기대/.test(trimmedLine);
+                                                                        const barColor = isAsIs ? 'bg-white/30' : isEffect ? 'bg-emerald-500' : 'bg-brand-primary';
+                                                                        const labelColor = isAsIs ? 'text-text-secondary/60' : isEffect ? 'text-emerald-400' : 'text-text-primary';
+                                                                        const borderColor = isAsIs ? 'border-white/10' : isEffect ? 'border-emerald-500/20' : 'border-brand-primary/20';
 
                                                                         if (hasContentAfterColon) {
                                                                             const titlePart = trimmedLine.substring(0, colonIndex + 1);
                                                                             const contentPart = trimmedLine.substring(colonIndex + 1).trim();
                                                                             return (
                                                                                 <div key={idx} className="mt-8 mb-4 first:mt-0">
-                                                                                    <div className="text-[16px] font-bold text-text-primary flex items-center gap-2 mb-2">
-                                                                                        <div className="w-1 h-4 bg-brand-primary rounded-full" />
+                                                                                    <div className={`text-[15px] font-bold flex items-center gap-2 mb-2 ${labelColor}`}>
+                                                                                        <div className={`w-0.5 h-4 rounded-full ${barColor}`} />
                                                                                         {titlePart}
                                                                                     </div>
-                                                                                    <div className="text-[14px] leading-relaxed opacity-80 pl-3 border-l border-border-light ml-0.5">
+                                                                                    <div className={`text-[14px] leading-relaxed opacity-80 pl-3 border-l ml-0.5 ${borderColor}`}>
                                                                                         {contentPart}
                                                                                     </div>
                                                                                 </div>
@@ -287,8 +296,8 @@ export default function MultiAgentPlatformPage() {
                                                                         }
 
                                                                         return (
-                                                                            <div key={idx} className="text-[16px] font-bold text-text-primary mt-8 mb-3 first:mt-0 flex items-center gap-2">
-                                                                                <div className="w-1 h-4 bg-brand-primary rounded-full" />
+                                                                            <div key={idx} className={`text-[15px] font-bold mt-8 mb-3 first:mt-0 flex items-center gap-2 ${labelColor}`}>
+                                                                                <div className={`w-0.5 h-4 rounded-full ${barColor}`} />
                                                                                 {trimmedLine}
                                                                             </div>
                                                                         );
@@ -309,35 +318,44 @@ export default function MultiAgentPlatformPage() {
                                     )}
 
                                     {currentContent.고객사례 && currentContent.고객사례.length > 0 && (
-                                        <div id="section-cases" className="mb-12 scroll-mt-32">
+                                        <div id="section-cases" className="mb-12 pt-10 border-t border-border-light/30 scroll-mt-32">
                                             <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">고객사례</h3>
                                             <div className={`grid grid-cols-1 ${currentContent.고객사례.length > 1 ? 'md:grid-cols-2' : ''} gap-4`}>
                                                 {currentContent.고객사례.map((item, i) => (
-                                                    <div key={i} className="bg-bg-surface backdrop-blur-sm rounded-[20px] p-5 border border-border-light hover:border-brand-primary transition-all group">
-                                                        <div className="flex items-start gap-4 mb-5">
-                                                            <div className="size-14 rounded-2xl bg-brand-primary/10 flex items-center justify-center text-3xl border border-brand-primary/20">
-                                                                {item.아이콘}
+                                                    <div key={i} className="bg-bg-surface backdrop-blur-sm rounded-[20px] border border-border-light">
+                                                        <div className="p-5">
+                                                            {/* 헤더 */}
+                                                            <div className="mb-5">
+                                                                <h4 className="text-[18px] font-bold text-text-primary leading-tight mb-1.5">{item.기업명}</h4>
+                                                                <span className="inline-flex items-center text-[11px] font-bold text-brand-primary bg-brand-primary/10 border border-brand-primary/20 rounded-full px-2 py-0.5 tracking-wide">{item.산업분야}</span>
                                                             </div>
-                                                            <div>
-                                                                <h4 className="text-[20px] font-bold text-text-primary mb-1.5 leading-tight">{item.기업명}</h4>
-                                                                <span className="text-[15px] text-text-dim">{item.산업분야}</span>
+                                                            {/* 항목들 */}
+                                                            <div className="space-y-3 mb-5">
+                                                                {item.항목들.map((detail, idx) => (
+                                                                    <div key={idx}>
+                                                                        {detail.타이틀 === '성과' ? (
+                                                                            <div className="rounded-xl bg-brand-primary/10 border border-brand-primary/20 p-3.5">
+                                                                                <div className="flex items-center gap-1.5 mb-1.5">
+                                                                                    <div className="w-0.5 h-3.5 rounded-full bg-brand-primary" />
+                                                                                    <span className="text-[11px] font-bold text-brand-primary/70 tracking-wider uppercase">성과</span>
+                                                                                </div>
+                                                                                <p className="text-[14px] leading-relaxed break-keep text-brand-primary font-bold">{detail.내용}</p>
+                                                                            </div>
+                                                                        ) : (
+                                                                            <div>
+                                                                                <span className="text-[11px] font-bold text-text-dim tracking-wider uppercase mb-1.5 block">{detail.타이틀}</span>
+                                                                                <p className="text-[14px] leading-relaxed break-keep text-text-secondary">{detail.내용}</p>
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+                                                                ))}
                                                             </div>
+                                                            {item.상세링크 && (
+                                                                <Link to={item.상세링크} className="inline-flex items-center gap-1.5 text-[13px] font-bold text-white border border-white/20 rounded-lg px-3 py-1.5 hover:bg-white/10 transition-all w-fit">
+                                                                    자세히 보기 <ChevronRight className="size-3.5" />
+                                                                </Link>
+                                                            )}
                                                         </div>
-                                                        <div className="space-y-4 mb-5">
-                                                            {item.항목들.map((detail, idx) => (
-                                                                <div key={idx}>
-                                                                    <span className="text-[13px] font-bold text-text-dim tracking-wider uppercase mb-3 block">{detail.타이틀}</span>
-                                                                    <p className={`text-[14px] leading-relaxed break-keep ${detail.타이틀 === '성과' ? 'text-brand-primary font-bold' : 'text-text-secondary'}`}>
-                                                                        {detail.내용}
-                                                                    </p>
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                        {item.상세링크 && (
-                                                            <Link to={item.상세링크} className="inline-flex items-center gap-2 text-[14px] font-bold text-text-primary hover:text-text-primary/80 hover:gap-3 transition-all">
-                                                                자세히 보기 <ChevronRight className="size-4" />
-                                                            </Link>
-                                                        )}
                                                     </div>
                                                 ))}
                                             </div>
@@ -345,7 +363,7 @@ export default function MultiAgentPlatformPage() {
                                     )}
 
                                     {currentContent.소개영상 && currentContent.소개영상.length > 0 && (
-                                        <div id="section-videos" className="mb-10 scroll-mt-32">
+                                        <div id="section-videos" className="mb-10 pt-10 border-t border-border-light/30 scroll-mt-32">
                                             <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">소개영상</h3>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                                 {currentContent.소개영상.map((video, i) => {
@@ -391,18 +409,18 @@ export default function MultiAgentPlatformPage() {
                                     )}
 
                                     {currentContent.오퍼링 && currentContent.오퍼링.length > 0 && (
-                                        <div id="section-offerings" className="mb-12 scroll-mt-32">
+                                        <div id="section-offerings" className="mb-12 pt-10 border-t border-border-light/30 scroll-mt-32">
                                             <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">오퍼링</h3>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 {currentContent.오퍼링.map((offering, i) => (
                                                     <div key={i} className="bg-bg-surface backdrop-blur-sm rounded-[20px] p-5 border border-border-light hover:border-brand-primary transition-all flex flex-col justify-between">
                                                         <div>
                                                             <h4 className="text-[20px] font-bold text-text-primary mb-3">{offering.타이틀}</h4>
-                                                            <p className="text-text-secondary/50 text-[15px] mb-8 leading-relaxed">{offering.설명}</p>
+                                                            <p className="text-text-secondary/70 text-[15px] mb-6 leading-relaxed">{offering.설명}</p>
                                                         </div>
                                                         {offering.상세링크 && (
-                                                            <Link to={offering.상세링크} className="inline-flex items-center gap-2 text-[14px] text-text-primary hover:text-text-primary/80 hover:gap-3 transition-all font-bold">
-                                                                자세히 보기 <ChevronRight className="size-4" />
+                                                            <Link to={offering.상세링크} className="inline-flex items-center gap-1.5 text-[13px] font-bold text-white border border-white/20 rounded-lg px-3 py-1.5 hover:bg-white/10 transition-all w-fit">
+                                                                자세히 보기 <ChevronRight className="size-3.5" />
                                                             </Link>
                                                         )}
                                                     </div>
@@ -411,7 +429,7 @@ export default function MultiAgentPlatformPage() {
                                         </div>
                                     )}
 
-                                    <div id="section-contact" className={`grid grid-cols-1 ${currentContent.제품상세문의 && (currentContent.제품상세문의.이메일 || currentContent.제품상세문의.전화번호) && currentContent.관련리소스 && currentContent.관련리소스.length > 0 ? 'md:grid-cols-2' : ''} gap-5 mb-12 scroll-mt-32 items-stretch`}>
+                                    <div id="section-contact" className={`pt-10 border-t border-border-light/30 grid grid-cols-1 ${currentContent.제품상세문의 && (currentContent.제품상세문의.이메일 || currentContent.제품상세문의.전화번호) && currentContent.관련리소스 && currentContent.관련리소스.length > 0 ? 'md:grid-cols-2' : ''} gap-5 mb-12 scroll-mt-32 items-stretch`}>
                                         {currentContent.제품상세문의 && (currentContent.제품상세문의.이메일 || currentContent.제품상세문의.전화번호) && (
                                             <div className="flex flex-col h-full">
                                                 <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">제품 상세 문의</h3>
