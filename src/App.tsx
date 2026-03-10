@@ -12,7 +12,9 @@ import ParticleEngine from './components/ParticleEngine';
 import HeroContent from './components/HeroContent';
 import { LightRays } from './components/LightRays';
 import { HIGHLIGHT_NEWS, REGULAR_NEWS } from '@/context/news/news-data';
+import { USE_CASES, USE_CASE_CATEGORIES, USE_CASE_CATEGORY_COLORS } from '@/context/use-cases/use-case-data';
 import Silk from './components/Silk';
+import Navbar from './components/Navbar';
 import Aurora from './components/Aurora';
 import Antigravity from './components/Antigravity';
 import { BackgroundGradientAnimation } from './components/ui/background-gradient-animation';
@@ -776,71 +778,12 @@ const App = () => {
   return (
     <div className="min-h-screen bg-[#000000] text-white font-sans">
       {/* GNB - Global Navigation Bar */}
-      <nav
-        className={`fixed w-full z-50 bg-black/[0.85] backdrop-blur-sm py-4 px-6 md:px-10 transition-colors duration-300 ${scrolled ? 'border-b border-white/20' : 'border-b border-transparent'}`}
-      >
-        <div className="max-w-[1200px] mx-auto flex justify-between items-center">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 shrink-0">
-            <img src="/bizai_logo.png" alt="Biz.AI Logo" className="h-6 w-auto" />
-            <span className="text-xl font-bold text-white tracking-tighter hidden sm:inline">Biz.AI</span>
-          </Link>
-
-          <div className="hidden lg:flex items-center gap-8 text-white/90 text-[14px] font-medium tracking-tight">
-            <Link to="/platform" className="hover:text-white transition-colors">멀티 에이전트 플랫폼</Link>
-            <Link to="/use-cases" className="hover:text-white transition-colors">고객 사례</Link>
-            <Link to="/news" className="hover:text-white transition-colors">새로운 소식</Link>
-          </div>
-
-          {/* Right: CTA Buttons */}
-          <div className="flex items-center gap-3">
-            <a href="https://www.ktds.com/" target="_blank" rel="noopener noreferrer">
-              <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10 group">
-                <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
-              </Button>
-            </a>
-            <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard group">
-              AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
-            </Button>
-            <button className="cursor-pointer lg:hidden text-white p-2 smooth-gpu" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="lg:hidden absolute top-full left-0 right-0 bg-[#000000] py-4 px-6 md:px-10 overflow-hidden border-b border-white/20"
-            >
-              <div className="flex flex-col gap-4">
-                <Link to="/" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>멀티 에이전트 플랫폼</Link>
-                <Link to="/use-cases" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>고객 사례</Link>
-                <Link to="/news" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>새로운 소식</Link>
-                <div className="pt-2 mt-2 border-t border-white/20 flex flex-col gap-2">
-                  <a href="https://www.ktds.com/" target="_blank" rel="noopener noreferrer" className="w-full">
-                    <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group hover:bg-transparent px-0 py-1 h-auto text-[16px] w-full">
-                      <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
-                    </Button>
-                  </a>
-                  <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start font-medium group px-0 py-1 h-auto text-[16px]">
-                    AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
-                  </Button>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+      <Navbar activePage="home" />
 
       {/* Hero Section */}
       <section id="hero" className="relative z-20 h-screen flex items-center justify-center overflow-clip bg-[#000000] font-poppins">
 
-        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 flex items-center h-full">
+        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-0 flex items-center h-full">
           <div className="w-full flex flex-col lg:flex-row items-center relative">
             {/* Left Content */}
             <div className="w-full lg:max-w-[800px] relative z-20">
@@ -897,8 +840,8 @@ const App = () => {
             style={{ clipPath, willChange: 'clip-path' } as any}
             className={`bg-[#F3F5FC] border-black/5 relative z-20 overflow-hidden mb-20 smooth-gpu ${isMobile ? 'border-none' : 'border'}`}
           >
-            <section id="solution" className="py-32 px-6">
-              <div className="max-w-[1200px] mx-auto relative">
+            <section id="solution" className="py-32">
+              <div className="max-w-[1200px] mx-auto px-6 md:px-0 relative">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -1012,8 +955,8 @@ const App = () => {
           </motion.div>
         </div>
 
-        <section id="domain" className="py-20 md:py-32 px-4 md:px-6 relative overflow-hidden bg-black pb-16">
-          <div className="max-w-[1200px] mx-auto">
+        <section id="domain" className="py-20 md:py-32 relative overflow-hidden bg-black pb-16">
+          <div className="max-w-[1200px] mx-auto px-6 md:px-0">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1068,7 +1011,7 @@ const App = () => {
 
         <section id="use-cases" className="relative bg-[#000000]">
           {/* Title Area: Normal Scrolling */}
-          <div className="max-w-[1200px] mx-auto w-full px-4 md:px-6 pt-32 pb-0 text-center relative">
+          <div className="max-w-[1200px] mx-auto w-full px-6 md:px-0 pt-32 pb-0 text-center relative">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1101,7 +1044,7 @@ const App = () => {
                   </div>
 
                   {/* Solution + Visual Group */}
-                  <div className="bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-6 flex flex-col gap-8">
+                  <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-[2.5rem] p-6 flex flex-col gap-8">
                     <div className="flex flex-col gap-4">
                       <p className="text-[#1A75FF] text-[15px] font-semibold tracking-tight">
                         {String(index + 1).padStart(2, '0')}. Solution
@@ -1325,7 +1268,7 @@ const App = () => {
         <ProcessSection isMobile={isMobile} />
 
         <section id="logos" className="relative py-12 bg-black overflow-hidden">
-          <div className="relative z-10 max-w-[1200px] mx-auto px-6 text-center">
+          <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-0 text-center">
             <div className="relative overflow-hidden w-full py-4">
               <motion.div
                 className="flex items-center gap-x-20 whitespace-nowrap"
@@ -1359,8 +1302,8 @@ const App = () => {
           </div>
         </section>
 
-        <section id="stats" className="py-32 px-6 bg-[#000000]">
-          <div className="max-w-[1200px] mx-auto">
+        <section id="stats" className="py-32 bg-[#000000]">
+          <div className="max-w-[1200px] mx-auto px-6 md:px-0">
             <div className="text-center mb-32">
 
               <h2 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-6 tracking-tight">
@@ -1409,7 +1352,7 @@ const App = () => {
                   { user: "Nidhi B.", role: "Content Writer", stars: 4.5, quote: "The road to no-code interface designing has been made easy with applications like Framer." },
                   { user: "Leo A.", role: "Amazing tool for no-code modern web design and publishing", stars: 5, quote: "엔터프라이즈 AI의 패러다임을 바꿀 만한 강력한 도구입니다!" },
                 ].slice(0, isMobile ? 4 : undefined).map((post, i) => (
-                  <div key={i} className="break-inside-avoid bg-white/[0.01] border border-white/10 rounded-[20px] p-7 hover:border-white/20 transition-all duration-300 group/card">
+                  <div key={i} className="break-inside-avoid bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-[20px] p-7 hover:border-white/20 transition-all duration-300 group/card">
                     <div className="mb-4">
                       <div className="text-white font-bold text-[18px] mb-1">{post.user}</div>
                       <div className="text-white/40 text-[14px] font-medium leading-tight mb-4">{post.role}</div>
@@ -1444,7 +1387,7 @@ const App = () => {
         {/* 새로운 소식 섹션: 우측 블리드(Bleed) 레이아웃 */}
         <section id="news" className="py-32 bg-[#000000] relative">
           {/* 헤더 영역: 컨테이너 내부 */}
-          <div className="max-w-[1200px] mx-auto px-6 mb-16">
+          <div className="max-w-[1200px] mx-auto px-6 md:px-0 mb-16">
             <div className="flex justify-between items-center">
               <div className="flex flex-col items-start text-left">
                 <h2 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
@@ -1476,7 +1419,7 @@ const App = () => {
           {/* 뉴스 카드 리스트: 타이틀 정렬 + 우측 블리드 */}
           <div
             ref={newsScrollRef}
-            className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-12 pl-[calc(max(24px,(100vw-1200px)/2+24px))] pr-6"
+            className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-12 pl-[max(1.5rem,calc((100vw-1200px)/2))] md:pl-[max(0rem,calc((100vw-1200px)/2))] pr-6"
           >
             {[...HIGHLIGHT_NEWS, ...REGULAR_NEWS].slice(0, 8).map((news: any, i) => (
               <motion.div
@@ -1527,8 +1470,8 @@ const App = () => {
         </section>
 
         {/* FAQ 섹션 */}
-        <section id="faq" className="py-24 px-6 bg-[#000000] relative overflow-hidden">
-          <div className="max-w-[1200px] mx-auto">
+        <section id="faq" className="py-24 bg-[#000000] relative overflow-hidden">
+          <div className="max-w-[1200px] mx-auto px-6 md:px-0">
             <div className="flex flex-col lg:flex-row gap-20">
               {/* 왼쪽: 헤더 */}
               <div className="lg:w-1/3">

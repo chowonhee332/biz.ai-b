@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, ExternalLink, ChevronRight, ChevronLeft, PlayCircle, Download, Linkedin, Youtube, Mail, Phone } from 'lucide-react';
+import { Menu, X, ExternalLink, ChevronRight, ChevronLeft, Play, PlayCircle, Download, Linkedin, Youtube, Mail, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { PLATFORM_PAGE_CONFIG } from '@/context/platform/platform-data';
 import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
 
 export default function MultiAgentPlatformPage() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -32,64 +33,10 @@ export default function MultiAgentPlatformPage() {
     return (
         <div className="min-h-screen bg-[#000000] text-white font-pretendard flex flex-col">
             {/* GNB (Omitted for brevity, assuming standard GNB) */}
-            <nav className={`fixed w-full z-50 bg-black/[0.85] backdrop-blur-sm py-4 px-6 md:px-10 transition-colors duration-300 ${scrolled ? 'border-b border-white/20' : 'border-b border-transparent'}`}>
-                <div className="max-w-[1200px] mx-auto flex justify-between items-center">
-                    <Link to="/" className="flex items-center gap-2 shrink-0">
-                        <img src="/bizai_logo.png" alt="Biz.AI Logo" className="h-6 w-auto" />
-                        <span className="text-xl font-bold text-white tracking-tighter hidden sm:inline">Biz.AI</span>
-                    </Link>
+            <Navbar activePage="platform" />
 
-                    <div className="hidden lg:flex items-center gap-8 text-white/90 text-[14px] font-medium tracking-tight">
-                        <Link to="/platform" className="text-white font-semibold transition-colors">멀티 에이전트 플랫폼</Link>
-                        <Link to="/use-cases" className="hover:text-white transition-colors">고객 사례</Link>
-                        <Link to="/news" className="hover:text-white transition-colors">새로운 소식</Link>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                        <a href="https://www.ktds.com/" target="_blank" rel="noopener noreferrer">
-                            <Button variant="ghost" size="sm" className="hidden md:flex text-white/90 hover:text-white hover:bg-white/10 group">
-                                <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
-                            </Button>
-                        </a>
-                        <Button size="sm" className="hidden md:flex bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md font-semibold font-pretendard group">
-                            AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
-                        </Button>
-                        <button className="cursor-pointer lg:hidden text-white p-2 smooth-gpu" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="메뉴">
-                            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                        </button>
-                    </div>
-                </div>
-
-                <AnimatePresence>
-                    {isMenuOpen && (
-                        <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="lg:hidden absolute top-full left-0 right-0 bg-[#000000] py-4 px-6 md:px-10 overflow-hidden border-b border-white/20"
-                        >
-                            <div className="flex flex-col gap-4">
-                                <Link to="/platform" className="text-white font-bold py-1" onClick={() => setIsMenuOpen(false)}>멀티 에이전트 플랫폼</Link>
-                                <Link to="/use-cases" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>고객 사례</Link>
-                                <Link to="/news" className="text-white/90 hover:text-white font-medium py-1" onClick={() => setIsMenuOpen(false)}>새로운 소식</Link>
-                                <div className="pt-2 mt-2 border-t border-white/20 flex flex-col gap-2">
-                                    <a href="https://www.ktds.com/" target="_blank" rel="noopener noreferrer" className="w-full">
-                                        <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start group hover:bg-transparent px-0 py-1 h-auto text-[16px] w-full">
-                                            <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity" /> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
-                                        </Button>
-                                    </a>
-                                    <Button variant="ghost" size="sm" className="text-white/90 hover:text-white justify-start font-medium group px-0 py-1 h-auto text-[16px]">
-                                        AI Agent 스튜디오 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
-                                    </Button>
-                                </div>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </nav>
-
-            <section className="pt-48 pb-32 flex-1 px-6 md:px-10">
-                <div className="max-w-[1200px] mx-auto mb-20">
+            <section className="pt-48 pb-32 flex-1">
+                <div className="max-w-[1200px] mx-auto px-6 md:px-0 mb-20">
                     <motion.div
                         key={activeTab + "header"}
                         initial={{ opacity: 0, y: 20 }}
@@ -99,46 +46,47 @@ export default function MultiAgentPlatformPage() {
                         <h1 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
                             {heroText.title}
                         </h1>
-                        <p className="text-white/70 text-[18px] max-w-2xl font-medium leading-relaxed">
+                        <p className="text-white/70 text-[16px] max-w-2xl font-medium leading-relaxed">
                             {heroText.description}
                         </p>
                     </motion.div>
                 </div>
 
-                <div className="max-w-[1200px] mx-auto">
-                    {/* Sticky Tabs */}
-                    <div className="lg:hidden sticky top-[72px] bg-black/[0.85] backdrop-blur-sm z-40 border-b border-white/20 mb-12 -mx-6 md:-mx-10 px-6 md:px-10">
-                        <div className="flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap">
-                            {sidebarItems.map((item) => (
-                                <button
-                                    key={item}
-                                    onClick={() => setActiveTab(item)}
-                                    className={`relative h-full text-[16px] font-bold transition-all shrink-0 flex items-center px-1 cursor-pointer ${activeTab === item ? "text-blue-500" : "text-white/30 hover:text-white/60"}`}
-                                >
-                                    {item}
-                                    {activeTab === item && (
-                                        <motion.div layoutId="activePlatformTab" className="absolute bottom-0 left-0 right-0 h-[3px] bg-blue-500 rounded-full" />
-                                    )}
-                                </button>
-                            ))}
-                        </div>
+                {/* Sticky Tabs - 데스크탑 제외 모바일용 */}
+                <div className="lg:hidden sticky top-[72px] bg-black/[0.85] backdrop-blur-sm z-40 border-b border-white/20 mb-12">
+                    <div className="max-w-[1200px] mx-auto px-6 md:px-0 flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap">
+                        {sidebarItems.map((item) => (
+                            <button
+                                key={item}
+                                onClick={() => setActiveTab(item)}
+                                className={`relative h-full text-[14px] font-medium transition-all shrink-0 flex items-center px-1 cursor-pointer ${activeTab === item ? "text-blue-500" : "text-white/30 hover:text-white/60"}`}
+                            >
+                                {item}
+                                {activeTab === item && (
+                                    <motion.div layoutId="activePlatformTab" className="absolute bottom-0 left-0 right-0 h-[3px] bg-blue-500 rounded-full" />
+                                )}
+                            </button>
+                        ))}
                     </div>
+                </div>
 
+                <div className="max-w-[1200px] mx-auto px-6 md:px-0">
                     <div className="flex flex-col lg:flex-row gap-20">
                         <aside className="hidden lg:block lg:w-[220px] shrink-0">
-                            <ul className="flex flex-col gap-8 sticky top-[100px] border-l border-white/5 py-2">
+                            <div className="flex flex-col gap-2 sticky top-[100px]">
                                 {sidebarItems.map((item) => (
-                                    <li key={item}>
-                                        <button
-                                            onClick={() => setActiveTab(item)}
-                                            className={`pl-8 relative text-[18px] font-bold transition-all text-left w-full cursor-pointer ${activeTab === item ? "text-white" : "text-white/30 hover:text-white/60"}`}
-                                        >
-                                            {activeTab === item && <div className="absolute left-[-1.5px] top-0 bottom-0 w-[3px] bg-[#3B82F6] rounded-full" />}
-                                            {item}
-                                        </button>
-                                    </li>
+                                    <button
+                                        key={item}
+                                        onClick={() => setActiveTab(item)}
+                                        className={`w-full text-left px-4 py-2.5 rounded-xl text-[16px] font-semibold transition-all cursor-pointer ${activeTab === item
+                                            ? "bg-[#1A75FF] text-white shadow-lg shadow-blue-500/20"
+                                            : "text-white/40 hover:text-white/70 hover:bg-white/5"
+                                            }`}
+                                    >
+                                        {item}
+                                    </button>
                                 ))}
-                            </ul>
+                            </div>
                         </aside>
 
                         <main className="flex-1 min-w-0">
@@ -150,36 +98,36 @@ export default function MultiAgentPlatformPage() {
                                     exit={{ opacity: 0, x: -10 }}
                                     transition={{ duration: 0.4 }}
                                 >
-                                    <div className="mb-12">
-                                        <h2 className="text-[36px] font-bold text-white mb-5 break-keep">{currentContent.타이틀}</h2>
-                                        <div className="text-white/60 text-[16px] leading-relaxed break-keep">
+                                    <div className="mb-16">
+                                        <h2 className="text-[32px] font-bold text-white mb-4 break-keep">{currentContent.타이틀}</h2>
+                                        <div className="text-white/80 text-[16px] leading-relaxed break-keep font-medium">
                                             <p>{currentContent.설명}</p>
                                         </div>
                                     </div>
 
-                                    <div className="mb-12">
-                                        <h3 className="text-[16px] font-bold text-[#1A75FF] mb-5 tracking-wider uppercase">주요 고객군</h3>
+                                    <div className="mb-16">
+                                        <h3 className="text-[14px] font-bold text-[#1A75FF] mb-4 tracking-wider uppercase">주요 고객군</h3>
                                         <p className="text-white/80 text-[16px] font-medium leading-relaxed">{currentContent.주요고객군}</p>
                                     </div>
 
-                                    <div className="mb-12">
-                                        <h3 className="text-[16px] font-bold text-[#1A75FF] mb-6 tracking-wider uppercase">핵심가치</h3>
+                                    <div className="mb-16">
+                                        <h3 className="text-[15px] font-bold text-[#1A75FF] mb-4 tracking-wider uppercase">핵심가치</h3>
                                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                             {currentContent.핵심가치.map((item, i) => (
-                                                <div key={i} className="bg-white/5 rounded-xl p-6 border border-white/5">
-                                                    <h4 className="text-[16px] font-bold text-white mb-2">{item.타이틀}</h4>
-                                                    <p className="text-white/60 text-[14px] leading-snug">{item.설명}</p>
+                                                <div key={i} className="bg-white/[0.03] backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all group">
+                                                    <h4 className="text-[18px] font-bold text-white mb-2">{item.타이틀}</h4>
+                                                    <p className="text-white/60 text-[14px] leading-relaxed font-medium">{item.설명}</p>
                                                 </div>
                                             ))}
                                         </div>
                                     </div>
 
-                                    <div className="mb-12">
-                                        <h3 className="text-[16px] font-bold text-white mb-6 tracking-wider uppercase">주요기능</h3>
-                                        <div className="bg-white/5 rounded-2xl p-6 border border-white/5 space-y-3">
+                                    <div className="mb-16">
+                                        <h3 className="text-[15px] font-bold text-[#1A75FF] mb-4 tracking-wider uppercase">주요기능</h3>
+                                        <div className="bg-white/[0.03] backdrop-blur-sm rounded-3xl p-8 border border-white/10 space-y-4">
                                             {currentContent.주요기능.map((feature, i) => (
-                                                <div key={i} className="flex gap-4 text-white text-[16px]">
-                                                    <span className="text-white/30 shrink-0">›</span>
+                                                <div key={i} className="flex gap-3 text-white/80 text-[16px] font-medium">
+                                                    <ChevronRight className="mt-1.5 size-4 text-white/30 shrink-0" strokeWidth={3} />
                                                     <span className="break-keep">{feature}</span>
                                                 </div>
                                             ))}
@@ -187,33 +135,33 @@ export default function MultiAgentPlatformPage() {
                                     </div>
 
                                     {currentContent.주요특징이미지 && currentContent.주요특징이미지.length > 0 && (
-                                        <div className="mb-12">
-                                            <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
+                                        <div className="mb-16">
+                                            <div className="bg-white/[0.03] backdrop-blur-sm rounded-3xl p-8 border border-white/10">
                                                 <div className="flex justify-between items-start mb-6 gap-4">
                                                     <div className="flex-1">
-                                                        <h4 className="text-[20px] font-bold text-white mb-2">{currentContent.주요특징이미지[currentImageIndex].타이틀}</h4>
-                                                        <p className="text-white/60 text-[16px] leading-relaxed break-keep">{currentContent.주요특징이미지[currentImageIndex].설명}</p>
+                                                        <h4 className="text-[18px] font-bold text-white mb-2">{currentContent.주요특징이미지[currentImageIndex].타이틀}</h4>
+                                                        <p className="text-white/60 text-[14px] leading-relaxed break-keep font-medium">{currentContent.주요특징이미지[currentImageIndex].설명}</p>
                                                     </div>
                                                     {currentContent.주요특징이미지.length > 1 && (
                                                         <div className="flex gap-1.5 shrink-0 pt-1">
                                                             <button
                                                                 onClick={() => setCurrentImageIndex((prev) => Math.max(0, prev - 1))}
                                                                 disabled={currentImageIndex === 0}
-                                                                className={`size-8 rounded-full bg-white/10 flex items-center justify-center text-white transition-all ${currentImageIndex === 0 ? 'opacity-20 cursor-not-allowed' : 'hover:bg-white/20'}`}
+                                                                className={`size-10 rounded-full bg-white/10 flex items-center justify-center text-white transition-all ${currentImageIndex === 0 ? 'opacity-20 cursor-not-allowed' : 'hover:bg-white/20'}`}
                                                             >
-                                                                <ChevronLeft className="size-4" strokeWidth={3} />
+                                                                <ChevronLeft className="size-5" strokeWidth={3} />
                                                             </button>
                                                             <button
                                                                 onClick={() => setCurrentImageIndex((prev) => Math.min(currentContent.주요특징이미지!.length - 1, prev + 1))}
                                                                 disabled={currentImageIndex === currentContent.주요특징이미지.length - 1}
-                                                                className={`size-8 rounded-full bg-white flex items-center justify-center text-black transition-all shadow-lg ${currentImageIndex === currentContent.주요특징이미지.length - 1 ? 'opacity-20 cursor-not-allowed' : 'hover:bg-white/90'}`}
+                                                                className={`size-10 rounded-full bg-white flex items-center justify-center text-black transition-all shadow-lg ${currentImageIndex === currentContent.주요특징이미지.length - 1 ? 'opacity-20 cursor-not-allowed' : 'hover:bg-white/90'}`}
                                                             >
-                                                                <ChevronRight className="size-4" strokeWidth={3} />
+                                                                <ChevronRight className="size-5" strokeWidth={3} />
                                                             </button>
                                                         </div>
                                                     )}
                                                 </div>
-                                                <div className="rounded-xl overflow-hidden border border-white/10 shadow-2xl bg-black/20">
+                                                <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black/20">
                                                     <AnimatePresence mode="wait">
                                                         <motion.img
                                                             key={currentImageIndex}
@@ -231,101 +179,116 @@ export default function MultiAgentPlatformPage() {
                                         </div>
                                     )}
 
-                                    <div className="mb-12">
-                                        <h3 className="text-[16px] font-bold text-[#1A75FF] mb-6 tracking-wider uppercase">특장점</h3>
-                                        <div className="bg-[#1A75FF]/10 rounded-2xl p-6 border border-[#1A75FF]/40 space-y-10">
-                                            {currentContent.특장점.map((item, i) => (
-                                                <div key={i} className="flex flex-col gap-3">
-                                                    <div className="flex items-center gap-4">
-                                                        <div className="size-8 rounded-full bg-white/5 flex items-center justify-center">
-                                                            <span className="text-[12px] font-bold text-[#1A75FF]">{(i + 1).toString().padStart(2, '0')}</span>
-                                                        </div>
-                                                        <h4 className="text-[18px] font-bold text-[#1A75FF] leading-tight">
-                                                            {item.타이틀.replace(/^\d+\.\s*/, '')}
-                                                        </h4>
-                                                    </div>
-                                                    <div className="pl-12">
-                                                        <p className="text-white/60 text-[15px] leading-relaxed break-keep">
-                                                            {item.설명}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    <div className="mb-12">
-                                        <h3 className="text-[16px] font-bold text-[#1A75FF] mb-6 tracking-wider uppercase">이렇게 활용하세요</h3>
-                                        <div className="grid grid-cols-1 gap-4">
-                                            {currentContent.주요활용시나리오.map((item, i) => (
-                                                <div key={i} className="bg-white/5 rounded-xl p-6 border border-white/5">
-                                                    <h4 className="text-[16px] font-bold text-white mb-2">{item.타이틀}</h4>
-                                                    <div className="flex items-start gap-2 text-white/60 text-[14px]">
-                                                        <ChevronRight className="size-4 shrink-0 mt-0.5" />
-                                                        <p className="leading-relaxed">{item.설명}</p>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    <div className="mb-12">
-                                        <h3 className="text-[16px] font-bold text-[#1A75FF] mb-6 tracking-wider uppercase">고객사례</h3>
-                                        <div className={`grid grid-cols-1 ${currentContent.고객사례.length > 1 ? 'md:grid-cols-2' : ''} gap-4`}>
-                                            {currentContent.고객사례.map((item, i) => (
-                                                <div key={i} className="bg-white/5 rounded-2xl p-8 border border-white/5 hover:border-[#1A75FF] transition-all group">
-                                                    <div className="flex items-start gap-5 mb-7">
-                                                        <div className="size-12 rounded-xl bg-[#1A75FF]/10 flex items-center justify-center text-2xl border border-[#1A75FF]/20">
-                                                            {item.아이콘}
-                                                        </div>
-                                                        <div>
-                                                            <h4 className="text-[18px] font-bold text-white mb-1 leading-tight">{item.기업명}</h4>
-                                                            <span className="text-[14px] text-white/40">{item.산업분야}</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="space-y-6 mb-7">
-                                                        {item.항목들.map((detail, idx) => (
-                                                            <div key={idx}>
-                                                                <span className="text-[14px] font-bold text-white/30 tracking-wider uppercase mb-2 block">{detail.타이틀}</span>
-                                                                <p className={`text-[16px] leading-relaxed break-keep ${detail.타이틀 === '성과' ? 'text-[#1A75FF] font-bold' : 'text-white/70'}`}>
-                                                                    {detail.내용}
-                                                                </p>
+                                    {currentContent.특장점 && currentContent.특장점.length > 0 && (
+                                        <div className="mb-16">
+                                            <h3 className="text-[15px] font-bold text-[#1A75FF] mb-4 tracking-wider uppercase">특장점</h3>
+                                            <div className="bg-[#1A75FF]/[0.03] backdrop-blur-sm rounded-3xl p-8 border border-[#1A75FF]/20 space-y-10">
+                                                {currentContent.특장점.map((item, i) => (
+                                                    <div key={i} className="flex flex-col gap-3">
+                                                        <div className="flex items-center gap-4">
+                                                            <div className="size-6 rounded-full bg-[#1A75FF] flex items-center justify-center shadow-lg shadow-blue-500/20">
+                                                                <span className="text-[10px] font-bold text-white">{(i + 1).toString().padStart(2, '0')}</span>
                                                             </div>
-                                                        ))}
+                                                            <h4 className="text-[18px] font-bold text-white leading-tight">
+                                                                {item.타이틀.replace(/^\d+\.\s*/, '')}
+                                                            </h4>
+                                                        </div>
+                                                        <div className="pl-10">
+                                                            <p className="text-white/70 text-[14px] leading-relaxed break-keep font-medium">
+                                                                {item.설명}
+                                                            </p>
+                                                        </div>
                                                     </div>
-
-                                                    {item.상세링크 && (
-                                                        <Link to={item.상세링크} className="inline-flex items-center gap-2 text-[14px] font-bold text-white hover:text-white/80 hover:gap-3 transition-all">
-                                                            자세히 보기 <ChevronRight className="size-4" />
-                                                        </Link>
-                                                    )}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {currentContent.소개영상 && (
-                                        <div className="mb-12">
-                                            <h3 className="text-[16px] font-bold text-[#1A75FF] mb-6 tracking-wider uppercase">소개영상</h3>
-                                            <div className="aspect-video bg-white/5 rounded-2xl border border-white/5 flex flex-col items-center justify-center group cursor-pointer relative overflow-hidden">
-                                                <PlayCircle className="size-16 text-white/20 group-hover:text-[#1A75FF] group-hover:scale-110 transition-all duration-300 z-10" />
-                                                <span className="mt-4 text-white/30 font-medium z-10">{currentContent.소개영상.타이틀} 재생하기</span>
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                ))}
                                             </div>
                                         </div>
                                     )}
 
-                                    {currentContent.오퍼링 && (
-                                        <div className="mb-12">
-                                            <h3 className="text-[16px] font-bold text-[#1A75FF] mb-6 tracking-wider uppercase">오퍼링</h3>
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                {currentContent.오퍼링.map((offering, i) => (
-                                                    <div key={i} className="bg-white/5 rounded-2xl p-6 border border-white/5 hover:border-[#1A75FF] transition-all">
-                                                        <h4 className="text-[18px] font-bold text-white mb-2">{offering.타이틀}</h4>
-                                                        <p className="text-white/50 text-[14px] mb-6">{offering.설명}</p>
-                                                        {offering.상세링크 && (
-                                                            <Link to={offering.상세링크} className="inline-flex items-center gap-2 text-[14px] text-white hover:text-white/80 hover:gap-3 transition-all">
+                                    {currentContent.주요활용시나리오 && currentContent.주요활용시나리오.length > 0 && (
+                                        <div className="mb-20">
+                                            <h3 className="text-[15px] font-bold text-[#1A75FF] mb-6 tracking-wider uppercase">이렇게 활용하세요</h3>
+                                            <div className="grid grid-cols-1 gap-6">
+                                                {currentContent.주요활용시나리오.map((item, i) => (
+                                                    <div key={i} className="bg-white/[0.03] backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-[#1A75FF]/30 transition-all">
+                                                        <h4 className="text-[20px] font-bold text-white mb-6 underline underline-offset-8 decoration-white/10">{item.타이틀}</h4>
+                                                        <div className="flex items-start gap-4 text-white/60">
+                                                            <div className="flex-1">
+                                                                {item.설명.split('\n').map((line, idx) => {
+                                                                    const trimmedLine = line.trim();
+                                                                    if (!trimmedLine) return <div key={idx} className="h-4" />;
+
+                                                                    const subHeaderRegex = /^(As-Is|To-Be|기대\s?효과|대상\s?사용자)/i;
+                                                                    const isSubHeader = subHeaderRegex.test(trimmedLine);
+
+                                                                    if (isSubHeader) {
+                                                                        const colonIndex = trimmedLine.indexOf(':');
+                                                                        const hasContentAfterColon = colonIndex !== -1 && trimmedLine.substring(colonIndex + 1).trim().length > 0;
+
+                                                                        if (hasContentAfterColon) {
+                                                                            const titlePart = trimmedLine.substring(0, colonIndex + 1);
+                                                                            const contentPart = trimmedLine.substring(colonIndex + 1).trim();
+                                                                            return (
+                                                                                <div key={idx} className="mt-8 mb-4 first:mt-0">
+                                                                                    <div className="text-[16px] font-bold text-white flex items-center gap-2 mb-2">
+                                                                                        <div className="w-1 h-4 bg-[#1A75FF] rounded-full" />
+                                                                                        {titlePart}
+                                                                                    </div>
+                                                                                    <div className="text-[14px] leading-relaxed opacity-80 pl-3 border-l border-white/5 ml-0.5">
+                                                                                        {contentPart}
+                                                                                    </div>
+                                                                                </div>
+                                                                            );
+                                                                        }
+
+                                                                        return (
+                                                                            <div key={idx} className="text-[16px] font-bold text-white mt-8 mb-3 first:mt-0 flex items-center gap-2">
+                                                                                <div className="w-1 h-4 bg-[#1A75FF] rounded-full" />
+                                                                                {trimmedLine}
+                                                                            </div>
+                                                                        );
+                                                                    }
+
+                                                                    return (
+                                                                        <div key={idx} className="text-[14px] leading-relaxed mb-2 opacity-80 pl-0">
+                                                                            {trimmedLine}
+                                                                        </div>
+                                                                    );
+                                                                })}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {currentContent.고객사례 && currentContent.고객사례.length > 0 && (
+                                        <div className="mb-20">
+                                            <h3 className="text-[15px] font-bold text-[#1A75FF] mb-6 tracking-wider uppercase">고객사례</h3>
+                                            <div className={`grid grid-cols-1 ${currentContent.고객사례.length > 1 ? 'md:grid-cols-2' : ''} gap-6`}>
+                                                {currentContent.고객사례.map((item, i) => (
+                                                    <div key={i} className="bg-white/[0.03] backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-[#1A75FF]/40 transition-all group">
+                                                        <div className="flex items-start gap-6 mb-8">
+                                                            <div className="size-14 rounded-2xl bg-[#1A75FF]/10 flex items-center justify-center text-3xl border border-[#1A75FF]/20">
+                                                                {item.아이콘}
+                                                            </div>
+                                                            <div>
+                                                                <h4 className="text-[20px] font-bold text-white mb-1.5 leading-tight">{item.기업명}</h4>
+                                                                <span className="text-[15px] text-white/40">{item.산업분야}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="space-y-6 mb-8">
+                                                            {item.항목들.map((detail, idx) => (
+                                                                <div key={idx}>
+                                                                    <span className="text-[13px] font-bold text-white/30 tracking-wider uppercase mb-3 block">{detail.타이틀}</span>
+                                                                    <p className={`text-[14px] leading-relaxed break-keep ${detail.타이틀 === '성과' ? 'text-[#1A75FF] font-bold' : 'text-white/80'}`}>
+                                                                        {detail.내용}
+                                                                    </p>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                        {item.상세링크 && (
+                                                            <Link to={item.상세링크} className="inline-flex items-center gap-2 text-[14px] font-bold text-white hover:text-white/80 hover:gap-3 transition-all">
                                                                 자세히 보기 <ChevronRight className="size-4" />
                                                             </Link>
                                                         )}
@@ -335,36 +298,110 @@ export default function MultiAgentPlatformPage() {
                                         </div>
                                     )}
 
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12 items-stretch">
-                                        {currentContent.제품상세문의 && (
+                                    {currentContent.소개영상 && currentContent.소개영상.length > 0 && (
+                                        <div className="mb-12">
+                                            <h3 className="text-[16px] font-bold text-[#1A75FF] mb-6 tracking-wider uppercase">소개영상</h3>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                                {currentContent.소개영상.map((video, i) => {
+                                                    const youtubeThumbnail = (url: string) => {
+                                                        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+                                                        const match = url.match(regExp);
+                                                        if (match && match[2].length === 11) {
+                                                            return `https://img.youtube.com/vi/${match[2]}/maxresdefault.jpg`;
+                                                        }
+                                                        return null;
+                                                    };
+                                                    const thumbnail = youtubeThumbnail(video.URL);
+
+                                                    return (
+                                                        <a
+                                                            key={i}
+                                                            href={video.URL}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="block group"
+                                                        >
+                                                            <div className="aspect-video bg-white/5 rounded-3xl border border-white/5 flex items-center justify-center relative overflow-hidden transition-all hover:border-[#1A75FF]/40 mb-4">
+                                                                {thumbnail ? (
+                                                                    <>
+                                                                        <img src={thumbnail} alt={video.타이틀} className="absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-500" />
+                                                                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500" />
+                                                                    </>
+                                                                ) : (
+                                                                    <div className="absolute inset-0 bg-gradient-to-br from-[#1A75FF]/10 to-transparent" />
+                                                                )}
+                                                                <div className="size-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 z-10 border border-white/30 shadow-2xl">
+                                                                    <Play className="size-5 text-white fill-white ml-0.5" />
+                                                                </div>
+                                                            </div>
+                                                            <h4 className="text-[17px] font-bold text-white/80 group-hover:text-white transition-colors break-keep leading-snug pl-1">
+                                                                {video.타이틀}
+                                                            </h4>
+                                                        </a>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {currentContent.오퍼링 && currentContent.오퍼링.length > 0 && (
+                                        <div className="mb-20">
+                                            <h3 className="text-[15px] font-bold text-[#1A75FF] mb-6 tracking-wider uppercase">오퍼링</h3>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                {currentContent.오퍼링.map((offering, i) => (
+                                                    <div key={i} className="bg-white/[0.03] backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-[#1A75FF]/40 transition-all flex flex-col justify-between">
+                                                        <div>
+                                                            <h4 className="text-[20px] font-bold text-white mb-3">{offering.타이틀}</h4>
+                                                            <p className="text-white/50 text-[15px] mb-8 leading-relaxed">{offering.설명}</p>
+                                                        </div>
+                                                        {offering.상세링크 && (
+                                                            <Link to={offering.상세링크} className="inline-flex items-center gap-2 text-[14px] text-white hover:text-white/80 hover:gap-3 transition-all font-bold">
+                                                                자세히 보기 <ChevronRight className="size-4" />
+                                                            </Link>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    <div className={`grid grid-cols-1 ${currentContent.제품상세문의 && (currentContent.제품상세문의.이메일 || currentContent.제품상세문의.전화번호) && currentContent.관련리소스 && currentContent.관련리소스.length > 0 ? 'md:grid-cols-2' : ''} gap-8 mb-20 items-stretch`}>
+                                        {currentContent.제품상세문의 && (currentContent.제품상세문의.이메일 || currentContent.제품상세문의.전화번호) && (
                                             <div className="flex flex-col h-full">
-                                                <h3 className="text-[16px] font-bold text-[#1A75FF] mb-6 tracking-wider uppercase">제품 상세 문의</h3>
-                                                <div className="bg-white/5 rounded-2xl p-6 border border-white/5 flex flex-col gap-4 items-start justify-center flex-1 min-h-[120px]">
-                                                    <div className="flex items-center gap-3 text-white">
-                                                        <Mail className="size-4" />
-                                                        <span className="text-[16px]">{currentContent.제품상세문의.이메일}</span>
-                                                    </div>
-                                                    <div className="flex items-center gap-3 text-white">
-                                                        <Phone className="size-4" />
-                                                        <span className="text-[16px]">{currentContent.제품상세문의.전화번호}</span>
-                                                    </div>
+                                                <h3 className="text-[15px] font-bold text-[#1A75FF] mb-6 tracking-wider uppercase">제품 상세 문의</h3>
+                                                <div className="bg-white/[0.03] backdrop-blur-sm rounded-3xl p-8 border border-white/10 flex flex-col gap-6 items-start justify-center flex-1 min-h-[140px]">
+                                                    {currentContent.제품상세문의.이메일 && (
+                                                        <div className="flex items-center gap-4 text-white">
+                                                            <div className="size-8 rounded-lg bg-white/5 flex items-center justify-center">
+                                                                <Mail className="size-4 text-white/40" />
+                                                            </div>
+                                                            <span className="text-[16px] font-medium">{currentContent.제품상세문의.이메일}</span>
+                                                        </div>
+                                                    )}
+                                                    {currentContent.제품상세문의.전화번호 && (
+                                                        <div className="flex items-center gap-4 text-white">
+                                                            <div className="size-8 rounded-lg bg-white/5 flex items-center justify-center">
+                                                                <Phone className="size-4 text-white/40" />
+                                                            </div>
+                                                            <span className="text-[16px] font-medium">{currentContent.제품상세문의.전화번호}</span>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             </div>
                                         )}
-
-                                        {currentContent.관련리소스 && (
+                                        {currentContent.관련리소스 && currentContent.관련리소스.length > 0 && (
                                             <div className="flex flex-col h-full">
-                                                <h3 className="text-[16px] font-bold text-[#1A75FF] mb-6 tracking-wider uppercase">관련 리소스</h3>
-                                                <div className="space-y-3 flex-1">
+                                                <h3 className="text-[15px] font-bold text-[#1A75FF] mb-6 tracking-wider uppercase">관련 리소스</h3>
+                                                <div className="space-y-4 flex-1">
                                                     {currentContent.관련리소스.map((resource, i) => (
-                                                        <button key={i} className="w-full flex justify-between items-center p-4 bg-white/5 rounded-2xl border border-white/5 hover:border-[#1A75FF] transition-all group text-left min-h-[52px]">
-                                                            <div className="flex items-center gap-3">
-                                                                <div className="size-6 bg-[#1A75FF]/10 rounded flex items-center justify-center text-[9px] font-bold text-[#1A75FF]">
+                                                        <button key={i} className="w-full flex justify-between items-center p-5 bg-white/5 rounded-2xl border border-white/5 hover:border-[#1A75FF] transition-all group text-left min-h-[64px]">
+                                                            <div className="flex items-center gap-4">
+                                                                <div className="size-8 bg-[#1A75FF]/10 rounded-lg flex items-center justify-center text-[11px] font-bold text-[#1A75FF]">
                                                                     {resource.파일타입}
                                                                 </div>
-                                                                <h4 className="text-[16px] text-white/90">{resource.타이틀}</h4>
+                                                                <h4 className="text-[16px] text-white/90 font-medium">{resource.타이틀}</h4>
                                                             </div>
-                                                            <Download className="size-4 text-white/20 group-hover:text-[#1A75FF] transition-colors" />
+                                                            <Download className="size-5 text-white/20 group-hover:text-[#1A75FF] transition-colors" />
                                                         </button>
                                                     ))}
                                                 </div>
