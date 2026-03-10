@@ -1157,7 +1157,7 @@ const App = () => {
                                 <span className="font-bold">{item.titlePrefix}</span>{" "}
                                 <span className="font-normal">{item.titleSuffix}</span>
                               </h3>
-                              <p className="text-[16px] text-white/80 leading-relaxed max-w-lg mb-3 font-normal">
+                              <p className="text-[16px] text-white/70 leading-relaxed max-w-lg mb-4 font-medium">
                                 {item.desc}
                               </p>
                               {item.tags && (
@@ -1165,7 +1165,7 @@ const App = () => {
                                   {item.tags.map((tag: string, i: number) => (
                                     <span
                                       key={i}
-                                      className="px-1 py-1.5 text-[16px] font-medium"
+                                      className="px-2.5 py-1 text-[12px] font-bold rounded-full border border-white/10 bg-white/5"
                                       style={{ color: item.themeColor === 'sky' ? '#0EA5E9' : item.themeColor === 'emerald' ? '#10B981' : '#00AEFF' }}
                                     >
                                       # {tag}
@@ -1174,12 +1174,12 @@ const App = () => {
                                 </div>
                               )}
                               {item.features && (
-                                <div className="border-y border-white/20 py-10 mb-6 max-w-lg">
-                                  <ul className="space-y-3">
+                                <div className="mb-6 max-w-lg">
+                                  <ul className="space-y-3.5">
                                     {item.features.map((feature: string, i: number) => (
-                                      <li key={i} className="flex items-start gap-4 text-white text-[16px] leading-snug font-normal">
-                                        <div className="w-1 h-1 rounded-full bg-white mt-[10px] shrink-0" />
-                                        <span className="bg-gradient-to-r from-white to-[#B9D9FF] bg-clip-text text-transparent">{feature}</span>
+                                      <li key={i} className="flex items-start gap-3 text-white text-[15px] leading-snug font-medium">
+                                        <div className="w-0.5 h-4 rounded-full bg-white/40 mt-[3px] shrink-0" />
+                                        <span className="text-white/80">{feature}</span>
                                       </li>
                                     ))}
                                   </ul>
