@@ -1,27 +1,17 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, ExternalLink } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Linkedin, Youtube } from 'lucide-react';
+import { motion } from 'motion/react';
+import { useNavigate } from 'react-router-dom';
 
 import { USE_CASES, USE_CASE_CATEGORIES, USE_CASE_CATEGORY_COLORS } from '@/context/use-cases/use-case-data';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 
 export default function UseCasePage() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeCategory, setActiveCategory] = useState(USE_CASE_CATEGORIES[0]);
     const navigate = useNavigate();
-    const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
@@ -54,16 +44,16 @@ export default function UseCasePage() {
                             <button
                                 key={category}
                                 onClick={() => setActiveCategory(category)}
-                                className={`relative h-full text-[15px] font-medium transition-colors flex items-center px-1 cursor-pointer ${activeCategory === category
-                                    ? "text-brand-primary"
-                                    : "text-text-secondary/60 hover:text-text-primary"
+                                className={`relative h-full text-[15px] transition-colors flex items-center px-1 cursor-pointer ${activeCategory === category
+                                    ? "text-white font-bold"
+                                    : "text-text-secondary/60 font-medium hover:text-white"
                                     }`}
                             >
                                 {category}
                                 {activeCategory === category && (
                                     <motion.div
                                         layoutId="activeCategoryUseCase"
-                                        className="absolute bottom-0 left-0 right-0 h-[3px] bg-brand-primary rounded-full"
+                                        className="absolute bottom-0 left-0 right-0 h-[2px] bg-white rounded-full"
                                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                                     />
                                 )}
@@ -87,31 +77,27 @@ export default function UseCasePage() {
                                     transition={{ delay: i * 0.05, duration: 0.5 }}
                                     className="group cursor-pointer flex flex-col"
                                 >
-                                    <div className="relative aspect-video rounded-[20px] overflow-hidden mb-6 bg-bg-surface border border-border-light">
+                                    <div className="relative aspect-video rounded-[20px] overflow-hidden mb-5 bg-bg-surface border border-border-light">
                                         <img
                                             src={item.이미지}
                                             alt={item.타이틀}
-                                            className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 filter grayscale-[0.1] brightness-[0.9] group-hover:grayscale-0 group-hover:brightness-100"
+                                            className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 brightness-[0.85] group-hover:brightness-100"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                                        <span className={`absolute top-3 left-3 text-[12px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm bg-black/30 border border-white/10 ${USE_CASE_CATEGORY_COLORS[item.카테고리]?.text || 'text-blue-400'}`}>
+                                            {item.카테고리}
+                                        </span>
                                     </div>
-                                    <div className="flex flex-col gap-3">
-                                        <div className="flex flex-wrap gap-2">
-                                            <span className={`text-[14px] font-bold transition-colors ${USE_CASE_CATEGORY_COLORS[item.카테고리]?.text || 'text-blue-400'}`}>
-                                                {item.카테고리}
-                                            </span>
-                                        </div>
-                                        <h3 className={`text-white text-[22px] font-bold leading-tight transition-colors whitespace-pre-line group-hover:${USE_CASE_CATEGORY_COLORS[item.카테고리]?.text || 'text-blue-400'}`}>
+                                    <div className="flex flex-col gap-2.5">
+                                        <h3 className="text-white text-[19px] font-bold leading-snug whitespace-pre-line">
                                             {item.타이틀}
                                         </h3>
-                                        <p className="text-text-secondary text-[15px] leading-relaxed line-clamp-2">
+                                        <p className="text-text-secondary/70 text-[14px] leading-relaxed line-clamp-2 font-medium">
                                             {item.설명}
                                         </p>
-                                        <div className="mt-1">
-                                            <span className="text-white/40 text-[14px] font-medium transition-colors group-hover:text-white/60">
-                                                #{item.태그}
-                                            </span>
-                                        </div>
+                                        <span className="text-white/30 text-[13px] font-medium mt-0.5">
+                                            #{item.태그}
+                                        </span>
                                     </div>
                                 </motion.div>
                             ))
