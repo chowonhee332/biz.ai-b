@@ -88,28 +88,28 @@ const AnimatedCounter = ({ from, to }: { from: number; to: number }) => {
 };
 
 const SolutionCard = ({ number, image, title, desc, highlight, isLarge }: { number: string; image: string; title: string; desc: string; highlight: string; isLarge?: boolean }) => (
-  <div className="bg-white rounded-[20px] p-10 flex flex-col w-full min-w-[280px] h-[424px] group cursor-pointer shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_48px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-2 font-pretendard relative overflow-hidden">
+  <div className="bg-white rounded-[20px] p-6 md:p-10 flex flex-col w-full min-w-[280px] h-[340px] md:h-[424px] group cursor-pointer shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_48px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-2 font-pretendard relative overflow-hidden">
     {/* Index Number */}
-    <div className="text-black text-[20px] font-bold leading-none mb-3">{number}</div>
+    <div className="text-black text-[16px] md:text-[20px] font-bold leading-none mb-2 md:mb-3">{number}</div>
 
     {/* Title & Description Group */}
-    <div className="flex flex-col gap-4 mb-6">
-      <h4 className="text-black text-[32px] font-bold tracking-tight leading-tight">{title}</h4>
-      <div className="min-h-[48px]"> {/* Align highlight tags by giving min-height to desc */}
-        <p className="text-black/80 text-[16px] leading-snug font-normal break-keep whitespace-pre-line">
+    <div className="flex flex-col gap-2 md:gap-4 mb-4 md:mb-6">
+      <h4 className="text-black text-[24px] md:text-[32px] font-bold tracking-tight leading-tight">{title}</h4>
+      <div className="min-h-[40px] md:min-h-[48px]">
+        <p className="text-black/80 text-[13px] md:text-[16px] leading-snug font-normal break-keep whitespace-pre-line">
           {desc}
         </p>
       </div>
     </div>
 
     {/* Highlight Tag */}
-    <div className="text-brand-primary font-medium text-[16px] tracking-tight">
+    <div className="text-brand-primary font-medium text-[13px] md:text-[16px] tracking-tight">
       {highlight.startsWith('#') ? highlight : `# ${highlight}`}
     </div>
 
     {/* Logo: Absolute Bottom Right Positioning */}
-    <div className="absolute bottom-10 right-10 pointer-events-none">
-      <div className={`relative flex items-end justify-end transition-transform duration-500 group-hover:scale-105 ${isLarge ? 'w-44 h-44' : 'w-[160px] h-[160px]'}`}>
+    <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10 pointer-events-none">
+      <div className={`relative flex items-end justify-end transition-transform duration-500 group-hover:scale-105 ${isLarge ? 'w-28 h-28 md:w-44 md:h-44' : 'w-[100px] h-[100px] md:w-[160px] md:h-[160px]'}`}>
         <motion.img
           src={image}
           alt={title}
@@ -485,14 +485,14 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
         style={{ clipPath: clipPathProcess, scrollMarginTop: "100px" } as any}
         className={`bg-[#F3F5FC] border-black/5 relative z-20 overflow-hidden shadow-2xl smooth-gpu ${isMobile ? 'border-none' : 'border'}`}
       >
-        <section id="process" className="py-32 relative overflow-hidden px-6">
+        <section id="process" className="py-16 md:py-32 relative overflow-hidden px-6">
           <div className="max-w-[1200px] mx-auto relative z-10">
-            <div className="text-center mb-24 container-responsive">
-              <p className="text-brand-primary text-[18px] font-semibold mb-4 tracking-wide">Why kt ds</p>
-              <h2 className="text-[36px] lg:text-[58px] font-bold text-black mb-6 tracking-tight leading-tight">
+            <div className="text-center mb-12 md:mb-24 container-responsive">
+              <p className="text-brand-primary text-[13px] md:text-[18px] font-semibold mb-3 md:mb-4 tracking-wide">Why kt ds</p>
+              <h2 className="text-[26px] md:text-[36px] lg:text-[58px] font-bold text-black mb-4 md:mb-6 tracking-tight leading-tight">
                 왜 kt ds와 함께 해야 할까요?
               </h2>
-              <p className="text-black/80 text-[18px] max-w-2xl mx-auto font-medium">
+              <p className="text-black/80 text-[13px] md:text-[16px] lg:text-[18px] max-w-2xl mx-auto font-medium">
                 기업의 복잡한 요구사항을 기획부터 구축, 검증, 운영까지<br className="hidden md:block" />
                 표준화된 프로세스로 완성합니다.
               </p>
@@ -539,12 +539,12 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ delay: i * 0.15, duration: 0.6, ease: "easeOut" }}
                   viewport={{ once: false, margin: "-50px" }}
-                  className="group relative bg-white rounded-[20px] p-10 border border-black/5 hover:-translate-y-2 hover:shadow-[0_20px_48px_rgba(0,0,0,0.08)] transition-all duration-300 flex flex-col min-h-[420px] overflow-hidden"
+                  className="group relative bg-white rounded-[20px] p-6 md:p-10 border border-black/5 hover:-translate-y-2 hover:shadow-[0_20px_48px_rgba(0,0,0,0.08)] transition-all duration-300 flex flex-col min-h-[320px] md:min-h-[420px] overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-b from-black/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[20px] pointer-events-none" />
-                  <div className="relative min-h-[130px]">
-                    <span className={`${step.color} text-[20px] font-bold mb-2 block`}>{step.num}</span>
-                    <h3 className="text-[32px] font-bold text-gray-900 leading-tight whitespace-pre-line">{step.subtitle}</h3>
+                  <div className="relative min-h-[100px] md:min-h-[130px]">
+                    <span className={`${step.color} text-[16px] md:text-[20px] font-bold mb-2 block`}>{step.num}</span>
+                    <h3 className="text-[24px] md:text-[32px] font-bold text-gray-900 leading-tight whitespace-pre-line">{step.subtitle}</h3>
                   </div>
                   <div className="relative flex-1" />
                   <div className="relative min-h-[160px]">
@@ -570,7 +570,7 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
 
 const StudioSection = () => {
   return (
-    <section id="studio-v2" className="bg-bg-main py-32 px-6">
+    <section id="studio-v2" className="bg-bg-main py-16 md:py-32 px-6">
       <div className="max-w-[1200px] mx-auto">
         {/* 메인 배너 카드 */}
         <motion.div
@@ -591,11 +591,11 @@ const StudioSection = () => {
           </div>
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent z-[1]" />
 
-          <div className="relative z-10 pl-20 h-full flex flex-col justify-center max-w-2xl font-pretendard">
-            <h2 className="text-[48px] font-bold text-white mb-4 tracking-tight leading-tight">
+          <div className="relative z-10 px-6 md:pl-20 h-full flex flex-col justify-center max-w-2xl font-pretendard">
+            <h2 className="text-[28px] md:text-[48px] font-bold text-white mb-3 md:mb-4 tracking-tight leading-tight">
               AI Agent Studio
             </h2>
-            <p className="text-text-secondary text-[18px] leading-relaxed break-keep font-normal mb-8 max-w-xl">
+            <p className="text-text-secondary text-[13px] md:text-[18px] leading-relaxed break-keep font-normal mb-6 md:mb-8 max-w-xl">
               필요한 Agent, Tool, MCP를 빠르게 확인하고 시작하세요.<br />
               쉽게 개발 가능한 AI 아키텍처와 Delivery 가이드를 제공합니다.
             </p>
@@ -823,7 +823,7 @@ const App = () => {
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
-              className="absolute lg:left-[55%] top-1/2 -translate-y-1/2 w-[600px] lg:w-[720px] left-1/2 -translate-x-1/2 lg:translate-x-0 z-0 lg:z-10 pointer-events-none opacity-40 lg:opacity-90"
+              className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 md:top-1/2 md:bottom-auto md:-translate-y-1/2 lg:left-[55%] lg:translate-x-0 w-[420px] md:w-[600px] lg:w-[720px] z-0 lg:z-10 pointer-events-none opacity-50 md:opacity-40 lg:opacity-90"
             >
               <motion.div
                 className="relative"
@@ -843,7 +843,7 @@ const App = () => {
 
         {/* 스크롤 다운 인디케이터 */}
         <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 cursor-pointer"
+          className="hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-2 cursor-pointer"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
@@ -869,26 +869,26 @@ const App = () => {
             style={{ clipPath, willChange: 'clip-path' } as any}
             className={`bg-[#F3F5FC] border-black/5 relative z-20 overflow-hidden mb-20 smooth-gpu ${isMobile ? 'border-none' : 'border'}`}
           >
-            <section id="solution" className="py-32">
+            <section id="solution" className="py-16 md:py-32">
               <div className="max-w-[1280px] mx-auto container-responsive relative">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="text-center mb-20 font-pretendard flex flex-col items-center relative z-10"
+                  className="text-center mb-10 md:mb-20 font-pretendard flex flex-col items-center relative z-10"
                 >
-                  <h2 className="text-[36px] lg:text-[58px] font-bold text-black mb-6 tracking-tight leading-tight">
+                  <h2 className="text-[26px] md:text-[36px] lg:text-[58px] font-bold text-black mb-4 md:mb-6 tracking-tight leading-tight">
                     AI Solutions
                   </h2>
-                  <p className="text-black/80 text-[18px] max-w-2xl mx-auto font-medium">
+                  <p className="text-black/80 text-[14px] md:text-[18px] max-w-2xl mx-auto font-medium">
                     AI 전략부터 운영까지, 기업 AI의 전 과정을 통합 지원합니다.
                   </p>
                 </motion.div>
 
 
                 {/* 그룹 1: 전사 공통 */}
-                <div className="mb-32 max-w-[1024px] mx-auto">
+                <div className="mb-16 md:mb-32 max-w-[1024px] mx-auto">
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -993,9 +993,9 @@ const App = () => {
               transition={{ duration: 0.8 }}
               className="text-left mb-12 md:mb-16 font-pretendard"
             >
-              <span className="text-brand-primary font-semibold text-[18px] mb-2 md:mb-4 block tracking-tight">Multi Agent</span>
-              <h2 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-4 md:mb-6 tracking-tight">도메인별 Multi Agent</h2>
-              <p className="text-text-secondary text-[16px] md:text-[18px] font-normal tracking-tight">공공/금융 등 도메인별로 kt ds의 Multi-Agent를 활용해 보세요.</p>
+              <span className="text-brand-primary font-semibold text-[13px] md:text-[18px] mb-2 md:mb-4 block tracking-tight">Multi Agent</span>
+              <h2 className="text-[26px] md:text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-4 md:mb-6 tracking-tight">도메인별 Multi Agent</h2>
+              <p className="text-text-secondary text-[13px] md:text-[16px] lg:text-[18px] font-normal tracking-tight">공공/금융 등 도메인별로 kt ds의 Multi-Agent를 활용해 보세요.</p>
             </motion.div>
 
             <div className="flex flex-col lg:flex-row gap-1 md:gap-2 w-full h-[800px] md:h-[900px] lg:h-[700px]">
@@ -1050,7 +1050,7 @@ const App = () => {
 
         <section id="use-cases" className="relative bg-bg-main">
           {/* Title Area: Normal Scrolling */}
-          <div className="max-w-[1280px] mx-auto w-full container-responsive pt-32 pb-0 text-center relative">
+          <div className="max-w-[1280px] mx-auto w-full container-responsive pt-16 md:pt-32 pb-0 text-center relative">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1058,8 +1058,8 @@ const App = () => {
               transition={{ duration: 0.8 }}
               className="w-full flex flex-col items-center"
             >
-              <span className="text-brand-primary font-semibold text-[18px] block mb-4">Use Case</span>
-              <h2 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent tracking-tight leading-[1.1] font-pretendard mx-auto">
+              <span className="text-brand-primary font-semibold text-[13px] md:text-[18px] block mb-4">Use Case</span>
+              <h2 className="text-[26px] md:text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent tracking-tight leading-[1.1] font-pretendard mx-auto">
                 Solution, Multi Agent <br />
                 Use Cases
               </h2>
@@ -1314,18 +1314,18 @@ const App = () => {
 
 
         {/* 수치로 증명하는 Biz.AI (Stats Section) */}
-        <section id="stats" className="py-32 bg-bg-main">
+        <section id="stats" className="py-16 md:py-32 bg-bg-main">
           <div className="max-w-[1280px] mx-auto container-responsive">
-            <div className="text-center mb-32">
-              <h2 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-6 tracking-tight">
+            <div className="text-center mb-12 md:mb-32">
+              <h2 className="text-[26px] md:text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-4 md:mb-6 tracking-tight">
                 수치로 증명하는 Biz.AI
               </h2>
-              <p className="text-text-secondary text-[18px] max-w-3xl mx-auto font-normal">
+              <p className="text-text-secondary text-[13px] md:text-[16px] lg:text-[18px] max-w-3xl mx-auto font-normal">
                 150+ 고객과 600+ AI Agent 구축 경험으로 Biz.AI의 역량을 증명합니다.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-x-16">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-x-16">
               {[
                 { label: "IT Engineers", value: 1700, suffix: "+", sub: "Cloud & AI 기술을 선도하는 전문 인력" },
                 { label: "Solution", value: 18, suffix: "", sub: "AX를 리딩하는 자체 개발 솔루션" },
@@ -1333,12 +1333,12 @@ const App = () => {
                 { label: "AI Agent", value: 600, suffix: "+", sub: "도메인별 특화 AI 에이전트" }
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col items-start font-pretendard">
-                  <div className="text-[72px] font-medium text-text-primary tracking-tighter leading-none mb-12">
+                  <div className="text-[44px] md:text-[60px] lg:text-[72px] font-medium text-text-primary tracking-tighter leading-none mb-6 md:mb-12">
                     <AnimatedCounter from={0} to={stat.value} />
                     <span className="text-brand-primary ml-1">{stat.suffix}</span>
                   </div>
-                  <span className="text-text-primary text-[18px] font-bold mb-1">{stat.label}</span>
-                  <p className="text-text-secondary text-[16px] leading-relaxed font-normal break-keep">{stat.sub}</p>
+                  <span className="text-text-primary text-[13px] md:text-[16px] lg:text-[18px] font-bold mb-1">{stat.label}</span>
+                  <p className="text-text-secondary text-[12px] md:text-[14px] lg:text-[16px] leading-relaxed font-normal break-keep">{stat.sub}</p>
                 </div>
               ))}
             </div>
@@ -1442,15 +1442,15 @@ const App = () => {
         </section>
 
         {/* 새로운 소식 섹션: 우측 블리드(Bleed) 레이아웃 */}
-        <section id="news" className="py-32 bg-bg-main relative">
+        <section id="news" className="py-16 md:py-32 bg-bg-main relative">
           {/* 헤더 영역: 컨테이너 내부 */}
-          <div className="max-w-[1280px] mx-auto container-responsive mb-20">
+          <div className="max-w-[1280px] mx-auto container-responsive mb-10 md:mb-20">
             <div className="flex justify-between items-end">
               <div className="flex flex-col items-start text-left">
-                <h2 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
+                <h2 className="text-[26px] md:text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-4 md:mb-6 tracking-tight leading-tight">
                   새로운 소식
                 </h2>
-                <p className="text-text-secondary text-[18px] max-w-2xl font-medium leading-relaxed">
+                <p className="text-text-secondary text-[13px] md:text-[16px] lg:text-[18px] max-w-2xl font-medium leading-relaxed">
                   Biz.AI가 전하는 최신 업데이트와 인사이트를 확인하세요.
                 </p>
               </div>
@@ -1535,12 +1535,12 @@ const App = () => {
         </section>
 
         {/* FAQ 섹션 */}
-        <section id="faq" className="py-24 bg-bg-main relative overflow-hidden">
+        <section id="faq" className="py-12 md:py-24 bg-bg-main relative overflow-hidden">
           <div className="max-w-[1280px] mx-auto container-responsive">
-            <div className="flex flex-col lg:flex-row gap-20">
+            <div className="flex flex-col lg:flex-row gap-10 md:gap-20">
               {/* 왼쪽: 헤더 */}
               <div className="lg:w-1/3">
-                <h2 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-8 tracking-tight leading-tight font-pretendard">
+                <h2 className="text-[26px] md:text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-6 md:mb-8 tracking-tight leading-tight font-pretendard">
                   FAQ
                 </h2>
               </div>
@@ -1591,7 +1591,7 @@ const App = () => {
                                   onClick={() => setOpenIndex(isOpen ? null : i)}
                                   className="w-full py-8 flex items-center justify-between text-left group cursor-pointer h-auto px-0 hover:bg-transparent"
                                 >
-                                  <span className={`text-[20px] font-bold tracking-tight transition-colors duration-300 ${isOpen ? 'text-text-primary' : 'text-text-secondary/80 group-hover:text-text-primary/90'}`}>
+                                  <span className={`text-[15px] md:text-[20px] font-bold tracking-tight transition-colors duration-300 ${isOpen ? 'text-text-primary' : 'text-text-secondary/80 group-hover:text-text-primary/90'}`}>
                                     {item.q}
                                   </span>
                                   <div className="relative w-6 h-6 flex items-center justify-center">
@@ -1659,7 +1659,7 @@ const App = () => {
                 viewport={{ once: false }}
                 transition={{ duration: 1, ease: "easeOut" }}
               >
-                <h2 className="text-text-primary text-[48px] font-bold mb-10 tracking-tighter leading-[1.2] drop-shadow-[0_0_25px_rgba(255,255,255,0.2)]">
+                <h2 className="text-text-primary text-[28px] md:text-[48px] font-bold mb-6 md:mb-10 tracking-tighter leading-[1.2] drop-shadow-[0_0_25px_rgba(255,255,255,0.2)]">
                   Biz.AI와 함께<br />
                   AI 혁신을 지금 실행하세요.
                 </h2>

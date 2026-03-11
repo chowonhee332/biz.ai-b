@@ -74,7 +74,7 @@ export default function Navbar({ activePage }: NavbarProps) {
           className="lg:hidden ml-auto text-text-primary h-10 w-10 hover:bg-bg-active"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
         </Button>
       </div>
 

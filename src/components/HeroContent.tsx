@@ -84,7 +84,7 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className={`flex mb-6 ${isLeft ? 'justify-start' : 'justify-center'} w-full`}
+        className={`hidden md:flex mb-6 ${isLeft ? 'justify-start' : 'justify-center'} w-full`}
       >
         <div className="relative inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm overflow-hidden">
           <motion.span
@@ -100,7 +100,7 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
         </div>
       </motion.div>
 
-      <div className="relative h-[200px] md:h-[240px] w-full flex flex-col items-center justify-center">
+      <div className="relative h-[220px] md:h-[260px] w-full flex flex-col items-center justify-center">
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
@@ -130,7 +130,7 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
               initial={{ opacity: 0 }}
               animate={{ opacity: done ? 1 : 0 }}
               transition={{ duration: 0.5 }}
-              className={`text-[18px] lg:text-[16px] font-normal text-text-secondary max-w-[85vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl w-full leading-relaxed whitespace-pre-line ${isLeft ? 'text-left' : 'text-center'} px-1`}
+              className={`text-[13px] md:text-[15px] lg:text-[16px] font-normal text-text-secondary max-w-[85vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl w-full leading-relaxed whitespace-pre-line ${isLeft ? 'text-left' : 'text-center'} px-1`}
             >
               {slide.sub}
             </motion.p>
@@ -157,26 +157,26 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0 }}
-        className={`flex flex-col sm:flex-row gap-4 ${isLeft ? 'justify-start' : 'justify-center'} mt-12`}
+        className={`flex flex-row gap-3 ${isLeft ? 'justify-start' : 'justify-center'} mt-8 md:mt-12`}
       >
         <Button
           variant="premium"
           size="cta"
           rounded="xl"
-          className="w-[130px] relative group transition-all duration-300"
+          className="w-[110px] md:w-[130px] h-10 md:h-12 text-[13px] md:text-[15px] relative group transition-all duration-300"
           disabled={isAnalyzing}
         >
           <span className="group-hover:-translate-x-2 transition-transform duration-300">무료체험 신청</span>
-          <ChevronRight size={18} className="absolute right-4 max-w-0 opacity-0 group-hover:max-w-[24px] group-hover:opacity-100 transition-all duration-300 overflow-hidden" />
+          <ChevronRight size={16} className="absolute right-3 max-w-0 opacity-0 group-hover:max-w-[20px] group-hover:opacity-100 transition-all duration-300 overflow-hidden" />
         </Button>
         <Button
           variant="glass"
           size="cta"
           rounded="xl"
-          className="w-[130px] relative group transition-all duration-300"
+          className="w-[110px] md:w-[130px] h-10 md:h-12 text-[13px] md:text-[15px] relative group transition-all duration-300"
         >
           <span className="group-hover:-translate-x-2 transition-transform duration-300">솔루션 문의</span>
-          <ChevronRight size={18} className="absolute right-4 max-w-0 opacity-0 group-hover:max-w-[24px] group-hover:opacity-100 transition-all duration-300 overflow-hidden" />
+          <ChevronRight size={16} className="absolute right-3 max-w-0 opacity-0 group-hover:max-w-[20px] group-hover:opacity-100 transition-all duration-300 overflow-hidden" />
         </Button>
       </motion.div>
 
