@@ -10,14 +10,13 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import ParticleEngine from './components/ParticleEngine';
 import HeroContent from './components/HeroContent';
-import { LightRays } from './components/LightRays';
 import { HIGHLIGHT_NEWS, REGULAR_NEWS } from '@/context/news/news-data';
 import { USE_CASES, USE_CASE_CATEGORIES, USE_CASE_CATEGORY_COLORS } from '@/context/use-cases/use-case-data';
-import Silk from './components/Silk';
 import Navbar from './components/Navbar';
 import Aurora from './components/Aurora';
 import Antigravity from './components/Antigravity';
 import { BackgroundGradientAnimation } from './components/ui/background-gradient-animation';
+import { Component as EtheralShadow } from './components/ui/etheral-shadow';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Search,
@@ -579,22 +578,21 @@ const StudioSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative h-[440px] w-full rounded-[20px] border border-border-light overflow-hidden group mb-5"
+          className="relative h-[400px] w-full rounded-[20px] overflow-hidden group mb-5"
         >
-          {/* LightRays 배경 - 박스 없이 전체로 활용 */}
+          {/* EtheralShadow 배경 */}
           <div className="absolute inset-0 z-0">
-            <LightRays
-              raysOrigin="right"
-              raysColor="#3B82F6"
-              raysSpeed={0.15}
-              lightSpread={0.8}
-              rayLength={2}
+            <EtheralShadow
+              color="rgba(220, 220, 220, 1)"
+              animation={{ scale: 60, speed: 70 }}
+              noise={{ opacity: 0.4, scale: 1.2 }}
+              sizing="fill"
             />
           </div>
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent z-[1]" />
 
           <div className="relative z-10 pl-20 h-full flex flex-col justify-center max-w-2xl font-pretendard">
-            <h2 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-text-primary via-text-primary via-[40%] to-brand-secondary bg-clip-text text-transparent mb-4 tracking-tight leading-tight">
+            <h2 className="text-[48px] font-bold text-white mb-4 tracking-tight leading-tight">
               AI Agent Studio
             </h2>
             <p className="text-text-secondary text-[18px] leading-relaxed break-keep font-normal mb-8 max-w-xl">
@@ -1646,14 +1644,13 @@ const App = () => {
         {/* CTA 배너 - Full Width (Premium Aurora Style) 복구 */}
         <div className="w-full py-0">
           <section className="relative h-[500px] w-full overflow-hidden flex items-center justify-center bg-black">
-            <div className="absolute inset-0 z-0 flex items-center justify-center opacity-60">
-              <Silk
-                speed={5}
-                scale={0.6}
-                color="#5d7cda"
-                noiseIntensity={2.5}
-                rotation={1.2}
+            <div className="absolute inset-0 z-0">
+              <img
+                src="/meeting-bg.jpg"
+                alt="회의"
+                className="w-full h-full object-cover"
               />
+              <div className="absolute inset-0 bg-black/70" />
             </div>
             <div className="relative z-10 w-full max-w-[1200px] mx-auto text-center font-pretendard px-6 py-20">
               <motion.div
@@ -1662,7 +1659,7 @@ const App = () => {
                 viewport={{ once: false }}
                 transition={{ duration: 1, ease: "easeOut" }}
               >
-                <h2 className="text-text-primary text-[32px] lg:text-[52px] font-bold mb-10 tracking-tighter leading-[1.2] drop-shadow-[0_0_25px_rgba(255,255,255,0.2)]">
+                <h2 className="text-text-primary text-[48px] font-bold mb-10 tracking-tighter leading-[1.2] drop-shadow-[0_0_25px_rgba(255,255,255,0.2)]">
                   Biz.AI와 함께<br />
                   AI 혁신을 지금 실행하세요.
                 </h2>
