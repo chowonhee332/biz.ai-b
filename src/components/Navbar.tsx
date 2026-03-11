@@ -30,7 +30,7 @@ export default function Navbar({ activePage }: NavbarProps) {
     <nav className={`fixed w-full z-50 bg-bg-main/95 backdrop-blur-md py-4 transition-all duration-300 ${scrolled ? 'border-b border-border-light shadow-lg' : 'border-b border-transparent'}`}>
       <div className="max-w-[1280px] mx-auto container-responsive flex items-center">
         {/* Logo - Always visible */}
-        <Link to="/" className="flex items-center gap-2 shrink-0">
+        <Link to="/" className="flex items-center gap-2 shrink-0" onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
           <img src="/bizai_logo.png" alt="Biz.AI Logo" className="h-6 w-auto" />
           <span className="text-xl font-bold text-text-primary tracking-tighter">Biz.AI</span>
         </Link>

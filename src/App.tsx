@@ -210,7 +210,7 @@ const InteractiveMockup = ({ image, frameImage, initialMouseX = -0.75, cursorCol
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="relative w-full h-full rounded-[16px] overflow-hidden cursor-none bg-bg-main"
+        className="relative w-full h-full rounded-[28px] overflow-hidden cursor-none bg-bg-main"
       >
         {/* 배경 이미지 (프레임) */}
         <img
@@ -406,7 +406,7 @@ const DomainAccordionItem = ({
       className="relative overflow-hidden cursor-pointer rounded-2xl smooth-gpu w-full lg:w-auto"
       style={{ willChange: 'flex, width' }}
       animate={{
-        flex: forceExpanded ? 300 : isActive ? (window.innerWidth < 1024 ? 300 : 680) : (window.innerWidth < 1024 ? 100 : 122),
+        flex: forceExpanded ? 300 : isActive ? (window.innerWidth < 1024 ? 300 : 780) : (window.innerWidth < 1024 ? 100 : 122),
         minHeight: forceExpanded ? 160 : undefined,
       }}
       transition={{
@@ -431,8 +431,8 @@ const DomainAccordionItem = ({
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/70" />
       </div>
 
-      <div className="absolute inset-x-0 top-0 p-6 md:p-8 flex flex-col justify-start h-full text-left">
-        <p className="text-white/60 font-medium text-[13px] tracking-wide mb-3 whitespace-nowrap uppercase">
+      <div className={`absolute inset-x-0 top-0 p-6 md:p-8 flex flex-col justify-start h-full ${expanded ? 'items-start text-left' : 'items-center'}`}>
+        <p className="text-white/60 font-medium text-[14px] tracking-wide mb-3 whitespace-nowrap uppercase">
           {title}
         </p>
 
@@ -696,6 +696,13 @@ const App = () => {
     else if (latest < 0.66) setActiveUseCase(1);
     else setActiveUseCase(2);
   });
+
+  // 배경색 직접 보간: dark → light → dark (3 케이스, 전환 구간 0.04로 부드럽게)
+  const useCaseBgColor = useTransform(
+    sectionProgress,
+    [0, 0.12, 0.16, 0.28, 0.32, 0.45, 0.49, 0.61, 0.65, 0.78, 0.82, 0.95, 0.99, 1.0],
+    ['#09090B', '#09090B', '#F4F5FE', '#F4F5FE', '#09090B', '#09090B', '#F4F5FE', '#F4F5FE', '#09090B', '#09090B', '#F4F5FE', '#F4F5FE', '#09090B', '#09090B']
+  );
 
   const newsScrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -1104,21 +1111,11 @@ const App = () => {
 
             {/* Desktop Layout (Sticky & Transitions) */}
             <div className="hidden lg:flex sticky top-0 h-screen w-full items-center justify-center px-4 md:px-6 md:px-10 overflow-hidden pt-16">
-              {/* 전체 배경: 솔루션 페이즈에서 즉시 전환, 위로 밀어내며 퇴장 */}
-              {useCaseItems.map((item, index) => {
-                const bgQRange: [number, number] = index === 0 ? [0.0, 0.08] : index === 1 ? [0.33, 0.41] : [0.66, 0.74];
-                const bgDRange: [number, number] = [bgQRange[1] + 0.04, bgQRange[1] + 0.08];
-                const bgNextStart = index < 2 ? (index === 0 ? 0.33 : 0.66) : 1.0;
-                const bgExitRange: [number, number] = [bgNextStart - 0.06, bgNextStart - 0.01];
-                const bgOpacity = useTransform(sectionProgress, [bgDRange[0] - 0.005, bgDRange[0], bgExitRange[1] - 0.005, bgExitRange[1]], [0, 1, 1, 0]);
-                return (
-                  <motion.div
-                    key={`bg-${item.id}`}
-                    style={{ opacity: bgOpacity, backgroundColor: '#F4F5FE' }}
-                    className="absolute inset-0 w-full h-full"
-                  />
-                );
-              })}
+              {/* 전체 배경: 색상 직접 보간으로 부드러운 전환 */}
+              <motion.div
+                style={{ backgroundColor: useCaseBgColor }}
+                className="absolute inset-0 w-full h-full"
+              />
               <div className="max-w-[1200px] mx-auto w-full h-full relative z-10">
                 <div className="w-full flex flex-col lg:flex-row items-center relative gap-8 lg:gap-0 h-full">
                   <div className="w-full lg:w-[42%] flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16 self-start pt-[20vh] h-full relative overflow-hidden">
@@ -1150,7 +1147,7 @@ const App = () => {
                         // 즉시 등장, 다음 이미지가 중앙 도달 시(exitRange[1]) 즉시 사라짐
                         const panelOpacity = useTransform(
                           sectionProgress,
-                          [dRange[0] - 0.005, dRange[0], exitRange[1] - 0.005, exitRange[1]],
+                          [dRange[0], dRange[0] + 0.06, exitRange[1] - 0.005, exitRange[1]],
                           [0, 1, 1, 0]
                         );
 

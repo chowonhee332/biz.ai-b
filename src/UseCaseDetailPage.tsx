@@ -182,7 +182,7 @@ export default function UseCaseDetailPage() {
                                 <a
                                     key={nav.id}
                                     href={`#${nav.id}`}
-                                    className={`py-2.5 pl-4 text-[13px] font-medium transition-all border-l-2 -ml-[1px] cursor-pointer ${activeSection === nav.id
+                                    className={`py-2.5 pl-4 text-[14px] font-medium transition-all border-l-2 -ml-[1px] cursor-pointer ${activeSection === nav.id
                                         ? "text-white font-bold border-brand-primary"
                                         : "text-white/30 border-transparent hover:text-white/60"
                                     }`}
