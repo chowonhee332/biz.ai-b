@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { ChevronRight, Play } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function Hero() {
   return (
@@ -57,13 +58,23 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
 >
-          <button className="h-14 px-8 rounded-xl bg-white text-black font-bold text-lg hover:bg-gray-200 transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+          <Button
+            variant="premium"
+            size="cta"
+            rounded="xl"
+            className="h-14 px-8 text-lg"
+          >
             무료 체험 신청하기
-          </button>
-          <button className="h-14 px-8 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] text-white font-bold text-lg hover:bg-[var(--color-surface-hover)] hover:border-[var(--color-text-secondary)] transition-all flex items-center gap-2">
-            <Play size={18} fill="currentColor" />
-            솔루션 문의하기
-          </button>
+          </Button>
+          <Button
+            variant="glass"
+            size="cta"
+            rounded="xl"
+            className="h-14 px-8 text-lg relative group transition-all duration-300"
+          >
+            <span>솔루션 문의하기</span>
+            <ChevronRight size={20} className="absolute right-6 max-w-0 opacity-0 group-hover:max-w-[24px] group-hover:opacity-100 transition-all duration-300 overflow-hidden" />
+          </Button>
         </motion.div>
 
         {/* Hero Image / Visual Placeholder (Framer style often has a UI preview here) */}

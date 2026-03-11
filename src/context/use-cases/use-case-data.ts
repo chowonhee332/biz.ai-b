@@ -22,7 +22,7 @@ export const USE_CASES: UseCaseItem[] = [
         산업군: "서비스/기업",
         태그: "AI 회의록",
         카테고리: "내부 업무 처리 향상",
-        이미지: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800",
+        이미지: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&q=80&w=800",
         설명: "화자 분리 및 겹침 발화 처리로 회의록 작성 리드타임 85% 단축, 온프레미스 보안으로 기밀 정보 보호 강화.",
         상세내용: MEETING_MINUTES_DETAIL
     },
@@ -40,7 +40,7 @@ export const USE_CASES: UseCaseItem[] = [
         산업군: "통신/ICT",
         태그: "Codebox",
         카테고리: "내부 업무 처리 향상",
-        이미지: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&q=80&w=800",
+        이미지: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&q=80&w=800",
         설명: "대규모 레거시 전환 공수 48% 절감, 전환율 100% 달성으로 Cloud 전환 경쟁력을 강화했습니다.",
         상세내용: AUTOBUILDER_DETAIL
     },
@@ -49,7 +49,7 @@ export const USE_CASES: UseCaseItem[] = [
         산업군: "공공/기업",
         태그: "Beast AI Gateway",
         카테고리: "강력한 보안",
-        이미지: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800",
+        이미지: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&q=80&w=800",
         설명: "전사 AI 사용 통합 관리 및 실시간 PII 필터링으로 AI 사용 비용 30~50% 절감, 보안 안정성 제로 리스크를 실현했습니다.",
         상세내용: BEAST_GATEWAY_DETAIL
     },
@@ -58,7 +58,7 @@ export const USE_CASES: UseCaseItem[] = [
         산업군: "제조",
         태그: "Cloudwiz",
         카테고리: "리스크 관리 효율화",
-        이미지: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
+        이미지: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800",
         설명: "멀티클라우드 비용 30% 절감, 운영 생산성 2배 향상으로 비용·보안·운영 자동화를 실현했습니다.",
         상세내용: CLOUDWIZ_DETAIL
     },
@@ -76,7 +76,7 @@ export const USE_CASES: UseCaseItem[] = [
         산업군: "공공",
         태그: "감사 대응 Agent",
         카테고리: "내부 업무 처리 향상",
-        이미지: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=800",
+        이미지: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800",
         설명: "답변서 생성 시간 80% 단축, 문서 탐색 시간 90% 단축으로 국정감사 대응의 속도·정확도·품질을 혁신했습니다.",
         상세내용: AUDIT_AGENT_DETAIL
     }

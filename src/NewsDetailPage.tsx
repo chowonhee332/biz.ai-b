@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
+import { Button } from '@/components/ui/button';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import { HIGHLIGHT_NEWS, REGULAR_NEWS } from './context/news/news-data';
@@ -15,7 +16,7 @@ export default function NewsDetailPage() {
     const news = allNews[newsIndex] || allNews[0];
 
     const getTagColor = (tag: string) => {
-        if (tag === "기술 이야기") return "text-emerald-500";
+        if (tag === "기술 이야기") return "text-emerald";
         return "text-brand-primary";
     };
 
@@ -39,33 +40,38 @@ export default function NewsDetailPage() {
                         {/* 태그 & 날짜 */}
                         <div className="flex items-center gap-3 mb-6 text-[14px] font-medium">
                             <span className={`${getTagColor(news.태그)} font-bold`}>{news.태그}</span>
-                            <span className="text-white/20">|</span>
-                            <span className="text-white/40">{news.날짜}</span>
+                            <span className="text-text-dim/50">|</span>
+                            <span className="text-text-dim">{news.날짜}</span>
                         </div>
 
                         {/* 타이틀 */}
-                        <h1 className="text-[36px] md:text-[50px] font-bold text-white mb-8 leading-snug break-keep tracking-tight">
+                        <h1 className="text-[36px] md:text-[50px] font-bold text-text-primary mb-8 leading-snug break-keep tracking-tight">
                             {news.타이틀}
                         </h1>
 
                         {/* 언론사 & 원문 링크 */}
                         <div className="flex flex-wrap items-center justify-center gap-4 text-[15px] font-medium">
                             {news.언론사 && (
-                                <div className="text-white/50 flex items-center gap-2">
+                                <div className="text-text-secondary/60 flex items-center gap-2">
                                     <span>[{news.언론사}]</span>
                                     <span>{news.기자 || "기자"}</span>
                                 </div>
                             )}
-                            {news.언론사 && <span className="text-white/20 text-xs">|</span>}
-                            <a
-                                href={news.링크}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 text-brand-primary hover:text-brand-primary/80 transition-colors"
+                            {news.언론사 && <span className="text-text-dim/50 text-xs">|</span>}
+                            <Button
+                                variant="ghost"
+                                asChild
+                                className="p-0 h-auto gap-1.5 text-brand-primary hover:text-brand-primary/80 hover:bg-transparent -ml-1"
                             >
-                                기사보기
-                                <ExternalLink size={14} />
-                            </a>
+                                <a
+                                    href={news.링크}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    기사보기
+                                    <ExternalLink size={14} />
+                                </a>
+                            </Button>
                         </div>
                     </motion.div>
                 </div>
@@ -96,12 +102,14 @@ export default function NewsDetailPage() {
 
                 {/* 목록보기 */}
                 <div className="mt-16 pt-10 border-t border-border-light/30 w-full max-w-[800px] flex justify-center">
-                    <button
+                    <Button
+                        variant="outline"
+                        rounded="lg"
+                        className="w-[120px] h-12 text-[15px] font-bold"
                         onClick={() => navigate('/news')}
-                        className="inline-flex items-center gap-1.5 text-[13px] font-bold text-white border border-white/20 rounded-lg px-4 py-2 hover:bg-white/10 transition-all cursor-pointer"
                     >
                         목록보기
-                    </button>
+                    </Button>
                 </div>
             </main>
 

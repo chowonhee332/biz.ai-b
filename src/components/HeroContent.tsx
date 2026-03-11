@@ -160,17 +160,23 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
         className={`flex flex-col sm:flex-row gap-4 ${isLeft ? 'justify-start' : 'justify-center'} mt-12`}
       >
         <Button
-          className="group bg-text-primary text-bg-main hover:bg-text-primary/90 w-[130px] h-[48px] py-0 text-[15px] font-semibold rounded-full transition-all flex items-center justify-center gap-0"
+          variant="premium"
+          size="cta"
+          rounded="xl"
+          className="w-[130px] relative group transition-all duration-300"
           disabled={isAnalyzing}
         >
-          무료체험 신청
-          <ChevronRight size={18} className="max-w-0 opacity-0 group-hover:max-w-[24px] group-hover:opacity-100 group-hover:ml-1 transition-all duration-300 overflow-hidden" />
+          <span className="group-hover:-translate-x-2 transition-transform duration-300">무료체험 신청</span>
+          <ChevronRight size={18} className="absolute right-4 max-w-0 opacity-0 group-hover:max-w-[24px] group-hover:opacity-100 transition-all duration-300 overflow-hidden" />
         </Button>
         <Button
-          className="group bg-white/10 text-white border-none hover:bg-white/20 w-[130px] h-[48px] py-0 text-[15px] font-semibold rounded-full transition-all flex items-center justify-center gap-0"
+          variant="glass"
+          size="cta"
+          rounded="xl"
+          className="w-[130px] relative group transition-all duration-300"
         >
-          솔루션 문의
-          <ChevronRight size={18} className="max-w-0 opacity-0 group-hover:max-w-[24px] group-hover:opacity-100 group-hover:ml-1 transition-all duration-300 overflow-hidden" />
+          <span className="group-hover:-translate-x-2 transition-transform duration-300">솔루션 문의</span>
+          <ChevronRight size={18} className="absolute right-4 max-w-0 opacity-0 group-hover:max-w-[24px] group-hover:opacity-100 transition-all duration-300 overflow-hidden" />
         </Button>
       </motion.div>
 

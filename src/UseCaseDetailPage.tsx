@@ -5,6 +5,7 @@ import { motion } from 'motion/react';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import { USE_CASES, USE_CASE_CATEGORY_COLORS } from '@/context/use-cases/use-case-data';
+import { Button } from '@/components/ui/button';
 
 export default function UseCaseDetailPage() {
     const { id } = useParams();
@@ -57,7 +58,7 @@ export default function UseCaseDetailPage() {
                         transition={{ duration: 0.6 }}
                         className="flex flex-col items-center gap-4 mb-8"
                     >
-                        <span className={`text-[12px] font-bold px-3 py-1 rounded-full border border-white/10 bg-white/5 ${USE_CASE_CATEGORY_COLORS[item.카테고리]?.text || 'text-blue-400'}`}>
+                        <span className={`text-[13px] font-bold ${USE_CASE_CATEGORY_COLORS[item.카테고리]?.text || 'text-brand-primary'}`}>
                             {item.카테고리}
                         </span>
                         <h1 className="text-[36px] md:text-[50px] font-bold text-white leading-snug break-keep tracking-tight">
@@ -188,8 +189,13 @@ export default function UseCaseDetailPage() {
 
                         <div className="mt-8 p-4 rounded-[16px] bg-bg-surface/50 border border-border-light flex flex-col gap-4">
                             <h4 className="text-[15px] font-bold text-text-primary break-keep">비슷한 과제를 겪고 계신가요?</h4>
-                            <a href="mailto:" className="inline-flex items-center justify-center gap-1.5 text-[13px] font-bold text-white border border-white/20 rounded-lg px-3 py-2 hover:bg-white/10 transition-all">
-                                상담 문의하기 <ChevronRight className="size-3.5" />
+                            <a href="mailto:">
+                                <Button
+                                    className="w-full h-11 bg-brand-primary hover:bg-brand-primary/90 text-white border-0 rounded-lg font-bold text-[14px] group relative transition-all duration-300"
+                                >
+                                    <span className="group-hover:-translate-x-2 transition-transform duration-300">상담 문의하기</span>
+                                    <ChevronRight size={18} className="absolute right-4 max-w-0 opacity-0 group-hover:max-w-[24px] group-hover:opacity-100 transition-all duration-300 overflow-hidden" />
+                                </Button>
                             </a>
                         </div>
                     </div>

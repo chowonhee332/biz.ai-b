@@ -76,7 +76,7 @@ export default function MultiAgentPlatformPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <h1 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
+                        <h1 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
                             {heroText.title}
                         </h1>
                         <p className="text-text-secondary text-[16px] max-w-2xl font-medium leading-relaxed">
@@ -89,16 +89,18 @@ export default function MultiAgentPlatformPage() {
                 <div className="lg:hidden sticky top-[72px] bg-bg-main/85 backdrop-blur-sm z-40 border-b border-border-light mb-12">
                     <div className="max-w-[1280px] mx-auto container-responsive flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap">
                         {sidebarItems.map((item) => (
-                            <button
+                            <Button
                                 key={item}
+                                variant="ghost"
+                                rounded="none"
                                 onClick={() => setActiveTab(item)}
-                                className={`relative h-full text-[14px] font-medium transition-all shrink-0 flex items-center px-1 cursor-pointer ${activeTab === item ? "text-brand-primary" : "text-text-dim hover:text-text-primary/60"}`}
+                                className={`relative h-full text-[14px] font-medium transition-all shrink-0 flex items-center px-1 cursor-pointer hover:bg-transparent ${activeTab === item ? "text-text-primary font-bold" : "text-text-dim hover:text-text-primary/60"}`}
                             >
                                 {item}
                                 {activeTab === item && (
                                     <motion.div layoutId="activePlatformTab" className="absolute bottom-0 left-0 right-0 h-[3px] bg-brand-primary rounded-full" />
                                 )}
-                            </button>
+                            </Button>
                         ))}
                     </div>
                 </div>
@@ -108,16 +110,18 @@ export default function MultiAgentPlatformPage() {
                         <aside className="hidden lg:block lg:w-[220px] shrink-0">
                             <div className="flex flex-col gap-2 sticky top-[100px]">
                                 {sidebarItems.map((item) => (
-                                    <button
+                                    <Button
                                         key={item}
+                                        variant={activeTab === item ? "default" : "ghost"}
+                                        rounded="lg"
                                         onClick={() => setActiveTab(item)}
-                                        className={`w-full text-left px-4 py-2.5 rounded-xl text-[16px] font-semibold transition-all cursor-pointer ${activeTab === item
+                                        className={`w-full justify-start px-4 py-2.5 text-[16px] font-semibold transition-all cursor-pointer ${activeTab === item
                                             ? "bg-brand-primary text-text-primary shadow-lg shadow-brand-primary/20"
                                             : "text-text-secondary/40 hover:text-text-primary/70 hover:bg-bg-surface"
                                             }`}
                                     >
                                         {item}
-                                    </button>
+                                    </Button>
                                 ))}
                             </div>
                         </aside>
@@ -202,20 +206,26 @@ export default function MultiAgentPlatformPage() {
                                                     </AnimatePresence>
                                                     {currentContent.주요특징이미지.length > 1 && (
                                                         <>
-                                                            <button
+                                                            <Button
+                                                                variant="glass"
+                                                                size="icon-sm"
+                                                                rounded="full"
                                                                 onClick={() => setCurrentImageIndex((prev) => Math.max(0, prev - 1))}
                                                                 disabled={currentImageIndex === 0}
-                                                                className={`absolute left-3 top-1/2 -translate-y-1/2 size-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-white transition-all border border-white/10 ${currentImageIndex === 0 ? 'opacity-20 cursor-not-allowed' : 'hover:bg-black/60'}`}
+                                                                className="absolute left-3 top-1/2 -translate-y-1/2"
                                                             >
                                                                 <ChevronLeft className="size-5" strokeWidth={3} />
-                                                            </button>
-                                                            <button
+                                                            </Button>
+                                                            <Button
+                                                                variant="glass"
+                                                                size="icon-sm"
+                                                                rounded="full"
                                                                 onClick={() => setCurrentImageIndex((prev) => Math.min(currentContent.주요특징이미지!.length - 1, prev + 1))}
                                                                 disabled={currentImageIndex === currentContent.주요특징이미지.length - 1}
-                                                                className={`absolute right-3 top-1/2 -translate-y-1/2 size-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-white transition-all border border-white/10 ${currentImageIndex === currentContent.주요특징이미지.length - 1 ? 'opacity-20 cursor-not-allowed' : 'hover:bg-black/60'}`}
+                                                                className="absolute right-3 top-1/2 -translate-y-1/2"
                                                             >
                                                                 <ChevronRight className="size-5" strokeWidth={3} />
-                                                            </button>
+                                                            </Button>
                                                         </>
                                                     )}
                                                 </div>
@@ -275,9 +285,9 @@ export default function MultiAgentPlatformPage() {
                                                                         const hasContentAfterColon = colonIndex !== -1 && trimmedLine.substring(colonIndex + 1).trim().length > 0;
                                                                         const isAsIs = /^As-Is/i.test(trimmedLine);
                                                                         const isEffect = /^기대/.test(trimmedLine);
-                                                                        const barColor = isAsIs ? 'bg-white/30' : isEffect ? 'bg-emerald-500' : 'bg-brand-primary';
-                                                                        const labelColor = isAsIs ? 'text-text-secondary/60' : isEffect ? 'text-emerald-400' : 'text-text-primary';
-                                                                        const borderColor = isAsIs ? 'border-white/10' : isEffect ? 'border-emerald-500/20' : 'border-brand-primary/20';
+                                                                        const barColor = isAsIs ? 'bg-white/30' : isEffect ? 'bg-emerald' : 'bg-brand-primary';
+                                                                        const labelColor = isAsIs ? 'text-text-secondary/60' : isEffect ? 'text-emerald' : 'text-text-primary';
+                                                                        const borderColor = isAsIs ? 'border-white/10' : isEffect ? 'border-emerald/20' : 'border-brand-primary/20';
 
                                                                         if (hasContentAfterColon) {
                                                                             const titlePart = trimmedLine.substring(0, colonIndex + 1);
@@ -322,7 +332,7 @@ export default function MultiAgentPlatformPage() {
                                             <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">고객사례</h3>
                                             <div className={`grid grid-cols-1 ${currentContent.고객사례.length > 1 ? 'md:grid-cols-2' : ''} gap-4`}>
                                                 {currentContent.고객사례.map((item, i) => (
-                                                    <div key={i} className="bg-bg-surface backdrop-blur-sm rounded-[20px] border border-border-light">
+                                                    <div key={i} className="bg-bg-surface backdrop-blur-sm rounded-[20px] border border-border-light group transition-all hover:border-brand-primary/50">
                                                         <div className="p-5">
                                                             {/* 헤더 */}
                                                             <div className="mb-5">
@@ -351,8 +361,14 @@ export default function MultiAgentPlatformPage() {
                                                                 ))}
                                                             </div>
                                                             {item.상세링크 && (
-                                                                <Link to={item.상세링크} className="inline-flex items-center gap-1.5 text-[13px] font-bold text-white border border-white/20 rounded-lg px-3 py-1.5 hover:bg-white/10 transition-all w-fit">
-                                                                    자세히 보기 <ChevronRight className="size-3.5" />
+                                                                <Link to={item.상세링크}>
+                                                                    <Button
+                                                                        variant="ghost"
+                                                                        className="h-auto p-0 text-[13px] font-bold relative transition-all duration-300 hover:bg-transparent hover:text-white"
+                                                                    >
+                                                                        <span className="group-hover:-translate-x-1.5 transition-transform duration-300">자세히 보기</span>
+                                                                        <ChevronRight size={14} className="max-w-0 opacity-0 group-hover:max-w-[14px] group-hover:opacity-100 group-hover:ml-1 transition-all duration-300 overflow-hidden" />
+                                                                    </Button>
                                                                 </Link>
                                                             )}
                                                         </div>
@@ -385,14 +401,14 @@ export default function MultiAgentPlatformPage() {
                                                             rel="noopener noreferrer"
                                                             className="block group"
                                                         >
-                                                            <div className="aspect-video bg-white/5 rounded-[20px] border border-white/5 flex items-center justify-center relative overflow-hidden transition-all hover:border-[#1A75FF]/40 mb-4">
+                                                            <div className="aspect-video bg-white/5 rounded-[20px] border border-white/5 flex items-center justify-center relative overflow-hidden transition-all hover:border-brand-primary/40 mb-4">
                                                                 {thumbnail ? (
                                                                     <>
                                                                         <img src={thumbnail} alt={video.타이틀} className="absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-500" />
                                                                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500" />
                                                                     </>
                                                                 ) : (
-                                                                    <div className="absolute inset-0 bg-gradient-to-br from-[#1A75FF]/10 to-transparent" />
+                                                                    <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/10 to-transparent" />
                                                                 )}
                                                                 <div className="size-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 z-10 border border-white/30 shadow-2xl">
                                                                     <Play className="size-5 text-white fill-white ml-0.5" />
@@ -413,14 +429,20 @@ export default function MultiAgentPlatformPage() {
                                             <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">오퍼링</h3>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 {currentContent.오퍼링.map((offering, i) => (
-                                                    <div key={i} className="bg-bg-surface backdrop-blur-sm rounded-[20px] p-5 border border-border-light hover:border-brand-primary transition-all flex flex-col justify-between">
+                                                    <div key={i} className="bg-bg-surface backdrop-blur-sm rounded-[20px] p-5 border border-border-light hover:border-brand-primary transition-all flex flex-col justify-between group">
                                                         <div>
                                                             <h4 className="text-[20px] font-bold text-text-primary mb-3">{offering.타이틀}</h4>
                                                             <p className="text-text-secondary/70 text-[15px] mb-6 leading-relaxed">{offering.설명}</p>
                                                         </div>
                                                         {offering.상세링크 && (
-                                                            <Link to={offering.상세링크} className="inline-flex items-center gap-1.5 text-[13px] font-bold text-white border border-white/20 rounded-lg px-3 py-1.5 hover:bg-white/10 transition-all w-fit">
-                                                                자세히 보기 <ChevronRight className="size-3.5" />
+                                                            <Link to={offering.상세링크}>
+                                                                    <Button
+                                                                        variant="ghost"
+                                                                        className="h-auto p-0 text-[13px] font-bold relative transition-all duration-300 hover:bg-transparent hover:text-white"
+                                                                    >
+                                                                        <span className="group-hover:-translate-x-1.5 transition-transform duration-300">자세히 보기</span>
+                                                                        <ChevronRight size={14} className="max-w-0 opacity-0 group-hover:max-w-[14px] group-hover:opacity-100 transition-all duration-300 overflow-hidden" />
+                                                                    </Button>
                                                             </Link>
                                                         )}
                                                     </div>
@@ -458,7 +480,12 @@ export default function MultiAgentPlatformPage() {
                                                 <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">관련 리소스</h3>
                                                 <div className="space-y-4 flex-1">
                                                     {currentContent.관련리소스.map((resource, i) => (
-                                                        <button key={i} className="w-full flex justify-between items-center p-5 bg-bg-surface rounded-2xl border border-border-light hover:border-brand-primary transition-all group text-left min-h-[64px]">
+                                                        <Button
+                                                            key={i}
+                                                            variant="outline"
+                                                            rounded="2xl"
+                                                            className="w-full flex justify-between items-center p-5 bg-bg-surface border border-border-light hover:border-brand-primary transition-all group text-left min-h-[64px] h-auto"
+                                                        >
                                                             <div className="flex items-center gap-4">
                                                                 <div className="size-8 bg-brand-primary/10 rounded-lg flex items-center justify-center text-[11px] font-bold text-brand-primary">
                                                                     {resource.파일타입}
@@ -466,7 +493,7 @@ export default function MultiAgentPlatformPage() {
                                                                 <h4 className="text-[16px] text-text-primary/90 font-medium">{resource.타이틀}</h4>
                                                             </div>
                                                             <Download className="size-5 text-text-dim group-hover:text-brand-primary transition-colors" />
-                                                        </button>
+                                                        </Button>
                                                     ))}
                                                 </div>
                                             </div>
@@ -482,16 +509,18 @@ export default function MultiAgentPlatformPage() {
                                 <div className="text-[12px] font-bold text-white/40 uppercase tracking-widest pl-4">Contents</div>
                                 <nav className="flex flex-col border-l border-white/5">
                                     {tocSections.map((sec) => (
-                                        <button
+                                        <Button
                                             key={sec.id}
+                                            variant="ghost"
+                                            rounded="none"
                                             onClick={() => document.getElementById(sec.id)?.scrollIntoView({ behavior: 'smooth' })}
-                                            className={`text-left py-2.5 pl-4 text-[14px] font-medium transition-all border-l-2 -ml-[1px] cursor-pointer ${activeSection === sec.id
+                                            className={`text-left py-2.5 pl-4 text-[14px] font-medium transition-all border-l-2 -ml-[1px] cursor-pointer h-auto justify-start hover:bg-transparent ${activeSection === sec.id
                                                 ? 'text-white border-brand-primary'
                                                 : 'text-white/30 border-transparent hover:text-white/60'
                                             }`}
                                         >
                                             {sec.label}
-                                        </button>
+                                        </Button>
                                     ))}
                                 </nav>
                             </div>

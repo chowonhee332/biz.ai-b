@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
 import { HIGHLIGHT_NEWS, REGULAR_NEWS, NEWS_CATEGORIES } from '@/context/news/news-data';
 import Footer from '@/components/Footer';
@@ -14,7 +15,7 @@ export default function NewsPage() {
     const [canScrollLeft, setCanScrollLeft] = useState(false);
 
     const getTagColor = (tag: string) => {
-        if (tag === "기술 이야기") return "text-emerald-500";
+        if (tag === "기술 이야기") return "text-emerald";
         return "text-brand-primary";
     };
 
@@ -50,31 +51,35 @@ export default function NewsPage() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, ease: "easeOut" }}
                         >
-                            <h1 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-[#93C5FD] bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
+                            <h1 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
                                 새로운 소식
                             </h1>
-                            <p className="text-white/70 text-[18px] max-w-2xl font-medium leading-relaxed">
+                            <p className="text-text-secondary text-[18px] max-w-2xl font-medium leading-relaxed">
                                 Biz.AI가 전하는 최신 업데이트와 인사이트를 확인하세요.
                             </p>
                         </motion.div>
 
                         {/* 캐러셀 내비게이션 버튼 */}
                         <div className="flex gap-2.5 mb-2">
-                            <button
+                            <Button
+                                variant="nav"
+                                size="icon-md"
+                                rounded="full"
+                                className="gap-2"
                                 onClick={() => scrollNews('left')}
                                 disabled={!canScrollLeft}
-                                className={`w-9 h-9 rounded-full flex items-center justify-center transition-all active:scale-95 ${canScrollLeft
-                                    ? "bg-white text-black hover:bg-white/90 cursor-pointer"
-                                    : "bg-white/10 text-white/20 cursor-not-allowed"}`}
                             >
                                 <ChevronLeft size={20} strokeWidth={2.5} />
-                            </button>
-                            <button
+                            </Button>
+                            <Button
+                                variant="nav"
+                                size="icon-md"
+                                rounded="full"
+                                className="gap-2"
                                 onClick={() => scrollNews('right')}
-                                className="w-9 h-9 rounded-full bg-white flex items-center justify-center text-black hover:bg-white/90 transition-all active:scale-95 cursor-pointer"
                             >
                                 <ChevronRight size={20} strokeWidth={2.5} />
-                            </button>
+                            </Button>
                         </div>
                     </div>
                 </div>
@@ -100,15 +105,14 @@ export default function NewsPage() {
                                     <motion.img
                                         src={news.이미지}
                                         alt={news.타이틀}
-                                        className="w-full h-full object-cover brightness-90 group-hover:brightness-100 transition-all duration-700"
-                                        whileHover={{ scale: 1.05 }}
+                                        className="w-full h-full object-cover brightness-90 group-hover:brightness-100 group-hover:scale-105 transition-transform duration-700"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                                 </div>
                                 <div className="pt-2 px-1 flex-1 flex flex-col">
                                     <span className={`${getTagColor(news.태그)} text-[13px] font-bold mb-2.5`}>{news.태그}</span>
-                                    <h3 className="text-white text-[22px] font-bold leading-snug whitespace-pre-line mb-4">{news.타이틀}</h3>
-                                    <div className="flex items-center text-white/40 text-[13px] font-medium mt-auto">
+                                    <h3 className="text-text-primary text-[22px] font-bold leading-snug whitespace-pre-line mb-4">{news.타이틀}</h3>
+                                    <div className="flex items-center text-text-dim text-[13px] font-medium mt-auto">
                                         <span>{news.솔루션}</span>
                                         <span className="mx-2 text-[4px] opacity-50">●</span>
                                         <span>{news.날짜}</span>
@@ -123,12 +127,14 @@ export default function NewsPage() {
                 <div className="sticky top-[72px] lg:top-[64px] bg-bg-main/85 backdrop-blur-sm z-40 border-b border-border-light mb-12">
                     <div className="max-w-[1280px] mx-auto container-responsive flex items-center gap-8 h-[66px]">
                         {NEWS_CATEGORIES.map((category) => (
-                            <button
+                            <Button
                                 key={category}
+                                variant="ghost"
+                                rounded="none"
                                 onClick={() => setActiveCategory(category)}
-                                className={`relative h-full text-[15px] transition-colors flex items-center px-1 cursor-pointer ${activeCategory === category
-                                    ? "text-white font-bold"
-                                    : "text-white/40 font-medium hover:text-white"
+                                className={`relative h-full text-[15px] transition-colors flex items-center px-1 cursor-pointer hover:bg-transparent ${activeCategory === category
+                                    ? "text-text-primary font-bold"
+                                    : "text-text-dim font-medium hover:text-text-primary"
                                     }`}
                             >
                                 {category}
@@ -139,7 +145,7 @@ export default function NewsPage() {
                                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                                     />
                                 )}
-                            </button>
+                            </Button>
                         ))}
                     </div>
                 </div>
@@ -159,9 +165,9 @@ export default function NewsPage() {
                             >
                                 <div className="flex-1 w-full flex flex-col">
                                     <span className={`${getTagColor(news.태그)} text-[13px] font-bold mb-2.5`}>{news.태그}</span>
-                                    <h3 className="text-white text-[22px] font-bold leading-snug mb-3 group-hover:text-white/70 transition-colors">{news.타이틀}</h3>
-                                    <p className="text-white/50 text-[15px] leading-relaxed line-clamp-2 mb-5 font-medium">{news.설명}</p>
-                                    <div className="flex items-center text-white/30 text-[13px] font-medium">
+                                    <h3 className="text-text-primary text-[22px] font-bold leading-snug mb-3 group-hover:text-text-secondary transition-colors">{news.타이틀}</h3>
+                                    <p className="text-text-secondary/70 text-[15px] leading-relaxed line-clamp-2 mb-5 font-medium">{news.설명}</p>
+                                    <div className="flex items-center text-text-dim text-[13px] font-medium">
                                         <span>{news.솔루션}</span>
                                         <span className="mx-2 text-[4px] opacity-50">●</span>
                                         <span>{news.날짜}</span>

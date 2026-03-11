@@ -1,4 +1,4 @@
-import { Menu, X, ChevronRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
@@ -41,7 +41,7 @@ export default function Navbar({ activePage }: NavbarProps) {
             <Link
               key={link.id}
               to={link.path}
-              className={`transition-colors hover:text-white ${activePage === link.id ? 'text-white font-bold' : 'text-text-secondary font-medium'}`}
+              className={`transition-colors hover:text-text-primary ${activePage === link.id ? 'text-text-primary font-bold' : 'text-text-secondary font-medium'}`}
             >
               {link.name}
             </Link>
@@ -67,9 +67,15 @@ export default function Navbar({ activePage }: NavbarProps) {
         </div>
 
         {/* Mobile Menu Button - Shown only below 1024px */}
-        <button className="lg:hidden ml-auto text-white p-2 hover:bg-white/10 rounded-lg transition-colors" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <Button
+          variant="ghost"
+          size="icon"
+          rounded="lg"
+          className="lg:hidden ml-auto text-text-primary h-10 w-10 hover:bg-bg-active"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        </Button>
       </div>
 
       {/* Mobile Menu */}

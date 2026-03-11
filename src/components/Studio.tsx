@@ -1,5 +1,7 @@
-import { ChevronRight, Settings, Box, Rocket, BookOpen } from 'lucide-react';
+import { ChevronRight, Settings, Box, Rocket, BookOpen, Play } from 'lucide-react';
+import { motion } from 'motion/react';
 import React from 'react';
+import { Button } from '@/components/ui/button';
 
 const StudioCard = ({ icon, title, desc }: { icon: React.ReactElement, title: string, desc: string }) => (
   <div className="bg-[var(--color-surface)] p-10 rounded-[2rem] border border-[var(--color-outline)]/10 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all group flex flex-col items-center md:items-start text-center md:text-left">
@@ -20,9 +22,14 @@ export default function Studio() {
           필요한 Agent, Tool, MCP를 빠르게 확인하고 시작하세요.<br className="hidden md:block" />
           쉽게 개발 가능한 AI 아키텍처와 Delivery 가이드를 제공합니다.
         </p>
-        <button className="px-10 py-3 border border-[var(--color-outline)] rounded-full text-[var(--color-on-surface)] font-bold hover:bg-[var(--color-primary)] hover:text-[var(--color-on-primary)] hover:border-transparent hover:shadow-lg transition-all mb-20 flex items-center gap-2 mx-auto">
+        <Button
+          variant="outline"
+          rounded="full"
+          size="cta"
+          className="px-10 h-auto py-3 mb-20 mx-auto gap-2"
+        >
           더보기 <ChevronRight size={18} />
-        </button>
+        </Button>
 
         <div className="grid md:grid-cols-4 gap-8">
           <StudioCard icon={<Settings />} title="Agent 개발" desc="AI Agent 개발을 위한 통합 개발 환경과 도구를 제공합니다." />
