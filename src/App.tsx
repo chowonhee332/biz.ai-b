@@ -1318,48 +1318,10 @@ const App = () => {
         </section>
 
 
-        {/* Why kt ds - 프로세스 섹션 */}
-        <ProcessSection isMobile={isMobile} />
-
-        <section id="logos" className="relative py-12 bg-black overflow-hidden">
-          <div className="relative z-10 max-w-[1280px] mx-auto container-responsive text-center">
-            <div className="relative overflow-hidden w-full py-4">
-              <motion.div
-                className="flex items-center gap-x-20 whitespace-nowrap"
-                animate={{ x: ["0%", "-50%"] }}
-                transition={{
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  duration: 30,
-                  ease: "linear"
-                }}
-              >
-                {[...Array(2)].map((_, i) => (
-                  <React.Fragment key={i}>
-                    {[
-                      { name: "Kakaobank", color: "blue" },
-                      { name: "Samsung", color: "blue" },
-                      { name: "SK Hynix", color: "blue" },
-                      { name: "Hyundai", color: "blue" }
-                    ].map((brand, idx) => (
-                      <div key={`${i}-${idx}`} className="flex items-center space-x-2">
-                        <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
-                          <div className="w-4 h-4 rounded-full bg-blue-500/40" />
-                        </div>
-                        <span className="text-xl font-bold text-text-dim tracking-tight">{brand.name}</span>
-                      </div>
-                    ))}
-                  </React.Fragment>
-                ))}
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
+        {/* 수치로 증명하는 Biz.AI (Stats Section) */}
         <section id="stats" className="py-32 bg-bg-main">
           <div className="max-w-[1280px] mx-auto container-responsive">
             <div className="text-center mb-32">
-
               <h2 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-6 tracking-tight">
                 수치로 증명하는 Biz.AI
               </h2>
@@ -1376,7 +1338,7 @@ const App = () => {
                 { label: "AI Agent", value: 600, suffix: "+", sub: "도메인별 특화 AI 에이전트" }
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col items-start font-pretendard">
-                  <div className="text-[80px] font-medium text-text-primary tracking-tighter leading-none mb-12">
+                  <div className="text-[72px] font-medium text-text-primary tracking-tighter leading-none mb-12">
                     <AnimatedCounter from={0} to={stat.value} />
                     <span className="text-brand-primary ml-1">{stat.suffix}</span>
                   </div>
@@ -1387,6 +1349,52 @@ const App = () => {
             </div>
           </div>
         </section>
+
+        {/* Why kt ds - 프로세스 섹션 */}
+        <ProcessSection isMobile={isMobile} />
+
+        <section id="logos" className="relative py-24 bg-bg-main overflow-hidden">
+          {/* Hero와 동일한 그리드 배경 추가 */}
+          <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
+          
+          <div className="relative z-10 w-full text-center">
+            <div className="relative overflow-hidden w-full py-4">
+              <motion.div
+                className="flex items-center gap-x-24 whitespace-nowrap"
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 70,
+                  ease: "linear"
+                }}
+              >
+                {[...Array(2)].map((_, i) => (
+                  <React.Fragment key={i}>
+                    {[
+                      { name: "KT", logo: "/logos/kt.png" },
+                      { name: "경기도", logo: "/logos/gyeonggido.png" },
+                      { name: "현대그린푸드", logo: "/logos/hwell.png" },
+                      { name: "신한은행", logo: "/logos/shinhan.png" },
+                      { name: "한국철도공사", logo: "/logos/kr.png" },
+                      { name: "건국대학교 미래지식교육원", logo: "/logos/konmi.png" },
+                      { name: "트루엔", logo: "/logos/true.png" }
+                    ].map((brand, idx) => (
+                      <div key={`${i}-${idx}`} className="flex items-center shrink-0">
+                        <img 
+                          src={brand.logo} 
+                          alt={brand.name} 
+                          className="h-[44px] w-auto object-contain opacity-80 hover:opacity-100 transition-all duration-300 pointer-events-auto"
+                        />
+                      </div>
+                    ))}
+                  </React.Fragment>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
 
         <section id="testimonials" className="py-24 px-6 bg-bg-main relative">
           <div className="max-w-[1000px] mx-auto">
