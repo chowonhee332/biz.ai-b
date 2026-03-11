@@ -210,7 +210,7 @@ const InteractiveMockup = ({ image, frameImage, initialMouseX = -0.75, cursorCol
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="relative w-full h-full rounded-[16px] overflow-hidden border border-border-light/30 cursor-none shadow-2xl bg-bg-main"
+        className="relative w-full h-full rounded-[16px] overflow-hidden cursor-none bg-bg-main"
       >
         {/* 배경 이미지 (프레임) */}
         <img
@@ -227,7 +227,7 @@ const InteractiveMockup = ({ image, frameImage, initialMouseX = -0.75, cursorCol
           <img
             src={image}
             alt="Use Case Screenshot"
-            className="w-[180%] h-auto rounded-[12px] shadow-2xl object-contain pointer-events-none transition-transform duration-500 group-hover:scale-[1.02]"
+            className="w-[180%] h-auto rounded-[12px] object-contain pointer-events-none transition-transform duration-500 group-hover:scale-[1.02]"
           />
         </motion.div>
 
@@ -364,28 +364,56 @@ const DomainAccordionItem = ({
   agents,
   image,
   isActive,
-  onMouseEnter
+  forceExpanded,
+  onMouseEnter,
+  onClick
 }: {
   title: string;
   agents: string[];
   image: string;
   isActive: boolean;
-  onMouseEnter: () => void
+  forceExpanded?: boolean;
+  onMouseEnter: () => void;
+  onClick: () => void;
 }) => {
+  const expanded = isActive || forceExpanded;
+
+  const agentListVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: forceExpanded ? 0 : 0.15,
+      }
+    }
+  };
+
+  const agentItemVariants = {
+    hidden: { opacity: 0, y: 12, filter: 'blur(6px)' },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: { type: 'spring' as const, stiffness: 200, damping: 24 }
+    }
+  };
+
   return (
     <motion.div
       layout
       onMouseEnter={onMouseEnter}
-      className="relative h-[400px] md:h-[550px] lg:h-[700px] overflow-hidden cursor-pointer rounded-2xl smooth-gpu w-full lg:w-auto"
+      onClick={onClick}
+      className="relative overflow-hidden cursor-pointer rounded-2xl smooth-gpu w-full lg:w-auto"
       style={{ willChange: 'flex, width' }}
       animate={{
-        flex: isActive ? (window.innerWidth < 1024 ? 300 : 680) : (window.innerWidth < 1024 ? 80 : 122),
+        flex: forceExpanded ? 300 : isActive ? (window.innerWidth < 1024 ? 300 : 680) : (window.innerWidth < 1024 ? 100 : 122),
+        minHeight: forceExpanded ? 160 : undefined,
       }}
       transition={{
-        type: "spring",
-        stiffness: 120,
-        damping: 24,
-        mass: 0.8
+        type: 'spring',
+        stiffness: 80,
+        damping: 22,
+        mass: 1,
       }}
     >
       <div className="absolute inset-0">
@@ -395,44 +423,37 @@ const DomainAccordionItem = ({
           loading="eager"
           className="w-full h-full object-cover"
           animate={{
-            filter: isActive ? 'grayscale(0) brightness(0.9) contrast(1.1)' : 'grayscale(1) brightness(0.5)',
-            scale: isActive ? 1.05 : 1
+            filter: expanded ? 'grayscale(0) brightness(0.85) contrast(1.1)' : 'grayscale(1) brightness(0.4)',
+            scale: expanded ? 1.06 : 1
           }}
-          transition={{
-            type: "spring",
-            stiffness: 100,
-            damping: 20
-          }}
+          transition={{ type: 'spring', stiffness: 80, damping: 22 }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/70" />
       </div>
 
-      <div className={`absolute inset-x-0 top-0 p-6 md:p-8 flex flex-col justify-start h-full ${isActive ? 'text-left' : 'text-center'}`}>
-        <div className={`flex flex-col gap-2 md:gap-4 ${isActive ? 'items-start' : 'items-center'}`}>
-          <motion.div
-            layout
-            initial={false}
-          >
-            <h4 className={`text-text-primary font-normal transition-colors duration-500 whitespace-nowrap ${isActive ? 'text-[16px] md:text-[18px] mb-2 md:mb-4' : 'text-[16px] md:text-[18px]'}`}>
-              {title}
-            </h4>
-          </motion.div>
+      <div className="absolute inset-x-0 top-0 p-6 md:p-8 flex flex-col justify-start h-full text-left">
+        <p className="text-white/60 font-medium text-[13px] tracking-wide mb-3 whitespace-nowrap uppercase">
+          {title}
+        </p>
 
-          {isActive && (
+        <AnimatePresence>
+          {expanded && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="flex flex-col gap-1 md:gap-2"
+              key="agents"
+              variants={agentListVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              className="flex flex-col gap-1.5 md:gap-2"
             >
               {agents.map((agent, i) => (
-                <div key={i} className="flex items-center">
-                  <span className="text-gray-100 text-[18px] md:text-[24px] lg:text-[28px] font-bold">{agent}</span>
-                </div>
+                <motion.div key={i} variants={agentItemVariants}>
+                  <span className="text-white text-[20px] md:text-[22px] lg:text-[26px] font-bold leading-tight">{agent}</span>
+                </motion.div>
               ))}
             </motion.div>
           )}
-        </div>
+        </AnimatePresence>
       </div>
     </motion.div>
   );
@@ -666,6 +687,8 @@ const App = () => {
     offset: ["start 0.5", "end 1.2"]
   });
   const [activeUseCase, setActiveUseCase] = useState(0);
+
+  // 솔루션 페이즈에서 배경을 라이트로 전환 (dRange 기준 3개 아이템)
 
   // Re-balanced active ranges for 500vh scroll length and longer persistence
   useMotionValueEvent(sectionProgress, "change", (latest) => {
@@ -965,46 +988,56 @@ const App = () => {
               transition={{ duration: 0.8 }}
               className="text-left mb-12 md:mb-16 font-pretendard"
             >
-              <span className="text-brand-primary font-bold text-[16px] md:text-[20px] mb-2 md:mb-4 block tracking-tight">Multi Agent</span>
+              <span className="text-brand-primary font-semibold text-[18px] mb-2 md:mb-4 block tracking-tight">Multi Agent</span>
               <h2 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-4 md:mb-6 tracking-tight">도메인별 Multi Agent</h2>
               <p className="text-text-secondary text-[16px] md:text-[18px] font-normal tracking-tight">공공/금융 등 도메인별로 kt ds의 Multi-Agent를 활용해 보세요.</p>
             </motion.div>
 
-            <div className="flex flex-col lg:flex-row gap-1 md:gap-2 w-full h-[600px] md:h-auto lg:h-[700px]">
+            <div className="flex flex-col lg:flex-row gap-1 md:gap-2 w-full h-[800px] md:h-[900px] lg:h-[700px]">
               <DomainAccordionItem
                 title="금융"
                 agents={['Audit Agent', 'SQL Agent', 'RFP Agent']}
                 image="https://images.unsplash.com/photo-1643258367012-1e1a983489e5?auto=format&fit=crop&q=80&w=1200"
                 isActive={activeDomain === 0}
+                forceExpanded={isMobile}
                 onMouseEnter={() => setActiveDomain(0)}
+                onClick={() => setActiveDomain(0)}
               />
               <DomainAccordionItem
                 title="공공기관"
                 agents={['Audit Agent', 'RFP Agent', 'SQL Agent']}
                 image="https://images.unsplash.com/photo-1665865298238-ec7a85eb3f9a?auto=format&fit=crop&q=80&w=1200"
                 isActive={activeDomain === 1}
+                forceExpanded={isMobile}
                 onMouseEnter={() => setActiveDomain(1)}
+                onClick={() => setActiveDomain(1)}
               />
               <DomainAccordionItem
                 title="일반기업"
                 agents={['SQL Agent', 'RFP Agent', 'Codebox', 'beast AI Gateway']}
                 image="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200"
                 isActive={activeDomain === 2}
+                forceExpanded={isMobile}
                 onMouseEnter={() => setActiveDomain(2)}
+                onClick={() => setActiveDomain(2)}
               />
               <DomainAccordionItem
                 title="미디어"
                 agents={['SQL Agent', 'TA Agent']}
                 image="https://images.unsplash.com/photo-1652166553819-f892e61fc12c?auto=format&fit=crop&q=80&w=1200"
                 isActive={activeDomain === 3}
+                forceExpanded={isMobile}
                 onMouseEnter={() => setActiveDomain(3)}
+                onClick={() => setActiveDomain(3)}
               />
               <DomainAccordionItem
                 title="통신/네트워크"
                 agents={['SQL Agent', 'beast AI Gateway', 'Codebox']}
                 image="https://images.unsplash.com/photo-1680992044138-ce4864c2b962?auto=format&fit=crop&q=80&w=1200"
                 isActive={activeDomain === 4}
+                forceExpanded={isMobile}
                 onMouseEnter={() => setActiveDomain(4)}
+                onClick={() => setActiveDomain(4)}
               />
             </div>
           </div>
@@ -1020,7 +1053,7 @@ const App = () => {
               transition={{ duration: 0.8 }}
               className="w-full flex flex-col items-center"
             >
-              <span className="text-brand-primary font-bold text-[14px] tracking-widest block mb-4 uppercase">Use Case</span>
+              <span className="text-brand-primary font-semibold text-[18px] block mb-4">Use Case</span>
               <h2 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent tracking-tight leading-[1.1] font-pretendard mx-auto">
                 Solution, Multi Agent <br />
                 Use Cases
@@ -1029,49 +1062,37 @@ const App = () => {
           </div>
 
           {/* Sticky Pinned Area: Begins after the title scrolls away */}
-          <div ref={useCaseRef} className="relative h-auto lg:h-[1400vh]">
+          <div ref={useCaseRef} className="relative h-auto lg:h-[2000vh]">
             {/* Mobile Layout (Static List) */}
             <div className="lg:hidden w-full flex flex-col gap-16 px-4 py-12">
               {useCaseItems.map((item, index) => (
                 <div key={item.id} className="flex flex-col gap-8">
-                  {/* Painpoint Section */}
-                  <div className="px-2">
-                    <p className="text-text-secondary/70 text-[14px] font-medium tracking-tight mb-3 font-pretendard">
-                      {String(index + 1).padStart(2, '0')}. Painpoint
-                    </p>
-                    <h3 className="text-[28px] font-bold text-text-primary leading-tight break-keep whitespace-pre-line">
-                      {item.question}
-                    </h3>
-                  </div>
-
                   {/* Solution + Visual Group */}
                   <div className="bg-bg-surface/50 backdrop-blur-sm border border-border-light rounded-[20px] p-6 flex flex-col gap-8">
-                    <div className="flex flex-col gap-4">
-                      <p className="text-brand-primary text-[15px] font-semibold tracking-tight">
-                        {String(index + 1).padStart(2, '0')}. Solution
-                      </p>
-                      <h4 className="text-[24px] font-bold text-text-primary leading-tight">
+                    <div className="flex flex-col gap-3">
+                      <span className="text-text-secondary/60 text-[20px] font-medium font-pretendard tracking-tight">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <h4 className="text-[22px] font-bold text-text-primary leading-tight">
                         {item.titlePrefix} {item.titleSuffix || ''}
                       </h4>
-                      <p className="text-text-secondary text-[15px] leading-relaxed break-keep font-normal">
+                      <p className="text-text-secondary text-[14px] leading-relaxed break-keep font-normal">
                         {item.desc}
                       </p>
-                      <div className="bg-bg-surface/60 border border-border-light rounded-[20px] p-4">
-                        <ul className="space-y-2">
-                          {item.features.map((feature, i) => (
-                            <li key={i} className="flex items-start gap-3 text-text-primary/90 text-[14px] leading-relaxed">
-                              <span className="text-brand-primary mt-[2px]">•</span>
-                              <span className="break-keep">{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                      <ul className="space-y-2 pt-1">
+                        {item.features.map((feature, i) => (
+                          <li key={i} className="flex items-start gap-2 text-text-secondary text-[13px] leading-relaxed">
+                            <span className="text-brand-primary mt-[2px] shrink-0">•</span>
+                            <span className="break-keep">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
 
                     {/* Visual Preview */}
                     <div className="relative aspect-video rounded-[20px] overflow-hidden bg-zinc-900 border border-border-light/50 shadow-2xl">
                       <img
-                        src={index === 0 ? "/test-1.png" : index === 1 ? "/test-2.png" : "/test-3.png"}
+                        src={item.image}
                         alt={item.titlePrefix}
                         className="w-full h-full object-cover"
                       />
@@ -1082,36 +1103,59 @@ const App = () => {
             </div>
 
             {/* Desktop Layout (Sticky & Transitions) */}
-            <div className="hidden lg:flex sticky top-0 h-screen w-full items-center justify-center px-4 md:px-6 md:px-10 overflow-hidden">
-              <div className="max-w-[1200px] mx-auto w-full h-full">
+            <div className="hidden lg:flex sticky top-0 h-screen w-full items-center justify-center px-4 md:px-6 md:px-10 overflow-hidden pt-16">
+              {/* 전체 배경: 솔루션 페이즈에서 즉시 전환, 위로 밀어내며 퇴장 */}
+              {useCaseItems.map((item, index) => {
+                const bgQRange: [number, number] = index === 0 ? [0.0, 0.08] : index === 1 ? [0.33, 0.41] : [0.66, 0.74];
+                const bgDRange: [number, number] = [bgQRange[1] + 0.04, bgQRange[1] + 0.08];
+                const bgNextStart = index < 2 ? (index === 0 ? 0.33 : 0.66) : 1.0;
+                const bgExitRange: [number, number] = [bgNextStart - 0.06, bgNextStart - 0.01];
+                const bgOpacity = useTransform(sectionProgress, [bgDRange[0] - 0.005, bgDRange[0], bgExitRange[1] - 0.005, bgExitRange[1]], [0, 1, 1, 0]);
+                return (
+                  <motion.div
+                    key={`bg-${item.id}`}
+                    style={{ opacity: bgOpacity, backgroundColor: '#F4F5FE' }}
+                    className="absolute inset-0 w-full h-full"
+                  />
+                );
+              })}
+              <div className="max-w-[1200px] mx-auto w-full h-full relative z-10">
                 <div className="w-full flex flex-col lg:flex-row items-center relative gap-8 lg:gap-0 h-full">
-                  <div className="w-full lg:w-[42%] flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16 self-start pt-[20vh] h-full relative">
+                  <div className="w-full lg:w-[42%] flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16 self-start pt-[20vh] h-full relative overflow-hidden">
                     {/* 단일 슬롯: 모든 Use Case가 동일한 자리에서 교체됨 */}
                     <div className="relative h-full">
                       {useCaseItems.map((item, index) => {
-                        // 각 아이템별 범위 정의 - 솔루션 체류 시간을 늘리기 위해 dRange를 앞당김
-                        const qRange: [number, number] = index === 0 ? [0.0, 0.12] : index === 1 ? [0.33, 0.45] : [0.66, 0.78];
-                        const dRange: [number, number] = [qRange[1] + 0.08, qRange[1] + 0.12];
+                        // painpoint를 짧게, solution dwell을 길게 (0.06 → 0.12)
+                        const qRange: [number, number] = index === 0 ? [0.0, 0.08] : index === 1 ? [0.33, 0.41] : [0.66, 0.74];
+                        const dRange: [number, number] = [qRange[1] + 0.04, qRange[1] + 0.08];
                         const nextStart = index < 2 ? (index === 0 ? 0.33 : 0.66) : 1.0;
-                        const exitRange: [number, number] = [nextStart - 0.08, nextStart - 0.02];
+                        const exitRange: [number, number] = [nextStart - 0.06, nextStart - 0.01];
                         const isActive = activeUseCase === index;
 
                         // 라인 애니메이션: 솔루션 등장 완료(dRange[1])부터 퇴장 시작(exitRange[0])까지 채워짐
                         const lineScaleX = useTransform(sectionProgress, [dRange[1], exitRange[0]], [0, 1]);
 
-                        // 숫자가 먼저 채워지고 (qRange의 앞 30%), 이어서 질문 텍스트 (나머지 70%)
+                        // CharacterReveal 범위 (모든 항목 동일하게 유지)
                         const qSpan = qRange[1] - qRange[0];
                         const numFillEnd = qRange[0] + qSpan * 0.3;
                         const textRange: [number, number] = [numFillEnd, qRange[1]];
 
-                        // Q: 등장 → D가 시작되면 사라짐 (Cross-fade 적용하여 겹침 방지)
-                        const qOpacity = useTransform(sectionProgress, [qRange[0] - 0.01, qRange[0], dRange[0], dRange[1]], [0, 1, 1, 0]);
+                        // Q: 이전 솔루션 퇴장 시점부터 미리 보여줌 (Char base 0.4로 ghost 상태)
+                        // index > 0: 이전 exitRange[1](=qRange[0]-0.01) 시점에 즉시 ghost 등장
+                        const ghostStart = index === 0 ? qRange[0] - 0.01 : qRange[0] - 0.02;
+                        const ghostVisible = index === 0 ? qRange[0] : qRange[0] - 0.01;
+                        const qOpacity = useTransform(sectionProgress, [ghostStart, ghostVisible, dRange[0] - 0.005, dRange[0]], [0, 1, 1, 0]);
                         // D: Q가 사라지면서 등장 → 다음 Q 시작 전에 사라짐
-                        const dOpacity = useTransform(sectionProgress, [dRange[0], dRange[1], nextStart - 0.03, nextStart], [0, 1, 1, 0]);
-                        const dY = useTransform(sectionProgress, dRange, [20, 0]);
+
+                        // 즉시 등장, 다음 이미지가 중앙 도달 시(exitRange[1]) 즉시 사라짐
+                        const panelOpacity = useTransform(
+                          sectionProgress,
+                          [dRange[0] - 0.005, dRange[0], exitRange[1] - 0.005, exitRange[1]],
+                          [0, 1, 1, 0]
+                        );
 
                         // 숫자: qRange 시작부터 즉시 100% (다만 내부 CharacterReveal이 0.4 -> 1 조절), 이후 사라짐
-                        const numOpacity = useTransform(sectionProgress, [qRange[0] - 0.01, qRange[0], nextStart - 0.03, nextStart], [0, 1, 1, 0]);
+                        const numOpacity = useTransform(sectionProgress, [ghostStart, ghostVisible, dRange[0] - 0.005, dRange[0]], [0, 1, 1, 0]);
 
                         return (
                           <div key={item.id} className="absolute inset-0 w-full" style={{
@@ -1125,7 +1169,7 @@ const App = () => {
                             >
                               <motion.p
                                 style={{ opacity: numOpacity }}
-                                className="text-text-primary text-[18px] lg:text-[20px] font-medium tracking-tight mb-6 font-pretendard"
+                                className="text-text-primary text-[20px] font-medium tracking-tight mb-6 font-pretendard"
                               >
                                 {String(index + 1).padStart(2, '0')}. Painpoint
                               </motion.p>
@@ -1137,50 +1181,56 @@ const App = () => {
                               />
                             </motion.div>
 
-                            {/* 설명 레이어 */}
+                            {/* 설명 레이어 - 솔루션 컨텐츠 (배경은 외부 전체 bg 패널이 담당) */}
                             <motion.div
-                              style={{ opacity: dOpacity, y: dY }}
-                              className="absolute inset-0 w-full"
+                              style={{ opacity: panelOpacity }}
+                              className="absolute inset-0 w-full overflow-hidden"
                             >
-                              <div className="flex items-center gap-4 mb-4 w-full max-w-lg">
-                                <p className="text-text-primary text-[20px] font-normal tracking-tight font-pretendard">
-                                  {String(index + 1).padStart(2, '0')}
+                              <div className="mb-6 w-full max-w-lg">
+                                <p className="text-gray-900 text-[20px] font-bold tracking-tight font-pretendard mb-3">
+                                  {String(index + 1).padStart(2, '0')}&nbsp;&nbsp;Solution.
                                 </p>
-                                <div className="flex-1 h-[2px] bg-bg-active relative overflow-hidden">
+                                <div className="w-full h-[1px] bg-gray-200 relative overflow-hidden">
                                   <motion.div
                                     style={{ scaleX: lineScaleX, originX: 0 }}
-                                    className="absolute inset-0 bg-white shadow-[0_0_10px_white]"
+                                    className="absolute inset-0 bg-gray-900"
                                   />
                                 </div>
                               </div>
 
-                              <h3 className="text-[40px] text-text-primary mb-2 leading-tight">
+                              <h3 className="text-[40px] text-gray-900 mb-3 leading-[1.1] tracking-tight">
                                 <span className="font-bold">{item.titlePrefix}</span>{" "}
-                                <span className="font-normal">{item.titleSuffix}</span>
+                                <span className="font-light">{item.titleSuffix}</span>
                               </h3>
-                              <p className="text-[16px] text-text-secondary leading-relaxed max-w-lg mb-4 font-medium">
+                              <p className="text-[16px] text-gray-800 leading-relaxed max-w-lg mb-5 font-normal">
                                 {item.desc}
                               </p>
                               {item.tags && (
-                                <div className="flex flex-wrap gap-2 mb-6">
-                                  {item.tags.map((tag: string, i: number) => (
-                                    <span
-                                      key={i}
-                                      className="px-2.5 py-1 text-[12px] font-bold rounded-full border border-border-light bg-bg-surface"
-                                      style={{ color: item.themeColor === 'sky' ? '#0EA5E9' : item.themeColor === 'emerald' ? '#10B981' : '#00AEFF' }}
-                                    >
-                                      # {tag}
-                                    </span>
-                                  ))}
+                                <div className="flex flex-wrap gap-2 mb-12">
+                                  {item.tags.map((tag: string, i: number) => {
+                                    const tagColor = '#1A75FF'; // Primary Blue
+                                    return (
+                                      <span
+                                        key={i}
+                                        className="px-4 py-1.5 text-[14px] font-semibold rounded-full"
+                                        style={{
+                                          color: tagColor,
+                                          backgroundColor: `${tagColor}12`, // 옅은 프라이머리 배경
+                                        }}
+                                      >
+                                        # {tag}
+                                      </span>
+                                    );
+                                  })}
                                 </div>
                               )}
                               {item.features && (
                                 <div className="mb-6 max-w-lg">
-                                  <ul className="space-y-3.5">
+                                  <ul className="space-y-3">
                                     {item.features.map((feature: string, i: number) => (
-                                      <li key={i} className="flex items-start gap-3 text-text-primary text-[15px] leading-snug font-medium">
-                                        <div className="w-0.5 h-4 rounded-full bg-text-primary/40 mt-[3px] shrink-0" />
-                                        <span className="text-text-secondary">{feature}</span>
+                                      <li key={i} className="flex items-start gap-3 text-[16px] leading-relaxed">
+                                        <div className="w-[3px] h-5 rounded-full bg-gray-400 mt-[3px] shrink-0" />
+                                        <span className="text-gray-800 font-normal">{feature}</span>
                                       </li>
                                     ))}
                                   </ul>
@@ -1188,16 +1238,16 @@ const App = () => {
                               )}
                             </motion.div>
 
-                            {/* 버튼 영역: 텍스트 영역과 별도로 하단 고정 배치 */}
+                            {/* 버튼 영역: 솔루션 컨텐츠와 함께 등장/퇴장 */}
                             <motion.div
-                              style={{ opacity: dOpacity }}
+                              style={{ opacity: panelOpacity }}
                               className="absolute bottom-[10vh] left-0 pointer-events-auto"
                             >
                                 <Button
                                   variant="outline"
-                                  rounded="xl"
+                                  rounded="lg"
                                   size="cta"
-                                  className="w-[100px] h-[48px] p-0 gap-0"
+                                  className="w-[100px] h-[48px] p-0 gap-0 border-gray-900/20 text-gray-900 hover:border-gray-900/40"
                                   onClick={() => navigate('/use-cases')}
                                 >
                                   <span>전체보기</span>
@@ -1215,33 +1265,33 @@ const App = () => {
                     <div className="w-full relative h-[80vh]">
                       {useCaseItems.map((item, index) => {
                         const isActive = activeUseCase === index;
-                        // 텍스트 레이어와 동기화된 범위 계산
-                        const qRange: [number, number] = index === 0 ? [0.0, 0.12] : index === 1 ? [0.33, 0.45] : [0.66, 0.78];
-                        const dRange: [number, number] = [qRange[1] + 0.08, qRange[1] + 0.12];
+                        const qRange: [number, number] = index === 0 ? [0.0, 0.08] : index === 1 ? [0.33, 0.41] : [0.66, 0.74];
                         const nextStart = index < 2 ? (index === 0 ? 0.33 : 0.66) : 1.0;
-                        const exitRange: [number, number] = [nextStart - 0.08, nextStart - 0.02];
+                        const exitRange: [number, number] = [nextStart - 0.06, nextStart - 0.01];
 
-                        // 1단계 (진입): 텍스트(Painpoint)가 먼저 나오고, 읽을 시간을 가진 뒤 등장 (지연 타이밍 적용)
-                        const entryStart = dRange[0] - 0.04;
-                        const entryEnd = dRange[1];
-                        const x = useTransform(sectionProgress, [entryStart, entryEnd], [400, 0]);
+                        // 이전 아이템의 exitRange (index>0에서 아래서 올라오는 진입에 사용)
+                        const prevExitStart = qRange[0] - 0.06;
+                        const prevExitEnd = qRange[0] - 0.01;
 
-                        // 2단계 (고정): dRange 동안은 x: 0, y: 0으로 고정
+                        // index 0: 우에서 등장 + 위로 퇴장
+                        const imageX0 = useTransform(sectionProgress, [qRange[0], qRange[0] + 0.04], [60, 0]);
+                        const imageY0 = useTransform(sectionProgress, [exitRange[0], exitRange[1]], [0, -800]);
+                        const imageOpacity0 = useTransform(sectionProgress, [qRange[0], qRange[0] + 0.03, exitRange[1] - 0.005, exitRange[1]], [0, 1, 1, 0]);
 
-                        // 3단계 (퇴장): 다음 페인포인트 시작 전 위로 스크롤 (y: 0 -> -400)
-                        const y = useTransform(sectionProgress, [exitRange[0], exitRange[1]], [0, -400]);
+                        // index > 0: 아래서 올라오며 진입, 위로 퇴장
+                        const imageYn = useTransform(sectionProgress, [prevExitStart, prevExitEnd, exitRange[0], exitRange[1]], [800, 0, 0, -800]);
+                        const imageOpacityn = useTransform(sectionProgress, [prevExitStart - 0.01, prevExitStart, exitRange[1] - 0.005, exitRange[1]], [0, 1, 1, 0]);
 
-                        // 등장 페이드 (entryStart 시점부터 지연 등장)
-                        const opacity = useTransform(sectionProgress, [entryStart, entryStart + 0.03], [0, 1]);
+                        const imageY = index === 0 ? imageY0 : imageYn;
+                        const imageOpacity = index === 0 ? imageOpacity0 : imageOpacityn;
 
                         return (
                           <motion.div
                             key={index}
                             style={{
-                              opacity: isActive ? opacity : 0,
-                              x: isActive ? x : 400,
-                              y: isActive ? y : 0,
-                              scale: isActive ? 1 : 0.95,
+                              opacity: imageOpacity,
+                              x: index === 0 ? imageX0 : 0,
+                              y: imageY,
                               pointerEvents: isActive ? 'auto' : 'none',
                             }}
                             className="absolute inset-0 w-full h-full flex items-center justify-end"

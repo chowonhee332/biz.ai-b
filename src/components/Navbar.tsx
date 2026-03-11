@@ -27,7 +27,7 @@ export default function Navbar({ activePage }: NavbarProps) {
   ];
 
   return (
-    <nav className={`fixed w-full z-50 bg-bg-main/80 backdrop-blur-md py-4 transition-all duration-300 ${scrolled ? 'border-b border-border-light shadow-lg' : 'border-b border-transparent'}`}>
+    <nav className={`fixed w-full z-50 bg-bg-main/95 backdrop-blur-md py-4 transition-all duration-300 ${scrolled ? 'border-b border-border-light shadow-lg' : 'border-b border-transparent'}`}>
       <div className="max-w-[1280px] mx-auto container-responsive flex items-center">
         {/* Logo - Always visible */}
         <Link to="/" className="flex items-center gap-2 shrink-0">

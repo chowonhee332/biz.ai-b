@@ -115,7 +115,7 @@ export default function MultiAgentPlatformPage() {
                                         variant={activeTab === item ? "default" : "ghost"}
                                         rounded="lg"
                                         onClick={() => setActiveTab(item)}
-                                        className={`w-full justify-start px-4 py-2.5 text-[16px] font-semibold transition-all cursor-pointer ${activeTab === item
+                                        className={`w-full justify-start px-4 h-11 text-[16px] font-semibold transition-all cursor-pointer ${activeTab === item
                                             ? "bg-brand-primary text-text-primary shadow-lg shadow-brand-primary/20"
                                             : "text-text-secondary/40 hover:text-text-primary/70 hover:bg-bg-surface"
                                             }`}
