@@ -93,10 +93,10 @@ export default function UseCasePage() {
                                             {item.카테고리}
                                         </span>
                                         <h3 className="text-text-primary text-[19px] font-bold leading-snug whitespace-pre-line">
-                                            {item.타이틀}
+                                            {item.상세내용?.title || item.타이틀}
                                         </h3>
                                         <p className="text-text-secondary/70 text-[14px] leading-relaxed line-clamp-2 font-medium">
-                                            {item.설명}
+                                            {item.상세내용?.header || item.설명}
                                         </p>
                                         <span className="text-text-dim text-[13px] font-medium mt-0.5">
                                             #{item.태그}

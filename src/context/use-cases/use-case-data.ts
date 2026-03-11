@@ -1,10 +1,11 @@
 import { MEETING_MINUTES_DETAIL } from './details/meeting-minutes';
-import { AION_PUBLIC_DETAIL } from './details/aion-public';
+import { AION_PUBLIC_SECTOR_DETAIL } from './details/aion-public-sector';
+import { AION_FINANCE_DETAIL } from './details/aion-finance';
 import { AUTOBUILDER_DETAIL } from './details/autobuilder';
 import { BEAST_GATEWAY_DETAIL } from './details/beast-gateway';
 import { CLOUDWIZ_DETAIL } from './details/cloudwiz';
 import { WORKS_AI_HANWHA_DETAIL } from './details/works-ai-hanwha';
-import { AUDIT_AGENT_DETAIL } from './details/audit-agent';
+import { NATIONAL_ASSEMBLY_AGENT_DETAIL } from './details/national-assembly-agent';
 
 export interface UseCaseItem {
     타이틀: string;
@@ -18,22 +19,31 @@ export interface UseCaseItem {
 
 export const USE_CASES: UseCaseItem[] = [
     {
-        타이틀: "AI 회의록",
+        타이틀: "AI 회의록 고객사례",
         산업군: "서비스/기업",
         태그: "AI 회의록",
         카테고리: "내부 업무 처리 향상",
         이미지: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&q=80&w=800",
-        설명: "화자 분리 및 겹침 발화 처리로 회의록 작성 리드타임 85% 단축, 온프레미스 보안으로 기밀 정보 보호 강화.",
+        설명: "겹침 발화까지 놓치지 않는 화자 분리와 온프레미스 보안으로, 회의 생산성의 기준을 바꾸다",
         상세내용: MEETING_MINUTES_DETAIL
     },
     {
-        타이틀: "공공기관 데이터 분석 챗봇 서비스",
+        타이틀: "AI:ON-U 공공기관 데이터 분석 챗봇 구축 사례",
         산업군: "공공기관",
         태그: "AI:ON-U",
         카테고리: "데이터 분석",
         이미지: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
-        설명: "자연어 기반 데이터 분석 플랫폼으로 민원 처리 시간 80% 단축, 보고서 작성 시간을 3일에서 30분으로 혁신했습니다.",
-        상세내용: AION_PUBLIC_DETAIL
+        설명: "데이터 기반 정책 의사결정과 민원 대응 혁신을 동시에 잡다",
+        상세내용: AION_PUBLIC_SECTOR_DETAIL
+    },
+    {
+        타이틀: "AI:ON-U 금융사 지능형 검색 챗봇 구축 사례",
+        산업군: "금융",
+        태그: "AI:ON-U",
+        카테고리: "데이터 분석",
+        이미지: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80&w=800",
+        설명: '상품·약관·리서치·민원 응답까지, "한 번에 찾고 바로 답한다"',
+        상세내용: AION_FINANCE_DETAIL
     },
     {
         타이틀: "AutoBuilder",
@@ -41,16 +51,16 @@ export const USE_CASES: UseCaseItem[] = [
         태그: "Codebox",
         카테고리: "내부 업무 처리 향상",
         이미지: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&q=80&w=800",
-        설명: "대규모 레거시 전환 공수 48% 절감, 전환율 100% 달성으로 Cloud 전환 경쟁력을 강화했습니다.",
+        설명: "대규모 레거시 전환 공수 절감과 Cloud 전환 경쟁력 강화를 동시에 실현하다",
         상세내용: AUTOBUILDER_DETAIL
     },
     {
-        타이틀: "디지털 플랫폼 정부 파이프라인 구축",
+        타이틀: "Beast AI 공공·기업용 AI Gateway 구축 사례",
         산업군: "공공/기업",
         태그: "Beast AI Gateway",
         카테고리: "강력한 보안",
         이미지: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&q=80&w=800",
-        설명: "전사 AI 사용 통합 관리 및 실시간 PII 필터링으로 AI 사용 비용 30~50% 절감, 보안 안정성 제로 리스크를 실현했습니다.",
+        설명: "엔터프라이즈 전역의 AI 활용을 표준화하고, 보안·규제 환경에서도 확장 가능한 AI 운영 체계를 확보하다",
         상세내용: BEAST_GATEWAY_DETAIL
     },
     {
@@ -59,26 +69,26 @@ export const USE_CASES: UseCaseItem[] = [
         태그: "Cloudwiz",
         카테고리: "리스크 관리 효율화",
         이미지: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800",
-        설명: "멀티클라우드 비용 30% 절감, 운영 생산성 2배 향상으로 비용·보안·운영 자동화를 실현했습니다.",
+        설명: "비용·보안·운영 자동화를 한 번에 잡은 멀티/하이브리드 클라우드 통합관리",
         상세내용: CLOUDWIZ_DETAIL
     },
     {
-        타이틀: "Works AI 테크로스 ERP",
+        타이틀: "Works AI",
         산업군: "기업",
         태그: "Works AI",
         카테고리: "내부 업무 처리 향상",
         이미지: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
-        설명: "사내 AI Agent Portal 구축으로 업무 처리 클릭 수 대폭 감소, CSAT 40% 향상 및 전사 업무 혁신을 실현했습니다.",
+        설명: "사내 AI Agent Portal로 전사 업무 혁신을 현실로 만들다",
         상세내용: WORKS_AI_HANWHA_DETAIL
     },
     {
-        타이틀: "국정감사 Agent",
+        타이틀: "K사 국회업무 AI Agent 구축 사례",
         산업군: "공공",
-        태그: "감사 대응 Agent",
+        태그: "국회업무 Agent",
         카테고리: "내부 업무 처리 향상",
         이미지: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800",
-        설명: "답변서 생성 시간 80% 단축, 문서 탐색 시간 90% 단축으로 국정감사 대응의 속도·정확도·품질을 혁신했습니다.",
-        상세내용: AUDIT_AGENT_DETAIL
+        설명: "국회업무 대응의 속도·정확도·품질을 한 번에 끌어올린 디지털 혁신 사례",
+        상세내용: NATIONAL_ASSEMBLY_AGENT_DETAIL
     }
 ];
 

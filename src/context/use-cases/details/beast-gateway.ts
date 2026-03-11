@@ -1,5 +1,5 @@
 export const BEAST_GATEWAY_DETAIL = {
-    title: "Beast AI Gateway",
+    title: "Beast AI 공공·기업용 AI Gateway 구축 사례",
     subtitle: "Beast AI 공공·기업용 AI Gateway 구축 사례",
     header: "엔터프라이즈 전역의 AI 활용을 표준화하고, 보안·규제 환경에서도 확장 가능한 AI 운영 체계를 확보하다",
     sections: [
@@ -13,7 +13,7 @@ export const BEAST_GATEWAY_DETAIL = {
                 "시스템 간 API·AI Agent 연동이 어려움: Legacy 시스템, LLM 모델, MCP Tool이 따로 운영되어 자동화 구축이 어려움",
                 "규제산업 환경에서의 LLM 활용 제한: 공공·금융 등 규제 기관과 협업 시 표준화된 AI 거버넌스 요구 증가"
             ],
-            footer: "기관은 “전사 AI 사용을 하나의 시스템에서 통합 관리하고, 보안·규제 환경에서도 안전하게 확장 가능한 AI 활용 구조”를 목표로 AI Gateway 솔루션인 Beast AI 도입을 결정했다."
+            footer: '기관은 “전사 AI 사용을 하나의 시스템에서 통합 관리하고, 보안·규제 환경에서도 안전하게 확장 가능한 AI 활용 구조”를 목표로 AI Gateway 솔루션인 Beast AI 도입을 결정했다.'
         },
         {
             id: "objective",
@@ -99,7 +99,7 @@ export const BEAST_GATEWAY_DETAIL = {
             title: "6. 고객 담당자 코멘트 (가상 인터뷰 기반 재현)",
             quotes: [
                 {
-                    text: "Beast AI를 도입하면서 우리 조직의 ‘AI 활용 방식’이 완전히 정비됐습니다. AI 사용량·정책·보안이 모두 통합되어 관리되니 규제기관 대응도 훨씬 수월해졌고, 새로운 자동화 시나리오를 계속 만들고 있습니다.",
+                    text: "Beast AI를 도입하면서 우리 조직의 ‘AI 활용 방식’이 완전히 정비됐습니다. AI 사용량·정책·보안이 모두 통합되어 관리되니 규제기관 대응도 훨씬 수월해졌고, Legacy 시스템과 LLM을 쉽게 연결해서 새로운 자동화 시나리오를 계속 만들고 있습니다.",
                     author: "B 기관 디지털전환실 실장"
                 }
             ]

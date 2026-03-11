@@ -1,5 +1,5 @@
 export const AUTOBUILDER_DETAIL = {
-    title: "AutoBuilder",
+    title: "Cloud TR(Auto Builder) 엔지니어링 솔루션 적용 사례",
     subtitle: "Cloud TR(Auto Builder) 엔지니어링 솔루션 적용 사례",
     header: "대규모 레거시 전환 공수 절감과 Cloud 전환 경쟁력 강화를 동시에 실현하다",
     sections: [

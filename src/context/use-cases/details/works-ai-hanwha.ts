@@ -1,5 +1,5 @@
 export const WORKS_AI_HANWHA_DETAIL = {
-    title: "Works AI(한화) 테크로스",
+    title: "Works AI 도입 고객 사례",
     subtitle: "Works AI 도입 고객 사례",
     header: "사내 AI Agent Portal로 전사 업무 혁신을 현실로 만들다",
     sections: [
@@ -117,7 +117,7 @@ export const WORKS_AI_HANWHA_DETAIL = {
             title: "7. 향후 계획",
             list: [
                 "사내 전 부서용 표준 Agent 카탈로그 구축",
-                "외부 시스템(ERP/HR/문서관리/비용관리)과의 확장 연동",
+                "외부 시스템(ERP/HR/문서관리)과의 확장 연동",
                 "특정 직무 전용 고도화 Agent 개발",
                 "전사 AI 기반 업무 자동화 로드맵 추진"
             ]

@@ -604,7 +604,7 @@ const StudioSection = () => {
 
             <Button
               variant="outline"
-              rounded="full"
+              rounded="lg"
               size="cta"
               className="w-[120px] p-0"
             >
@@ -1704,7 +1704,7 @@ const App = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-xl bg-brand-primary hover:bg-brand-primary/90 text-white flex items-center justify-center shadow-lg shadow-brand-primary/30 transition-colors cursor-pointer"
+              className="fixed bottom-8 right-8 z-[100] w-11 h-11 rounded-xl bg-brand-primary hover:bg-brand-primary/90 text-white flex items-center justify-center shadow-lg shadow-brand-primary/30 transition-colors cursor-pointer"
               aria-label="맨 위로 가기"
             >
               <ArrowUp size={20} strokeWidth={2.5} />

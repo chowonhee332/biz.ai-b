@@ -62,8 +62,11 @@ export default function UseCaseDetailPage() {
                             {item.카테고리}
                         </span>
                         <h1 className="text-[36px] md:text-[50px] font-bold text-white leading-snug break-keep tracking-tight">
-                            {item.타이틀}
+                            {detail?.title || item.타이틀}
                         </h1>
+                        <p className="text-[16px] md:text-[18px] text-text-secondary break-keep">
+                            {item.설명}
+                        </p>
                     </motion.div>
                 </div>
             </section>
@@ -113,14 +116,20 @@ export default function UseCaseDetailPage() {
                                 {section.list && (
                                     <div className="bg-bg-surface/50 rounded-[20px] p-6 border border-border-light mb-6">
                                         <ul className="flex flex-col gap-3.5">
-                                            {section.list.map((li: string, idx: number) => (
-                                                <li key={idx} className="flex items-start gap-3 text-text-secondary">
-                                                    <div className="w-0.5 h-4 rounded-full bg-brand-primary/60 shrink-0 mt-1" />
-                                                    <div className="text-[15px] font-medium leading-relaxed break-keep">
-                                                        {li}
-                                                    </div>
-                                                </li>
-                                            ))}
+                                            {section.list.map((li: string, idx: number) => {
+                                                const colonIdx = li.indexOf(':');
+                                                const hasColon = colonIdx !== -1;
+                                                const title = hasColon ? li.slice(0, colonIdx) : null;
+                                                const desc = hasColon ? li.slice(colonIdx + 1).trimStart() : li;
+                                                return (
+                                                    <li key={idx} className="flex items-start gap-3 text-text-secondary">
+                                                        <div className="w-0.5 h-4 rounded-full bg-brand-primary/60 shrink-0 mt-1" />
+                                                        <div className="text-[15px] font-medium leading-relaxed break-keep">
+                                                            {hasColon && <span className="text-white font-bold">{title}: </span>}{desc}
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })}
                                         </ul>
                                     </div>
                                 )}

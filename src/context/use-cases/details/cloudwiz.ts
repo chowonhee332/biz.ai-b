@@ -1,5 +1,5 @@
 export const CLOUDWIZ_DETAIL = {
-    title: "CloudWiz",
+    title: "CloudWiz 대기업 멀티클라우드 운영혁신 사례",
     subtitle: "CloudWiz 대기업 멀티클라우드 운영혁신 사례",
     header: "비용·보안·운영 자동화를 한 번에 잡은 멀티/하이브리드 클라우드 통합관리",
     sections: [
