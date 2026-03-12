@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
@@ -10,28 +9,11 @@ import Navbar from '@/components/Navbar';
 
 export default function NewsPage() {
     const [activeCategory, setActiveCategory] = useState("전체");
-    const newsScrollRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
-    const [canScrollLeft, setCanScrollLeft] = useState(false);
 
     const getTagColor = (tag: string) => {
         if (tag === "기술 이야기") return "text-emerald";
         return "text-brand-primary";
-    };
-
-    const scrollNews = (direction: 'left' | 'right') => {
-        if (newsScrollRef.current) {
-            newsScrollRef.current.scrollBy({
-                left: direction === 'left' ? -400 : 400,
-                behavior: 'smooth'
-            });
-        }
-    };
-
-    const handleNewsScroll = () => {
-        if (newsScrollRef.current) {
-            setCanScrollLeft(newsScrollRef.current.scrollLeft > 10);
-        }
     };
 
     useEffect(() => {
@@ -39,7 +21,7 @@ export default function NewsPage() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-bg-main text-text-primary font-pretendard flex flex-col">
+        <div className="min-h-screen text-text-primary font-pretendard flex flex-col" style={{ backgroundColor: '#101013' }}>
             <Navbar activePage="news" />
 
             <section className="pt-48 pb-32 flex-1">
@@ -52,79 +34,19 @@ export default function NewsPage() {
                             transition={{ duration: 0.8, ease: "easeOut" }}
                         >
                             <h1 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
-                                새로운 소식
+                                News
                             </h1>
                             <p className="text-text-secondary text-[18px] max-w-2xl font-medium leading-relaxed">
                                 Biz.AI가 전하는 최신 업데이트와 인사이트를 확인하세요.
                             </p>
                         </motion.div>
 
-                        {/* 캐러셀 내비게이션 버튼 */}
-                        <div className="flex gap-2.5 mb-2">
-                            <Button
-                                variant="nav"
-                                size="icon-md"
-                                rounded="full"
-                                className="gap-2"
-                                onClick={() => scrollNews('left')}
-                                disabled={!canScrollLeft}
-                            >
-                                <ChevronLeft size={20} strokeWidth={2.5} />
-                            </Button>
-                            <Button
-                                variant="nav"
-                                size="icon-md"
-                                rounded="full"
-                                className="gap-2"
-                                onClick={() => scrollNews('right')}
-                            >
-                                <ChevronRight size={20} strokeWidth={2.5} />
-                            </Button>
-                        </div>
                     </div>
                 </div>
 
-                {/* 하이라이트 캐러셀 */}
-                <div className="mb-24">
-                    <div
-                        ref={newsScrollRef}
-                        onScroll={handleNewsScroll}
-                        className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-12 pl-[max(1.25rem,calc((100vw-1200px)/2))]"
-                    >
-                        {HIGHLIGHT_NEWS.map((news, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ y: 20, opacity: 0 }}
-                                whileInView={{ y: 0, opacity: 1 }}
-                                transition={{ delay: i * 0.1, duration: 0.5 }}
-                                viewport={{ once: true }}
-                                className="group cursor-pointer shrink-0 w-[380px]"
-                                onClick={() => navigate(`/news/${i + 1}`, { state: { news } })}
-                            >
-                                <div className="relative w-full aspect-[380/240] rounded-[20px] overflow-hidden mb-5 bg-bg-surface border border-border-light group-hover:border-border-light/60 transition-all">
-                                    <motion.img
-                                        src={news.이미지}
-                                        alt={news.타이틀}
-                                        className="w-full h-full object-cover brightness-90 group-hover:brightness-100 group-hover:scale-105 transition-transform duration-700"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                                </div>
-                                <div className="pt-2 px-1 flex-1 flex flex-col">
-                                    <span className={`${getTagColor(news.태그)} text-[13px] font-bold mb-2.5`}>{news.태그}</span>
-                                    <h3 className="text-text-primary text-[22px] font-bold leading-snug whitespace-pre-line mb-4">{news.타이틀}</h3>
-                                    <div className="flex items-center text-text-dim text-[13px] font-medium mt-auto">
-                                        <span>{news.솔루션}</span>
-                                        <span className="mx-2 text-[4px] opacity-50">●</span>
-                                        <span>{news.날짜}</span>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
 
                 {/* 카테고리 탭 */}
-                <div className="sticky top-[72px] lg:top-[64px] bg-bg-main/85 backdrop-blur-sm z-40 border-b border-border-light mb-12">
+                <div className="sticky top-[72px] lg:top-[64px] backdrop-blur-sm z-40 border-b border-border-light mb-12" style={{ backgroundColor: 'rgba(16, 16, 19, 0.85)' }}>
                     <div className="max-w-[1280px] mx-auto container-responsive flex items-center gap-8 h-[66px]">
                         {NEWS_CATEGORIES.map((category) => (
                             <Button
@@ -168,7 +90,7 @@ export default function NewsPage() {
                                     <h3 className="text-text-primary text-[22px] font-bold leading-snug mb-3 group-hover:text-text-secondary transition-colors">{news.타이틀}</h3>
                                     <p className="text-text-secondary/70 text-[15px] leading-relaxed line-clamp-2 mb-5 font-medium">{news.설명}</p>
                                     <div className="flex items-center text-text-dim text-[13px] font-medium">
-                                        <span>{news.솔루션}</span>
+                                        <span>{news.언론사 || news.솔루션}</span>
                                         <span className="mx-2 text-[4px] opacity-50">●</span>
                                         <span>{news.날짜}</span>
                                     </div>

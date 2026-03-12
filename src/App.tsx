@@ -570,7 +570,7 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
 
 const StudioSection = () => {
   return (
-    <section id="studio-v2" className="bg-bg-main py-16 md:py-32 px-6">
+    <section id="studio-v2" className="py-16 md:py-32 px-6" style={{ backgroundColor: '#101013' }}>
       <div className="max-w-[1200px] mx-auto">
         {/* 메인 배너 카드 */}
         <motion.div
@@ -699,7 +699,7 @@ const App = () => {
   const useCaseBgColor = useTransform(
     sectionProgress,
     [0, 0.12, 0.16, 0.28, 0.32, 0.45, 0.49, 0.61, 0.65, 0.78, 0.82, 0.95, 0.99, 1.0],
-    ['#09090B', '#09090B', '#F4F5FE', '#F4F5FE', '#09090B', '#09090B', '#F4F5FE', '#F4F5FE', '#09090B', '#09090B', '#F4F5FE', '#F4F5FE', '#09090B', '#09090B']
+    ['#101013', '#101013', '#F4F5FE', '#F4F5FE', '#101013', '#101013', '#F4F5FE', '#F4F5FE', '#101013', '#101013', '#F4F5FE', '#F4F5FE', '#101013', '#101013']
   );
 
   const newsScrollRef = useRef<HTMLDivElement>(null);
@@ -805,7 +805,7 @@ const App = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-bg-main text-text-primary font-sans">
+    <div className="min-h-screen text-text-primary font-sans" style={{ backgroundColor: '#101013' }}>
       {/* GNB - Global Navigation Bar */}
       <Navbar activePage="home" />
 
@@ -861,7 +861,7 @@ const App = () => {
       </section>
 
       {/* Main Content Area */}
-      <div className="relative z-20 bg-bg-main">
+      <div className="relative z-20" style={{ backgroundColor: '#101013' }}>
         <div className="relative w-full pt-10">
           {/* Continuous gradient from the Hero section into the gap */}
 
@@ -984,7 +984,7 @@ const App = () => {
           </motion.div>
         </div>
 
-        <section id="domain" className="py-20 md:py-32 relative overflow-hidden bg-black pb-16">
+        <section id="domain" className="py-20 md:py-32 relative overflow-hidden pb-16" style={{ backgroundColor: '#101013' }}>
           <div className="max-w-[1280px] mx-auto container-responsive">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -1048,7 +1048,7 @@ const App = () => {
           </div>
         </section>
 
-        <section id="use-cases" className="relative bg-bg-main">
+        <section id="use-cases" className="relative" style={{ backgroundColor: '#101013' }}>
           {/* Title Area: Normal Scrolling */}
           <div className="max-w-[1280px] mx-auto w-full container-responsive pt-16 md:pt-32 pb-0 text-center relative">
             <motion.div
@@ -1314,7 +1314,7 @@ const App = () => {
 
 
         {/* 수치로 증명하는 Biz.AI (Stats Section) */}
-        <section id="stats" className="py-16 md:py-32 bg-bg-main">
+        <section id="stats" className="py-16 md:py-32" style={{ backgroundColor: '#101013' }}>
           <div className="max-w-[1280px] mx-auto container-responsive">
             <div className="text-center mb-12 md:mb-32">
               <h2 className="text-[26px] md:text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-4 md:mb-6 tracking-tight">
@@ -1348,7 +1348,7 @@ const App = () => {
         {/* Why kt ds - 프로세스 섹션 */}
         <ProcessSection isMobile={isMobile} />
 
-        <section id="logos" className="relative py-24 bg-bg-main overflow-hidden">
+        <section id="logos" className="relative py-24 overflow-hidden" style={{ backgroundColor: '#101013' }}>
           {/* Hero와 동일한 그리드 배경 추가 */}
           <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
           
@@ -1391,58 +1391,9 @@ const App = () => {
         </section>
 
 
-        <section id="testimonials" className="py-24 px-6 bg-bg-main relative">
-          <div className="max-w-[1000px] mx-auto">
-            <div className="max-w-[1000px] mx-auto relative group">
-              <div className="columns-1 md:columns-2 lg:columns-3 gap-3 space-y-3">
-                {[
-                  { user: "Musa M.", role: "Figma for web design.", stars: 4.5, quote: "kt ds의 AI 솔루션은 상상 그 이상이었습니다. No-code 기반으로 이렇게 정교한 에이전트를 만들 수 있다는 게 믿기지 않네요." },
-                  { user: "Marcelo A.", role: "CEO and Co-Founder", stars: 5, quote: "Great marketing site building in no time. 복잡한 지식 베이스를 RAG로 구축하는 과정이 너무나 간결합니다." },
-                  { user: "Jorge H.", role: "Founder", stars: 5, quote: "Web design and development brought to a new level - also friendly for non-tech people. 비전문가도 수준 높은 AI 서비스를 운영할 수 있습니다." },
-                  { user: "Ayush S.", role: "Product Designer", stars: 5, quote: "Design and publish websites in minutes! And for free! 디자인 작업과 AI 로직 구현이 완벽하게 시너지를 냅니다." },
-                  { user: "Priya P.", role: "Product Designer", stars: 5, quote: "Best tool in market to create and ship website live faster. 기업용 AI 도입 속도를 획기적으로 단축시켜주었습니다." },
-                  { user: "Erman M.", role: "Freelance designer", stars: 5, quote: "The easiest web design tool I've ever used. 정말 직관적이고 강력합니다." },
-                  { user: "Durvesh C.", role: "User Interface Designer", stars: 5, quote: "Smooth and easy to migrate no code tool. 기존 레거시 시스템과의 연동이 매끄럽게 이루어집니다." },
-                  { user: "Alex C.", role: "Manager", stars: 4.5, quote: "A good balance between full customization and easy to use platform. 커스터마이징의 유연성과 편의성을 모두 잡았습니다." },
-                  { user: "Selçuk K.", role: "Senior DevOps Consultant", stars: 5, quote: "Easy and powerful. 인프라와 AI의 결합이 완벽한 자동화를 만들어냅니다." },
-                  { user: "Shaddy", role: "My go-to tool for website designing.", stars: 5, quote: "복잡했던 업무들이 AI 에이전트 하나로 자동화되는 경험은 놀라웠습니다." },
-                  { user: "Nidhi B.", role: "Content Writer", stars: 4.5, quote: "The road to no-code interface designing has been made easy with applications like Framer." },
-                  { user: "Leo A.", role: "Amazing tool for no-code modern web design and publishing", stars: 5, quote: "엔터프라이즈 AI의 패러다임을 바꿀 만한 강력한 도구입니다!" },
-                ].slice(0, isMobile ? 4 : undefined).map((post, i) => (
-                  <div key={i} className="break-inside-avoid bg-bg-surface/50 backdrop-blur-sm border border-border-light rounded-[20px] p-7 hover:border-border-light transition-all duration-300 group/card">
-                    <div className="mb-4">
-                      <div className="text-text-primary font-bold text-[18px] mb-1">{post.user}</div>
-                      <div className="text-text-dim text-[14px] font-medium leading-tight mb-4">{post.role}</div>
-                      <p className="text-text-secondary text-[15px] leading-[1.6] font-normal break-keep mb-5">{post.quote}</p>
-
-                      {/* 별점 */}
-                      <div className="flex gap-1">
-                        {[...Array(5)].map((_, index) => (
-                          <svg
-                            key={index}
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill={index < Math.floor(post.stars) ? "#3B82F6" : "rgba(255,255,255,0.1)"}
-                            className="shrink-0"
-                          >
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                          </svg>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* 바닥 그라데이션 페이드 아웃 */}
-              <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-bg-main via-bg-main/80 to-transparent z-20 pointer-events-none" />
-            </div>
-          </div>
-        </section>
 
         {/* 새로운 소식 섹션: 우측 블리드(Bleed) 레이아웃 */}
-        <section id="news" className="py-16 md:py-32 bg-bg-main relative">
+        <section id="news" className="py-16 md:py-32 relative" style={{ backgroundColor: '#101013' }}>
           {/* 헤더 영역: 컨테이너 내부 */}
           <div className="max-w-[1280px] mx-auto container-responsive mb-10 md:mb-20">
             <div className="flex justify-between items-end">
@@ -1510,7 +1461,7 @@ const App = () => {
                     {news.타이틀}
                   </h3>
                   <div className="flex items-center text-text-dim text-[14px] font-medium">
-                    <span>{news.솔루션}</span>
+                    <span>{news.언론사 || news.솔루션}</span>
                     <span className="mx-2 text-[4px] opacity-50">●</span>
                     <span>{news.날짜}</span>
                   </div>
@@ -1535,7 +1486,7 @@ const App = () => {
         </section>
 
         {/* FAQ 섹션 */}
-        <section id="faq" className="py-12 md:py-24 bg-bg-main relative overflow-hidden">
+        <section id="faq" className="py-12 md:py-24 relative overflow-hidden" style={{ backgroundColor: '#101013' }}>
           <div className="max-w-[1280px] mx-auto container-responsive">
             <div className="flex flex-col lg:flex-row gap-10 md:gap-20">
               {/* 왼쪽: 헤더 */}
@@ -1707,7 +1658,7 @@ const App = () => {
         </AnimatePresence>
 
         {/* 풋터 */}
-        <footer className="bg-bg-main py-16 px-6 border-t border-border-light relative z-20">
+        <footer className="py-16 px-6 border-t border-border-light relative z-20" style={{ backgroundColor: '#101013' }}>
           <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-start gap-10 md:gap-0 font-pretendard">
             {/* 좌측: 로고 + 주소 */}
             <div className="flex flex-col items-start gap-8">

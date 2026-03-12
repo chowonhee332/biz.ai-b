@@ -19,7 +19,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-bg-main border-t border-border-light py-10 container-responsive relative">
+    <footer className="border-t border-border-light py-10 container-responsive relative" style={{ backgroundColor: '#101013' }}>
       <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row md:items-start md:justify-between gap-6">
         {/* 좌측: 로고 + 주소 */}
         <div className="flex flex-col gap-3">

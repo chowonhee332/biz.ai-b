@@ -16,7 +16,7 @@ export default function UseCasePage() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-bg-main text-text-primary font-pretendard flex flex-col">
+        <div className="min-h-screen text-text-primary font-pretendard flex flex-col" style={{ backgroundColor: '#101013' }}>
             {/* GNB */}
             <Navbar activePage="use-cases" />
 
@@ -39,7 +39,7 @@ export default function UseCasePage() {
                 </div>
 
                 {/* 카테고리 탭 - Sticky 적용 (풀 너비 라인) */}
-                <div className="sticky top-[72px] lg:top-[64px] bg-bg-main/85 backdrop-blur-sm z-40 border-b border-border-light mb-12">
+                <div className="sticky top-[72px] lg:top-[64px] backdrop-blur-sm z-40 border-b border-border-light mb-12" style={{ backgroundColor: 'rgba(16, 16, 19, 0.85)' }}>
                     <div className="max-w-[1280px] mx-auto container-responsive flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap">
                         {USE_CASE_CATEGORIES.map((category) => (
                             <Button
