@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ChevronRight, ChevronLeft, Play, Download, Mail, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { PLATFORM_PAGE_CONFIG } from '@/context/platform/platform-data';
+import { PLATFORM_PAGE_CONFIG } from '@/context/platform/platform-data-test';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 
@@ -359,11 +359,19 @@ export default function MultiAgentPlatformPage() {
                                                     <div key={i} className="bg-bg-surface backdrop-blur-sm rounded-[20px] border border-border-light group transition-all hover:border-brand-primary/50">
                                                         <div className="p-5">
                                                             <div className="mb-5">
-                                                                <h4 className="text-[18px] font-bold text-text-primary leading-tight mb-1.5">{item.기업명}</h4>
-                                                                <span className="inline-flex items-center text-[11px] font-bold text-brand-primary bg-brand-primary/10 border border-brand-primary/20 rounded-full px-2 py-0.5 tracking-wide">{item.산업분야}</span>
+                                                                <h4 className="text-[18px] font-bold text-text-primary leading-tight mb-1.5">
+                                                                    {item.기업명 || item.고객조직 || "고객 사례"}
+                                                                </h4>
+                                                                {(item.산업분야 || item.적용범위) && (
+                                                                    <span className="inline-flex items-center text-[11px] font-bold text-brand-primary bg-brand-primary/10 border border-brand-primary/20 rounded-full px-2 py-0.5 tracking-wide">
+                                                                        {item.산업분야 || item.적용범위}
+                                                                    </span>
+                                                                )}
                                                             </div>
-                                                            <div className="space-y-3 mb-5">
-                                                                {item.항목들.map((detail, idx) => (
+
+                                                            <div className="space-y-4 mb-5">
+                                                                {/* 기존 항목들(array of objects) 처리 */}
+                                                                {item.항목들 && Array.isArray(item.항목들) && item.항목들.map((detail: any, idx: number) => (
                                                                     <div key={idx}>
                                                                         {detail.타이틀 === '성과' ? (
                                                                             <div className="rounded-xl bg-brand-primary/10 border border-brand-primary/20 p-3.5">
@@ -381,6 +389,38 @@ export default function MultiAgentPlatformPage() {
                                                                         )}
                                                                     </div>
                                                                 ))}
+
+                                                                {/* 새로운 필드들 (평면적 구조) 처리 */}
+                                                                {item.핵심적용기능 && (
+                                                                    <div>
+                                                                        <span className="text-[11px] font-bold text-text-dim tracking-wider uppercase mb-2 block">핵심 적용 기능</span>
+                                                                        <div className="flex flex-wrap gap-1.5">
+                                                                            {Array.isArray(item.핵심적용기능) ? item.핵심적용기능.map((tech: string, i: number) => (
+                                                                                <span key={i} className="text-[12px] px-2 py-0.5 bg-bg-surface border border-border-light rounded-md text-text-secondary">{tech}</span>
+                                                                            )) : <span className="text-text-secondary text-[14px]">{item.핵심적용기능}</span>}
+                                                                        </div>
+                                                                    </div>
+                                                                )}
+
+                                                                {(item.성과정량 || item.성과정성) && (
+                                                                    <div className="rounded-xl bg-brand-primary/10 border border-brand-primary/20 p-3.5">
+                                                                        <div className="flex items-center gap-1.5 mb-1.5">
+                                                                            <div className="w-0.5 h-3.5 rounded-full bg-brand-primary" />
+                                                                            <span className="text-[11px] font-bold text-brand-primary/70 tracking-wider uppercase">성과</span>
+                                                                        </div>
+                                                                        <div className="space-y-2">
+                                                                            {item.성과정량 && <p className="text-[14px] leading-relaxed break-keep text-brand-primary font-bold">🎯 {item.성과정량}</p>}
+                                                                            {item.성과정성 && <p className="text-[13px] leading-relaxed break-keep text-brand-primary/80">{item.성과정성}</p>}
+                                                                        </div>
+                                                                    </div>
+                                                                )}
+
+                                                                {item.담당자코멘트 && (
+                                                                    <div className="pt-2 italic text-[14px] text-text-dim/80 relative">
+                                                                        <span className="absolute -left-2 top-1 text-2xl text-brand-primary/20">"</span>
+                                                                        {item.담당자코멘트}
+                                                                    </div>
+                                                                )}
                                                             </div>
                                                             {item.상세링크 && (
                                                                 <Link to={item.상세링크}>
