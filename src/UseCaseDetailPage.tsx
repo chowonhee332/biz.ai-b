@@ -86,7 +86,7 @@ export default function UseCaseDetailPage() {
                         {sections.map((section: any) => (
                             <section key={section.id} id={section.id} className="flex flex-col scroll-mt-32">
                                 {section.title && (
-                                    <h2 className={`${section.subtitle_level === 1 ? 'text-[22px] text-text-secondary' : 'text-[26px] text-text-primary'} font-bold pt-10 border-t border-border-light/30 pb-4 mb-6`}>
+                                    <h2 className={`${section.subtitle_level === 1 ? 'text-[22px] text-text-secondary' : 'text-[26px] text-text-primary'} font-bold pt-8 border-t border-border-light/60 pb-3 mb-4`}>
                                         {section.title}
                                     </h2>
                                 )}
@@ -179,11 +179,9 @@ export default function UseCaseDetailPage() {
                                             {section.items.map((it: any, idx: number) => (
                                                 <div key={idx} className="p-5 rounded-[16px] bg-bg-surface/50 border border-border-light flex flex-col gap-3">
                                                     {section.id !== 'results' && (
-                                                        <div className="size-6 rounded-full bg-brand-primary flex items-center justify-center shadow-lg shadow-brand-primary/20 shrink-0">
-                                                            <span className="text-[10px] font-bold text-white leading-none">{(idx + 1).toString().padStart(2, '0')}</span>
-                                                        </div>
+                                                        <span className="text-brand-primary text-[13px] font-bold shrink-0 leading-none mt-0.5">{(idx + 1).toString().padStart(2, '0')}</span>
                                                     )}
-                                                    <div className={`font-bold leading-tight ${section.id === 'results' ? 'text-[16px] text-emerald-400' : 'text-[16px] text-text-primary'}`}>{it.타이틀}</div>
+                                                    <div className={`font-bold leading-tight ${section.id === 'results' ? 'text-[17px] text-emerald-400' : 'text-[17px] text-text-primary'}`}>{it.타이틀}</div>
                                                     <p className="text-[14px] leading-relaxed break-keep font-medium" style={{ color: '#AFAFAF' }}>{it.설명}</p>
                                                 </div>
                                             ))}

@@ -90,7 +90,7 @@ export default function MultiAgentPlatformPage() {
                 </div>
 
                 {/* 모바일 탭 */}
-                <div className="lg:hidden sticky top-[72px] backdrop-blur-sm z-40 border-b border-border-light mb-12" style={{ backgroundColor: 'rgba(16, 16, 19, 0.85)' }}>
+                <div className="lg:hidden sticky top-[72px] backdrop-blur-sm z-40 border-b border-border-light mb-12" style={{ backgroundColor: 'rgba(16, 16, 19, 0.95)' }}>
                     <div className="max-w-[1280px] mx-auto container-responsive flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap">
                         {sidebarItems.map((item) => (
                             <Button
@@ -274,10 +274,8 @@ export default function MultiAgentPlatformPage() {
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 {currentContent.특장점.map((item, i) => (
                                                     <div key={i} className="bg-bg-surface/50 rounded-[16px] p-5 border border-border-light flex flex-col gap-3">
-                                                        <div className="size-6 rounded-full bg-brand-primary flex items-center justify-center shadow-lg shadow-brand-primary/20">
-                                                            <span className="text-[10px] font-bold text-text-primary">{(i + 1).toString().padStart(2, '0')}</span>
-                                                        </div>
-                                                        <h4 className="text-[16px] font-bold text-text-primary leading-tight">
+                                                        <span className="text-brand-primary text-[14px] font-bold leading-none">{(i + 1).toString().padStart(2, '0')}</span>
+                                                        <h4 className="text-[17px] font-bold text-text-primary leading-tight">
                                                             {item.타이틀.replace(/^\d+\.\s*/, '')}
                                                         </h4>
                                                         <p className="text-text-secondary/70 text-[14px] leading-relaxed break-keep font-medium">
