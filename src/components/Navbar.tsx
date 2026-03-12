@@ -58,12 +58,14 @@ export default function Navbar({ activePage }: NavbarProps) {
               </svg>
             </Button>
           </a>
-          <Button size="sm" className="bg-text-primary text-bg-main hover:bg-text-primary/90 px-4 py-0 h-9 rounded-lg font-bold text-[14px] group">
-            AI Agent 스튜디오
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">
-              <path d="M7 17L17 7M17 7H7M17 7V17" />
-            </svg>
-          </Button>
+          <a href="https://studio.abclab.ktds.com/auth/login" target="_blank" rel="noopener noreferrer">
+            <Button size="sm" className="bg-text-primary text-bg-main hover:bg-text-primary/90 px-4 py-0 h-9 rounded-lg font-bold text-[14px] group">
+              AI Agent 스튜디오
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </Button>
+          </a>
         </div>
 
         {/* Mobile Menu Button - Shown only below 1024px */}
@@ -106,7 +108,7 @@ export default function Navbar({ activePage }: NavbarProps) {
                     <path d="M7 17L17 7M17 7H7M17 7V17" />
                   </svg>
                 </a>
-                <a href="#" className="flex items-center gap-1.5 text-text-secondary/60 font-medium py-1">
+                <a href="https://studio.abclab.ktds.com/auth/login" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-text-secondary/60 font-medium py-1">
                   <span className="text-[16px]">AI Agent 스튜디오</span>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M7 17L17 7M17 7H7M17 7V17" />

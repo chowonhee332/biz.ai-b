@@ -1355,31 +1355,31 @@ const App = () => {
           <div className="relative z-10 w-full text-center">
             <div className="relative overflow-hidden w-full py-4">
               <motion.div
-                className="flex items-center gap-x-24 whitespace-nowrap"
+                className="flex items-center gap-x-12 whitespace-nowrap"
                 animate={{ x: ["0%", "-50%"] }}
                 transition={{
                   repeat: Infinity,
                   repeatType: "loop",
-                  duration: 70,
+                  duration: 60,
                   ease: "linear"
                 }}
               >
                 {[...Array(2)].map((_, i) => (
                   <React.Fragment key={i}>
                     {[
-                      { name: "KT", logo: "/logos/kt.png" },
-                      { name: "경기도", logo: "/logos/gyeonggido.png" },
-                      { name: "현대그린푸드", logo: "/logos/hwell.png" },
-                      { name: "신한은행", logo: "/logos/shinhan.png" },
-                      { name: "한국철도공사", logo: "/logos/kr.png" },
-                      { name: "건국대학교 미래지식교육원", logo: "/logos/konmi.png" },
-                      { name: "트루엔", logo: "/logos/true.png" }
+                      { name: "KT", logo: "/logos/kt.png", scale: 1 },
+                      { name: "경기도", logo: "/logos/gyeonggido.png", scale: 1 },
+                      { name: "현대그린푸드", logo: "/logos/hwell.png", scale: 1.2 },
+                      { name: "한국철도공사", logo: "/logos/kr.png", scale: 1.2 },
+                      { name: "건국대학교 미래지식교육원", logo: "/logos/konmi.png", scale: 1.2 },
+                      { name: "트루엔", logo: "/logos/true.png", scale: 1.2 }
                     ].map((brand, idx) => (
-                      <div key={`${i}-${idx}`} className="flex items-center shrink-0">
+                      <div key={`${i}-${idx}`} className="flex items-center justify-center shrink-0 w-[180px] h-[80px]">
                         <img 
                           src={brand.logo} 
                           alt={brand.name} 
-                          className="h-[44px] w-auto object-contain opacity-80 hover:opacity-100 transition-all duration-300 pointer-events-auto"
+                          style={{ transform: `scale(${brand.scale})` }}
+                          className="max-h-[38px] max-w-[140px] w-auto h-auto object-contain opacity-100 transition-all duration-300 pointer-events-auto brightness-0 invert"
                         />
                       </div>
                     ))}
