@@ -98,7 +98,7 @@ export default function MultiAgentPlatformPage() {
                                 variant="ghost"
                                 rounded="none"
                                 onClick={() => setActiveTab(item)}
-                                className={`relative h-full text-[14px] font-medium transition-all shrink-0 flex items-center px-1 cursor-pointer hover:bg-transparent ${activeTab === item ? "text-text-primary font-bold" : "text-text-dim hover:text-text-primary/60"}`}
+                                className={`relative h-full text-[14px] font-medium transition-all shrink-0 flex items-center px-1 cursor-pointer hover:bg-transparent focus-visible:ring-0 focus-visible:outline-none ${activeTab === item ? "text-text-primary font-bold" : "text-text-dim hover:text-text-primary/60"}`}
                             >
                                 {item}
                                 {activeTab === item && (

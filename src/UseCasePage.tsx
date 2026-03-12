@@ -47,7 +47,7 @@ export default function UseCasePage() {
                                 variant="ghost"
                                 rounded="none"
                                 onClick={() => setActiveCategory(category)}
-                                className={`relative h-full text-[15px] transition-colors flex items-center px-1 cursor-pointer hover:bg-transparent ${activeCategory === category
+                                className={`relative h-full text-[15px] transition-colors flex items-center px-1 cursor-pointer hover:bg-transparent focus-visible:ring-0 focus-visible:outline-none ${activeCategory === category
                                     ? "text-text-primary font-bold"
                                     : "text-text-dim font-medium hover:text-text-primary"
                                     }`}
