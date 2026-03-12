@@ -151,8 +151,8 @@ export default function MultiAgentPlatformPage() {
                                     </div>
 
                                     {/* 2. 주요 고객군 */}
-                                    <div id="section-target" className="mb-10 pt-10 border-t border-border-light/30 scroll-mt-32">
-                                        <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">주요 고객군</h3>
+                                    <div id="section-target" className="mb-10 pt-10 border-t border-border-light/60 scroll-mt-32">
+                                        <h3 className="text-[22px] font-bold text-white mb-4">1. 주요 고객군</h3>
                                         {currentContent.주요고객군 ? (
                                             <div className="pl-4 border-l-2 border-brand-primary/40">
                                                 <p className="text-text-secondary text-[16px] font-medium leading-relaxed">{currentContent.주요고객군}</p>
@@ -163,8 +163,8 @@ export default function MultiAgentPlatformPage() {
                                     </div>
 
                                     {/* 3. 핵심가치 */}
-                                    <div id="section-values" className="mb-10 pt-10 border-t border-border-light/30 scroll-mt-32">
-                                        <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">핵심가치</h3>
+                                    <div id="section-values" className="mb-10 pt-10 border-t border-border-light/60 scroll-mt-32">
+                                        <h3 className="text-[22px] font-bold text-white mb-4">2. 핵심가치</h3>
                                         {currentContent.핵심가치 && currentContent.핵심가치.length > 0 ? (
                                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                                 {currentContent.핵심가치.map((item, i) => (
@@ -180,8 +180,8 @@ export default function MultiAgentPlatformPage() {
                                     </div>
 
                                     {/* 4. 주요 기능 */}
-                                    <div id="section-features" className="mb-10 pt-10 border-t border-border-light/30 scroll-mt-32">
-                                        <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">주요기능</h3>
+                                    <div id="section-features" className="mb-10 pt-10 border-t border-border-light/60 scroll-mt-32">
+                                        <h3 className="text-[22px] font-bold text-white mb-4">3. 주요기능</h3>
                                         {currentContent.주요기능 && currentContent.주요기능.length > 0 ? (
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 {currentContent.주요기능.map((feature, i) => {
@@ -210,8 +210,8 @@ export default function MultiAgentPlatformPage() {
                                     </div>
 
                                     {/* 5. 주요 특징 */}
-                                    <div id="section-screenshots" className="mb-10 pt-10 border-t border-border-light/30 scroll-mt-32">
-                                        <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">주요특징</h3>
+                                    <div id="section-screenshots" className="mb-10 pt-10 border-t border-border-light/60 scroll-mt-32">
+                                        <h3 className="text-[22px] font-bold text-white mb-4">4. 주요특징</h3>
                                         {currentContent.주요특징이미지 && currentContent.주요특징이미지.length > 0 ? (
                                             <div className="rounded-[20px] overflow-hidden border border-white/10 bg-white/[0.03]">
                                                 <div className="relative">
@@ -268,8 +268,8 @@ export default function MultiAgentPlatformPage() {
                                     </div>
 
                                     {/* 6. 특장점 */}
-                                    <div id="section-advantages" className="mb-10 pt-10 border-t border-border-light/30 scroll-mt-32">
-                                        <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">특장점</h3>
+                                    <div id="section-advantages" className="mb-10 pt-10 border-t border-border-light/60 scroll-mt-32">
+                                        <h3 className="text-[22px] font-bold text-white mb-4">5. 특장점</h3>
                                         {currentContent.특장점 && currentContent.특장점.length > 0 ? (
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 {currentContent.특장점.map((item, i) => (
@@ -290,8 +290,8 @@ export default function MultiAgentPlatformPage() {
                                     </div>
 
                                     {/* 7. 활용 시나리오 */}
-                                    <div id="section-scenarios" className="mb-12 pt-10 border-t border-border-light/30 scroll-mt-32">
-                                        <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">이렇게 활용하세요</h3>
+                                    <div id="section-scenarios" className="mb-12 pt-10 border-t border-border-light/60 scroll-mt-32">
+                                        <h3 className="text-[22px] font-bold text-white mb-4">6. 이렇게 활용하세요</h3>
                                         {currentContent.주요활용시나리오 && currentContent.주요활용시나리오.length > 0 ? (
                                             <div className="grid grid-cols-1 gap-4">
                                                 {currentContent.주요활용시나리오.map((item, i) => (
@@ -351,8 +351,8 @@ export default function MultiAgentPlatformPage() {
                                     </div>
 
                                     {/* 8. 고객사례 */}
-                                    <div id="section-cases" className="mb-12 pt-10 border-t border-border-light/30 scroll-mt-32">
-                                        <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">고객사례</h3>
+                                    <div id="section-cases" className="mb-12 pt-10 border-t border-border-light/60 scroll-mt-32">
+                                        <h3 className="text-[22px] font-bold text-white mb-4">7. 고객사례</h3>
                                         {currentContent.고객사례 && currentContent.고객사례.length > 0 ? (
                                             <div className={`grid grid-cols-1 ${currentContent.고객사례.length > 1 ? 'md:grid-cols-2' : ''} gap-4`}>
                                                 {currentContent.고객사례.map((item, i) => (
@@ -403,8 +403,8 @@ export default function MultiAgentPlatformPage() {
                                     </div>
 
                                     {/* 9. 소개영상 */}
-                                    <div id="section-videos" className="mb-10 pt-10 border-t border-border-light/30 scroll-mt-32">
-                                        <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">소개영상</h3>
+                                    <div id="section-videos" className="mb-10 pt-10 border-t border-border-light/60 scroll-mt-32">
+                                        <h3 className="text-[22px] font-bold text-white mb-4">8. 소개영상</h3>
                                         {currentContent.소개영상 && currentContent.소개영상.length > 0 ? (
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                                 {currentContent.소개영상.map((video, i) => {
@@ -451,8 +451,8 @@ export default function MultiAgentPlatformPage() {
                                     </div>
 
                                     {/* 10. 오퍼링 */}
-                                    <div id="section-offerings" className="mb-12 pt-10 border-t border-border-light/30 scroll-mt-32">
-                                        <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">오퍼링</h3>
+                                    <div id="section-offerings" className="mb-12 pt-10 border-t border-border-light/60 scroll-mt-32">
+                                        <h3 className="text-[22px] font-bold text-white mb-4">9. 오퍼링</h3>
                                         {currentContent.오퍼링 && currentContent.오퍼링.length > 0 ? (
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 {currentContent.오퍼링.map((offering, i) => (
@@ -481,8 +481,8 @@ export default function MultiAgentPlatformPage() {
                                     </div>
 
                                     {/* 11. 문의/리소스 */}
-                                    <div id="section-contact" className="pt-10 border-t border-border-light/30 mb-12 scroll-mt-32">
-                                        <h3 className="text-[15px] font-bold text-brand-primary mb-4 tracking-wider uppercase">문의 / 리소스</h3>
+                                    <div id="section-contact" className="pt-10 border-t border-border-light/60 mb-12 scroll-mt-32">
+                                        <h3 className="text-[22px] font-bold text-white mb-4">10. 문의 / 리소스</h3>
                                         {(currentContent.제품상세문의?.이메일 || currentContent.제품상세문의?.전화번호 || (currentContent.관련리소스 && currentContent.관련리소스.length > 0)) ? (
                                             <div className={`grid grid-cols-1 ${currentContent.제품상세문의 && (currentContent.제품상세문의.이메일 || currentContent.제품상세문의.전화번호) && currentContent.관련리소스 && currentContent.관련리소스.length > 0 ? 'md:grid-cols-2' : ''} gap-5 items-stretch`}>
                                                 {currentContent.제품상세문의 && (currentContent.제품상세문의.이메일 || currentContent.제품상세문의.전화번호) && (

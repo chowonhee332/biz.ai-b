@@ -86,7 +86,7 @@ export default function UseCaseDetailPage() {
                         {sections.map((section: any) => (
                             <section key={section.id} id={section.id} className="flex flex-col scroll-mt-32">
                                 {section.title && (
-                                    <h2 className={`${section.subtitle_level === 1 ? 'text-[22px] text-text-secondary' : 'text-[26px] text-text-primary'} font-bold pt-8 border-t border-border-light/60 pb-3 mb-4`}>
+                                    <h2 className={`${section.subtitle_level === 1 ? 'text-[20px] text-text-secondary' : 'text-[22px] text-text-primary'} font-bold pt-8 border-t border-border-light/60 pb-3 mb-4`}>
                                         {section.title}
                                     </h2>
                                 )}
