@@ -51,7 +51,7 @@ export interface PlatformProduct {
 
 export const PLATFORM_PAGE_CONFIG = {
     hero: {
-        title: "AI Products",
+        title: "AI Products / Service",
         description: "Biz.AI의 멀티 에이전트 플랫폼은 각 산업 분야에 최적화된 전문 AI 에이전트들을 통해 비즈니스 혁신을 지원합니다."
     },
     sidebarItems: [
@@ -661,21 +661,5 @@ To-Be(사용 흐름):
             주요고객군: "",
             설명: "RFP 분석 및 제안서 작성 지원 솔루션입니다.",
             타이틀: "제안서 대응 자동화 및 지원 솔루션 RFP Agent",},
-        "SQL Agent": {
-            관련리소스: [],
-            제품상세문의: { 이메일: '', 전화번호: '' },
-            오퍼링: [],
-            다운로드: [],
-            노출뉴스: [],
-            소개영상: [],
-            고객사례: [],
-            주요활용시나리오: [],
-            특장점: [],
-            메인이미지: "/works.png",
-            주요특징이미지: [],
-            주요기능: [],
-            핵심가치: [],
-            주요고객군: "",
-            설명: "자연어 기반 DB 조회 AI 에이전트입니다.",
-            타이틀: "자연어로 데이터베이스를 조회하는 SQL Agent",} } as Record<string, PlatformProduct>
+} as Record<string, PlatformProduct>
 };

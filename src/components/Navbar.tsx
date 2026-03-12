@@ -21,7 +21,7 @@ export default function Navbar({ activePage }: NavbarProps) {
   }, []);
 
   const navLinks = [
-    { name: 'AI 제품 서비스', path: '/platform', id: 'platform' },
+    { name: 'AI 제품/서비스', path: '/platform', id: 'platform' },
     { name: '고객 사례', path: '/use-cases', id: 'use-cases' },
     { name: '새로운 소식', path: '/news', id: 'news' },
   ];
