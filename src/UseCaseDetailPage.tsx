@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
-import { ChevronRight } from 'lucide-react';
+import { useEffect } from 'react';
+import { Mail, Phone } from 'lucide-react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import { USE_CASES, USE_CASE_CATEGORY_COLORS } from '@/context/use-cases/use-case-data';
-import { Button } from '@/components/ui/button';
 
 export default function UseCaseDetailPage() {
     const { id } = useParams();
@@ -21,28 +20,8 @@ export default function UseCaseDetailPage() {
         { id: "results", title: "4. 기대 효과 및 결과" }
     ];
 
-    const [activeSection, setActiveSection] = useState<string>(sections[0].id);
-
     useEffect(() => {
         window.scrollTo(0, 0);
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActiveSection(entry.target.id);
-                    }
-                });
-            },
-            { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
-        );
-
-        sections.forEach((sec: any) => {
-            const el = document.getElementById(sec.id);
-            if (el) observer.observe(el);
-        });
-
-        return () => observer.disconnect();
     }, [item]);
 
     return (
@@ -78,10 +57,9 @@ export default function UseCaseDetailPage() {
                 </div>
             </div>
 
-            {/* Main Content with Sticky ToC */}
-            <main className="max-w-[1280px] mx-auto container-responsive pb-48 flex flex-col lg:flex-row gap-20 relative">
-                {/* Left: Article Content */}
-                <div className="flex-1 lg:max-w-[840px]">
+            {/* Main Content */}
+            <main className="max-w-[1280px] mx-auto container-responsive pb-48">
+                <div className="max-w-[840px] mx-auto">
                     <article className="flex flex-col gap-14 font-pretendard">
                         {sections.map((section: any) => (
                             <section key={section.id} id={section.id} className="flex flex-col scroll-mt-32">
@@ -190,10 +168,10 @@ export default function UseCaseDetailPage() {
                                 )}
 
                                 {section.quotes && (
-                                    <div className="flex flex-col gap-8 mt-4">
+                                    <div className="flex flex-col gap-4 mt-4">
                                         {section.quotes.map((q: any, idx: number) => (
-                                            <div key={idx} className="relative pl-5 border-l-2 border-brand-primary/40">
-                                                <div className="text-[16px] font-medium leading-relaxed mb-3 break-keep" style={{ color: '#AFAFAF' }}>
+                                            <div key={idx} className="p-6 rounded-[20px] bg-bg-surface/50 border border-border-light flex flex-col gap-4">
+                                                <div className="text-[16px] font-medium leading-relaxed break-keep" style={{ color: '#AFAFAF' }}>
                                                     {q.text}
                                                 </div>
                                                 <div className="text-brand-primary text-[14px] font-bold">— {q.author}</div>
@@ -212,44 +190,24 @@ export default function UseCaseDetailPage() {
                             </section>
                         ))}
                     </article>
-                </div>
 
-                {/* Right: Sticky Table of Contents */}
-                <aside className="hidden lg:block w-[220px] shrink-0">
-                    <div className="sticky top-32 flex flex-col gap-5">
-                        <div className="text-[11px] font-bold text-white/30 uppercase tracking-widest pl-4">Contents</div>
-                        <nav className="flex flex-col border-l border-white/5">
-                            {sections.filter((s: any) => s.title).map((nav: any) => (
-                                <a
-                                    key={nav.id}
-                                    href={`#${nav.id}`}
-                                    className={`py-2.5 pl-4 text-[14px] font-medium transition-all border-l-2 -ml-[1px] cursor-pointer ${activeSection === nav.id
-                                        ? "text-white font-bold border-brand-primary"
-                                        : "text-white/30 border-transparent hover:text-white/60"
-                                    }`}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        document.getElementById(nav.id)?.scrollIntoView({ behavior: 'smooth' });
-                                    }}
-                                >
-                                    {nav.title.replace(/^\d+\.\s*/, '').replace(/^\d+\)\s*/, '')}
-                                </a>
-                            ))}
-                        </nav>
-
-                        <div className="mt-8 p-4 rounded-[16px] bg-bg-surface/50 border border-border-light flex flex-col gap-4">
-                            <h4 className="text-[15px] font-bold text-text-primary break-keep">비슷한 과제를 겪고 계신가요?</h4>
-                            <a href="mailto:">
-                                <Button
-                                    className="w-full h-11 bg-brand-primary hover:bg-brand-primary/90 text-white border-0 rounded-lg font-bold text-[14px] group relative transition-all duration-300"
-                                >
-                                    <span className="group-hover:-translate-x-2 transition-transform duration-300">상담 문의하기</span>
-                                    <ChevronRight size={18} className="absolute right-4 max-w-0 opacity-0 group-hover:max-w-[24px] group-hover:opacity-100 transition-all duration-300 overflow-hidden" />
-                                </Button>
-                            </a>
+                    {/* 상담 문의 - 콘텐츠 최하단 */}
+                    <div className="mt-16 pt-10 border-t border-border-light/60">
+                        <div className="p-6 rounded-[20px] bg-bg-surface/50 border border-border-light flex flex-row items-center justify-between gap-4">
+                            <h4 className="text-[16px] font-bold text-text-primary break-keep">비슷한 과제를 겪고 계신가요?</h4>
+                            <div className="flex flex-wrap gap-5 shrink-0">
+                                <div className="flex items-center gap-2 text-text-secondary">
+                                    <Mail className="size-4 text-text-dim" />
+                                    <span className="text-[15px] font-medium">ktdspr@kt.com</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-text-secondary">
+                                    <Phone className="size-4 text-text-dim" />
+                                    <span className="text-[15px] font-medium">02-523-7029</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </aside>
+                </div>
             </main>
 
             <Footer />

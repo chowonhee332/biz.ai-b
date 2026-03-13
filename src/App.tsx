@@ -695,10 +695,10 @@ const App = () => {
     else setActiveUseCase(2);
   });
 
-  // 배경색 직접 보간: dark → light → dark (3 케이스, 전환 구간 0.04로 부드럽게)
+  // 배경색: 진입은 부드럽게, 퇴장은 snap
   const useCaseBgColor = useTransform(
     sectionProgress,
-    [0, 0.12, 0.16, 0.28, 0.32, 0.45, 0.49, 0.61, 0.65, 0.78, 0.82, 0.95, 0.99, 1.0],
+    [0, 0.18, 0.22, 0.32, 0.321, 0.51, 0.55, 0.65, 0.651, 0.84, 0.88, 0.99, 0.991, 1.0],
     ['#101013', '#101013', '#F4F5FE', '#F4F5FE', '#101013', '#101013', '#F4F5FE', '#F4F5FE', '#101013', '#101013', '#F4F5FE', '#F4F5FE', '#101013', '#101013']
   );
 
@@ -1120,9 +1120,9 @@ const App = () => {
                     {/* 단일 슬롯: 모든 Use Case가 동일한 자리에서 교체됨 */}
                     <div className="relative h-full">
                       {useCaseItems.map((item, index) => {
-                        // painpoint를 짧게, solution dwell을 길게 (0.06 → 0.12)
+                        // painpoint 완료 후 0.10 pause, 이후 solution 등장
                         const qRange: [number, number] = index === 0 ? [0.0, 0.08] : index === 1 ? [0.33, 0.41] : [0.66, 0.74];
-                        const dRange: [number, number] = [qRange[1] + 0.04, qRange[1] + 0.08];
+                        const dRange: [number, number] = [qRange[1] + 0.10, qRange[1] + 0.14];
                         const nextStart = index < 2 ? (index === 0 ? 0.33 : 0.66) : 1.0;
                         const exitRange: [number, number] = [nextStart - 0.06, nextStart - 0.01];
                         const isActive = activeUseCase === index;
@@ -1135,22 +1135,21 @@ const App = () => {
                         const numFillEnd = qRange[0] + qSpan * 0.3;
                         const textRange: [number, number] = [numFillEnd, qRange[1]];
 
-                        // Q: 이전 솔루션 퇴장 시점부터 미리 보여줌 (Char base 0.4로 ghost 상태)
-                        // index > 0: 이전 exitRange[1](=qRange[0]-0.01) 시점에 즉시 ghost 등장
-                        const ghostStart = index === 0 ? qRange[0] - 0.01 : qRange[0] - 0.02;
-                        const ghostVisible = index === 0 ? qRange[0] : qRange[0] - 0.01;
-                        const qOpacity = useTransform(sectionProgress, [ghostStart, ghostVisible, dRange[0] - 0.005, dRange[0]], [0, 1, 1, 0]);
+                        // Q: bg가 dark로 스냅된 이후에 등장 (0.321/0.651/0.991 이후)
+                        const ghostStart = index === 0 ? qRange[0] - 0.01 : qRange[0] - 0.005;
+                        const ghostVisible = index === 0 ? qRange[0] : qRange[0];
+                        const qOpacity = useTransform(sectionProgress, [ghostStart, ghostVisible, dRange[0], dRange[0] + 0.001], [0, 1, 1, 0]);
                         // D: Q가 사라지면서 등장 → 다음 Q 시작 전에 사라짐
 
-                        // 즉시 등장, 다음 이미지가 중앙 도달 시(exitRange[1]) 즉시 사라짐
+                        // 즉시 등장, exitRange[1]에서 snap으로 사라짐
                         const panelOpacity = useTransform(
                           sectionProgress,
-                          [dRange[0], dRange[0] + 0.06, exitRange[1] - 0.005, exitRange[1]],
+                          [dRange[0], dRange[0] + 0.06, exitRange[1], exitRange[1] + 0.001],
                           [0, 1, 1, 0]
                         );
 
                         // 숫자: qRange 시작부터 즉시 100% (다만 내부 CharacterReveal이 0.4 -> 1 조절), 이후 사라짐
-                        const numOpacity = useTransform(sectionProgress, [ghostStart, ghostVisible, dRange[0] - 0.005, dRange[0]], [0, 1, 1, 0]);
+                        const numOpacity = useTransform(sectionProgress, [ghostStart, ghostVisible, dRange[0], dRange[0] + 0.001], [0, 1, 1, 0]);
 
                         return (
                           <div key={item.id} className="absolute inset-0 w-full" style={{
@@ -1195,7 +1194,7 @@ const App = () => {
 
                               <h3 className="text-[40px] text-gray-900 mb-3 leading-[1.1] tracking-tight">
                                 <span className="font-bold">{item.titlePrefix}</span>{" "}
-                                <span className="font-light">{item.titleSuffix}</span>
+                                <span className="font-normal">{item.titleSuffix}</span>
                               </h3>
                               <p className="text-[16px] text-gray-800 leading-relaxed max-w-lg mb-5 font-normal">
                                 {item.desc}
@@ -1268,14 +1267,14 @@ const App = () => {
                         const prevExitStart = qRange[0] - 0.06;
                         const prevExitEnd = qRange[0] - 0.01;
 
-                        // index 0: 우에서 등장 + 위로 퇴장
+                        // index 0: 우에서 등장, 라인 완료 후 pause, 이후 위로 퇴장
                         const imageX0 = useTransform(sectionProgress, [qRange[0], qRange[0] + 0.04], [60, 0]);
-                        const imageY0 = useTransform(sectionProgress, [exitRange[0], exitRange[1]], [0, -800]);
+                        const imageY0 = useTransform(sectionProgress, [exitRange[0] + 0.03, exitRange[1]], [0, -800]);
                         const imageOpacity0 = useTransform(sectionProgress, [qRange[0], qRange[0] + 0.03, exitRange[1] - 0.005, exitRange[1]], [0, 1, 1, 0]);
 
-                        // index > 0: 아래서 올라오며 진입, 위로 퇴장
-                        const imageYn = useTransform(sectionProgress, [prevExitStart, prevExitEnd, exitRange[0], exitRange[1]], [800, 0, 0, -800]);
-                        const imageOpacityn = useTransform(sectionProgress, [prevExitStart - 0.01, prevExitStart, exitRange[1] - 0.005, exitRange[1]], [0, 1, 1, 0]);
+                        // index > 0: pause 끝난 시점(+0.03)부터 올라오며 진입, 이후 위로 퇴장
+                        const imageYn = useTransform(sectionProgress, [prevExitStart + 0.03, prevExitEnd, exitRange[0] + 0.03, exitRange[1]], [800, 0, 0, -800]);
+                        const imageOpacityn = useTransform(sectionProgress, [prevExitStart + 0.02, prevExitStart + 0.03, exitRange[1] - 0.005, exitRange[1]], [0, 1, 1, 0]);
 
                         const imageY = index === 0 ? imageY0 : imageYn;
                         const imageOpacity = index === 0 ? imageOpacity0 : imageOpacityn;
