@@ -329,8 +329,8 @@ export default function AiServicePage() {
                                                                 {item.핵심적용기능 && (
                                                                     <div className="flex flex-wrap gap-1.5">
                                                                         {Array.isArray(item.핵심적용기능) ? item.핵심적용기능.map((tech: string, ti: number) => (
-                                                                            <span key={ti} className="text-[14px] px-2.5 py-1 bg-white/5 rounded-lg text-text-secondary font-medium">{tech}</span>
-                                                                        )) : <span className="text-text-secondary text-[14px]">{item.핵심적용기능}</span>}
+                                                                            <span key={ti} className="text-[13px] px-2.5 py-1 bg-white/5 rounded-lg text-text-secondary font-medium">{tech}</span>
+                                                                        )) : <span className="text-text-secondary text-[13px]">{item.핵심적용기능}</span>}
                                                                     </div>
                                                                 )}
                                                             </div>
@@ -353,17 +353,19 @@ export default function AiServicePage() {
 
                                                             {/* 성과 */}
                                                             {(item.성과정량 || item.성과정성 || (item.항목들 && item.항목들.some((d: any) => d.타이틀 === '성과'))) && (
-                                                                <div className="rounded-[14px] bg-emerald-400/5 border border-emerald-400/20 p-4 flex flex-col gap-2">
-                                                                    <span className="text-[12px] font-bold text-emerald-400/60 tracking-widest uppercase">성과</span>
-                                                                    {item.성과정량 && (
-                                                                        <p className="text-[15px] font-bold text-emerald-400 leading-snug break-keep">{item.성과정량}</p>
-                                                                    )}
-                                                                    {item.성과정성 && (
-                                                                        <p className="text-[14px] leading-relaxed break-keep text-emerald-400/70">{item.성과정성}</p>
-                                                                    )}
-                                                                    {item.항목들 && item.항목들.filter((d: any) => d.타이틀 === '성과').map((d: any, idx: number) => (
-                                                                        <p key={idx} className="text-[15px] font-bold text-emerald-400 leading-snug break-keep">{d.내용}</p>
-                                                                    ))}
+                                                                <div className="flex gap-3 items-start">
+                                                                    <span className="text-[12px] font-bold text-text-dim tracking-widest uppercase shrink-0 mt-0.5 w-14">성과</span>
+                                                                    <div className="flex flex-col gap-1.5">
+                                                                        {item.성과정량 && (
+                                                                            <p className="text-[14px] font-bold text-emerald-400 leading-snug break-keep">{item.성과정량}</p>
+                                                                        )}
+                                                                        {item.성과정성 && (
+                                                                            <p className="text-[14px] leading-[1.6] break-keep text-text-secondary">{item.성과정성}</p>
+                                                                        )}
+                                                                        {item.항목들 && item.항목들.filter((d: any) => d.타이틀 === '성과').map((d: any, idx: number) => (
+                                                                            <p key={idx} className="text-[14px] font-bold text-emerald-400 leading-snug break-keep">{d.내용}</p>
+                                                                        ))}
+                                                                    </div>
                                                                 </div>
                                                             )}
 
@@ -485,30 +487,49 @@ export default function AiServicePage() {
                                                     <div>
                                                         <h4 className="text-[13px] font-bold text-text-dim mb-3 tracking-wider uppercase">관련 리소스</h4>
                                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                                    {currentContent.관련리소스.map((resource, i) => (
-                                                                        <a 
-                                                                            key={i} 
-                                                                            href={resource.URL} 
-                                                                            target="_blank" 
-                                                                            rel="noopener noreferrer"
-                                                                            download={resource.URL.endsWith('.pdf') || resource.URL.endsWith('.docx')}
-                                                                            className="block"
-                                                                        >
-                                                                            <Button
-                                                                                variant="outline"
-                                                                                rounded="2xl"
-                                                                                className="w-full flex justify-between items-center p-4 bg-bg-surface border border-border-light hover:border-brand-primary transition-all group text-left min-h-[56px] h-auto cursor-pointer"
+                                                                    {currentContent.관련리소스.map((resource, i) => {
+                                                                        const isAvailable = resource.URL && resource.URL !== '#';
+                                                                        return isAvailable ? (
+                                                                            <a
+                                                                                key={i}
+                                                                                href={resource.URL}
+                                                                                target="_blank"
+                                                                                rel="noopener noreferrer"
+                                                                                download={resource.URL.endsWith('.pdf') || resource.URL.endsWith('.docx')}
+                                                                                className="block"
                                                                             >
-                                                                                <div className="flex items-center gap-4 min-w-0 mr-4">
-                                                                                    <div className="size-8 flex-shrink-0 bg-brand-primary/10 rounded-lg flex items-center justify-center text-[11px] font-bold text-brand-primary">
-                                                                                        {resource.파일타입}
+                                                                                <Button
+                                                                                    variant="outline"
+                                                                                    rounded="2xl"
+                                                                                    className="w-full flex justify-between items-center p-4 bg-bg-surface border border-border-light hover:border-brand-primary transition-all group text-left min-h-[56px] h-auto cursor-pointer"
+                                                                                >
+                                                                                    <div className="flex items-center gap-4 min-w-0 mr-4">
+                                                                                        <div className="size-8 flex-shrink-0 bg-brand-primary/10 rounded-lg flex items-center justify-center text-[11px] font-bold text-brand-primary">
+                                                                                            {resource.파일타입}
+                                                                                        </div>
+                                                                                        <h4 className="text-[16px] text-text-primary/90 font-medium truncate">{resource.타이틀}</h4>
                                                                                     </div>
-                                                                                    <h4 className="text-[16px] text-text-primary/90 font-medium truncate">{resource.타이틀}</h4>
-                                                                                </div>
-                                                                                <Download className="size-5 flex-shrink-0 text-text-dim group-hover:text-brand-primary transition-colors" />
-                                                                            </Button>
-                                                                        </a>
-                                                                    ))}
+                                                                                    <Download className="size-5 flex-shrink-0 text-text-dim group-hover:text-brand-primary transition-colors" />
+                                                                                </Button>
+                                                                            </a>
+                                                                        ) : (
+                                                                            <div key={i} className="block cursor-not-allowed">
+                                                                                <Button
+                                                                                    variant="outline"
+                                                                                    rounded="2xl"
+                                                                                    className="w-full flex justify-between items-center p-4 bg-bg-surface border border-border-light text-left min-h-[56px] h-auto pointer-events-none"
+                                                                                >
+                                                                                    <div className="flex items-center gap-4 min-w-0 mr-4">
+                                                                                        <div className="size-8 flex-shrink-0 bg-brand-primary/10 rounded-lg flex items-center justify-center text-[11px] font-bold text-brand-primary">
+                                                                                            {resource.파일타입}
+                                                                                        </div>
+                                                                                        <h4 className="text-[16px] text-text-primary/90 font-medium truncate">{resource.타이틀}</h4>
+                                                                                    </div>
+                                                                                    <Download className="size-5 flex-shrink-0 text-text-dim" />
+                                                                                </Button>
+                                                                            </div>
+                                                                        );
+                                                                    })}
                                                         </div>
                                                     </div>
                                                 )}
