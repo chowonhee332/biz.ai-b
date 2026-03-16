@@ -25,7 +25,7 @@ export default function UseCaseDetailPage() {
     }, [item]);
 
     return (
-        <div className="min-h-screen text-text-primary font-pretendard flex flex-col" style={{ backgroundColor: '#101013' }}>
+        <div className="min-h-screen text-text-primary font-pretendard flex flex-col" style={{ backgroundColor: '#0A0A0A' }}>
             <Navbar activePage="use-cases" />
 
             {/* Header */}
@@ -43,7 +43,7 @@ export default function UseCaseDetailPage() {
                         <h1 className="text-[36px] md:text-[50px] font-bold text-white leading-snug break-keep tracking-tight">
                             {detail?.title || item.타이틀}
                         </h1>
-                        <p className="text-[16px] md:text-[18px] break-keep" style={{ color: '#AFAFAF' }}>
+                        <p className="text-[17px] md:text-[18px] break-keep" style={{ color: '#CCCCCC' }}>
                             {item.설명}
                         </p>
                     </motion.div>
@@ -81,12 +81,12 @@ export default function UseCaseDetailPage() {
                                             <div className="w-0.5 h-4 rounded-full bg-brand-primary" />
                                             <span className="text-[12px] font-bold text-brand-primary/70 tracking-wider uppercase">Summary</span>
                                         </div>
-                                        <div className="text-[16px] leading-relaxed break-keep font-medium" style={{ color: '#AFAFAF' }}>
+                                        <div className="text-[17px] leading-relaxed break-keep font-medium" style={{ color: '#CCCCCC' }}>
                                             {section.content}
                                         </div>
                                     </div>
                                 ) : section.content && (
-                                    <div className="text-[16px] leading-relaxed mb-6 break-keep whitespace-pre-line font-medium" style={{ color: '#AFAFAF' }}>
+                                    <div className="text-[17px] leading-relaxed mb-6 break-keep whitespace-pre-line font-medium" style={{ color: '#CCCCCC' }}>
                                         {section.content}
                                     </div>
                                 )}
@@ -100,7 +100,7 @@ export default function UseCaseDetailPage() {
                                                 const title = hasColon ? li.slice(0, colonIdx) : null;
                                                 const desc = hasColon ? li.slice(colonIdx + 1).trimStart() : li;
                                                 return (
-                                                    <li key={idx} className="flex items-start gap-3" style={{ color: '#AFAFAF' }}>
+                                                    <li key={idx} className="flex items-start gap-3" style={{ color: '#CCCCCC' }}>
                                                         <div className="w-0.5 h-4 rounded-full bg-brand-primary/60 shrink-0 mt-1" />
                                                         <div className="text-[15px] font-medium leading-relaxed break-keep">
                                                             {hasColon && <span className="text-white font-bold">{title}: </span>}{desc}
@@ -127,7 +127,7 @@ export default function UseCaseDetailPage() {
                                                             )}
                                                             <div className="flex flex-col gap-0.5 break-keep">
                                                                 <span className="text-white text-[15px] font-bold leading-snug">{it.타이틀}</span>
-                                                                {it.설명 && <span className="text-[14px] font-medium leading-relaxed" style={{ color: '#AFAFAF' }}>{it.설명}</span>}
+                                                                {it.설명 && <span className="text-[14px] font-medium leading-relaxed" style={{ color: '#CCCCCC' }}>{it.설명}</span>}
                                                             </div>
                                                         </li>
                                                     ))}
@@ -146,7 +146,7 @@ export default function UseCaseDetailPage() {
                                                         <div className="w-0.5 h-4 rounded-full bg-brand-primary/60 shrink-0 mt-1.5" />
                                                         <div className="flex flex-col gap-0.5 break-keep">
                                                             <span className="text-white text-[16px] font-bold leading-snug">{it.타이틀}</span>
-                                                            {it.설명 && <span className="text-[14px] font-medium leading-relaxed" style={{ color: '#AFAFAF' }}>{it.설명}</span>}
+                                                            {it.설명 && <span className="text-[14px] font-medium leading-relaxed" style={{ color: '#CCCCCC' }}>{it.설명}</span>}
                                                         </div>
                                                     </li>
                                                 ))}
@@ -160,7 +160,7 @@ export default function UseCaseDetailPage() {
                                                         <span className="text-brand-primary text-[13px] font-bold shrink-0 leading-none mt-0.5">{(idx + 1).toString().padStart(2, '0')}</span>
                                                     )}
                                                     <div className={`font-bold leading-tight ${section.id === 'results' ? 'text-[17px] text-emerald-400' : 'text-[17px] text-text-primary'}`}>{it.타이틀}</div>
-                                                    <p className="text-[14px] leading-relaxed break-keep font-medium" style={{ color: '#AFAFAF' }}>{it.설명}</p>
+                                                    <p className="text-[14px] leading-relaxed break-keep font-medium" style={{ color: '#CCCCCC' }}>{it.설명}</p>
                                                 </div>
                                             ))}
                                         </div>
@@ -171,7 +171,7 @@ export default function UseCaseDetailPage() {
                                     <div className="flex flex-col gap-4 mt-4">
                                         {section.quotes.map((q: any, idx: number) => (
                                             <div key={idx} className="p-6 rounded-[20px] bg-bg-surface/50 border border-border-light flex flex-col gap-4">
-                                                <div className="text-[16px] font-medium leading-relaxed break-keep" style={{ color: '#AFAFAF' }}>
+                                                <div className="text-[17px] font-medium leading-relaxed break-keep" style={{ color: '#CCCCCC' }}>
                                                     {q.text}
                                                 </div>
                                                 <div className="text-brand-primary text-[14px] font-bold">— {q.author}</div>
@@ -182,7 +182,7 @@ export default function UseCaseDetailPage() {
 
                                 {section.footer && (
                                     <div className="mt-6 p-6 rounded-[20px] bg-brand-primary/10 border border-brand-primary/20">
-                                        <div className="text-[16px] leading-relaxed break-keep font-medium" style={{ color: '#AFAFAF' }}>
+                                        <div className="text-[17px] leading-relaxed break-keep font-medium" style={{ color: '#CCCCCC' }}>
                                             {section.footer}
                                         </div>
                                     </div>

@@ -21,7 +21,7 @@ export default function NewsPage() {
     }, []);
 
     return (
-        <div className="min-h-screen text-text-primary font-pretendard flex flex-col" style={{ backgroundColor: '#101013' }}>
+        <div className="min-h-screen text-text-primary font-pretendard flex flex-col" style={{ backgroundColor: '#0A0A0A' }}>
             <Navbar activePage="news" />
 
             <section className="pt-48 pb-32 flex-1">
@@ -33,12 +33,10 @@ export default function NewsPage() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, ease: "easeOut" }}
                         >
-                            <h1 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
-                                News
+                            <span className="text-[18px] text-[#999999] mb-3 block font-medium">News</span>
+                            <h1 className="text-[36px] lg:text-[52px] font-bold text-white mb-6 tracking-tight leading-tight">
+                                새로운 소식
                             </h1>
-                            <p className="text-text-secondary text-[18px] max-w-2xl font-medium leading-relaxed">
-                                Biz.AI가 전하는 최신 업데이트와 인사이트를 확인하세요.
-                            </p>
                         </motion.div>
 
                     </div>
@@ -46,7 +44,7 @@ export default function NewsPage() {
 
 
                 {/* 카테고리 탭 */}
-                <div className="sticky top-[72px] lg:top-[64px] backdrop-blur-sm z-40 border-b border-border-light mb-12" style={{ backgroundColor: 'rgba(16, 16, 19, 0.95)' }}>
+                <div className="sticky top-[72px] lg:top-[64px] backdrop-blur-sm z-40 border-b border-border-light mb-12" style={{ backgroundColor: 'rgba(10, 10, 10, 0.95)' }}>
                     <div className="max-w-[1280px] mx-auto container-responsive flex items-center gap-8 h-[66px]">
                         {NEWS_CATEGORIES.map((category) => (
                             <Button
@@ -83,25 +81,26 @@ export default function NewsPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.05, duration: 0.4 }}
-                                className="group flex flex-col-reverse sm:flex-row gap-8 items-center py-8 cursor-pointer"
+                                className="group flex flex-col sm:flex-row gap-8 items-center py-8 cursor-pointer border-b border-border-light last:border-0"
                             >
-                                <div className="flex-1 w-full flex flex-col">
-                                    <span className={`${getTagColor(news.태그)} text-[13px] font-bold mb-2.5`}>{news.태그}</span>
-                                    <h3 className="text-text-primary text-[22px] font-bold leading-snug mb-3 group-hover:text-text-secondary transition-colors">{news.타이틀}</h3>
-                                    <p className="text-text-secondary/70 text-[15px] leading-relaxed line-clamp-2 mb-5 font-medium">{news.설명}</p>
-                                    <div className="flex items-center text-text-dim text-[13px] font-medium">
-                                        <span>{news.언론사 || news.솔루션}</span>
-                                        <span className="mx-2 text-[4px] opacity-50">●</span>
-                                        <span>{news.날짜}</span>
-                                    </div>
-                                </div>
-
-                                <div className="w-full sm:w-[220px] shrink-0 aspect-video rounded-[16px] overflow-hidden bg-bg-surface border border-border-light">
+                                {/* 썸네일: 고정 높이 160px */}
+                                <div className="w-full sm:w-[280px] h-[160px] shrink-0 rounded-[16px] overflow-hidden bg-bg-surface border border-border-light">
                                     <img
                                         src={news.이미지}
                                         alt={news.타이틀}
                                         className="w-full h-full object-cover brightness-90 transition-all duration-700 group-hover:brightness-100 group-hover:scale-105"
                                     />
+                                </div>
+
+                                <div className="flex-1 w-full flex flex-col justify-center py-1">
+                                    <span className={`${getTagColor(news.태그)} text-[14px] font-bold mb-2`}>{news.태그}</span>
+                                    <h3 className="text-text-primary text-[22px] font-bold leading-snug mb-3 group-hover:text-text-secondary transition-colors line-clamp-2">{news.타이틀}</h3>
+                                    <p className="text-[#888888] text-[16px] leading-relaxed line-clamp-2 mb-4 font-medium">{news.설명}</p>
+                                    <div className="flex items-center text-text-dim text-[14px] font-medium">
+                                        <span>{news.언론사 || news.솔루션}</span>
+                                        <span className="mx-2 text-[4px] opacity-50">●</span>
+                                        <span>{news.날짜}</span>
+                                    </div>
                                 </div>
                             </motion.div>
                         ))}

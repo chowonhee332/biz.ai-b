@@ -27,7 +27,7 @@ export default function Navbar({ activePage }: NavbarProps) {
   ];
 
   return (
-    <nav className={`fixed w-full z-50 backdrop-blur-md py-4 transition-all duration-300 ${scrolled ? 'border-b border-border-light shadow-lg' : 'border-b border-transparent'}`} style={{ backgroundColor: 'rgba(16, 16, 19, 0.95)' }}>
+    <nav className={`fixed w-full z-50 backdrop-blur-md py-4 transition-all duration-300 ${scrolled ? 'border-b border-border-light shadow-lg' : 'border-b border-transparent'}`} style={{ backgroundColor: 'rgba(10, 10, 10, 0.95)' }}>
       <div className="max-w-[1280px] mx-auto container-responsive flex items-center">
         {/* Logo - Always visible */}
         <Link to="/" className="flex items-center gap-2 shrink-0" onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
@@ -87,7 +87,7 @@ export default function Navbar({ activePage }: NavbarProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden absolute top-full left-0 right-0 border-b border-border-light px-6 py-6 overflow-hidden" style={{ backgroundColor: '#101013' }}
+            className="lg:hidden absolute top-full left-0 right-0 border-b border-border-light px-6 py-6 overflow-hidden" style={{ backgroundColor: '#0A0A0A' }}
           >
             <div className="flex flex-col gap-5">
               {navLinks.map((link) => (

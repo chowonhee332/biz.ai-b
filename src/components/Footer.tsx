@@ -19,25 +19,25 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-border-light py-10 container-responsive relative" style={{ backgroundColor: '#101013' }}>
+    <footer className="border-t border-border-light py-10 container-responsive relative" style={{ backgroundColor: '#0A0A0A' }}>
       <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row md:items-start md:justify-between gap-6">
         {/* 좌측: 로고 + 주소 */}
         <div className="flex flex-col gap-3">
           <span className="text-[22px] font-black text-text-primary tracking-tight">kt ds</span>
-          <p className="text-text-dim text-[13px] font-medium">
+          <p className="text-[#CCCCCC] text-[13px] font-medium">
             (06707) 서울 서초구 효령로 176, 02-523-7029
           </p>
         </div>
 
         {/* 우측: 링크 + 카피라이트 */}
         <div className="flex flex-col items-start md:items-end gap-3">
-          <div className="flex items-center gap-6 text-text-secondary/60 text-[13px] font-medium">
+          <div className="flex items-center gap-6 text-[#CCCCCC] text-[13px] font-medium">
             <a href="#" className="hover:text-text-primary transition-colors">사이트맵</a>
             <a href="#" className="hover:text-text-primary transition-colors">공지사항</a>
             <a href="#" className="hover:text-text-primary transition-colors">개인정보처리방침</a>
             <a href="#" className="hover:text-text-primary transition-colors">이용약관</a>
           </div>
-          <p className="text-text-dim text-[12px]">© 2026 AI Biz Portal. All rights reserved.</p>
+          <p className="text-[#CCCCCC] text-[12px]">© 2026 AI Biz Portal. All rights reserved.</p>
         </div>
       </div>
 

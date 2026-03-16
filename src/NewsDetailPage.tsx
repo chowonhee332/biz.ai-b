@@ -26,7 +26,7 @@ export default function NewsDetailPage() {
     }, []);
 
     return (
-        <div className="min-h-screen text-text-primary font-pretendard flex flex-col" style={{ backgroundColor: '#101013' }}>
+        <div className="min-h-screen text-text-primary font-pretendard flex flex-col" style={{ backgroundColor: '#0A0A0A' }}>
             <Navbar activePage="news" />
 
             {/* Header */}
@@ -83,11 +83,11 @@ export default function NewsDetailPage() {
             <main className="max-w-[1280px] mx-auto container-responsive pb-32 flex-1 flex flex-col items-center">
                 <article className="max-w-[800px] w-full">
                     {news.내용 ? (
-                        <p className="text-[16px] leading-[1.9] font-medium whitespace-pre-wrap break-keep mb-8" style={{ color: '#AFAFAF' }}>
+                        <p className="text-[17px] leading-[1.9] font-medium whitespace-pre-wrap break-keep mb-8" style={{ color: '#CCCCCC' }}>
                             {news.내용}
                         </p>
                     ) : (
-                        <p className="text-white/30 text-[16px] font-medium italic">상세 내용이 준비 중입니다.</p>
+                        <p className="text-white/30 text-[17px] font-medium italic">상세 내용이 준비 중입니다.</p>
                     )}
                 </article>
 

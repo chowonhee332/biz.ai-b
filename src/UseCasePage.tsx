@@ -16,7 +16,7 @@ export default function UseCasePage() {
     }, []);
 
     return (
-        <div className="min-h-screen text-text-primary font-pretendard flex flex-col" style={{ backgroundColor: '#101013' }}>
+        <div className="min-h-screen text-text-primary font-pretendard flex flex-col" style={{ backgroundColor: '#0A0A0A' }}>
             {/* GNB */}
             <Navbar activePage="use-cases" />
 
@@ -29,17 +29,15 @@ export default function UseCasePage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                     >
-                        <h1 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
-                            Use Cases
+                        <span className="text-[18px] text-[#999999] mb-3 block font-medium">Use Cases</span>
+                        <h1 className="text-[36px] lg:text-[52px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
+                            고객 사례
                         </h1>
-                        <p className="text-text-secondary text-[18px] max-w-2xl font-medium leading-relaxed">
-                            다양한 산업 분야에서 Biz.AI를 통해 실현된 혁신 사례를 소개합니다.
-                        </p>
                     </motion.div>
                 </div>
 
                 {/* 카테고리 탭 - Sticky 적용 (풀 너비 라인) */}
-                <div className="sticky top-[72px] lg:top-[64px] backdrop-blur-sm z-40 border-b border-border-light mb-12" style={{ backgroundColor: 'rgba(16, 16, 19, 0.95)' }}>
+                <div className="sticky top-[72px] lg:top-[64px] backdrop-blur-sm z-40 border-b border-border-light mb-12" style={{ backgroundColor: 'rgba(10, 10, 10, 0.95)' }}>
                     <div className="max-w-[1280px] mx-auto container-responsive flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap">
                         {USE_CASE_CATEGORIES.map((category) => (
                             <Button
@@ -89,16 +87,16 @@ export default function UseCasePage() {
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                                     </div>
                                     <div className="pt-2 px-1 flex flex-col gap-2.5">
-                                        <span className={`text-[13px] font-bold ${USE_CASE_CATEGORY_COLORS[item.카테고리]?.text || 'text-brand-primary'}`}>
+                                        <span className={`text-[14px] font-bold ${USE_CASE_CATEGORY_COLORS[item.카테고리]?.text || 'text-brand-primary'}`}>
                                             {item.카테고리}
                                         </span>
                                         <h3 className="text-text-primary text-[19px] font-bold leading-snug whitespace-pre-line">
                                             {item.상세내용?.title || item.타이틀}
                                         </h3>
-                                        <p className="text-text-secondary/70 text-[14px] leading-relaxed line-clamp-2 font-medium">
+                                        <p className="text-[#888888] text-[16px] leading-relaxed line-clamp-2 font-medium">
                                             {item.상세내용?.header || item.설명}
                                         </p>
-                                        <span className="text-text-dim text-[13px] font-medium mt-0.5">
+                                        <span className="text-text-dim text-[14px] font-medium mt-0.5">
                                             #{item.태그}
                                         </span>
                                     </div>

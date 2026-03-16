@@ -34,7 +34,7 @@ export default function AiServicePage() {
 
 
     return (
-        <div className="min-h-screen text-text-primary font-pretendard flex flex-col" style={{ backgroundColor: '#101013' }}>
+        <div className="min-h-screen text-text-primary font-pretendard flex flex-col" style={{ backgroundColor: '#0A0A0A' }}>
             <Navbar activePage="platform" />
 
             <section className="pt-48 pb-32 flex-1">
@@ -45,17 +45,15 @@ export default function AiServicePage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <h1 className="text-[36px] lg:text-[58px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
-                            {heroText.title}
+                        <span className="text-[18px] text-[#999999] mb-3 block font-medium">AI Products/Service</span>
+                        <h1 className="text-[36px] lg:text-[52px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
+                            AI 제품 / 서비스
                         </h1>
-                        <p className="text-text-secondary text-[16px] max-w-2xl font-medium leading-relaxed">
-                            {heroText.description}
-                        </p>
                     </motion.div>
                 </div>
 
                 {/* 모바일 탭 */}
-                <div className="lg:hidden sticky top-[72px] backdrop-blur-sm z-40 border-b border-border-light mb-12" style={{ backgroundColor: 'rgba(16, 16, 19, 0.95)' }}>
+                <div className="lg:hidden sticky top-[72px] backdrop-blur-sm z-40 border-b border-border-light mb-12" style={{ backgroundColor: 'rgba(10, 10, 10, 0.95)' }}>
                     <div className="max-w-[1280px] mx-auto container-responsive flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap">
                         {sidebarItems.map((item) => (
                             <Button
@@ -111,7 +109,7 @@ export default function AiServicePage() {
                                     <div id="section-overview" className="mb-10 scroll-mt-32">
                                         <div className="max-w-[75%]">
                                             <h2 className="text-[32px] font-bold text-white mb-4 break-keep">{currentContent.타이틀}</h2>
-                                            <div className="text-[16px] leading-relaxed break-keep font-medium" style={{ color: '#AFAFAF' }}>
+                                            <div className="text-[16px] leading-relaxed break-keep font-medium" style={{ color: '#CCCCCC' }}>
                                                 <p>{currentContent.설명}</p>
                                             </div>
                                         </div>
@@ -244,7 +242,7 @@ export default function AiServicePage() {
                                                         <h4 className="text-[18px] font-bold text-text-primary leading-tight">
                                                             {item.타이틀.replace(/^\d+\.\s*/, '')}
                                                         </h4>
-                                                        <p className="text-text-secondary/70 text-[14px] leading-[1.6] break-keep font-medium">
+                                                        <p className="text-[#CCCCCC] text-[14px] leading-[1.6] break-keep font-medium">
                                                             {item.설명}
                                                         </p>
                                                     </div>
@@ -266,7 +264,7 @@ export default function AiServicePage() {
                                                             <>
                                                                 <h4 className="text-[18px] font-bold text-text-primary leading-tight">{item.타이틀}</h4>
                                                                 {item.설명 && (
-                                                                    <div className="text-[14px] leading-relaxed" style={{ color: '#AFAFAF' }}>{item.설명}</div>
+                                                                    <div className="text-[14px] leading-relaxed" style={{ color: '#CCCCCC' }}>{item.설명}</div>
                                                                 )}
                                                                 <div className="flex flex-col gap-3">
                                                                     {item.항목.filter(h => h.중타이틀 || h.설명).map((h, hi) => {
@@ -282,7 +280,7 @@ export default function AiServicePage() {
                                                                                     <div className={`w-0.5 h-3.5 rounded-full shrink-0 ${barColor}`} />
                                                                                     {h.중타이틀}
                                                                                 </div>
-                                                                                <div className={`text-[14px] leading-relaxed pl-3.5 border-l ml-0.5 ${borderColor}`} style={{ color: '#AFAFAF' }}>
+                                                                                <div className={`text-[14px] leading-relaxed pl-3.5 border-l ml-0.5 ${borderColor}`} style={{ color: '#CCCCCC' }}>
                                                                                     {h.설명}
                                                                                 </div>
                                                                             </div>
@@ -297,7 +295,7 @@ export default function AiServicePage() {
                                                                     <h4 className="text-[18px] font-bold text-text-primary leading-tight">{item.타이틀}</h4>
                                                                 </div>
                                                                 {item.설명 && (
-                                                                    <div className="text-[14px] leading-relaxed pl-4" style={{ color: '#AFAFAF' }}>
+                                                                    <div className="text-[14px] leading-relaxed pl-4" style={{ color: '#CCCCCC' }}>
                                                                         {item.설명}
                                                                     </div>
                                                                 )}
@@ -371,7 +369,7 @@ export default function AiServicePage() {
 
                                                             {/* 담당자 코멘트 */}
                                                             {item.담당자코멘트 && (
-                                                                <div className="text-[14px] italic leading-relaxed" style={{ color: '#AFAFAF' }}>
+                                                                <div className="text-[14px] italic leading-relaxed" style={{ color: '#CCCCCC' }}>
                                                                     "{item.담당자코멘트}"
                                                                 </div>
                                                             )}
