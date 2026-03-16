@@ -31,15 +31,12 @@ import {
   ChevronLeft,
   ChevronDown,
   ArrowUp,
-  ArrowRight,
   Code,
-  Box,
   Cpu,
   Layers,
   BookOpen,
   Monitor,
   Utensils,
-  Sparkles,
   Youtube,
   Linkedin,
   Mail,
@@ -47,7 +44,6 @@ import {
   Info,
   Menu,
   X,
-  ExternalLink,
 } from 'lucide-react';
 
 // Sub-components (Moved to top for hoisting/scoping clarity)
@@ -139,7 +135,7 @@ const CharacterReveal = ({ text, className, scrollProgress, range, highlightInde
         // Blue highlight from the specified highlightIndex to the end.
         // If no index is provided, only the last line is highlighted.
         const isHighlight = lineIdx >= (highlightIndex ?? lines.length - 1);
-        const colorClass = isHighlight ? "text-brand-primary" : "text-text-primary";
+        const colorClass = isHighlight ? "bg-gradient-to-r from-white to-brand-primary bg-clip-text text-transparent" : "text-text-primary";
 
         return (
           <div
@@ -401,18 +397,12 @@ const DomainAccordionItem = ({
       layout
       onMouseEnter={onMouseEnter}
       onClick={onClick}
-      className="relative overflow-hidden cursor-pointer rounded-2xl smooth-gpu w-full lg:w-auto"
+      className="relative overflow-hidden cursor-pointer rounded-2xl smooth-gpu w-full lg:w-auto h-[380px] lg:h-auto"
       style={{ willChange: 'flex, width' }}
-      animate={{
-        flex: forceExpanded ? 300 : isActive ? (window.innerWidth < 1024 ? 300 : 780) : (window.innerWidth < 1024 ? 100 : 122),
-        minHeight: forceExpanded ? 160 : undefined,
-      }}
-      transition={{
-        type: 'spring',
-        stiffness: 80,
-        damping: 22,
-        mass: 1,
-      }}
+      {...(!forceExpanded && {
+        animate: { flex: isActive ? 780 : 122 },
+        transition: { type: 'spring', stiffness: 80, damping: 22, mass: 1 },
+      })}
     >
       <div className="absolute inset-0">
         <motion.img
@@ -429,13 +419,13 @@ const DomainAccordionItem = ({
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/70" />
       </div>
 
-      <div className={`absolute inset-x-0 top-0 p-6 md:p-8 flex flex-col justify-start h-full ${expanded ? 'items-start text-left' : 'items-center'}`}>
-        <p className="text-white/60 font-medium text-[14px] tracking-wide mb-3 whitespace-nowrap uppercase">
+      <div className={`absolute inset-x-0 top-0 p-5 lg:p-8 flex flex-col justify-start h-full ${expanded ? 'items-start text-left' : 'items-center'}`}>
+        <p className="text-white/60 font-medium text-[16px] tracking-wide mb-3 whitespace-nowrap uppercase">
           {title}
         </p>
 
         <AnimatePresence>
-          {expanded && (
+          {(expanded || window.innerWidth < 1024) && (
             <motion.div
               key="agents"
               variants={agentListVariants}
@@ -567,128 +557,6 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
   );
 };
 
-const StudioSection = () => {
-  return (
-    <section id="studio-v2" className="py-16 md:py-32 px-6 relative overflow-hidden" style={{ backgroundColor: '#0A0A0A' }}>
-      {/* Background ambient light */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-primary/5 rounded-full blur-[120px] pointer-events-none" />
-      
-      <div className="max-w-[1280px] mx-auto relative z-10">
-        <motion.div
-           initial={{ opacity: 0, y: 30 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           transition={{ duration: 0.8 }}
-           className="mb-12 md:mb-16"
-        >
-          <span className="text-[18px] text-[#999999] mb-3 block font-medium tracking-tight">AI Agent Studio</span>
-          <h2 className="text-[26px] md:text-[36px] lg:text-[52px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-4 md:mb-6 tracking-tight leading-tight">
-            혁신을 위한 AI 개발 허브
-          </h2>
-        </motion.div>
-
-        {/* 메인 배너 카드 */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative h-[400px] md:h-[500px] w-full rounded-[32px] overflow-hidden group mb-8 border border-white/5 shadow-2xl shadow-black/50"
-        >
-          {/* EtheralShadow 배경 */}
-          <div className="absolute inset-0 z-0 scale-110">
-            <EtheralShadow
-              color="rgba(10, 80, 255, 0.4)"
-              animation={{ scale: 80, speed: 40 }}
-              noise={{ opacity: 0.2, scale: 1.5 }}
-              sizing="fill"
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#000000] via-[#000000]/60 to-transparent z-[1]" />
-
-          <div className="relative z-10 px-8 md:px-20 h-full flex flex-col justify-center max-w-3xl font-pretendard">
-            <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full bg-white/10 border border-white/10 backdrop-blur-md w-fit">
-              <Sparkles size={16} className="text-brand-secondary" />
-              <span className="text-white/90 text-[14px] font-semibold">Limited Access</span>
-            </div>
-            <h3 className="text-[32px] md:text-[56px] font-bold text-white mb-4 md:mb-6 tracking-tight leading-[1.1]">
-              AI Agent <br className="hidden md:block" />
-              Studio v2.0
-            </h3>
-            <p className="text-white/70 text-[15px] md:text-[20px] leading-relaxed break-keep font-medium mb-8 md:mb-10 max-w-xl">
-              필요한 Agent, Tool, MCP를 빠르게 확인하고 시작하세요.
-              쉽게 개발 가능한 AI 아키텍처와 Delivery 가이드를 제공합니다.
-            </p>
-
-            <Button
-              variant="premium"
-              rounded="xl"
-              size="cta"
-              className="w-[160px] relative group overflow-hidden"
-            >
-              <span className="relative z-10 font-bold tracking-tight">Studio 체험하기</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
-            </Button>
-          </div>
-
-          {/* Decorative element */}
-          <div className="absolute right-[-10%] top-[-10%] w-[50%] h-[120%] bg-brand-primary/20 blur-[100px] rounded-full opacity-50 pointer-events-none" />
-        </motion.div>
-
-        {/* 하단 4개 기능 카드 - Glassmorphism 스타일 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            {
-              title: "Agent 개발",
-              desc: "AI Agent 개발을 위한 통합 개발 환경과 도구를 제공합니다.",
-              icon: <Code className="text-brand-secondary" strokeWidth={2} size={28} />
-            },
-            {
-              title: "Core Agent",
-              desc: "사전 개발된 Core Agent를 활용하여 빠른 프로토타이핑이 가능합니다.",
-              icon: <Cpu className="text-brand-secondary" strokeWidth={2} size={28} />
-            },
-            {
-              title: "Use Case 패키징",
-              desc: "Use case 단위로 패키징된 솔루션을 통해 즉시 배포할 수 있습니다.",
-              icon: <Layers className="text-brand-secondary" strokeWidth={2} size={28} />
-            },
-            {
-              title: "Delivery 가이드",
-              desc: "AI 아키텍처 소개 및 배포 가이드를 통해 안정적인 운영을 지원합니다.",
-              icon: <BookOpen className="text-brand-secondary" strokeWidth={2} size={28} />
-            }
-          ].map((card, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
-              className="group relative p-8 rounded-[24px] bg-white/5 border border-white/5 backdrop-blur-xl hover:bg-white/10 hover:border-white/10 transition-all duration-500 overflow-hidden flex flex-col h-full"
-            >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-brand-secondary/5 blur-2xl rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-brand-secondary/10 transition-colors" />
-              
-              <div className="mb-6 p-3 rounded-2xl bg-white/5 border border-white/10 w-fit group-hover:scale-110 transition-transform duration-500">
-                {card.icon}
-              </div>
-              <h4 className="text-[20px] font-bold text-white mb-3 tracking-tight">{card.title}</h4>
-              <p className="text-white/50 text-[14px] leading-relaxed break-keep font-medium group-hover:text-white/70 transition-colors">
-                {card.desc}
-              </p>
-              
-              <div className="mt-auto pt-6 flex items-center gap-2 text-brand-secondary text-[14px] font-bold opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
-                <span>자세히 보기</span>
-                <ArrowRight size={14} />
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDomain, setActiveDomain] = useState<number>(0);
@@ -808,7 +676,7 @@ const App = () => {
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
-              className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 md:top-1/2 md:bottom-auto md:-translate-y-1/2 lg:left-[55%] lg:translate-x-0 w-[420px] md:w-[600px] lg:w-[720px] z-0 lg:z-10 pointer-events-none opacity-50 md:opacity-40 lg:opacity-90"
+              className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 md:top-1/2 md:bottom-auto md:-translate-y-1/2 lg:left-[55%] lg:translate-x-0 w-[420px] md:w-[600px] lg:w-[780px] z-0 lg:z-10 pointer-events-none opacity-50 md:opacity-40 lg:opacity-90"
             >
               <motion.div
                 className="relative"
@@ -980,7 +848,7 @@ const App = () => {
               <h2 className="text-[26px] md:text-[36px] lg:text-[52px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-4 md:mb-6 tracking-tight">도메인별 멀티 에이전트</h2>
             </motion.div>
 
-            <div className="flex flex-col lg:flex-row gap-1 md:gap-2 w-full h-[800px] md:h-[900px] lg:h-[700px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row gap-4 w-full lg:h-[700px]">
               <DomainAccordionItem
                 title="금융"
                 agents={['Audit Agent', 'SQL Agent', 'RFP Agent']}
@@ -1177,7 +1045,7 @@ const App = () => {
                                 <span className="font-bold">{item.titlePrefix}</span>{" "}
                                 <span className="font-normal">{item.titleSuffix}</span>
                               </h3>
-                              <p className="text-[16px] text-[#CCCCCC] leading-relaxed max-w-lg mb-5 font-normal">
+                              <p className="text-[16px] text-[#6B7280] leading-relaxed max-w-lg mb-5 font-normal">
                                 {item.desc}
                               </p>
                               {item.tags && (
@@ -1567,7 +1435,79 @@ const App = () => {
 
 
         {/* AI Agent 스튜디오 섹션 */}
-        <StudioSection />
+        {/* AI Agent 스튜디오 섹션 */}
+        <section id="studio-v2" className="py-16 md:py-32 px-6 relative overflow-hidden" style={{ backgroundColor: '#0A0A0A' }}>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-primary/5 rounded-full blur-[120px] pointer-events-none" />
+          <div className="max-w-[1200px] mx-auto relative z-10">
+            {/* 메인 배너 카드 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative h-[400px] w-full rounded-[32px] overflow-hidden group mb-8 border border-white/5 shadow-2xl shadow-black/50"
+            >
+              <div className="absolute inset-0 z-0 scale-110">
+                <EtheralShadow
+                  color="rgba(148, 163, 184, 0.5)"
+                  animation={{ scale: 80, speed: 40 }}
+                  noise={{ opacity: 0.2, scale: 1.5 }}
+                  sizing="fill"
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#000000] via-[#000000]/60 to-transparent z-[1]" />
+              <div className="relative z-10 px-8 md:px-20 h-full flex flex-col justify-center max-w-3xl font-pretendard">
+                <h3 className="text-[32px] md:text-[56px] font-bold text-white mb-4 md:mb-6 tracking-tight leading-[1.1]">
+                  AI Agent Studio
+                </h3>
+                <p className="text-white/70 text-[16px] leading-relaxed break-keep font-medium mb-8 md:mb-10 max-w-xl">
+                  필요한 Agent, Tool, MCP를 빠르게 확인하고 시작하세요.<br />
+                  쉽게 개발 가능한 AI 아키텍처와 Delivery 가이드를 제공합니다.
+                </p>
+                <a
+                  href="https://studio.abclab.ktds.com/auth/login"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/btn inline-flex items-center justify-center gap-0 py-3 rounded-lg border border-border-light text-white font-bold text-[15px] w-[120px] hover:border-text-primary/25 transition-all duration-300 overflow-hidden"
+                >
+                  <span className="translate-x-0 group-hover/btn:-translate-x-1 transition-transform duration-300">체험하기</span>
+                  <span className="w-0 opacity-0 group-hover/btn:w-5 group-hover/btn:opacity-100 transition-all duration-300 flex items-center justify-end overflow-hidden">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-300">
+                      <path d="M7 17L17 7M17 7H7M17 7V17" />
+                    </svg>
+                  </span>
+                </a>
+              </div>
+              <div className="absolute right-[-10%] top-[-10%] w-[50%] h-[120%] bg-brand-primary/20 blur-[100px] rounded-full opacity-50 pointer-events-none" />
+            </motion.div>
+
+            {/* 하단 4개 기능 카드 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                { title: "Agent 개발", desc: "AI Agent 개발을 위한 통합 개발 환경과 도구를 제공합니다.", icon: <Code className="text-white" strokeWidth={2} size={28} /> },
+                { title: "Core Agent", desc: "사전 개발된 Core Agent를 활용하여 빠른 프로토타이핑이 가능합니다.", icon: <Cpu className="text-white" strokeWidth={2} size={28} /> },
+                { title: "Use Case 패키징", desc: "Use case 단위로 패키징된 솔루션을 통해 즉시 배포할 수 있습니다.", icon: <Layers className="text-white" strokeWidth={2} size={28} /> },
+                { title: "Delivery 가이드", desc: "AI 아키텍처 소개 및 배포 가이드를 통해 안정적인 운영을 지원합니다.", icon: <BookOpen className="text-white" strokeWidth={2} size={28} /> },
+              ].map((card, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
+                  className="group relative p-8 rounded-[24px] border border-white/5 hover:border-white/10 transition-all duration-500 overflow-hidden flex flex-col h-full"
+                >
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-brand-secondary/5 blur-2xl rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-brand-secondary/10 transition-colors" />
+                  <div className="mb-6 group-hover:scale-110 transition-all duration-500 w-fit">
+                    {card.icon}
+                  </div>
+                  <h4 className="text-[20px] font-bold text-white mb-3 tracking-tight">{card.title}</h4>
+                  <p className="text-white/50 text-[14px] leading-relaxed break-keep font-medium group-hover:text-white/70 transition-colors">{card.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* CTA 배너 - Full Width (Premium Aurora Style) 복구 */}
         <div className="w-full py-0">
