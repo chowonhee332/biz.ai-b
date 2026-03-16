@@ -16,7 +16,7 @@ import Navbar from './components/Navbar';
 import Aurora from './components/Aurora';
 import Antigravity from './components/Antigravity';
 import { BackgroundGradientAnimation } from './components/ui/background-gradient-animation';
-import { Component as EtheralShadow } from './components/ui/etheral-shadow';
+import Silk from './components/Silk';
 import { Link, useNavigate } from 'react-router-dom';
 import { USE_CASE_HIGHLIGHTS } from './context/use-cases/use-case-highlights';
 import {
@@ -85,20 +85,20 @@ const AnimatedCounter = ({ from, to }: { from: number; to: number }) => {
 const SolutionCard = ({ number, image, title, desc, highlight, isLarge }: { number: string; image: string; title: string; desc: string; highlight: string; isLarge?: boolean }) => (
   <div className="bg-white rounded-[20px] p-6 md:p-10 flex flex-col w-full min-w-[280px] h-[340px] md:h-[424px] group cursor-pointer shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_48px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-2 font-pretendard relative overflow-hidden">
     {/* Index Number */}
-    <div className="text-black text-[16px] md:text-[20px] font-bold leading-none mb-2 md:mb-3">{number}</div>
+    <div className="text-black text-body-sm md:text-body-md font-bold leading-none mb-2 md:mb-3">{number}</div>
 
     {/* Title & Description Group */}
     <div className="flex flex-col gap-2 md:gap-4 mb-4 md:mb-6">
-      <h4 className="text-black text-[24px] md:text-[32px] font-bold tracking-tight leading-tight">{title}</h4>
+      <h4 className="text-black text-body-xl md:text-heading-md font-bold tracking-tight leading-tight">{title}</h4>
       <div className="min-h-[40px] md:min-h-[48px]">
-        <p className="text-[#CCCCCC] text-[13px] md:text-[16px] leading-snug font-normal break-keep whitespace-pre-line">
+        <p className="text-[#666666] text-label-md md:text-body-sm leading-snug font-normal break-keep whitespace-pre-line">
           {desc}
         </p>
       </div>
     </div>
 
     {/* Highlight Tag */}
-    <div className="text-brand-primary font-medium text-[13px] md:text-[16px] tracking-tight">
+    <div className="text-brand-primary font-medium text-label-md md:text-body-sm tracking-tight">
       {highlight.startsWith('#') ? highlight : `# ${highlight}`}
     </div>
 
@@ -146,7 +146,7 @@ const CharacterReveal = ({ text, className, scrollProgress, range, highlightInde
         return (
           <div
             key={lineIdx}
-            className={`flex flex-wrap text-[32px] md:text-[40px] font-bold tracking-tight leading-[1.3] ${colorClass}`}
+            className={`flex flex-wrap text-heading-md md:text-heading-xl font-bold tracking-tight leading-[1.3] ${colorClass}`}
           >
             {line.split('').map((char, charIdx) => {
               const charStart = range[0] + (charCounter / totalChars) * (range[1] - range[0]);
@@ -246,7 +246,7 @@ const InteractiveMockup = ({ image, frameImage, initialMouseX = -0.75, cursorCol
           </svg>
           {/* 이름표 */}
           <div
-            className="ml-6 -mt-1 px-3 py-1 text-text-primary text-[12px] font-bold rounded-lg shadow-lg border border-border-light whitespace-nowrap"
+            className="ml-6 -mt-1 px-3 py-1 text-text-primary text-label-sm font-bold rounded-lg shadow-lg border border-border-light whitespace-nowrap"
             style={{ backgroundColor: cursorColor }}
           >
             {cursorName}
@@ -426,7 +426,7 @@ const DomainAccordionItem = ({
       </div>
 
       <div className={`absolute inset-x-0 top-0 p-5 lg:p-8 flex flex-col justify-start h-full ${expanded ? 'items-start text-left' : 'items-center'}`}>
-        <p className="text-white/60 font-medium text-[16px] tracking-wide mb-3 whitespace-nowrap uppercase">
+        <p className="text-white/60 font-medium text-body-sm tracking-wide mb-3 whitespace-nowrap uppercase">
           {title}
         </p>
 
@@ -442,7 +442,7 @@ const DomainAccordionItem = ({
             >
               {agents.map((agent, i) => (
                 <motion.div key={i} variants={agentItemVariants}>
-                  <span className="text-white text-[20px] md:text-[22px] lg:text-[26px] font-bold leading-tight">{agent}</span>
+                  <span className="text-white text-body-md md:text-body-lg lg:text-heading-xs font-bold leading-tight">{agent}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -483,11 +483,11 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
         <section id="process" className="py-16 md:py-32 relative overflow-hidden px-6">
           <div className="max-w-[1200px] mx-auto relative z-10">
             <div className="text-center mb-12 md:mb-24 container-responsive">
-              <span className="text-[18px] text-[#999999] mb-3 block font-medium">Why kt ds</span>
-              <h2 className="text-[26px] md:text-[36px] lg:text-[52px] font-bold text-black mb-4 md:mb-6 tracking-tight leading-tight">
+              <span className="text-body text-[#999999] mb-3 block font-medium">Why kt ds</span>
+              <h2 className="text-heading-xs md:text-heading-lg lg:text-display-md font-bold text-black mb-4 md:mb-6 tracking-tight leading-tight">
                 왜 kt ds와 함께 해야 할까요?
               </h2>
-              <p className="text-black/80 text-[13px] md:text-[16px] lg:text-[18px] max-w-2xl mx-auto font-medium">
+              <p className="text-black/80 text-label-md md:text-body-sm lg:text-body max-w-2xl mx-auto font-medium">
                 기업의 복잡한 요구사항을 기획부터 구축, 검증, 운영까지<br className="hidden md:block" />
                 표준화된 프로세스로 완성합니다.
               </p>
@@ -538,15 +538,15 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
                 >
                   <div className="absolute inset-0 bg-gradient-to-b from-black/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[20px] pointer-events-none" />
                   <div className="relative min-h-[100px] md:min-h-[130px]">
-                    <span className={`${step.color} text-[16px] md:text-[20px] font-bold mb-2 block`}>{step.num}</span>
-                    <h3 className="text-[24px] md:text-[32px] font-bold text-gray-900 leading-tight whitespace-pre-line">{step.subtitle}</h3>
+                    <span className={`${step.color} text-body-sm md:text-body-md font-bold mb-2 block`}>{step.num}</span>
+                    <h3 className="text-body-xl md:text-heading-md font-bold text-gray-900 leading-tight whitespace-pre-line">{step.subtitle}</h3>
                   </div>
                   <div className="relative flex-1" />
                   <div className="relative min-h-[160px]">
-                    <h4 className="text-[16px] font-semibold text-gray-900 mb-3">{step.title}</h4>
+                    <h4 className="text-body-sm font-semibold text-gray-900 mb-3">{step.title}</h4>
                     <ul className="space-y-2">
                       {step.bullets.map((bullet, j) => (
-                        <li key={j} className="flex items-start gap-2 text-black/80 text-[14px] leading-relaxed font-normal">
+                        <li key={j} className="flex items-start gap-2 text-black/80 text-label-lg leading-relaxed font-normal">
                           <span className="mt-[9px] w-1 h-1 rounded-full bg-black/25 shrink-0" />
                           <span>{bullet}</span>
                         </li>
@@ -592,15 +592,23 @@ const App = () => {
 
   // Re-balanced active ranges for 500vh scroll length and longer persistence
   useMotionValueEvent(sectionProgress, "change", (latest) => {
-    if (latest < 0.33) setActiveUseCase(0);
-    else if (latest < 0.66) setActiveUseCase(1);
+    if (latest < 0.333) setActiveUseCase(0);
+    else if (latest < 0.667) setActiveUseCase(1);
     else setActiveUseCase(2);
   });
 
-  // 배경색: 진입은 부드럽게, 퇴장은 snap
+  // GNB 라인: 페인포인트 시작 → 솔루션 종료까지 0→1 채워짐, 3사이클 (각 아이템 1/3 균등)
+  // Item0: 0.0→0.280, Item1: 0.333→0.614, Item2: 0.667→0.947
+  const navLineScaleX = useTransform(
+    sectionProgress,
+    [0.0, 0.280, 0.3239, 0.3241, 0.333, 0.614, 0.6579, 0.6581, 0.667, 0.947, 0.9909, 0.9911, 1.0],
+    [0,   1,     1,      0,      0,     1,     1,       0,      0,     1,     1,      0,       0  ]
+  );
+
+  // 배경색: 진입은 부드럽게, 퇴장은 snap (각 아이템 1/3 균등: pain 0→0.167, sol 0.167→0.333)
   const useCaseBgColor = useTransform(
     sectionProgress,
-    [0, 0.18, 0.22, 0.32, 0.321, 0.51, 0.55, 0.65, 0.651, 0.84, 0.88, 0.99, 0.991, 1.0],
+    [0, 0.167, 0.200, 0.324, 0.3241, 0.500, 0.533, 0.658, 0.6581, 0.834, 0.867, 0.991, 0.9911, 1.0],
     ['#0A0A0A', '#0A0A0A', '#F4F5FE', '#F4F5FE', '#0A0A0A', '#0A0A0A', '#F4F5FE', '#F4F5FE', '#0A0A0A', '#0A0A0A', '#F4F5FE', '#F4F5FE', '#0A0A0A', '#0A0A0A']
   );
 
@@ -666,7 +674,7 @@ const App = () => {
   return (
     <div className="min-h-screen text-text-primary font-sans" style={{ backgroundColor: '#0A0A0A' }}>
       {/* GNB - Global Navigation Bar */}
-      <Navbar activePage="home" />
+      <Navbar activePage="home" scrollLineProgress={navLineScaleX} />
 
       {/* Hero Section */}
       <section id="hero" className="relative z-20 h-screen flex items-center justify-center overflow-clip bg-[#000000] font-poppins">
@@ -737,8 +745,8 @@ const App = () => {
                   transition={{ duration: 0.8, ease: "easeOut" }}
                   className="text-center mb-10 md:mb-20 font-pretendard flex flex-col items-center relative z-10"
                 >
-                  <span className="text-[18px] text-[#999999] mb-3 block font-medium">AI Solutions</span>
-                  <h2 className="text-[26px] md:text-[36px] lg:text-[52px] font-bold text-black mb-4 md:mb-6 tracking-tight leading-tight">
+                  <span className="text-body text-[#999999] mb-3 block font-medium">AI Solutions</span>
+                  <h2 className="text-heading-xs md:text-heading-lg lg:text-display-md font-bold text-black mb-4 md:mb-6 tracking-tight leading-tight">
                     AI 솔루션
                   </h2>
                 </motion.div>
@@ -753,7 +761,7 @@ const App = () => {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="flex items-center gap-2 mb-5 ml-4"
                   >
-                    <span className="text-[18px] font-normal text-gray-800">전사 공통 (General Business)</span>
+                    <span className="text-body font-normal text-gray-800">전사 공통 (General Business)</span>
                   </motion.div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                     {[
@@ -799,7 +807,7 @@ const App = () => {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="flex items-center gap-2 mb-5 ml-4"
                   >
-                    <span className="text-[18px] font-normal text-gray-800">IT 서비스/개발 직군 (IT Service & Dev)</span>
+                    <span className="text-body font-normal text-gray-800">IT 서비스/개발 직군 (IT Service & Dev)</span>
                   </motion.div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                     {[
@@ -850,11 +858,11 @@ const App = () => {
               transition={{ duration: 0.8 }}
               className="text-left mb-12 md:mb-16 font-pretendard"
             >
-              <span className="text-[18px] text-[#999999] mb-3 block font-medium tracking-tight">Multi Agent</span>
-              <h2 className="text-[26px] md:text-[36px] lg:text-[52px] font-bold text-white mb-4 md:mb-6 tracking-tight">도메인별 멀티 에이전트</h2>
+              <span className="text-body text-[#999999] mb-3 block font-medium tracking-tight">Multi Agent</span>
+              <h2 className="text-heading-xs md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight">도메인별 멀티 에이전트</h2>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row gap-4 w-full lg:h-[700px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row gap-2 w-full lg:h-[700px]">
               <DomainAccordionItem
                 title="금융"
                 agents={['Audit Agent', 'SQL Agent', 'RFP Agent']}
@@ -914,8 +922,8 @@ const App = () => {
               transition={{ duration: 0.8 }}
               className="w-full flex flex-col items-center"
             >
-              <span className="text-[18px] text-[#999999] mb-3 block font-medium">Use Cases</span>
-              <h2 className="text-[26px] md:text-[36px] lg:text-[52px] font-bold text-white tracking-tight leading-[1.1] font-pretendard mx-auto">
+              <span className="text-body text-[#999999] mb-3 block font-medium">Use Cases</span>
+              <h2 className="text-heading-xs md:text-heading-lg lg:text-display-md font-bold text-white tracking-tight leading-[1.3] font-pretendard mx-auto">
                 솔루션, 멀티 에이전트<br />UseCases
               </h2>
             </motion.div>
@@ -930,18 +938,18 @@ const App = () => {
                   {/* Solution + Visual Group */}
                   <div className="bg-bg-surface/50 backdrop-blur-sm border border-border-light rounded-[20px] p-6 flex flex-col gap-8">
                     <div className="flex flex-col gap-3">
-                      <span className="text-text-secondary/60 text-[20px] font-medium font-pretendard tracking-tight">
+                      <span className="text-text-secondary/60 text-body-md font-medium font-pretendard tracking-tight">
                         {String(index + 1).padStart(2, '0')}
                       </span>
-                      <h4 className="text-[22px] font-bold text-text-primary leading-tight">
+                      <h4 className="text-body-lg font-bold text-text-primary leading-tight">
                         {item.titlePrefix} {item.titleSuffix || ''}
                       </h4>
-                      <p className="text-text-secondary text-[14px] leading-relaxed break-keep font-normal">
+                      <p className="text-text-secondary text-label-lg leading-relaxed break-keep font-normal">
                         {item.desc}
                       </p>
                       <ul className="space-y-2 pt-1">
                         {item.features.map((feature, i) => (
-                          <li key={i} className="flex items-start gap-2 text-text-secondary text-[13px] leading-relaxed">
+                          <li key={i} className="flex items-start gap-2 text-text-secondary text-label-md leading-relaxed">
                             <span className="text-brand-primary mt-[2px] shrink-0">•</span>
                             <span className="break-keep">{feature}</span>
                           </li>
@@ -975,15 +983,12 @@ const App = () => {
                     {/* 단일 슬롯: 모든 Use Case가 동일한 자리에서 교체됨 */}
                     <div className="relative h-full">
                       {useCaseItems.map((item, index) => {
-                        // painpoint 완료 후 0.10 pause, 이후 solution 등장
-                        const qRange: [number, number] = index === 0 ? [0.0, 0.08] : index === 1 ? [0.33, 0.41] : [0.66, 0.74];
-                        const dRange: [number, number] = [qRange[1] + 0.10, qRange[1] + 0.14];
-                        const nextStart = index < 2 ? (index === 0 ? 0.33 : 0.66) : 1.0;
-                        const exitRange: [number, number] = [nextStart - 0.06, nextStart - 0.01];
+                        // 각 아이템 1/3 균등: pain 0.167, solution 0.167 (360vh 동일)
+                        const qRange: [number, number] = index === 0 ? [0.0, 0.08] : index === 1 ? [0.333, 0.413] : [0.667, 0.747];
+                        const dRange: [number, number] = [qRange[1] + 0.087, qRange[1] + 0.12];
+                        const nextStart = index < 2 ? (index === 0 ? 0.333 : 0.667) : 1.0;
+                        const exitRange: [number, number] = [nextStart - 0.053, nextStart - 0.009];
                         const isActive = activeUseCase === index;
-
-                        // 라인 애니메이션: 솔루션 등장 완료(dRange[1])부터 퇴장 시작(exitRange[0])까지 채워짐
-                        const lineScaleX = useTransform(sectionProgress, [dRange[1], exitRange[0]], [0, 1]);
 
                         // CharacterReveal 범위 (모든 항목 동일하게 유지)
                         const qSpan = qRange[1] - qRange[0];
@@ -1018,7 +1023,7 @@ const App = () => {
                             >
                               <motion.p
                                 style={{ opacity: numOpacity }}
-                                className="text-text-primary text-[20px] font-medium tracking-tight mb-6 font-pretendard"
+                                className="text-text-primary text-body-md font-medium tracking-tight mb-6 font-pretendard"
                               >
                                 {String(index + 1).padStart(2, '0')}. Painpoint
                               </motion.p>
@@ -1036,22 +1041,16 @@ const App = () => {
                               className="absolute inset-0 w-full overflow-hidden"
                             >
                               <div className="mb-6 w-full max-w-lg">
-                                <p className="text-gray-900 text-[20px] font-bold tracking-tight font-pretendard mb-3">
+                                <p className="text-gray-900 text-body-md font-bold tracking-tight font-pretendard mb-3">
                                   {String(index + 1).padStart(2, '0')}&nbsp;&nbsp;Solution.
                                 </p>
-                                <div className="w-full h-[1px] bg-gray-200 relative overflow-hidden">
-                                  <motion.div
-                                    style={{ scaleX: lineScaleX, originX: 0 }}
-                                    className="absolute inset-0 bg-gray-900"
-                                  />
-                                </div>
                               </div>
 
-                              <h3 className="text-[40px] text-gray-900 mb-3 leading-[1.1] tracking-tight">
+                              <h3 className="text-heading-xl text-gray-900 mb-3 leading-[1.1] tracking-tight">
                                 <span className="font-bold">{item.titlePrefix}</span>{" "}
                                 <span className="font-normal">{item.titleSuffix}</span>
                               </h3>
-                              <p className="text-[16px] text-[#6B7280] leading-relaxed max-w-lg mb-5 font-normal">
+                              <p className="text-body-sm text-[#6B7280] leading-relaxed max-w-lg mb-5 font-normal">
                                 {item.desc}
                               </p>
                               {item.tags && (
@@ -1061,7 +1060,7 @@ const App = () => {
                                     return (
                                       <span
                                         key={i}
-                                        className="px-4 py-1.5 text-[14px] font-semibold rounded-full"
+                                        className="px-4 py-1.5 text-label-lg font-semibold rounded-full"
                                         style={{
                                           color: tagColor,
                                           backgroundColor: `${tagColor}12`, // 옅은 프라이머리 배경
@@ -1077,7 +1076,7 @@ const App = () => {
                                 <div className="mb-6 max-w-lg">
                                   <ul className="space-y-1.5">
                                     {item.features.map((feature: string, i: number) => (
-                                      <li key={i} className="flex items-start gap-3 text-[16px] leading-relaxed">
+                                      <li key={i} className="flex items-start gap-3 text-body-sm leading-relaxed">
                                         <span className="text-gray-800 font-bold shrink-0">•</span>
                                         <span className="text-gray-800 font-normal">{feature}</span>
                                       </li>
@@ -1114,9 +1113,9 @@ const App = () => {
                     <div className="w-full relative h-[80vh]">
                       {useCaseItems.map((item, index) => {
                         const isActive = activeUseCase === index;
-                        const qRange: [number, number] = index === 0 ? [0.0, 0.08] : index === 1 ? [0.33, 0.41] : [0.66, 0.74];
-                        const nextStart = index < 2 ? (index === 0 ? 0.33 : 0.66) : 1.0;
-                        const exitRange: [number, number] = [nextStart - 0.06, nextStart - 0.01];
+                        const qRange: [number, number] = index === 0 ? [0.0, 0.08] : index === 1 ? [0.333, 0.413] : [0.667, 0.747];
+                        const nextStart = index < 2 ? (index === 0 ? 0.333 : 0.667) : 1.0;
+                        const exitRange: [number, number] = [nextStart - 0.053, nextStart - 0.009];
 
                         // 이전 아이템의 exitRange (index>0에서 아래서 올라오는 진입에 사용)
                         const prevExitStart = qRange[0] - 0.06;
@@ -1171,8 +1170,8 @@ const App = () => {
         <section id="stats" className="py-16 md:py-32" style={{ backgroundColor: '#0A0A0A' }}>
           <div className="max-w-[1280px] mx-auto container-responsive">
             <div className="text-center mb-12 md:mb-32">
-              <span className="text-[18px] text-[#999999] mb-3 block font-medium">Proven Results</span>
-              <h2 className="text-[26px] md:text-[36px] lg:text-[52px] font-bold text-white mb-4 md:mb-6 tracking-tight">
+              <span className="text-body text-[#999999] mb-3 block font-medium">Proven Results</span>
+              <h2 className="text-heading-xs md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight">
                 수치로 증명하는 Biz.AI
               </h2>
             </div>
@@ -1185,12 +1184,12 @@ const App = () => {
                 { label: "AI Agent", value: 600, suffix: "+", sub: "도메인별 특화 AI 에이전트" }
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col items-start font-pretendard">
-                  <div className="text-[44px] md:text-[60px] lg:text-[72px] font-medium text-text-primary tracking-tighter leading-none mb-6 md:mb-12">
+                  <div className="text-display-xs md:text-display-lg lg:text-display-xl font-medium text-text-primary tracking-tighter leading-none mb-6 md:mb-12">
                     <AnimatedCounter from={0} to={stat.value} />
                     <span className="text-brand-primary ml-1">{stat.suffix}</span>
                   </div>
-                  <span className="text-text-primary text-[13px] md:text-[16px] lg:text-[18px] font-bold mb-1">{stat.label}</span>
-                  <p className="text-text-secondary text-[12px] md:text-[14px] lg:text-[16px] leading-relaxed font-normal break-keep">{stat.sub}</p>
+                  <span className="text-text-primary text-label-md md:text-body-sm lg:text-body font-bold mb-1">{stat.label}</span>
+                  <p className="text-text-secondary text-label-sm md:text-label-lg lg:text-body-sm leading-relaxed font-normal break-keep">{stat.sub}</p>
                 </div>
               ))}
             </div>
@@ -1250,8 +1249,8 @@ const App = () => {
           <div className="max-w-[1280px] mx-auto container-responsive mb-10 md:mb-20">
             <div className="flex justify-between items-end">
               <div className="flex flex-col items-start text-left">
-                <span className="text-[18px] text-[#999999] mb-3 block font-medium">News</span>
-                <h2 className="text-[26px] md:text-[36px] lg:text-[52px] font-bold text-white mb-4 md:mb-6 tracking-tight leading-tight">
+                <span className="text-body text-[#999999] mb-3 block font-medium">News</span>
+                <h2 className="text-heading-xs md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight leading-tight">
                   새로운 소식
                 </h2>
               </div>
@@ -1306,11 +1305,11 @@ const App = () => {
                 </div>
 
                 <div className="pt-2 px-1 flex flex-col">
-                  <span className="text-brand-secondary text-[14px] font-bold mb-3">{news.태그}</span>
-                  <h3 className="text-text-primary text-[24px] font-bold leading-snug mb-3 whitespace-pre-line">
+                  <span className="text-brand-secondary text-label-lg font-bold mb-3">{news.태그}</span>
+                  <h3 className="text-text-primary text-body-xl font-bold leading-snug mb-3 whitespace-pre-line">
                     {news.타이틀}
                   </h3>
-                  <div className="flex items-center text-text-dim text-[14px] font-medium">
+                  <div className="flex items-center text-text-dim text-label-lg font-medium">
                     <span>{news.언론사 || news.솔루션}</span>
                     <span className="mx-2 text-[4px] opacity-50">●</span>
                     <span>{news.날짜}</span>
@@ -1341,8 +1340,8 @@ const App = () => {
             <div className="flex flex-col lg:flex-row gap-10 md:gap-20">
               {/* 왼쪽: 헤더 */}
               <div className="lg:w-1/3">
-                <span className="text-[18px] text-[#999999] mb-3 block font-medium">FAQ</span>
-                <h2 className="text-[26px] md:text-[36px] lg:text-[52px] font-bold text-white mb-6 md:mb-8 tracking-tight leading-tight font-pretendard">
+                <span className="text-body text-[#999999] mb-3 block font-medium">FAQ</span>
+                <h2 className="text-heading-xs md:text-heading-lg lg:text-display-md font-bold text-white mb-6 md:mb-8 tracking-tight leading-tight font-pretendard">
                   자주 묻는 질문
                 </h2>
               </div>
@@ -1393,7 +1392,7 @@ const App = () => {
                                   onClick={() => setOpenIndex(isOpen ? null : i)}
                                   className="w-full py-8 flex items-center justify-between text-left group cursor-pointer h-auto px-0 hover:bg-transparent"
                                 >
-                                  <span className={`text-[15px] md:text-[20px] font-bold tracking-tight transition-colors duration-300 ${isOpen ? 'text-text-primary' : 'text-text-secondary/80 group-hover:text-text-primary/90'}`}>
+                                  <span className={`text-body-xs md:text-body-md font-bold tracking-tight transition-colors duration-300 ${isOpen ? 'text-text-primary' : 'text-text-secondary/80 group-hover:text-text-primary/90'}`}>
                                     {item.q}
                                   </span>
                                   <div className="relative w-6 h-6 flex items-center justify-center">
@@ -1419,7 +1418,7 @@ const App = () => {
                                       transition={{ duration: 0.3, ease: "easeInOut" }}
                                       className="overflow-hidden"
                                     >
-                                      <p className="pb-8 text-[#CCCCCC] text-[17px] leading-relaxed font-normal break-keep max-w-2xl">
+                                      <p className="pb-8 text-[#CCCCCC] text-body-base leading-relaxed font-normal break-keep max-w-2xl">
                                         {item.a}
                                       </p>
                                     </motion.div>
@@ -1443,7 +1442,6 @@ const App = () => {
         {/* AI Agent 스튜디오 섹션 */}
         {/* AI Agent 스튜디오 섹션 */}
         <section id="studio-v2" className="py-16 md:py-32 px-6 relative overflow-hidden" style={{ backgroundColor: '#0A0A0A' }}>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-primary/5 rounded-full blur-[120px] pointer-events-none" />
           <div className="max-w-[1200px] mx-auto relative z-10">
             {/* 메인 배너 카드 */}
             <motion.div
@@ -1451,22 +1449,23 @@ const App = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative h-[400px] w-full rounded-[32px] overflow-hidden group mb-8 border border-white/5 shadow-2xl shadow-black/50"
+              className="relative h-[400px] w-full rounded-[32px] overflow-hidden group mb-8 shadow-2xl shadow-black/50"
             >
-              <div className="absolute inset-0 z-0 scale-110">
-                <EtheralShadow
-                  color="rgba(148, 163, 184, 0.5)"
-                  animation={{ scale: 80, speed: 40 }}
-                  noise={{ opacity: 0.2, scale: 1.5 }}
-                  sizing="fill"
+              <div className="absolute inset-0 z-0">
+                <Silk
+                  speed={3.5}
+                  scale={0.8}
+                  color="#ccd2ff"
+                  noiseIntensity={2.7}
+                  rotation={4.8}
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-r from-[#000000] via-[#000000]/60 to-transparent z-[1]" />
               <div className="relative z-10 px-8 md:px-20 h-full flex flex-col justify-center max-w-3xl font-pretendard">
-                <h3 className="text-[32px] md:text-[56px] font-bold text-white mb-4 md:mb-6 tracking-tight leading-[1.1]">
+                <h3 className="text-heading-md md:text-display-hero font-bold text-white mb-4 md:mb-6 tracking-tight leading-[1.1]">
                   AI Agent Studio
                 </h3>
-                <p className="text-white/70 text-[16px] leading-relaxed break-keep font-medium mb-8 md:mb-10 max-w-xl">
+                <p className="text-white/70 text-body-sm leading-relaxed break-keep font-medium mb-8 md:mb-10 max-w-xl">
                   필요한 Agent, Tool, MCP를 빠르게 확인하고 시작하세요.<br />
                   쉽게 개발 가능한 AI 아키텍처와 Delivery 가이드를 제공합니다.
                 </p>
@@ -1474,7 +1473,7 @@ const App = () => {
                   href="https://studio.abclab.ktds.com/auth/login"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/btn inline-flex items-center justify-center gap-0 py-3 rounded-lg border border-border-light text-white font-bold text-[15px] w-[120px] hover:border-text-primary/25 transition-all duration-300 overflow-hidden"
+                  className="group/btn inline-flex items-center justify-center gap-0 py-3 rounded-lg border border-border-light text-white font-bold text-body-xs w-[120px] hover:border-text-primary/25 transition-all duration-300 overflow-hidden"
                 >
                   <span className="translate-x-0 group-hover/btn:-translate-x-1 transition-transform duration-300">체험하기</span>
                   <span className="w-0 opacity-0 group-hover/btn:w-5 group-hover/btn:opacity-100 transition-all duration-300 flex items-center justify-end overflow-hidden">
@@ -1507,8 +1506,8 @@ const App = () => {
                   <div className="mb-6 group-hover:scale-110 transition-all duration-500 w-fit">
                     {card.icon}
                   </div>
-                  <h4 className="text-[20px] font-bold text-white mb-3 tracking-tight">{card.title}</h4>
-                  <p className="text-white/50 text-[14px] leading-relaxed break-keep font-medium group-hover:text-white/70 transition-colors">{card.desc}</p>
+                  <h4 className="text-body-md font-bold text-white mb-3 tracking-tight">{card.title}</h4>
+                  <p className="text-white/50 text-label-lg leading-relaxed break-keep font-medium group-hover:text-white/70 transition-colors">{card.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -1533,7 +1532,7 @@ const App = () => {
                 viewport={{ once: false }}
                 transition={{ duration: 1, ease: "easeOut" }}
               >
-                <h2 className="text-text-primary text-[28px] md:text-[48px] font-bold mb-6 md:mb-10 tracking-tighter leading-[1.2] drop-shadow-[0_0_25px_rgba(255,255,255,0.2)]">
+                <h2 className="text-text-primary text-heading-sm md:text-display-sm font-bold mb-6 md:mb-10 tracking-tighter leading-[1.2] drop-shadow-[0_0_25px_rgba(255,255,255,0.2)]">
                   Biz.AI와 함께<br />
                   AI 혁신을 지금 실행하세요.
                 </h2>
@@ -1590,20 +1589,20 @@ const App = () => {
                 alt="kt ds"
                 className="h-8 w-auto object-contain"
               />
-              <p className="text-[14px] text-text-primary/90 font-medium text-left">
+              <p className="text-label-lg text-text-primary/90 font-medium text-left">
                 (06707) 서울 서초구 효령로 176, 02-523-7029
               </p>
             </div>
 
             {/* 우측: 메뉴 + 저작권 (이 부분도 좌측 정렬로 통일) */}
             <div className="flex flex-col items-start gap-8">
-              <div className="flex flex-wrap gap-x-8 gap-y-2 text-[14px] text-text-primary/90 font-medium">
+              <div className="flex flex-wrap gap-x-8 gap-y-2 text-label-lg text-text-primary/90 font-medium">
                 <a href="#" className="hover:text-text-primary transition-colors">사이트맵</a>
                 <a href="#" className="hover:text-text-primary transition-colors">공지사항</a>
                 <a href="#" className="hover:text-text-primary transition-colors">개인정보처리방침</a>
                 <a href="#" className="hover:text-text-primary transition-colors">이용약관</a>
               </div>
-              <p className="text-[13px] text-text-dim font-medium text-left">
+              <p className="text-label-md text-text-dim font-medium text-left">
                 © 2026 AI Biz Portal. All rights reserved.
               </p>
             </div>

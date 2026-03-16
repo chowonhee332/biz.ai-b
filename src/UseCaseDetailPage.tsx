@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Mail, Phone } from 'lucide-react';
+import { Mail, Phone, FileText } from 'lucide-react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
 import Footer from '@/components/Footer';
@@ -43,7 +43,7 @@ export default function UseCaseDetailPage() {
                         <h1 className="text-[36px] md:text-[50px] font-bold text-white leading-snug break-keep tracking-tight">
                             {detail?.title || item.타이틀}
                         </h1>
-                        <p className="text-[17px] md:text-[18px] break-keep" style={{ color: '#CCCCCC' }}>
+                        <p className="text-body-base md:text-body break-keep" style={{ color: '#CCCCCC' }}>
                             {item.설명}
                         </p>
                     </motion.div>
@@ -52,7 +52,7 @@ export default function UseCaseDetailPage() {
 
             {/* Hero Image */}
             <div className="w-full mb-24 max-w-[1280px] mx-auto container-responsive">
-                <div className="w-full aspect-[21/9] sm:aspect-[24/9] md:aspect-[2.5/1] overflow-hidden rounded-[20px] bg-bg-surface border border-border-light shadow-2xl">
+                <div className="w-full aspect-[21/9] sm:aspect-[24/9] md:aspect-[2.5/1] overflow-hidden rounded-[12px] bg-bg-surface border border-border-light shadow-2xl">
                     <img src={item.이미지} alt="Case Study Hero" className="w-full h-full object-cover brightness-90" />
                 </div>
             </div>
@@ -60,12 +60,12 @@ export default function UseCaseDetailPage() {
             {/* Main Content */}
             <main className="max-w-[1280px] mx-auto container-responsive pb-48">
                 <div className="max-w-[840px] mx-auto">
-                    <article className="flex flex-col gap-14 font-pretendard">
+                    <article className="flex flex-col font-pretendard">
                         {sections.map((section: any) => (
-                            <section key={section.id} id={section.id} className="flex flex-col scroll-mt-32">
+                            <section key={section.id} id={section.id} className="flex flex-col scroll-mt-32 pb-[52px]">
                                 {section.title && (
-                                    <h2 className={`${section.subtitle_level === 1 ? 'text-[20px] text-text-secondary' : 'text-[22px] text-text-primary'} font-bold pt-8 border-t border-border-light/60 pb-3 mb-4`}>
-                                        {section.title}
+                                    <h2 className={`${section.subtitle_level === 1 ? 'text-[20px] text-text-secondary' : 'text-[24px] text-text-primary'} font-bold pt-[52px] border-t border-white/10 mb-4`}>
+                                        {section.title.replace(/^\d+[\)\.]\s*/, '')}
                                     </h2>
                                 )}
 
@@ -76,23 +76,20 @@ export default function UseCaseDetailPage() {
                                 )}
 
                                 {section.id === 'summary' ? (
-                                    <div className="p-6 rounded-[20px] bg-brand-primary/10 border border-brand-primary/20">
-                                        <div className="flex items-center gap-2 mb-3">
-                                            <div className="w-0.5 h-4 rounded-full bg-brand-primary" />
-                                            <span className="text-[12px] font-bold text-brand-primary/70 tracking-wider uppercase">Summary</span>
-                                        </div>
-                                        <div className="text-[17px] leading-relaxed break-keep font-medium" style={{ color: '#CCCCCC' }}>
+                                    <div className="p-6 rounded-[12px] border flex gap-4" style={{ backgroundColor: '#00ABFF0D', borderColor: '#00ABFF33' }}>
+                                        <FileText className="size-5 shrink-0 mt-0.5" style={{ color: '#00ABFF' }} />
+                                        <div className="text-body-base leading-relaxed break-keep font-medium" style={{ color: '#00ABFF' }}>
                                             {section.content}
                                         </div>
                                     </div>
                                 ) : section.content && (
-                                    <div className="text-[17px] leading-relaxed mb-6 break-keep whitespace-pre-line font-medium" style={{ color: '#CCCCCC' }}>
+                                    <div className="leading-relaxed mb-6 break-keep whitespace-pre-line font-medium" style={{ fontSize: '16px', color: '#CCCCCC' }}>
                                         {section.content}
                                     </div>
                                 )}
 
                                 {section.list && (
-                                    <div className="bg-bg-surface/50 rounded-[20px] p-6 border border-border-light mb-6">
+                                    <div className="bg-bg-surface/50 rounded-[12px] p-6 border border-border-light mb-6">
                                         <ul className="flex flex-col gap-3.5">
                                             {section.list.map((li: string, idx: number) => {
                                                 const colonIdx = li.indexOf(':');
@@ -115,7 +112,7 @@ export default function UseCaseDetailPage() {
                                 {section.groups && (
                                     <div className="flex flex-col gap-6 mb-6">
                                         {section.groups.map((group: any, gi: number) => (
-                                            <div key={gi} className="bg-bg-surface/50 rounded-[20px] p-6 border border-border-light">
+                                            <div key={gi} className="bg-bg-surface/50 rounded-[12px] p-6 border border-border-light">
                                                 <div className="text-[14px] font-bold text-text-secondary mb-4">{group.label}</div>
                                                 <ul className="flex flex-col gap-3.5">
                                                     {group.items.map((it: any, idx: number) => (
@@ -139,7 +136,7 @@ export default function UseCaseDetailPage() {
 
                                 {section.items && (
                                     section.id === 'solution' ? (
-                                        <div className="bg-bg-surface/50 rounded-[20px] p-6 border border-border-light mb-6">
+                                        <div className="bg-bg-surface/50 rounded-[12px] p-6 border border-border-light mb-6">
                                             <ul className="flex flex-col gap-3.5">
                                                 {section.items.map((it: any, idx: number) => (
                                                     <li key={idx} className="flex items-start gap-3">
@@ -159,7 +156,7 @@ export default function UseCaseDetailPage() {
                                                     {section.id !== 'results' && (
                                                         <span className="text-brand-primary text-[13px] font-bold shrink-0 leading-none mt-0.5">{(idx + 1).toString().padStart(2, '0')}</span>
                                                     )}
-                                                    <div className={`font-bold leading-tight ${section.id === 'results' ? 'text-[17px] text-emerald-400' : 'text-[17px] text-text-primary'}`}>{it.타이틀}</div>
+                                                    <div className={`font-bold leading-tight ${section.id === 'results' ? 'text-body-base text-emerald-400' : 'text-body-base text-text-primary'}`}>{it.타이틀}</div>
                                                     <p className="text-[14px] leading-relaxed break-keep font-medium" style={{ color: '#CCCCCC' }}>{it.설명}</p>
                                                 </div>
                                             ))}
@@ -170,8 +167,8 @@ export default function UseCaseDetailPage() {
                                 {section.quotes && (
                                     <div className="flex flex-col gap-4 mt-4">
                                         {section.quotes.map((q: any, idx: number) => (
-                                            <div key={idx} className="p-6 rounded-[20px] bg-bg-surface/50 border border-border-light flex flex-col gap-4">
-                                                <div className="text-[17px] font-medium leading-relaxed break-keep" style={{ color: '#CCCCCC' }}>
+                                            <div key={idx} className="p-6 rounded-[12px] bg-bg-surface/50 border border-border-light flex flex-col gap-4">
+                                                <div className="text-body-base font-medium leading-relaxed break-keep" style={{ color: '#CCCCCC' }}>
                                                     {q.text}
                                                 </div>
                                                 <div className="text-brand-primary text-[14px] font-bold">— {q.author}</div>
@@ -181,8 +178,9 @@ export default function UseCaseDetailPage() {
                                 )}
 
                                 {section.footer && (
-                                    <div className="mt-6 p-6 rounded-[20px] bg-brand-primary/10 border border-brand-primary/20">
-                                        <div className="text-[17px] leading-relaxed break-keep font-medium" style={{ color: '#CCCCCC' }}>
+                                    <div className="mt-6 p-6 rounded-[12px] border flex gap-4" style={{ backgroundColor: '#00ABFF0D', borderColor: '#00ABFF33' }}>
+                                        <FileText className="size-5 shrink-0 mt-0.5" style={{ color: '#00ABFF' }} />
+                                        <div className="text-body-base leading-relaxed break-keep font-medium" style={{ color: '#00ABFF' }}>
                                             {section.footer}
                                         </div>
                                     </div>
@@ -193,7 +191,7 @@ export default function UseCaseDetailPage() {
 
                     {/* 상담 문의 - 콘텐츠 최하단 */}
                     <div className="mt-16 pt-10 border-t border-border-light/60">
-                        <div className="p-6 rounded-[20px] bg-bg-surface/50 border border-border-light flex flex-row items-center justify-between gap-4">
+                        <div className="p-6 rounded-[12px] bg-bg-surface/50 border border-border-light flex flex-row items-center justify-between gap-4">
                             <h4 className="text-[16px] font-bold text-text-primary break-keep">비슷한 과제를 겪고 계신가요?</h4>
                             <div className="flex flex-wrap gap-5 shrink-0">
                                 <div className="flex items-center gap-2 text-text-secondary">
