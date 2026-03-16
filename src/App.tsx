@@ -117,10 +117,16 @@ const SolutionCard = ({ number, image, title, desc, highlight, isLarge }: { numb
 
 
 
-const Char = ({ children, progress, range }: { children: string; progress: any; range: [number, number] }) => {
-  // Increased base opacity to 0.4 for 'unwritten' text as requested
+const Char = ({ children, progress, range, isHighlight }: { children: string; progress: any; range: [number, number]; isHighlight?: boolean }) => {
   const opacity = useTransform(progress, range, [0.4, 1]);
-  return <motion.span style={{ opacity }} className="whitespace-pre">{children}</motion.span>;
+  return (
+    <motion.span
+      style={{ opacity, color: isHighlight ? '#33ADFF' : undefined }}
+      className="whitespace-pre"
+    >
+      {children}
+    </motion.span>
+  );
 };
 
 const CharacterReveal = ({ text, className, scrollProgress, range, highlightIndex }: { text: string; className?: string; scrollProgress: any, range: [number, number], highlightIndex?: number }) => {
@@ -135,7 +141,7 @@ const CharacterReveal = ({ text, className, scrollProgress, range, highlightInde
         // Blue highlight from the specified highlightIndex to the end.
         // If no index is provided, only the last line is highlighted.
         const isHighlight = lineIdx >= (highlightIndex ?? lines.length - 1);
-        const colorClass = isHighlight ? "bg-gradient-to-r from-white to-brand-primary bg-clip-text text-transparent" : "text-text-primary";
+        const colorClass = isHighlight ? "" : "text-text-primary";
 
         return (
           <div
@@ -147,7 +153,7 @@ const CharacterReveal = ({ text, className, scrollProgress, range, highlightInde
               const charEnd = range[0] + ((charCounter + 1) / totalChars) * (range[1] - range[0]);
               charCounter++;
               return (
-                <Char key={charIdx} progress={scrollProgress} range={[charStart, charEnd]}>
+                <Char key={charIdx} progress={scrollProgress} range={[charStart, charEnd]} isHighlight={isHighlight}>
                   {char}
                 </Char>
               );
@@ -845,7 +851,7 @@ const App = () => {
               className="text-left mb-12 md:mb-16 font-pretendard"
             >
               <span className="text-[18px] text-[#999999] mb-3 block font-medium tracking-tight">Multi Agent</span>
-              <h2 className="text-[26px] md:text-[36px] lg:text-[52px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-4 md:mb-6 tracking-tight">도메인별 멀티 에이전트</h2>
+              <h2 className="text-[26px] md:text-[36px] lg:text-[52px] font-bold text-white mb-4 md:mb-6 tracking-tight">도메인별 멀티 에이전트</h2>
             </motion.div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row gap-4 w-full lg:h-[700px]">
@@ -908,9 +914,9 @@ const App = () => {
               transition={{ duration: 0.8 }}
               className="w-full flex flex-col items-center"
             >
-              <span className="text-[18px] text-[#999999] mb-3 block font-medium">Use Case</span>
-              <h2 className="text-[26px] md:text-[36px] lg:text-[52px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent tracking-tight leading-[1.1] font-pretendard mx-auto">
-                솔루션 및 멀티 에이전트 적용 사례
+              <span className="text-[18px] text-[#999999] mb-3 block font-medium">Use Cases</span>
+              <h2 className="text-[26px] md:text-[36px] lg:text-[52px] font-bold text-white tracking-tight leading-[1.1] font-pretendard mx-auto">
+                솔루션, 멀티 에이전트<br />UseCases
               </h2>
             </motion.div>
           </div>
@@ -1069,10 +1075,10 @@ const App = () => {
                               )}
                               {item.features && (
                                 <div className="mb-6 max-w-lg">
-                                  <ul className="space-y-3">
+                                  <ul className="space-y-1.5">
                                     {item.features.map((feature: string, i: number) => (
                                       <li key={i} className="flex items-start gap-3 text-[16px] leading-relaxed">
-                                        <div className="w-[3px] h-5 rounded-full bg-gray-400 mt-[3px] shrink-0" />
+                                        <span className="text-black font-medium shrink-0 tabular-nums">{String(i + 1).padStart(2, '0')}.</span>
                                         <span className="text-gray-800 font-normal">{feature}</span>
                                       </li>
                                     ))}
@@ -1166,7 +1172,7 @@ const App = () => {
           <div className="max-w-[1280px] mx-auto container-responsive">
             <div className="text-center mb-12 md:mb-32">
               <span className="text-[18px] text-[#999999] mb-3 block font-medium">Proven Results</span>
-              <h2 className="text-[26px] md:text-[36px] lg:text-[52px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-4 md:mb-6 tracking-tight">
+              <h2 className="text-[26px] md:text-[36px] lg:text-[52px] font-bold text-white mb-4 md:mb-6 tracking-tight">
                 수치로 증명하는 Biz.AI
               </h2>
             </div>
@@ -1336,7 +1342,7 @@ const App = () => {
               {/* 왼쪽: 헤더 */}
               <div className="lg:w-1/3">
                 <span className="text-[18px] text-[#999999] mb-3 block font-medium">FAQ</span>
-                <h2 className="text-[26px] md:text-[36px] lg:text-[52px] font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent mb-6 md:mb-8 tracking-tight leading-tight font-pretendard">
+                <h2 className="text-[26px] md:text-[36px] lg:text-[52px] font-bold text-white mb-6 md:mb-8 tracking-tight leading-tight font-pretendard">
                   자주 묻는 질문
                 </h2>
               </div>
