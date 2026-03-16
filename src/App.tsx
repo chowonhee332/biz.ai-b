@@ -1078,7 +1078,7 @@ const App = () => {
                                   <ul className="space-y-1.5">
                                     {item.features.map((feature: string, i: number) => (
                                       <li key={i} className="flex items-start gap-3 text-[16px] leading-relaxed">
-                                        <span className="text-black font-medium shrink-0 tabular-nums">{String(i + 1).padStart(2, '0')}.</span>
+                                        <span className="text-gray-800 font-bold shrink-0">•</span>
                                         <span className="text-gray-800 font-normal">{feature}</span>
                                       </li>
                                     ))}
