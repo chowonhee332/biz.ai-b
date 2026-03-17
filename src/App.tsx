@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useRef, useEffect } from 'react';
+import Spline from '@splinetool/react-spline';
 import { useScroll, useTransform, useMotionTemplate, motion, useInView, AnimatePresence, animate, useAnimation, useMotionValueEvent, useMotionValue, useSpring } from 'motion/react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -677,34 +678,18 @@ const App = () => {
       <Navbar activePage="home" scrollLineProgress={navLineScaleX} />
 
       {/* Hero Section */}
-      <section id="hero" className="relative z-20 h-screen flex items-center justify-center overflow-clip bg-[#000000] font-poppins">
+      <section id="hero" className="relative z-20 h-screen flex items-center justify-center overflow-clip bg-[#0A0A0A] font-poppins">
+
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 hidden lg:block">
+          <Spline scene="https://prod.spline.design/6Ebx9Hr8jWkeCm2E/scene.splinecode" />
+        </div>
 
         <div className="relative z-10 w-full max-w-[1280px] mx-auto container-responsive flex items-center h-full">
-          <div className="w-full flex flex-col lg:flex-row items-center relative">
+          <div className="w-full h-full flex flex-col lg:flex-row items-center relative">
             {/* Left Content */}
             <div className="w-full lg:max-w-[800px] relative z-20">
               <HeroContent align="left" />
             </div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
-              className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 md:top-1/2 md:bottom-auto md:-translate-y-1/2 lg:left-[55%] lg:translate-x-0 w-[420px] md:w-[600px] lg:w-[780px] z-0 lg:z-10 pointer-events-none opacity-50 md:opacity-40 lg:opacity-90"
-            >
-              <motion.div
-                className="relative"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-              >
-                <div className="absolute -inset-20 bg-blue-500/5 rounded-full blur-[100px] z-0" />
-                <img
-                  src="/banner.png"
-                  alt="Biz.AI Hero"
-                  className="w-full h-auto object-contain relative z-10 opacity-90 shadow-2xl"
-                />
-              </motion.div>
-            </motion.div>
           </div>
         </div>
 
