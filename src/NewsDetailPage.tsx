@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -11,10 +11,11 @@ import { HIGHLIGHT_NEWS, REGULAR_NEWS } from './context/news/news-data';
 export default function NewsDetailPage() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const allNews = [...HIGHLIGHT_NEWS, ...REGULAR_NEWS];
     const newsIndex = id ? parseInt(id) - 1 : 0;
-    const news = allNews[newsIndex] || allNews[0];
+    const news = location.state?.news || allNews[newsIndex] || allNews[0];
 
     const getTagColor = (tag: string) => {
         if (tag === "기술 이야기") return "text-emerald-400";
