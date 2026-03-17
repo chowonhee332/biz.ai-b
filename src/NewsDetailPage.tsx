@@ -83,11 +83,11 @@ export default function NewsDetailPage() {
             <main className="max-w-[1280px] mx-auto container-responsive pb-32 flex-1 flex flex-col items-center">
                 <article className="max-w-[800px] w-full">
                     {news.내용 ? (
-                        <p className="text-[17px] leading-[1.9] font-medium whitespace-pre-wrap break-keep mb-8" style={{ color: '#CCCCCC' }}>
+                        <p className="text-body-base leading-[1.9] font-medium whitespace-pre-wrap break-keep mb-8" style={{ color: '#CCCCCC' }}>
                             {news.내용}
                         </p>
                     ) : (
-                        <p className="text-white/30 text-[17px] font-medium italic">상세 내용이 준비 중입니다.</p>
+                        <p className="text-white/30 text-body-base font-medium italic">상세 내용이 준비 중입니다.</p>
                     )}
                 </article>
 

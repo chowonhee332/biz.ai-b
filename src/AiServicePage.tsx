@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { PLATFORM_PAGE_CONFIG } from '@/context/ai-service/ai-service-data';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
+import Silk from '@/components/Silk';
 
 
 function EmptyPlaceholder({ label }: { label: string }) {
@@ -50,23 +51,27 @@ export default function AiServicePage() {
         <div className="min-h-screen text-text-primary font-pretendard flex flex-col" style={{ backgroundColor: '#0A0A0A' }}>
             <Navbar activePage="platform" />
 
-            <section className="pt-48 pb-32 flex-1">
-                <div className="max-w-[1280px] mx-auto container-responsive mb-20">
+            <section className="pt-48 pb-32 flex-1 relative">
+                <div className="absolute inset-0 z-0" style={{ height: '400px' }}>
+                    <Silk speed={3.5} scale={0.8} color="#c8d8ff" noiseIntensity={2.7} rotation={4.8} />
+                </div>
+                <div className="absolute inset-0 z-[1]" style={{ height: '400px', background: 'linear-gradient(to bottom, rgba(10,10,10,0.1) 0%, rgba(10,10,10,1) 100%)' }} />
+                <div className="max-w-[1280px] mx-auto container-responsive mb-20 relative z-10">
                     <motion.div
                         key={activeTab + "header"}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <span className="text-body text-[#999999] mb-3 block font-medium">AI Products/Service</span>
+                        <span className="text-body text-[#999999] mb-3 block font-medium">AI 제품 / 서비스</span>
                         <h1 className="text-heading-lg lg:text-display-md font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent tracking-tight leading-tight">
-                            AI 제품 / 서비스
+                            AI Products/Service
                         </h1>
                     </motion.div>
                 </div>
 
                 {/* 모바일 탭 */}
-                <div className="lg:hidden sticky top-[72px] backdrop-blur-sm z-40 border-b border-border-light mb-12" style={{ backgroundColor: 'rgba(10, 10, 10, 0.95)' }}>
+                <div className="lg:hidden sticky top-[72px] backdrop-blur-sm z-40 border-b border-border-light mb-12 relative" style={{ backgroundColor: 'rgba(10, 10, 10, 0.95)' }}>
                     <div className="max-w-[1280px] mx-auto container-responsive flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap">
                         {sidebarItems.map((item) => (
                             <Button
@@ -85,11 +90,11 @@ export default function AiServicePage() {
                     </div>
                 </div>
 
-                <div className="max-w-[1280px] mx-auto container-responsive">
+                <div className="max-w-[1280px] mx-auto container-responsive relative z-10">
                     <div className="flex flex-col lg:flex-row gap-[60px]">
 
                         {/* 왼쪽 사이드바 (데스크탑) */}
-                        <aside className="hidden lg:block lg:w-[220px] shrink-0">
+                        <aside className="hidden lg:block lg:w-[220px] shrink-0 pt-10 mt-5">
                             <div className="flex flex-col gap-2 sticky top-[100px]">
                                 {sidebarItems.map((item) => (
                                     <Button
@@ -97,7 +102,7 @@ export default function AiServicePage() {
                                         variant={activeTab === item ? "default" : "ghost"}
                                         rounded="lg"
                                         onClick={() => setActiveTab(item)}
-                                        className={`w-full justify-start px-5 h-[52px] !text-body font-semibold transition-all cursor-pointer ${activeTab === item
+                                        className={`w-full justify-start px-5 h-[48px] !text-body font-semibold transition-all cursor-pointer ${activeTab === item
                                             ? "bg-brand-primary text-text-primary shadow-lg shadow-brand-primary/20"
                                             : "text-text-secondary/40 hover:text-text-primary/70 hover:bg-bg-surface"
                                             }`}
@@ -109,7 +114,7 @@ export default function AiServicePage() {
                         </aside>
 
                         {/* 메인 콘텐츠 */}
-                        <main className="flex-1 min-w-0">
+                        <main className="flex-1 min-w-0 pt-10 mt-5">
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={activeTab}
@@ -119,7 +124,7 @@ export default function AiServicePage() {
                                     transition={{ duration: 0.4 }}
                                 >
                                     {/* 1. 개요 */}
-                                    <div id="section-overview" className="mb-[52px] scroll-mt-32">
+                                    <div id="section-overview" className="mb-[52px] scroll-mt-32 pt-8">
                                         <div className="max-w-[75%]">
                                             <p className="text-brand-primary text-body-sm font-bold mb-2 tracking-wide">{activeTab}</p>
                                             <h2 className="text-heading-md font-bold text-white mb-4 break-keep">{currentContent.타이틀}</h2>
