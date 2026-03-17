@@ -5,7 +5,6 @@ import { motion } from 'motion/react';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import { USE_CASES, USE_CASE_CATEGORY_COLORS } from '@/context/use-cases/use-case-data';
-import Silk from '@/components/Silk';
 
 export default function UseCaseDetailPage() {
     const { id } = useParams();
@@ -30,17 +29,7 @@ export default function UseCaseDetailPage() {
             <Navbar activePage="use-cases" />
 
             {/* Header */}
-            <section className="pt-48 pb-16 relative overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <Silk
-                        speed={3.5}
-                        scale={0.8}
-                        color="#ccd2ff"
-                        noiseIntensity={2.7}
-                        rotation={4.8}
-                    />
-                </div>
-                <div className="absolute inset-0 z-[1]" style={{ background: 'linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.85) 100%)' }} />
+            <section className="pt-48 pb-16 relative">
                 <div className="max-w-[1280px] mx-auto container-responsive text-center flex flex-col items-center relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -70,7 +59,7 @@ export default function UseCaseDetailPage() {
 
             {/* Main Content */}
             <main className="max-w-[1280px] mx-auto container-responsive pb-48">
-                <div className="max-w-[840px] mx-auto">
+                <div className="max-w-[780px] mx-auto">
                     <article className="flex flex-col font-pretendard">
                         {sections.map((section: any) => (
                             <section key={section.id} id={section.id} className="flex flex-col scroll-mt-32 pb-[52px]">
@@ -89,7 +78,7 @@ export default function UseCaseDetailPage() {
                                 {section.id === 'summary' ? (
                                     <div className="p-6 rounded-[12px] border flex gap-4" style={{ backgroundColor: '#00ABFF0D', borderColor: '#00ABFF33' }}>
                                         <FileText className="size-5 shrink-0 mt-0.5" style={{ color: '#00ABFF' }} />
-                                        <div className="text-body-base leading-relaxed break-keep font-medium" style={{ color: '#00ABFF' }}>
+                                        <div className="leading-relaxed break-keep font-medium" style={{ color: '#00ABFF', fontSize: '16px' }}>
                                             {section.content}
                                         </div>
                                     </div>
@@ -161,7 +150,7 @@ export default function UseCaseDetailPage() {
                                             </ul>
                                         </div>
                                     ) : (
-                                        <div className={`grid grid-cols-1 gap-4 mb-6 ${section.id === 'results' ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
+                                        <div className={`grid grid-cols-1 gap-4 mb-6 ${section.id === 'results' ? 'md:grid-cols-2' : 'md:grid-cols-2'}`}>
                                             {section.items.map((it: any, idx: number) => (
                                                 <div key={idx} className="p-5 rounded-[16px] bg-bg-surface/50 border border-border-light flex flex-col gap-3">
                                                     {section.id !== 'results' && (
@@ -191,7 +180,7 @@ export default function UseCaseDetailPage() {
                                 {section.footer && (
                                     <div className="mt-6 p-6 rounded-[12px] border flex gap-4" style={{ backgroundColor: '#00ABFF0D', borderColor: '#00ABFF33' }}>
                                         <FileText className="size-5 shrink-0 mt-0.5" style={{ color: '#00ABFF' }} />
-                                        <div className="text-body-base leading-relaxed break-keep font-medium" style={{ color: '#00ABFF' }}>
+                                        <div className="leading-relaxed break-keep font-medium" style={{ color: '#00ABFF', fontSize: '16px' }}>
                                             {section.footer}
                                         </div>
                                     </div>

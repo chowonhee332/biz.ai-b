@@ -104,13 +104,12 @@ export default function UseCasePage() {
                                     transition={{ delay: i * 0.05, duration: 0.5 }}
                                     className="group cursor-pointer flex flex-col"
                                 >
-                                    <div className="relative aspect-video rounded-[20px] overflow-hidden mb-5 bg-bg-surface border border-border-light group-hover:border-border-light/60 transition-all">
+                                    <div className="relative aspect-video rounded-[20px] overflow-hidden mb-5 bg-bg-surface">
                                         <img
                                             src={item.이미지}
                                             alt={item.타이틀}
-                                            className="w-full h-full object-cover brightness-90 group-hover:brightness-100 group-hover:scale-105 transition-transform duration-700"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                                     </div>
                                     <div className="pt-2 px-1 flex flex-col gap-2.5">
                                         <span className={`text-label-lg font-bold ${USE_CASE_CATEGORY_COLORS[item.카테고리]?.text || 'text-brand-primary'}`}>
