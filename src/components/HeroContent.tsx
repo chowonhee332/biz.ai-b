@@ -78,13 +78,13 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
   const isLeft = align === 'left';
 
   return (
-    <div className={`relative z-10 w-full max-w-6xl mx-auto px-6 py-20 md:py-24 min-h-[300px] flex flex-col ${isLeft ? 'items-start text-left' : 'items-center justify-center text-center'}`}>
+    <div className={`relative z-10 w-full max-w-6xl mx-auto px-6 py-20 md:py-24 min-h-[300px] flex flex-col ${isLeft ? 'items-center text-center md:items-start md:text-left' : 'items-center justify-center text-center'}`}>
       {/* 히어로 뱃지 - 타이틀 위 */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className={`hidden md:flex mb-6 ${isLeft ? 'justify-start' : 'justify-center'} w-full`}
+        className={`hidden md:flex mb-6 ${isLeft ? 'md:justify-start' : 'justify-center'} w-full`}
       >
         <div className="relative inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm overflow-hidden">
           <motion.span
@@ -108,18 +108,18 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className={`absolute inset-0 flex flex-col ${isLeft ? 'items-start text-left' : 'items-center justify-center text-center'}`}
+            className={`absolute inset-0 flex flex-col ${isLeft ? 'items-center text-center md:items-start md:text-left' : 'items-center justify-center text-center'}`}
           >
             <h1
-              className={`text-4xl md:text-5xl lg:text-[64px] font-[600] mb-4 md:mb-6 leading-[1.1] tracking-tight w-full max-w-5xl flex flex-col ${isLeft ? 'items-start' : 'items-center'}`}
+              className={`text-[44px] md:text-5xl lg:text-[64px] font-[600] mb-4 md:mb-6 leading-[1.1] tracking-tight w-full max-w-5xl flex flex-col ${isLeft ? 'items-center md:items-start' : 'items-center'}`}
             >
-              <span className={`block whitespace-nowrap ${isLeft ? 'text-left' : 'text-center'}`}>
+              <span className={`block whitespace-nowrap ${isLeft ? 'text-center md:text-left' : 'text-center'}`}>
                 <span className="bg-gradient-to-br from-brand-secondary via-text-primary to-text-primary bg-clip-text text-transparent">
                   {lines[0]}
                 </span>
                 {!done && lines.length === 1 && <span className="inline-block w-[3px] h-[0.85em] bg-brand-primary ml-1 align-middle animate-pulse" />}
               </span>
-              <span className={`block whitespace-nowrap ${isLeft ? 'text-left' : 'text-center'}`}>
+              <span className={`block whitespace-nowrap ${isLeft ? 'text-center md:text-left' : 'text-center'}`}>
                 <span className="bg-gradient-to-br from-brand-secondary via-text-primary to-text-primary bg-clip-text text-transparent">
                   {lines[1] ?? ''}
                 </span>
@@ -130,7 +130,7 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
               initial={{ opacity: 0 }}
               animate={{ opacity: done ? 1 : 0 }}
               transition={{ duration: 0.5 }}
-              className={`text-[13px] md:text-[15px] lg:text-[16px] font-normal text-text-secondary max-w-[85vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl w-full leading-relaxed whitespace-pre-line ${isLeft ? 'text-left' : 'text-center'} px-1`}
+              className={`text-[15px] md:text-[15px] lg:text-[16px] font-normal text-text-secondary max-w-[85vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl w-full leading-relaxed whitespace-pre-line ${isLeft ? 'text-center md:text-left' : 'text-center'} px-1`}
             >
               {slide.sub}
             </motion.p>
@@ -138,7 +138,7 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
         </AnimatePresence>
       </div>
 
-      <div className={`flex gap-2.5 ${isLeft ? 'justify-start' : 'justify-center'} mt-8 mb-2`}>
+      <div className={`flex gap-2.5 ${isLeft ? 'justify-center md:justify-start' : 'justify-center'} mt-8 mb-2`}>
         {HERO_SLIDES.map((_, i) => (
           <button
             key={i}
@@ -157,13 +157,13 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0 }}
-        className={`flex flex-row gap-3 ${isLeft ? 'justify-start' : 'justify-center'} mt-8 md:mt-12`}
+        className={`flex flex-row gap-3 ${isLeft ? 'justify-center md:justify-start' : 'justify-center'} mt-8 md:mt-12`}
       >
         <Button
           variant="premium"
           size="cta"
           rounded="xl"
-          className="w-[110px] md:w-[130px] h-10 md:h-12 text-[13px] md:text-[15px] relative group transition-all duration-300"
+          className="w-[110px] md:w-[130px] h-10 md:h-12 text-[15px] relative group transition-all duration-300"
           disabled={isAnalyzing}
         >
           <span className="group-hover:-translate-x-2 transition-transform duration-300">무료체험 신청</span>
@@ -173,7 +173,7 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
           variant="glass"
           size="cta"
           rounded="xl"
-          className="w-[110px] md:w-[130px] h-10 md:h-12 text-[13px] md:text-[15px] relative group transition-all duration-300"
+          className="w-[110px] md:w-[130px] h-10 md:h-12 text-[15px] relative group transition-all duration-300"
         >
           <span className="group-hover:-translate-x-2 transition-transform duration-300">솔루션 문의</span>
           <ChevronRight size={16} className="absolute right-3 max-w-0 opacity-0 group-hover:max-w-[20px] group-hover:opacity-100 transition-all duration-300 overflow-hidden" />

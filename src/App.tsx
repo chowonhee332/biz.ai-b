@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useRef, useEffect } from 'react';
-import Spline from '@splinetool/react-spline';
+import HeroSpline from './components/HeroSpline';
 import { useScroll, useTransform, useMotionTemplate, motion, useInView, AnimatePresence, animate, useAnimation, useMotionValueEvent, useMotionValue, useSpring } from 'motion/react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -90,9 +90,9 @@ const SolutionCard = ({ number, image, title, desc, highlight, isLarge }: { numb
 
     {/* Title & Description Group */}
     <div className="flex flex-col gap-2 md:gap-4 mb-4 md:mb-6">
-      <h4 className="text-black text-body-xl md:text-heading-md font-bold tracking-tight leading-tight">{title}</h4>
+      <h4 className="text-black text-[24px] md:text-heading-md font-bold tracking-tight leading-tight">{title}</h4>
       <div className="min-h-[40px] md:min-h-[48px]">
-        <p className="text-[#666666] text-label-md md:text-body-sm leading-snug font-normal break-keep whitespace-pre-line">
+        <p className="text-[#666666] text-body-sm md:text-body-sm leading-snug font-normal break-keep whitespace-pre-line">
           {desc}
         </p>
       </div>
@@ -483,12 +483,12 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
       >
         <section id="process" className="py-16 md:py-32 relative overflow-hidden px-6">
           <div className="max-w-[1200px] mx-auto relative z-10">
-            <div className="text-center mb-12 md:mb-24 container-responsive">
-              <span className="text-body text-[#999999] mb-3 block font-medium">Why kt ds</span>
-              <h2 className="text-heading-xs md:text-heading-lg lg:text-display-md font-bold text-black mb-4 md:mb-6 tracking-tight leading-tight">
+            <div className="text-left md:text-center mb-12 md:mb-24 container-responsive">
+              <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">Why kt ds</span>
+              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-black mb-4 md:mb-6 tracking-tight leading-tight">
                 왜 kt ds와 함께 해야 할까요?
-              </h2>
-              <p className="text-black/80 text-label-md md:text-body-sm lg:text-body max-w-2xl mx-auto font-medium">
+              </h1>
+              <p className="text-black/80 text-body-sm md:text-body-sm lg:text-body max-w-2xl mx-0 md:mx-auto font-medium">
                 기업의 복잡한 요구사항을 기획부터 구축, 검증, 운영까지<br className="hidden md:block" />
                 표준화된 프로세스로 완성합니다.
               </p>
@@ -531,8 +531,8 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
               ].map((step, i) => (
                 <motion.div
                   key={i}
-                  initial={{ y: 60, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
+                  initial={isMobile ? false : { y: 60, opacity: 0 }}
+                  whileInView={isMobile ? {} : { y: 0, opacity: 1 }}
                   transition={{ delay: i * 0.15, duration: 0.6, ease: "easeOut" }}
                   viewport={{ once: false, margin: "-50px" }}
                   className="group relative bg-white rounded-[20px] p-6 md:p-10 border border-black/5 hover:-translate-y-2 hover:shadow-[0_20px_48px_rgba(0,0,0,0.08)] transition-all duration-300 flex flex-col min-h-[320px] md:min-h-[420px] overflow-hidden"
@@ -540,7 +540,7 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
                   <div className="absolute inset-0 bg-gradient-to-b from-black/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[20px] pointer-events-none" />
                   <div className="relative min-h-[100px] md:min-h-[130px]">
                     <span className={`${step.color} text-body-sm md:text-body-md font-bold mb-2 block`}>{step.num}</span>
-                    <h3 className="text-body-xl md:text-heading-md font-bold text-gray-900 leading-tight whitespace-pre-line">{step.subtitle}</h3>
+                    <h3 className="text-[24px] md:text-heading-md font-bold text-gray-900 leading-tight whitespace-pre-line">{step.subtitle}</h3>
                   </div>
                   <div className="relative flex-1" />
                   <div className="relative min-h-[160px]">
@@ -568,7 +568,7 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDomain, setActiveDomain] = useState<number>(0);
   const navigate = useNavigate();
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth < 1024 : false);
   const [scrolled, setScrolled] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -680,14 +680,12 @@ const App = () => {
       {/* Hero Section */}
       <section id="hero" className="relative z-20 h-screen flex items-center justify-center overflow-clip bg-[#0A0A0A] font-poppins">
 
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 hidden lg:block">
-          <Spline scene="https://prod.spline.design/6Ebx9Hr8jWkeCm2E/scene.splinecode" />
-        </div>
+        <HeroSpline />
 
-        <div className="relative z-10 w-full max-w-[1280px] mx-auto container-responsive flex items-center h-full">
-          <div className="w-full h-full flex flex-col lg:flex-row items-center relative">
+        <div className="relative z-10 w-full max-w-[1280px] mx-auto container-responsive flex items-center h-full pointer-events-none -mt-[160px] md:mt-0">
+          <div className="w-full h-full flex flex-col justify-center lg:flex-row lg:justify-start items-center relative">
             {/* Left Content */}
-            <div className="w-full lg:max-w-[800px] relative z-20">
+            <div className="w-full lg:max-w-[800px] relative z-20 pointer-events-auto">
               <HeroContent align="left" />
             </div>
           </div>
@@ -724,24 +722,24 @@ const App = () => {
             <section id="solution" className="py-16 md:py-32">
               <div className="max-w-[1280px] mx-auto container-responsive relative">
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={isMobile ? false : { opacity: 0, y: 30 }}
+                  whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="text-center mb-10 md:mb-20 font-pretendard flex flex-col items-center relative z-10"
+                  className="text-left md:text-center mb-10 md:mb-20 font-pretendard flex flex-col items-start md:items-center relative z-10"
                 >
-                  <span className="text-body text-[#999999] mb-3 block font-medium">AI Solutions</span>
-                  <h2 className="text-heading-xs md:text-heading-lg lg:text-display-md font-bold text-black mb-4 md:mb-6 tracking-tight leading-tight">
+                  <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">AI Solutions</span>
+                  <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-black mb-4 md:mb-6 tracking-tight leading-tight">
                     AI 솔루션
-                  </h2>
+                  </h1>
                 </motion.div>
 
 
                 {/* 그룹 1: 전사 공통 */}
                 <div className="mb-16 md:mb-32 max-w-[1024px] mx-auto">
                   <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={isMobile ? false : { opacity: 0, x: -20 }}
+                    whileInView={isMobile ? {} : { opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="flex items-center gap-2 mb-5 ml-4"
@@ -772,8 +770,8 @@ const App = () => {
                       .map((card, i) => (
                         <motion.div
                           key={i}
-                          initial={{ y: 60, opacity: 0 }}
-                          whileInView={{ y: 0, opacity: 1 }}
+                          initial={isMobile ? false : { y: 60, opacity: 0 }}
+                          whileInView={isMobile ? {} : { y: 0, opacity: 1 }}
                           viewport={{ once: false, margin: "-50px" }}
                           transition={{ delay: i * 0.15, duration: 0.6, ease: "easeOut" }}
                         >
@@ -786,8 +784,8 @@ const App = () => {
                 {/* 그룹 2: IT 서비스/개발 직군 */}
                 <div className="mb-14 max-w-[1024px] mx-auto">
                   <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={isMobile ? false : { opacity: 0, x: -20 }}
+                    whileInView={isMobile ? {} : { opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="flex items-center gap-2 mb-5 ml-4"
@@ -817,8 +815,8 @@ const App = () => {
                     ].map((card, i) => (
                       <motion.div
                         key={i}
-                        initial={{ y: 60, opacity: 0 }}
-                        whileInView={{ y: 0, opacity: 1 }}
+                        initial={isMobile ? false : { y: 60, opacity: 0 }}
+                        whileInView={isMobile ? {} : { y: 0, opacity: 1 }}
                         viewport={{ once: false, margin: "-50px" }}
                         transition={{ delay: i * 0.15, duration: 0.6, ease: "easeOut" }}
                       >
@@ -837,14 +835,14 @@ const App = () => {
         <section id="domain" className="py-20 md:py-32 relative overflow-hidden pb-16" style={{ backgroundColor: '#0A0A0A' }}>
           <div className="max-w-[1280px] mx-auto container-responsive">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={isMobile ? false : { opacity: 0, y: 30 }}
+              whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8 }}
               className="text-left mb-12 md:mb-16 font-pretendard"
             >
-              <span className="text-body text-[#999999] mb-3 block font-medium tracking-tight">Multi Agent</span>
-              <h2 className="text-heading-xs md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight">도메인별 멀티 에이전트</h2>
+              <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium tracking-tight">Multi Agent</span>
+              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight">도메인별 멀티 에이전트</h1>
             </motion.div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row gap-2 w-full lg:h-[700px]">
@@ -899,18 +897,18 @@ const App = () => {
 
         <section id="use-cases" className="relative" style={{ backgroundColor: '#0A0A0A' }}>
           {/* Title Area: Normal Scrolling */}
-          <div className="max-w-[1280px] mx-auto w-full container-responsive pt-16 md:pt-32 pb-0 text-center relative">
+          <div className="max-w-[1280px] mx-auto w-full container-responsive pt-16 md:pt-32 pb-0 text-left md:text-center relative">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={isMobile ? false : { opacity: 0, y: 30 }}
+              whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8 }}
-              className="w-full flex flex-col items-center"
+              className="w-full flex flex-col items-start md:items-center"
             >
-              <span className="text-body text-[#999999] mb-3 block font-medium">Use Cases</span>
-              <h2 className="text-heading-xs md:text-heading-lg lg:text-display-md font-bold text-white tracking-tight leading-[1.3] font-pretendard mx-auto">
+              <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">Use Cases</span>
+              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white tracking-tight leading-[1.3] font-pretendard mx-0 md:mx-auto">
                 솔루션, 멀티 에이전트<br />UseCases
-              </h2>
+              </h1>
             </motion.div>
           </div>
 
@@ -1154,11 +1152,11 @@ const App = () => {
         {/* 수치로 증명하는 Biz.AI (Stats Section) */}
         <section id="stats" className="py-16 md:py-32" style={{ backgroundColor: '#0A0A0A' }}>
           <div className="max-w-[1280px] mx-auto container-responsive">
-            <div className="text-center mb-12 md:mb-32">
-              <span className="text-body text-[#999999] mb-3 block font-medium">Proven Results</span>
-              <h2 className="text-heading-xs md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight">
+            <div className="text-left md:text-center mb-12 md:mb-32">
+              <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">Proven Results</span>
+              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight">
                 수치로 증명하는 Biz.AI
-              </h2>
+              </h1>
             </div>
 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-x-16">
@@ -1234,10 +1232,10 @@ const App = () => {
           <div className="max-w-[1280px] mx-auto container-responsive mb-10 md:mb-20">
             <div className="flex justify-between items-end">
               <div className="flex flex-col items-start text-left">
-                <span className="text-body text-[#999999] mb-3 block font-medium">News</span>
-                <h2 className="text-heading-xs md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight leading-tight">
+                <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">News</span>
+                <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight leading-tight">
                   새로운 소식
-                </h2>
+                </h1>
               </div>
 
               {/* 내비게이션 버튼 */}
@@ -1325,10 +1323,10 @@ const App = () => {
             <div className="flex flex-col lg:flex-row gap-10 md:gap-20">
               {/* 왼쪽: 헤더 */}
               <div className="lg:w-1/3">
-                <span className="text-body text-[#999999] mb-3 block font-medium">FAQ</span>
-                <h2 className="text-heading-xs md:text-heading-lg lg:text-display-md font-bold text-white mb-6 md:mb-8 tracking-tight leading-tight font-pretendard">
+                <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">FAQ</span>
+                <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white mb-6 md:mb-8 tracking-tight leading-tight font-pretendard">
                   자주 묻는 질문
-                </h2>
+                </h1>
               </div>
 
               {/* 오른쪽: 아코디언 리스트 */}
@@ -1430,8 +1428,8 @@ const App = () => {
           <div className="max-w-[1200px] mx-auto relative z-10">
             {/* 메인 배너 카드 */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={isMobile ? false : { opacity: 0, y: 30 }}
+              whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative h-[400px] w-full rounded-[32px] overflow-hidden group mb-8 shadow-2xl shadow-black/50"
@@ -1481,8 +1479,8 @@ const App = () => {
               ].map((card, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={isMobile ? false : { opacity: 0, y: 20 }}
+                  whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
                   className="group relative p-8 rounded-[24px] border border-white/5 hover:border-white/10 transition-all duration-500 overflow-hidden flex flex-col h-full"
@@ -1512,8 +1510,8 @@ const App = () => {
             </div>
             <div className="relative z-10 w-full max-w-[1200px] mx-auto text-center font-pretendard px-6 py-20">
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={isMobile ? false : { opacity: 0, scale: 0.95 }}
+                whileInView={isMobile ? {} : { opacity: 1, scale: 1 }}
                 viewport={{ once: false }}
                 transition={{ duration: 1, ease: "easeOut" }}
               >
