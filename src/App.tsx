@@ -484,9 +484,9 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
         <section id="process" className="py-16 md:py-32 relative overflow-hidden px-6">
           <div className="max-w-[1200px] mx-auto relative z-10">
             <div className="text-left md:text-center mb-12 md:mb-24 container-responsive">
-              <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">Why kt ds</span>
-              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-black mb-4 md:mb-6 tracking-tight leading-tight">
-                왜 kt ds와 함께 해야 할까요?
+              <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">왜 kt ds와 함께 해야 할까요?</span>
+              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-black mb-4 md:mb-6 tracking-tight leading-tight font-poppins">
+                Why kt ds
               </h1>
               <p className="text-black/80 text-body-sm md:text-body-sm lg:text-body max-w-2xl mx-0 md:mx-auto font-medium">
                 기업의 복잡한 요구사항을 기획부터 구축, 검증, 운영까지<br className="hidden md:block" />
@@ -680,12 +680,27 @@ const App = () => {
       {/* Hero Section */}
       <section id="hero" className="relative z-20 h-screen flex items-center justify-center overflow-clip bg-[#0A0A0A] font-poppins">
 
-        <HeroSpline />
+        {/* Silk Motion Background */}
+        <div className="absolute inset-0 z-0">
+          <Silk
+            speed={3.5}
+            scale={0.8}
+            color="#c8d8ff"
+            noiseIntensity={6}
+            rotation={4.8}
+          />
+        </div>
+        {/* Fade-out gradient overlay */}
+        <div className="absolute inset-0 z-[1] pointer-events-none" style={{ background: 'linear-gradient(to bottom, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.85) 60%, rgba(10,10,10,1) 100%), linear-gradient(to right, rgba(10,10,10,0) 0%, rgba(10,10,10,0.5) 40%, rgba(10,10,10,1) 60%)' }} />
+
+        <div className="absolute inset-0 z-[2]">
+          <HeroSpline />
+        </div>
 
         <div className="relative z-10 w-full max-w-[1280px] mx-auto container-responsive flex items-center h-full pointer-events-none -mt-[160px] md:mt-0">
           <div className="w-full h-full flex flex-col justify-center lg:flex-row lg:justify-start items-center relative">
             {/* Left Content */}
-            <div className="w-full lg:max-w-[800px] relative z-20 pointer-events-auto">
+            <div className="w-full lg:max-w-[800px] relative z-20 pointer-events-auto md:pl-[28px]">
               <HeroContent align="left" />
             </div>
           </div>
@@ -703,10 +718,10 @@ const App = () => {
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           >
-            <ChevronDown size={28} className="text-text-secondary/80" strokeWidth={1.5} />
-            <ChevronDown size={28} className="text-text-dim -mt-5" strokeWidth={1.5} />
+            <ChevronDown size={28} className="text-white/80" strokeWidth={1.5} />
+            <ChevronDown size={28} className="text-white/40 -mt-5" strokeWidth={1.5} />
           </motion.div>
-          <span className="text-text-dim text-sm font-medium tracking-wider">Scroll down</span>
+          <span className="text-white/60 text-sm font-medium tracking-wider">Scroll down</span>
         </motion.div>
       </section>
 
@@ -728,9 +743,9 @@ const App = () => {
                   transition={{ duration: 0.8, ease: "easeOut" }}
                   className="text-left md:text-center mb-10 md:mb-20 font-pretendard flex flex-col items-start md:items-center relative z-10"
                 >
-                  <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">AI Solutions</span>
-                  <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-black mb-4 md:mb-6 tracking-tight leading-tight">
-                    AI 솔루션
+                  <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">AI 솔루션</span>
+                  <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-black mb-4 md:mb-6 tracking-tight leading-tight font-poppins">
+                    AI Solutions
                   </h1>
                 </motion.div>
 
@@ -839,10 +854,10 @@ const App = () => {
               whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8 }}
-              className="text-left mb-12 md:mb-16 font-pretendard"
+              className="text-center mb-12 md:mb-16 font-pretendard flex flex-col items-center"
             >
-              <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium tracking-tight">Multi Agent</span>
-              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight">도메인별 멀티 에이전트</h1>
+              <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium tracking-tight">도메인별 멀티 에이전트</span>
+              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight font-poppins leading-[1.1]">Domain-Specific<br />Multi Agent</h1>
             </motion.div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row gap-2 w-full lg:h-[700px]">
@@ -905,9 +920,9 @@ const App = () => {
               transition={{ duration: 0.8 }}
               className="w-full flex flex-col items-start md:items-center"
             >
-              <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">Use Cases</span>
-              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white tracking-tight leading-[1.3] font-pretendard mx-0 md:mx-auto">
-                솔루션, 멀티 에이전트<br />UseCases
+              <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">솔루션/멀티 에이전트 고객사례</span>
+              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white tracking-tight leading-[1.3] font-poppins mx-0 md:mx-auto">
+                Solution, Multi Agent<br />Use Cases
               </h1>
             </motion.div>
           </div>
@@ -1153,9 +1168,9 @@ const App = () => {
         <section id="stats" className="py-16 md:py-32" style={{ backgroundColor: '#0A0A0A' }}>
           <div className="max-w-[1280px] mx-auto container-responsive">
             <div className="text-left md:text-center mb-12 md:mb-32">
-              <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">Proven Results</span>
-              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight">
-                수치로 증명하는 Biz.AI
+              <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">수치로 증명하는 Biz.AI</span>
+              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight font-poppins">
+                Proven Results
               </h1>
             </div>
 
@@ -1232,9 +1247,9 @@ const App = () => {
           <div className="max-w-[1280px] mx-auto container-responsive mb-10 md:mb-20">
             <div className="flex justify-between items-end">
               <div className="flex flex-col items-start text-left">
-                <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">News</span>
-                <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight leading-tight">
-                  새로운 소식
+                <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">새로운 소식</span>
+                <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight leading-tight font-poppins">
+                  News
                 </h1>
               </div>
 
@@ -1323,9 +1338,8 @@ const App = () => {
             <div className="flex flex-col lg:flex-row gap-10 md:gap-20">
               {/* 왼쪽: 헤더 */}
               <div className="lg:w-1/3">
-                <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">FAQ</span>
-                <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white mb-6 md:mb-8 tracking-tight leading-tight font-pretendard">
-                  자주 묻는 질문
+                <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white mb-6 md:mb-8 tracking-tight leading-tight font-poppins">
+                  FAQ
                 </h1>
               </div>
 

@@ -84,9 +84,9 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className={`hidden md:flex mb-6 ${isLeft ? 'md:justify-start' : 'justify-center'} w-full`}
+        className={`flex mb-6 ${isLeft ? 'justify-center md:justify-start' : 'justify-center'} w-full`}
       >
-        <div className="relative inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm overflow-hidden">
+        <div className="relative inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/30 overflow-hidden">
           <motion.span
             className="relative font-normal text-[13px] tracking-[0.05em] font-pretendard bg-clip-text text-transparent bg-[length:200%_100%]"
             style={{
