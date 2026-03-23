@@ -4,21 +4,16 @@
  */
 
 import React, { useState, useRef, useEffect } from 'react';
+import { useTheme } from './context/ThemeContext';
 import HeroSpline from './components/HeroSpline';
-import { useScroll, useTransform, useMotionTemplate, motion, useInView, AnimatePresence, animate, useAnimation, useMotionValueEvent, useMotionValue, useSpring } from 'motion/react';
+import { useScroll, useTransform, motion, useInView, AnimatePresence, animate } from 'motion/react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import ParticleEngine from './components/ParticleEngine';
 import HeroContent from './components/HeroContent';
-import { HIGHLIGHT_NEWS, REGULAR_NEWS } from '@/context/news/news-data';
-import { USE_CASES, USE_CASE_CATEGORIES, USE_CASE_CATEGORY_COLORS } from '@/context/use-cases/use-case-data';
 import Navbar from './components/Navbar';
-import Aurora from './components/Aurora';
-import Antigravity from './components/Antigravity';
-import { BackgroundGradientAnimation } from './components/ui/background-gradient-animation';
 import Silk from './components/Silk';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { USE_CASE_HIGHLIGHTS } from './context/use-cases/use-case-highlights';
 import {
   Search,
@@ -32,12 +27,9 @@ import {
   ChevronLeft,
   ChevronDown,
   ArrowUp,
-  Code,
-  Cpu,
-  Layers,
-  BookOpen,
   Monitor,
   Utensils,
+  Box,
   Youtube,
   Linkedin,
   Mail,
@@ -83,23 +75,24 @@ const AnimatedCounter = ({ from, to }: { from: number; to: number }) => {
   return <span ref={nodeRef}>{Intl.NumberFormat("en-US").format(from)}</span>;
 };
 
-const SolutionCard = ({ number, image, title, desc, highlight, isLarge }: { number: string; image: string; title: string; desc: string; highlight: string; isLarge?: boolean }) => (
-  <div className="bg-white rounded-[20px] p-6 md:p-10 flex flex-col w-full min-w-[280px] h-[340px] md:h-[424px] group cursor-pointer shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_48px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-2 font-pretendard relative overflow-hidden">
+const SolutionCard = ({ number, image, title, desc, highlight, isLarge }: { number: string; image: string; title: string; desc: string; highlight: string; isLarge?: boolean }) => {
+  return (
+  <div className="rounded-[20px] p-6 md:p-10 flex flex-col w-full min-w-[280px] h-[340px] md:h-[424px] group cursor-pointer transition-all duration-500 hover:-translate-y-2 font-pretendard relative overflow-hidden bg-[#F3F5FC]">
     {/* Index Number */}
-    <div className="text-black text-body-sm md:text-body-md font-bold leading-none mb-2 md:mb-3">{number}</div>
+    <div className="text-body-sm md:text-body-md font-bold leading-none mb-2 md:mb-3 text-black">{number}</div>
 
     {/* Title & Description Group */}
     <div className="flex flex-col gap-2 md:gap-4 mb-4 md:mb-6">
-      <h4 className="text-black text-[24px] md:text-heading-md font-bold tracking-tight leading-tight">{title}</h4>
+      <h4 className="text-[24px] md:text-[28px] font-bold tracking-tight leading-tight text-black">{title}</h4>
       <div className="min-h-[40px] md:min-h-[48px]">
-        <p className="text-[#666666] text-body-sm md:text-body-sm leading-snug font-normal break-keep whitespace-pre-line">
+        <p className="text-body-sm md:text-body-sm leading-snug font-normal break-keep whitespace-pre-line text-[#666666]">
           {desc}
         </p>
       </div>
     </div>
 
     {/* Highlight Tag */}
-    <div className="text-brand-primary font-medium text-label-md md:text-body-sm tracking-tight">
+    <div className="font-medium text-label-md md:text-body-sm tracking-tight text-black">
       {highlight.startsWith('#') ? highlight : `# ${highlight}`}
     </div>
 
@@ -114,9 +107,8 @@ const SolutionCard = ({ number, image, title, desc, highlight, isLarge }: { numb
       </div>
     </div>
   </div>
-);
-
-
+  );
+};
 
 const Char = ({ children, progress, range, isHighlight }: { children: string; progress: any; range: [number, number]; isHighlight?: boolean }) => {
   const opacity = useTransform(progress, range, [0.4, 1]);
@@ -167,126 +159,7 @@ const CharacterReveal = ({ text, className, scrollProgress, range, highlightInde
   );
 };
 
-const InteractiveMockup = ({ image, frameImage, initialMouseX = -0.75, cursorColor = "var(--color-brand-primary)", cursorName = "Biz.AI" }: { image: string; frameImage: string; initialMouseX?: number; cursorColor?: string; cursorName?: string }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(initialMouseX);
-  const mouseY = useMotionValue(0.3);
 
-  // 커스텀 커서를 위한 실제 픽셀 좌표 (딜레이 없는 트래킹용)
-  const cursorX = useMotionValue(0);
-  const cursorY = useMotionValue(0);
-  const [isHovered, setIsHovered] = useState(false);
-
-  // 마우스 위치에 따라 이미지가 따라오는 효과 (실시간 반응성을 위해 stiffness를 250으로 대폭 강화)
-  const imgX = useSpring(useTransform(mouseX, [-1, 1], [-400, 400]), { stiffness: 250, damping: 30 });
-  const imgY = useSpring(useTransform(mouseY, [-1, 1], [-200, 200]), { stiffness: 250, damping: 30 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = containerRef.current?.getBoundingClientRect();
-    if (!rect) return;
-
-    // 커스텀 커서 위치 업데이트
-    cursorX.set(e.clientX - rect.left);
-    cursorY.set(e.clientY - rect.top);
-    if (!isHovered) setIsHovered(true);
-
-    // -1 ~ 1 사이 정규화
-    const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    const ny = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-    mouseX.set(nx);
-    mouseY.set(ny);
-  };
-
-  const handleMouseLeave = () => {
-    // 마우스가 떠나면 다시 설정된 초기 오프셋 지점으로 즉시 복귀
-    mouseX.set(initialMouseX);
-    mouseY.set(0.3);
-    setIsHovered(false);
-  };
-
-  return (
-    <div className="w-full h-full flex items-center justify-center lg:justify-end relative group/frame shrink-0 bg-transparent">
-      {/* 겉 프레임: 원래의 널찍한 사이즈로 복원 */}
-      <div
-        ref={containerRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className="relative w-full h-full rounded-[28px] overflow-hidden cursor-none bg-bg-main"
-      >
-        {/* 배경 이미지 (프레임) */}
-        <img
-          src={frameImage}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-        />
-
-        {/* 안의 이미지: 마우스 커서에 따라 움직임 */}
-        <motion.div
-          style={{ x: imgX, y: imgY }}
-          className="absolute inset-[-40%] flex items-center justify-center p-16"
-        >
-          <img
-            src={image}
-            alt="Use Case Screenshot"
-            className="w-[180%] h-auto rounded-[12px] object-contain pointer-events-none transition-transform duration-500 group-hover:scale-[1.02]"
-          />
-        </motion.div>
-
-        {/* 커스텀 커서 (협업 스타일) */}
-        <motion.div
-          style={{
-            x: cursorX,
-            y: cursorY,
-            opacity: isHovered ? 1 : 0
-          }}
-          className="absolute top-0 left-0 z-50 pointer-events-none select-none"
-        >
-          {/* 포인터 화살표 */}
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 4L11 20L14 14L20 11L4 4Z" fill={cursorColor} stroke="white" strokeWidth="2" strokeLinejoin="round" />
-          </svg>
-          {/* 이름표 */}
-          <div
-            className="ml-6 -mt-1 px-3 py-1 text-text-primary text-label-sm font-bold rounded-lg shadow-lg border border-border-light whitespace-nowrap"
-            style={{ backgroundColor: cursorColor }}
-          >
-            {cursorName}
-          </div>
-        </motion.div>
-      </div>
-    </div>
-  );
-};
-
-const UseCaseVisual = ({ image, frameImage, initialMouseX, cursorColor, cursorName, index, setActive, isActive }: { image: string; frameImage: string; initialMouseX: number; cursorColor: string; cursorName: string; index: number; setActive: (idx: number) => void; isActive: boolean }) => {
-  const ref = useRef(null);
-  // The isInView logic is now handled by the parent component's scroll progress
-  // and activeUseCase state. This component will just render based on isActive prop.
-  // const isInView = useInView(ref, { margin: "-20% 0px -20% 0px", amount: 0.5 });
-
-  // useEffect(() => {
-  //   if (isInView) setActive(index);
-  // }, [isInView, index, setActive]);
-
-  return (
-    <motion.div
-      ref={ref}
-      // initial={{ opacity: 0, y: 40 }} // Initial state is now handled by parent motion.div
-      // animate={(isInView || isActive) ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }} // Animation is now handled by parent motion.div
-      // transition={{
-      //   type: "spring",
-      //   stiffness: 100,
-      //   damping: 30,
-      //   mass: 1,
-      //   restDelta: 0.001,
-      //   delay: 0.1
-      // }}
-      className="w-full h-full smooth-gpu"
-    >
-      <InteractiveMockup image={image} frameImage={frameImage} initialMouseX={initialMouseX} cursorColor={cursorColor} cursorName={cursorName} />
-    </motion.div>
-  );
-};
 
 
 const CTAParticles = () => {
@@ -460,35 +333,22 @@ const Tag = ({ text }: { text: string }) => (
   </Badge>
 );
 
-const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
+const ProcessSection = (_: { isMobile: boolean }) => {
   const processRef = useRef(null);
-  const { scrollYProgress: scrollYProcess } = useScroll({
-    target: processRef,
-    offset: ["start end", "center center"]
-  });
-
-  const clipPathProcessBase = useTransform(
-    scrollYProcess,
-    [0.1, 0.6],
-    ["inset(200px 300px round 40px)", "inset(0px 24px round 40px)"]
-  );
-
-  const clipPathProcess = isMobile ? "none" : clipPathProcessBase;
 
   return (
     <div className="relative w-full py-10" ref={processRef}>
-      <motion.div
-        style={{ clipPath: clipPathProcess, scrollMarginTop: "100px" } as any}
-        className={`bg-[#F3F5FC] border-black/5 relative z-20 overflow-hidden shadow-2xl smooth-gpu ${isMobile ? 'border-none' : 'border'}`}
+      <div
+        className="relative z-20 overflow-hidden smooth-gpu bg-white mx-2 rounded-[32px]"
       >
         <section id="process" className="py-16 md:py-32 relative overflow-hidden px-6">
           <div className="max-w-[1200px] mx-auto relative z-10">
             <div className="text-left md:text-center mb-12 md:mb-24 container-responsive">
               <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">왜 kt ds와 함께 해야 할까요?</span>
-              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-black mb-4 md:mb-6 tracking-tight leading-tight font-poppins">
+              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold mb-4 md:mb-6 tracking-tight leading-tight font-poppins text-black">
                 Why kt ds
               </h1>
-              <p className="text-black/80 text-body-sm md:text-body-sm lg:text-body max-w-2xl mx-0 md:mx-auto font-medium">
+              <p className="text-body-sm md:text-body-sm lg:text-body max-w-2xl mx-0 md:mx-auto font-medium text-black/80">
                 기업의 복잡한 요구사항을 기획부터 구축, 검증, 운영까지<br className="hidden md:block" />
                 표준화된 프로세스로 완성합니다.
               </p>
@@ -531,24 +391,21 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
               ].map((step, i) => (
                 <motion.div
                   key={i}
-                  initial={isMobile ? false : { y: 60, opacity: 0 }}
-                  whileInView={isMobile ? {} : { y: 0, opacity: 1 }}
-                  transition={{ delay: i * 0.15, duration: 0.6, ease: "easeOut" }}
-                  viewport={{ once: false, margin: "-50px" }}
-                  className="group relative bg-white rounded-[20px] p-6 md:p-10 border border-black/5 hover:-translate-y-2 hover:shadow-[0_20px_48px_rgba(0,0,0,0.08)] transition-all duration-300 flex flex-col min-h-[320px] md:min-h-[420px] overflow-hidden"
+                  initial={false}
+                  className="relative rounded-[20px] p-6 md:p-10 flex flex-col min-h-[320px] md:min-h-[420px] overflow-hidden bg-[#F3F5FC]"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[20px] pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/[0.02] to-transparent rounded-[20px] pointer-events-none" />
                   <div className="relative min-h-[100px] md:min-h-[130px]">
                     <span className={`${step.color} text-body-sm md:text-body-md font-bold mb-2 block`}>{step.num}</span>
-                    <h3 className="text-[24px] md:text-heading-md font-bold text-gray-900 leading-tight whitespace-pre-line">{step.subtitle}</h3>
+                    <h3 className="text-[24px] md:text-heading-md font-bold leading-tight whitespace-pre-line text-gray-900">{step.subtitle}</h3>
                   </div>
                   <div className="relative flex-1" />
                   <div className="relative min-h-[160px]">
-                    <h4 className="text-body-sm font-semibold text-gray-900 mb-3">{step.title}</h4>
+                    <h4 className="text-body-sm font-semibold mb-3 text-gray-900">{step.title}</h4>
                     <ul className="space-y-2">
                       {step.bullets.map((bullet, j) => (
-                        <li key={j} className="flex items-start gap-2 text-black/80 text-label-lg leading-relaxed font-normal">
-                          <span className="mt-[9px] w-1 h-1 rounded-full bg-black/25 shrink-0" />
+                        <li key={j} className="flex items-start gap-2 text-label-lg leading-relaxed font-normal text-black/80">
+                          <span className="mt-[9px] w-1 h-1 rounded-full shrink-0 bg-black/25" />
                           <span>{bullet}</span>
                         </li>
                       ))}
@@ -559,12 +416,13 @@ const ProcessSection = ({ isMobile }: { isMobile: boolean }) => {
             </div>
           </div>
         </section>
-      </motion.div>
+      </div>
     </div>
   );
 };
 
 const App = () => {
+  const { isDark } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDomain, setActiveDomain] = useState<number>(0);
   const navigate = useNavigate();
@@ -582,36 +440,10 @@ const App = () => {
   }, []);
 
   const { scrollY, scrollYProgress } = useScroll();
-  const useCaseRef = useRef<HTMLDivElement>(null); // Keep one declaration
-  const { scrollYProgress: sectionProgress } = useScroll({
-    target: useCaseRef,
-    offset: ["start 0.5", "end 1.2"]
-  });
   const [activeUseCase, setActiveUseCase] = useState(0);
 
-  // 솔루션 페이즈에서 배경을 라이트로 전환 (dRange 기준 3개 아이템)
-
-  // Re-balanced active ranges for 500vh scroll length and longer persistence
-  useMotionValueEvent(sectionProgress, "change", (latest) => {
-    if (latest < 0.333) setActiveUseCase(0);
-    else if (latest < 0.667) setActiveUseCase(1);
-    else setActiveUseCase(2);
-  });
-
-  // GNB 라인: 페인포인트 시작 → 솔루션 종료까지 0→1 채워짐, 3사이클 (각 아이템 1/3 균등)
-  // Item0: 0.0→0.280, Item1: 0.333→0.614, Item2: 0.667→0.947
-  const navLineScaleX = useTransform(
-    sectionProgress,
-    [0.0, 0.280, 0.3239, 0.3241, 0.333, 0.614, 0.6579, 0.6581, 0.667, 0.947, 0.9909, 0.9911, 1.0],
-    [0,   1,     1,      0,      0,     1,     1,       0,      0,     1,     1,      0,       0  ]
-  );
-
-  // 배경색: 진입은 부드럽게, 퇴장은 snap (각 아이템 1/3 균등: pain 0→0.167, sol 0.167→0.333)
-  const useCaseBgColor = useTransform(
-    sectionProgress,
-    [0, 0.167, 0.200, 0.324, 0.3241, 0.500, 0.533, 0.658, 0.6581, 0.834, 0.867, 0.991, 0.9911, 1.0],
-    ['#0A0A0A', '#0A0A0A', '#F4F5FE', '#F4F5FE', '#0A0A0A', '#0A0A0A', '#F4F5FE', '#F4F5FE', '#0A0A0A', '#0A0A0A', '#F4F5FE', '#F4F5FE', '#0A0A0A', '#0A0A0A']
-  );
+  // GNB 라인: 전체 페이지 스크롤 기반
+  const navLineScaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   const newsScrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -633,14 +465,7 @@ const App = () => {
   };
 
 
-  // Re-added clip path animation for the expanding background effect
-  const clipPathBase = useTransform(
-    scrollYProgress,
-    [0.01, 0.03],
-    ["inset(200px 300px round 40px)", "inset(0px 24px round 40px)"]
-  );
-
-  const clipPath = isMobile ? "none" : clipPathBase;
+  const clipPath = "inset(0px 8px round 32px)";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -673,12 +498,13 @@ const App = () => {
   }));
 
   return (
-    <div className="min-h-screen text-text-primary font-sans" style={{ backgroundColor: '#0A0A0A' }}>
+    <div className="min-h-screen text-text-primary font-sans bg-bg-main">
       {/* GNB - Global Navigation Bar */}
       <Navbar activePage="home" scrollLineProgress={navLineScaleX} />
 
       {/* Hero Section */}
-      <section id="hero" className="relative z-20 h-screen flex items-center justify-center overflow-clip bg-[#0A0A0A] font-poppins">
+      <div className="relative z-20 bg-bg-main" style={{ marginTop: '68px' }}>
+      <section id="hero" data-theme="dark" className="relative flex items-center justify-center overflow-clip font-poppins mx-2 mt-2 mb-2 rounded-[32px] bg-[#0A0A0A]" style={{ minHeight: 'calc(100vh - 64px - 16px)' }}>
 
         {/* Silk Motion Background */}
         <div className="absolute inset-0 z-0">
@@ -697,9 +523,9 @@ const App = () => {
           <HeroSpline />
         </div>
 
-        <div className="relative z-10 w-full max-w-[1280px] mx-auto container-responsive flex items-center h-full pointer-events-none -mt-[160px] md:mt-0">
-          <div className="w-full h-full flex flex-col justify-center lg:flex-row lg:justify-start items-center relative">
-            {/* Left Content */}
+        <div className="relative z-10 w-full max-w-[1280px] mx-auto container-responsive flex items-center justify-center lg:justify-start h-full pointer-events-none">
+          <div className="w-full h-full flex flex-col justify-center items-center lg:items-start relative py-12">
+            {/* Content Area */}
             <div className="w-full lg:max-w-[800px] relative z-20 pointer-events-auto md:pl-[28px]">
               <HeroContent align="left" />
             </div>
@@ -708,7 +534,7 @@ const App = () => {
 
         {/* 스크롤 다운 인디케이터 */}
         <motion.div
-          className="hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-2 cursor-pointer"
+          className="flex absolute bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-1.5 md:gap-2 cursor-pointer"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
@@ -724,17 +550,18 @@ const App = () => {
           <span className="text-white/60 text-sm font-medium tracking-wider">Scroll down</span>
         </motion.div>
       </section>
+      </div>
 
       {/* Main Content Area */}
-      <div className="relative z-20" style={{ backgroundColor: '#0A0A0A' }}>
-        <div className="relative w-full pt-10">
+      <div className="relative z-20 bg-bg-main">
+        <div className="relative w-full">
           {/* Continuous gradient from the Hero section into the gap */}
 
           <motion.div
             style={{ clipPath, willChange: 'clip-path' } as any}
-            className={`bg-[#F3F5FC] border-black/5 relative z-20 overflow-hidden mb-20 smooth-gpu ${isMobile ? 'border-none' : 'border'}`}
+            className="relative z-20 overflow-hidden mb-20 smooth-gpu bg-bg-main"
           >
-            <section id="solution" className="py-16 md:py-32">
+            <section id="solution" data-theme="light" className="py-16 md:py-32 bg-white">
               <div className="max-w-[1280px] mx-auto container-responsive relative">
                 <motion.div
                   initial={isMobile ? false : { opacity: 0, y: 30 }}
@@ -743,15 +570,15 @@ const App = () => {
                   transition={{ duration: 0.8, ease: "easeOut" }}
                   className="text-left md:text-center mb-10 md:mb-20 font-pretendard flex flex-col items-start md:items-center relative z-10"
                 >
-                  <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">AI 솔루션</span>
-                  <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-black mb-4 md:mb-6 tracking-tight leading-tight font-poppins">
-                    AI Solutions
+                  <span className="text-body-sm md:text-body text-black mb-3 block font-medium">AI서비스</span>
+                  <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold mb-4 md:mb-6 tracking-tight leading-tight font-poppins text-black">
+                    AI Services by kt ds
                   </h1>
                 </motion.div>
 
 
                 {/* 그룹 1: 전사 공통 */}
-                <div className="mb-16 md:mb-32 max-w-[1024px] mx-auto">
+                <div className="mb-16 md:mb-32 max-w-[1200px] mx-auto">
                   <motion.div
                     initial={isMobile ? false : { opacity: 0, x: -20 }}
                     whileInView={isMobile ? {} : { opacity: 1, x: 0 }}
@@ -759,16 +586,10 @@ const App = () => {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="flex items-center gap-2 mb-5 ml-4"
                   >
-                    <span className="text-body font-normal text-gray-800">전사 공통 (General Business)</span>
+                    <span className="text-body font-normal text-gray-800">Agents</span>
                   </motion.div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
                     {[
-                      {
-                        image: "/logo_1.png",
-                        title: "AI:ON-U",
-                        desc: "엔터프라이즈 맞춤형 AI Agent를 빠르게 구축하는 No-Code 기반 Agent Builder",
-                        highlight: "#3분 완성 Agent"
-                      },
                       {
                         image: "/logo_2.png",
                         title: "WorksAI",
@@ -780,24 +601,30 @@ const App = () => {
                         title: "AI 회의록",
                         desc: "음성 기반 회의 자동 기록 · 요약 · 업무 추출 AI 서비스",
                         highlight: "#1분 완성 회의록 작성"
+                      },
+                      {
+                        image: "/logo_3.png",
+                        title: "국정감사 Agent",
+                        desc: "국정감사 담당자의 성향을 파악하여 필요한 내용을 정리하고 중요한 내용만 빠르게 확인할 수 있도록 도와주는 AI 서비스",
+                        highlight: "#빠른 준비, 정확한 대응"
+                      },
+                      {
+                        image: "/logo_4.png",
+                        title: "RFP Agent",
+                        desc: "AI 기반 제안요청서 자동 분석 및 답변 초안 생성 서비스",
+                        highlight: "#RFP 답변 시간 80% 단축"
                       }
                     ]
                       .map((card, i) => (
-                        <motion.div
-                          key={i}
-                          initial={isMobile ? false : { y: 60, opacity: 0 }}
-                          whileInView={isMobile ? {} : { y: 0, opacity: 1 }}
-                          viewport={{ once: false, margin: "-50px" }}
-                          transition={{ delay: i * 0.15, duration: 0.6, ease: "easeOut" }}
-                        >
+                        <div key={i}>
                           <SolutionCard {...card} number={`0${i + 1}`} />
-                        </motion.div>
+                        </div>
                       ))}
                   </div>
                 </div>
 
                 {/* 그룹 2: IT 서비스/개발 직군 */}
-                <div className="mb-14 max-w-[1024px] mx-auto">
+                <div className="mb-14 max-w-[1200px] mx-auto">
                   <motion.div
                     initial={isMobile ? false : { opacity: 0, x: -20 }}
                     whileInView={isMobile ? {} : { opacity: 1, x: 0 }}
@@ -805,19 +632,19 @@ const App = () => {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="flex items-center gap-2 mb-5 ml-4"
                   >
-                    <span className="text-body font-normal text-gray-800">IT 서비스/개발 직군 (IT Service & Dev)</span>
+                    <span className="text-body font-normal text-gray-800">Solutions</span>
                   </motion.div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
                     {[
                       {
-                        image: "/logo_4.png",
-                        title: "CloudWiz",
-                        desc: "클라우드 운영 효율화와 자동화를 지원하는 관리 서비스",
-                        highlight: "#멀티 클라우드 비용 30% 절감"
+                        image: "/logo_1.png",
+                        title: "AI:ON-U",
+                        desc: "엔터프라이즈 맞춤형 AI Agent를 빠르게 구축하는 No-Code 기반 Agent Builder",
+                        highlight: "#3분 완성 Agent"
                       },
                       {
                         image: "/logo_5.png",
-                        title: "Beast AI Gateway", isLarge: true,
+                        title: "Beast AI", isLarge: true,
                         desc: "엔터프라이즈용 AI 기술, API를 통합 관리하는 솔루션",
                         highlight: "#기업 내부 시스템과 AI 기능 표준화"
                       },
@@ -826,17 +653,17 @@ const App = () => {
                         title: "Codebox",
                         desc: "폐쇄형 설치형 AI 코드 개발 어플라이언스",
                         highlight: "#보안 특화 AI 개발 환경"
+                      },
+                      {
+                        image: "/logo_4.png",
+                        title: "CloudWiz",
+                        desc: "클라우드 운영 효율화와 자동화를 지원하는 관리 서비스",
+                        highlight: "#멀티 클라우드 비용 30% 절감"
                       }
                     ].map((card, i) => (
-                      <motion.div
-                        key={i}
-                        initial={isMobile ? false : { y: 60, opacity: 0 }}
-                        whileInView={isMobile ? {} : { y: 0, opacity: 1 }}
-                        viewport={{ once: false, margin: "-50px" }}
-                        transition={{ delay: i * 0.15, duration: 0.6, ease: "easeOut" }}
-                      >
+                      <div key={i}>
                         <SolutionCard {...card} number={`0${i + 1}`} />
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -847,498 +674,112 @@ const App = () => {
           </motion.div>
         </div>
 
-        <section id="domain" className="py-20 md:py-32 relative overflow-hidden pb-16" style={{ backgroundColor: '#0A0A0A' }}>
-          <div className="max-w-[1280px] mx-auto container-responsive">
-            <motion.div
-              initial={isMobile ? false : { opacity: 0, y: 30 }}
-              whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
-              className="text-center mb-12 md:mb-16 font-pretendard flex flex-col items-center"
-            >
-              <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium tracking-tight">도메인별 멀티 에이전트</span>
-              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight font-poppins leading-[1.1]">Domain-Specific<br />Multi Agent</h1>
-            </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row gap-2 w-full lg:h-[700px]">
-              <DomainAccordionItem
-                title="금융"
-                agents={['Audit Agent', 'SQL Agent', 'RFP Agent']}
-                image="https://images.unsplash.com/photo-1643258367012-1e1a983489e5?auto=format&fit=crop&q=80&w=1200"
-                isActive={activeDomain === 0}
-                forceExpanded={isMobile}
-                onMouseEnter={() => setActiveDomain(0)}
-                onClick={() => setActiveDomain(0)}
-              />
-              <DomainAccordionItem
-                title="공공기관"
-                agents={['Audit Agent', 'RFP Agent', 'SQL Agent']}
-                image="https://images.unsplash.com/photo-1665865298238-ec7a85eb3f9a?auto=format&fit=crop&q=80&w=1200"
-                isActive={activeDomain === 1}
-                forceExpanded={isMobile}
-                onMouseEnter={() => setActiveDomain(1)}
-                onClick={() => setActiveDomain(1)}
-              />
-              <DomainAccordionItem
-                title="일반기업"
-                agents={['SQL Agent', 'RFP Agent', 'Codebox', 'beast AI Gateway']}
-                image="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200"
-                isActive={activeDomain === 2}
-                forceExpanded={isMobile}
-                onMouseEnter={() => setActiveDomain(2)}
-                onClick={() => setActiveDomain(2)}
-              />
-              <DomainAccordionItem
-                title="미디어"
-                agents={['SQL Agent', 'TA Agent']}
-                image="https://images.unsplash.com/photo-1652166553819-f892e61fc12c?auto=format&fit=crop&q=80&w=1200"
-                isActive={activeDomain === 3}
-                forceExpanded={isMobile}
-                onMouseEnter={() => setActiveDomain(3)}
-                onClick={() => setActiveDomain(3)}
-              />
-              <DomainAccordionItem
-                title="통신/네트워크"
-                agents={['SQL Agent', 'beast AI Gateway', 'Codebox']}
-                image="https://images.unsplash.com/photo-1680992044138-ce4864c2b962?auto=format&fit=crop&q=80&w=1200"
-                isActive={activeDomain === 4}
-                forceExpanded={isMobile}
-                onMouseEnter={() => setActiveDomain(4)}
-                onClick={() => setActiveDomain(4)}
-              />
+        <section id="use-cases" data-theme="dark" className="relative" style={{ backgroundColor: '#0A0A0A' }}>
+          <div className="max-w-[1280px] mx-auto w-full container-responsive pt-16 md:pt-32 pb-0 text-left md:text-center relative">
+            <div className="w-full flex flex-col items-start md:items-center">
+              <span className="text-body-sm md:text-body mb-3 block font-medium text-white/40">고객 사례</span>
+              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold tracking-tight leading-[1.3] font-poppins mx-0 md:mx-auto text-white">
+                Use Cases
+              </h1>
             </div>
           </div>
-        </section>
 
-        <section id="use-cases" className="relative" style={{ backgroundColor: '#0A0A0A' }}>
-          {/* Title Area: Normal Scrolling */}
-          <div className="max-w-[1280px] mx-auto w-full container-responsive pt-16 md:pt-32 pb-0 text-left md:text-center relative">
-            <motion.div
-              initial={isMobile ? false : { opacity: 0, y: 30 }}
-              whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
-              className="w-full flex flex-col items-start md:items-center"
-            >
-              <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">솔루션/멀티 에이전트 고객사례</span>
-              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white tracking-tight leading-[1.3] font-poppins mx-0 md:mx-auto">
-                Solution, Multi Agent<br />Use Cases
-              </h1>
-            </motion.div>
-          </div>
+          <div className="max-w-[1248px] mx-auto w-full container-responsive py-16 md:py-24 flex flex-col items-center">
+            <div className="w-full flex flex-col gap-24 md:gap-32 items-center">
+            {useCaseItems.map((item) => (
+              <div key={item.id} className="flex flex-col items-center w-full max-w-[1200px]">
+                {/* Quote Header */}
+                <div className="w-full flex flex-col items-center text-center mb-16">
+                  <div className="text-[48px] md:text-[60px] font-serif text-white/30 leading-none h-8 select-none">“</div>
+                  <h2 className="text-[20px] md:text-[28px] font-bold mb-5 leading-[1.5] break-keep max-w-[800px] bg-gradient-to-b from-white via-white to-white/50 bg-clip-text text-transparent">
+                    질문만으로 원하는 데이터(문서, 통계)를 바로 찾고,<br />
+                    3개월 안에 업무에 적용한 AI 구축 사례
+                  </h2>
+                  <div className="text-[14px] md:text-[16px] font-medium text-white/40">
+                    - 한국기계산업진흥원
+                  </div>
+                </div>
 
-          {/* Sticky Pinned Area: Begins after the title scrolls away */}
-          <div ref={useCaseRef} className="relative h-auto lg:h-[2000vh]">
-            {/* Mobile Layout (Static List) */}
-            <div className="lg:hidden w-full flex flex-col gap-16 px-4 py-12">
-              {useCaseItems.map((item, index) => (
-                <div key={item.id} className="flex flex-col gap-8">
-                  {/* Solution + Visual Group */}
-                  <div className="bg-bg-surface/50 backdrop-blur-sm border border-border-light rounded-[20px] p-6 flex flex-col gap-8">
-                    <div className="flex flex-col gap-3">
-                      <span className="text-text-secondary/60 text-body-md font-medium font-pretendard tracking-tight">
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-                      <h4 className="text-body-lg font-bold text-text-primary leading-tight">
-                        {item.titlePrefix} {item.titleSuffix || ''}
-                      </h4>
-                      <p className="text-text-secondary text-label-lg leading-relaxed break-keep font-normal">
+                {/* Image */}
+                <div className="w-full rounded-[20px] overflow-hidden mb-8 border border-white/10 bg-white/5">
+                    <img src={item.image} alt={item.titlePrefix} className="w-full h-auto object-contain" />
+                  </div>
+                  <div className="flex flex-col md:flex-row gap-12 md:gap-[120px] text-left w-full mt-12 mb-16 items-stretch">
+                    {/* Left: Title & Chips & Button (aligned to bottom) */}
+                    <div className="md:w-1/3 flex flex-col justify-between items-start">
+                      <div className="flex flex-col items-start">
+                        <h3 className="text-[32px] md:text-[40px] mb-6 leading-[1.2] tracking-tight text-white">
+                          <span className="font-bold block">{item.titlePrefix}</span>
+                          {item.titleSuffix && <span className="font-normal block mt-2 text-white/80">{item.titleSuffix}</span>}
+                        </h3>
+                        {item.tags && (
+                          <div className="flex flex-wrap gap-2 justify-start">
+                            {item.tags.map((tag: string, i: number) => (
+                              <span
+                                key={i}
+                                className="px-4 py-1.5 text-[15px] font-medium rounded-full bg-white/10 text-white/90"
+                              >
+                                # {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      
+                    </div>
+
+                    {/* Right: Description + Features */}
+                    <div className="flex-1 flex flex-col gap-10">
+                      <p className="text-[16px] leading-relaxed font-normal text-white/70 break-keep max-w-[640px]">
                         {item.desc}
                       </p>
-                      <ul className="space-y-2 pt-1">
-                        {item.features.map((feature, i) => (
-                          <li key={i} className="flex items-start gap-2 text-text-secondary text-label-md leading-relaxed">
-                            <span className="text-brand-primary mt-[2px] shrink-0">•</span>
-                            <span className="break-keep">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
 
-                    {/* Visual Preview */}
-                    <div className="relative aspect-video rounded-[20px] overflow-hidden bg-zinc-900 border border-border-light/50 shadow-2xl">
-                      <img
-                        src={item.image}
-                        alt={item.titlePrefix}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+                      {/* Features */}
+                      {item.features && (
+                        <div className="bg-white/[0.03] border border-white/10 rounded-[16px] p-6 flex flex-col gap-4">
+                          {item.features.map((feature: string, i: number) => (
+                            <div key={i} className="flex items-baseline gap-4">
+                              <span className="text-[12px] font-bold text-blue-400 tracking-widest shrink-0">
+                                {String(i + 1).padStart(2, '0')}
+                              </span>
+                              <span className="text-[15px] font-normal text-[#CCCCCC] leading-relaxed">{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
 
-            {/* Desktop Layout (Sticky & Transitions) */}
-            <div className="hidden lg:flex sticky top-0 h-screen w-full items-center justify-center px-4 md:px-6 md:px-10 overflow-hidden pt-16">
-              {/* 전체 배경: 색상 직접 보간으로 부드러운 전환 */}
-              <motion.div
-                style={{ backgroundColor: useCaseBgColor }}
-                className="absolute inset-0 w-full h-full"
-              />
-              <div className="max-w-[1200px] mx-auto w-full h-full relative z-10">
-                <div className="w-full flex flex-col lg:flex-row items-center relative gap-8 lg:gap-0 h-full">
-                  <div className="w-full lg:w-[42%] flex flex-col justify-start z-20 pr-0 md:pr-12 lg:pr-16 self-start pt-[20vh] h-full relative overflow-hidden">
-                    {/* 단일 슬롯: 모든 Use Case가 동일한 자리에서 교체됨 */}
-                    <div className="relative h-full">
-                      {useCaseItems.map((item, index) => {
-                        // 각 아이템 1/3 균등: pain 0.167, solution 0.167 (360vh 동일)
-                        const qRange: [number, number] = index === 0 ? [0.0, 0.08] : index === 1 ? [0.333, 0.413] : [0.667, 0.747];
-                        const dRange: [number, number] = [qRange[1] + 0.087, qRange[1] + 0.12];
-                        const nextStart = index < 2 ? (index === 0 ? 0.333 : 0.667) : 1.0;
-                        const exitRange: [number, number] = [nextStart - 0.053, nextStart - 0.009];
-                        const isActive = activeUseCase === index;
-
-                        // CharacterReveal 범위 (모든 항목 동일하게 유지)
-                        const qSpan = qRange[1] - qRange[0];
-                        const numFillEnd = qRange[0] + qSpan * 0.3;
-                        const textRange: [number, number] = [numFillEnd, qRange[1]];
-
-                        // Q: bg가 dark로 스냅된 이후에 등장 (0.321/0.651/0.991 이후)
-                        const ghostStart = index === 0 ? qRange[0] - 0.01 : qRange[0] - 0.005;
-                        const ghostVisible = index === 0 ? qRange[0] : qRange[0];
-                        const qOpacity = useTransform(sectionProgress, [ghostStart, ghostVisible, dRange[0], dRange[0] + 0.001], [0, 1, 1, 0]);
-                        // D: Q가 사라지면서 등장 → 다음 Q 시작 전에 사라짐
-
-                        // 즉시 등장, exitRange[1]에서 snap으로 사라짐
-                        const panelOpacity = useTransform(
-                          sectionProgress,
-                          [dRange[0], dRange[0] + 0.06, exitRange[1], exitRange[1] + 0.001],
-                          [0, 1, 1, 0]
-                        );
-
-                        // 숫자: qRange 시작부터 즉시 100% (다만 내부 CharacterReveal이 0.4 -> 1 조절), 이후 사라짐
-                        const numOpacity = useTransform(sectionProgress, [ghostStart, ghostVisible, dRange[0], dRange[0] + 0.001], [0, 1, 1, 0]);
-
-                        return (
-                          <div key={item.id} className="absolute inset-0 w-full" style={{
-                            pointerEvents: isActive ? 'auto' : 'none',
-                            zIndex: isActive ? 50 : 0
-                          }}>
-                            {/* 번호 + 질문 레이어 */}
-                            <motion.div
-                              style={{ opacity: qOpacity }}
-                              className="absolute inset-0"
-                            >
-                              <motion.p
-                                style={{ opacity: numOpacity }}
-                                className="text-text-primary text-body-md font-medium tracking-tight mb-6 font-pretendard"
-                              >
-                                {String(index + 1).padStart(2, '0')}. Painpoint
-                              </motion.p>
-                              <CharacterReveal
-                                text={item.question}
-                                scrollProgress={sectionProgress}
-                                range={textRange}
-                                highlightIndex={item.highlightIndex}
-                              />
-                            </motion.div>
-
-                            {/* 설명 레이어 - 솔루션 컨텐츠 (배경은 외부 전체 bg 패널이 담당) */}
-                            <motion.div
-                              style={{ opacity: panelOpacity }}
-                              className="absolute inset-0 w-full overflow-hidden"
-                            >
-                              <div className="mb-6 w-full max-w-lg">
-                                <p className="text-gray-900 text-body-md font-bold tracking-tight font-pretendard mb-3">
-                                  {String(index + 1).padStart(2, '0')}&nbsp;&nbsp;Solution.
-                                </p>
-                              </div>
-
-                              <h3 className="text-heading-xl text-gray-900 mb-3 leading-[1.1] tracking-tight">
-                                <span className="font-bold">{item.titlePrefix}</span>{" "}
-                                <span className="font-normal">{item.titleSuffix}</span>
-                              </h3>
-                              <p className="text-body-sm text-[#6B7280] leading-relaxed max-w-lg mb-5 font-normal">
-                                {item.desc}
-                              </p>
-                              {item.tags && (
-                                <div className="flex flex-wrap gap-2 mb-12">
-                                  {item.tags.map((tag: string, i: number) => {
-                                    const tagColor = '#1A75FF'; // Primary Blue
-                                    return (
-                                      <span
-                                        key={i}
-                                        className="px-4 py-1.5 text-label-lg font-semibold rounded-full"
-                                        style={{
-                                          color: tagColor,
-                                          backgroundColor: `${tagColor}12`, // 옅은 프라이머리 배경
-                                        }}
-                                      >
-                                        # {tag}
-                                      </span>
-                                    );
-                                  })}
-                                </div>
-                              )}
-                              {item.features && (
-                                <div className="mb-6 max-w-lg">
-                                  <ul className="space-y-1.5">
-                                    {item.features.map((feature: string, i: number) => (
-                                      <li key={i} className="flex items-start gap-3 text-body-sm leading-relaxed">
-                                        <span className="text-gray-800 font-bold shrink-0">•</span>
-                                        <span className="text-gray-800 font-normal">{feature}</span>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              )}
-                            </motion.div>
-
-                            {/* 버튼 영역: 솔루션 컨텐츠와 함께 등장/퇴장 */}
-                            <motion.div
-                              style={{ opacity: panelOpacity }}
-                              className="absolute bottom-[10vh] left-0 pointer-events-auto"
-                            >
-                                <Button
-                                  variant="outline"
-                                  rounded="lg"
-                                  size="cta"
-                                  className="w-[100px] h-[48px] p-0 gap-0 border-gray-900/20 text-gray-900 hover:border-gray-900/40"
-                                  onClick={() => navigate('/use-cases')}
-                                >
-                                  <span>전체보기</span>
-                                  <ChevronRight size={18} className="max-w-0 opacity-0 group-hover:max-w-[20px] group-hover:opacity-100 group-hover:ml-1 transition-all duration-300 overflow-hidden" />
-                                </Button>
-                            </motion.div>
-                          </div>
-                        );
-                      })}
+                      <div className="flex justify-start">
+                        <Button
+                          variant="outline"
+                          rounded="lg"
+                          size="cta"
+                          className="w-[120px] h-[48px] border-white/20 text-white hover:border-white/40 hover:bg-white/5 transition-all"
+                          onClick={() => navigate('/use-cases')}
+                        >
+                          <span>전체보기</span>
+                        </Button>
+                      </div>
                     </div>
                   </div>
-
-                  {/* 우측 이미지: flex 레이아웃으로 화면 정중앙 배치 */}
-                  <div className="w-full lg:w-[58%] flex items-center justify-end overflow-visible">
-                    <div className="w-full relative h-[80vh]">
-                      {useCaseItems.map((item, index) => {
-                        const isActive = activeUseCase === index;
-                        const qRange: [number, number] = index === 0 ? [0.0, 0.08] : index === 1 ? [0.333, 0.413] : [0.667, 0.747];
-                        const nextStart = index < 2 ? (index === 0 ? 0.333 : 0.667) : 1.0;
-                        const exitRange: [number, number] = [nextStart - 0.053, nextStart - 0.009];
-
-                        // 이전 아이템의 exitRange (index>0에서 아래서 올라오는 진입에 사용)
-                        const prevExitStart = qRange[0] - 0.06;
-                        const prevExitEnd = qRange[0] - 0.01;
-
-                        // index 0: 우에서 등장, 라인 완료 후 pause, 이후 위로 퇴장
-                        const imageX0 = useTransform(sectionProgress, [qRange[0], qRange[0] + 0.04], [60, 0]);
-                        const imageY0 = useTransform(sectionProgress, [exitRange[0] + 0.03, exitRange[1]], [0, -800]);
-                        const imageOpacity0 = useTransform(sectionProgress, [qRange[0], qRange[0] + 0.03, exitRange[1] - 0.005, exitRange[1]], [0, 1, 1, 0]);
-
-                        // index > 0: pause 끝난 시점(+0.03)부터 올라오며 진입, 이후 위로 퇴장
-                        const imageYn = useTransform(sectionProgress, [prevExitStart + 0.03, prevExitEnd, exitRange[0] + 0.03, exitRange[1]], [800, 0, 0, -800]);
-                        const imageOpacityn = useTransform(sectionProgress, [prevExitStart + 0.02, prevExitStart + 0.03, exitRange[1] - 0.005, exitRange[1]], [0, 1, 1, 0]);
-
-                        const imageY = index === 0 ? imageY0 : imageYn;
-                        const imageOpacity = index === 0 ? imageOpacity0 : imageOpacityn;
-
-                        return (
-                          <motion.div
-                            key={index}
-                            style={{
-                              opacity: imageOpacity,
-                              x: index === 0 ? imageX0 : 0,
-                              y: imageY,
-                              pointerEvents: isActive ? 'auto' : 'none',
-                            }}
-                            className="absolute inset-0 w-full h-full flex items-center justify-end"
-                          >
-                            <UseCaseVisual
-                              image={item.image}
-                              frameImage={index === 0 ? "/test-1.png" : index === 1 ? "/test-2.png" : "/test-3.png"}
-                              initialMouseX={index === 0 ? 0.75 : -0.75}
-                              cursorColor={item.themeColor === 'sky' ? '#0EA5E9' : item.themeColor === 'emerald' ? '#10B981' : '#1A75FF'}
-                              cursorName={item.cursorName}
-                              index={index}
-                              setActive={() => { }}
-                              isActive={isActive}
-                            />
-                          </motion.div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
               </div>
+            ))}
             </div>
           </div>
         </section>
 
 
-        {/* 수치로 증명하는 Biz.AI (Stats Section) */}
-        <section id="stats" className="py-16 md:py-32" style={{ backgroundColor: '#0A0A0A' }}>
-          <div className="max-w-[1280px] mx-auto container-responsive">
-            <div className="text-left md:text-center mb-12 md:mb-32">
-              <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">수치로 증명하는 Biz.AI</span>
-              <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight font-poppins">
-                Proven Results
-              </h1>
-            </div>
-
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-x-16">
-              {[
-                { label: "IT Engineers", value: 1700, suffix: "+", sub: "Cloud & AI 기술을 선도하는 전문 인력" },
-                { label: "Solution", value: 18, suffix: "", sub: "AX를 리딩하는 자체 개발 솔루션" },
-                { label: "Clients", value: 150, suffix: "+", sub: "금융·공공·유통·미디어 등 다양한 산업 고객" },
-                { label: "AI Agent", value: 600, suffix: "+", sub: "도메인별 특화 AI 에이전트" }
-              ].map((stat, i) => (
-                <div key={i} className="flex flex-col items-start font-pretendard">
-                  <div className="text-display-xs md:text-display-lg lg:text-display-xl font-medium text-text-primary tracking-tighter leading-none mb-6 md:mb-12">
-                    <AnimatedCounter from={0} to={stat.value} />
-                    <span className="text-brand-primary ml-1">{stat.suffix}</span>
-                  </div>
-                  <span className="text-text-primary text-label-md md:text-body-sm lg:text-body font-bold mb-1">{stat.label}</span>
-                  <p className="text-text-secondary text-label-sm md:text-label-lg lg:text-body-sm leading-relaxed font-normal break-keep">{stat.sub}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Why kt ds - 프로세스 섹션 */}
         <ProcessSection isMobile={isMobile} />
 
-        <section id="logos" className="relative py-24 overflow-hidden" style={{ backgroundColor: '#0A0A0A' }}>
-          {/* Hero와 동일한 그리드 배경 추가 */}
-          <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
-          
-          <div className="relative z-10 w-full text-center">
-            <div className="relative overflow-hidden w-full py-4">
-              <motion.div
-                className="flex items-center gap-x-12 whitespace-nowrap"
-                animate={{ x: ["0%", "-50%"] }}
-                transition={{
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  duration: 60,
-                  ease: "linear"
-                }}
-              >
-                {[...Array(2)].map((_, i) => (
-                  <React.Fragment key={i}>
-                    {[
-                      { name: "KT", logo: "/logos/kt.png", scale: 1 },
-                      { name: "경기도", logo: "/logos/gyeonggido.png", scale: 1 },
-                      { name: "현대그린푸드", logo: "/logos/hwell.png", scale: 1.2 },
-                      { name: "한국철도공사", logo: "/logos/kr.png", scale: 1.2 },
-                      { name: "건국대학교 미래지식교육원", logo: "/logos/konmi.png", scale: 1.2 },
-                      { name: "트루엔", logo: "/logos/true.png", scale: 1.2 }
-                    ].map((brand, idx) => (
-                      <div key={`${i}-${idx}`} className="flex items-center justify-center shrink-0 w-[180px] h-[80px]">
-                        <img 
-                          src={brand.logo} 
-                          alt={brand.name} 
-                          style={{ transform: `scale(${brand.scale})` }}
-                          className="max-h-[38px] max-w-[140px] w-auto h-auto object-contain opacity-100 transition-all duration-300 pointer-events-auto brightness-0 invert"
-                        />
-                      </div>
-                    ))}
-                  </React.Fragment>
-                ))}
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-
-
-        {/* 새로운 소식 섹션: 우측 블리드(Bleed) 레이아웃 */}
-        <section id="news" className="py-16 md:py-32 relative" style={{ backgroundColor: '#0A0A0A' }}>
-          {/* 헤더 영역: 컨테이너 내부 */}
-          <div className="max-w-[1280px] mx-auto container-responsive mb-10 md:mb-20">
-            <div className="flex justify-between items-end">
-              <div className="flex flex-col items-start text-left">
-                <span className="text-body-sm md:text-body text-[#999999] mb-3 block font-medium">새로운 소식</span>
-                <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white mb-4 md:mb-6 tracking-tight leading-tight font-poppins">
-                  News
-                </h1>
-              </div>
-
-              {/* 내비게이션 버튼 */}
-              <div className="flex gap-2.5 mb-2">
-                  <Button
-                    variant="nav"
-                    size="icon-md"
-                    rounded="full"
-                    className="gap-2"
-                    onClick={() => scrollNews('left')}
-                    disabled={!canScrollLeft}
-                  >
-                    <ChevronLeft size={20} strokeWidth={2.5} />
-                  </Button>
-                  <Button
-                    variant="nav"
-                    size="icon-md"
-                    rounded="full"
-                    className="gap-2"
-                    onClick={() => scrollNews('right')}
-                  >
-                    <ChevronRight size={20} strokeWidth={2.5} />
-                  </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* 뉴스 카드 리스트: 타이틀 정렬 + 우측 블리드 */}
-          <div
-            ref={newsScrollRef}
-            className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-12 pl-[max(1.25rem,calc((100vw-1200px)/2))]"
-            onScroll={handleNewsScroll}
-          >
-            {[...HIGHLIGHT_NEWS, ...REGULAR_NEWS].slice(0, 8).map((news: any, i) => (
-              <motion.div
-                key={i}
-                className="group cursor-pointer shrink-0 w-[380px]"
-                onClick={() => {
-                  navigate(`/news/${i + 1}`, { state: { news } });
-                }}
-              >
-                {/* 썸네일: 380 * 240 사이즈 */}
-                <div className="relative w-full aspect-[380/240] rounded-[20px] overflow-hidden mb-5 bg-bg-surface border border-border-light group-hover:border-border-light/60 transition-all">
-                  <motion.img
-                    src={news.이미지}
-                    alt={news.타이틀}
-                    className="w-full h-full object-cover brightness-90 group-hover:brightness-100 group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                </div>
-
-                <div className="pt-2 px-1 flex flex-col">
-                  <span className="text-brand-secondary text-label-lg font-bold mb-3">{news.태그}</span>
-                  <h3 className="text-text-primary text-body-xl font-bold leading-snug mb-3 whitespace-pre-line">
-                    {news.타이틀}
-                  </h3>
-                  <div className="flex items-center text-text-dim text-label-lg font-medium">
-                    <span>{news.언론사 || news.솔루션}</span>
-                    <span className="mx-2 text-[4px] opacity-50">●</span>
-                    <span>{news.날짜}</span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* 더보기 버튼: 중앙 정렬 */}
-          <div className="flex justify-center mt-8">
-            <Link to="/news">
-              <Button
-                variant="outline"
-                rounded="lg"
-                size="cta"
-                className="w-[120px] h-[48px] p-0 gap-0"
-              >
-                <span>전체보기</span><ChevronRight size={16} className="max-w-0 opacity-0 group-hover:max-w-[18px] group-hover:opacity-100 group-hover:ml-[2px] transition-all duration-300 overflow-hidden" />
-              </Button>
-            </Link>
-          </div>
-        </section>
-
         {/* FAQ 섹션 */}
-        <section id="faq" className="py-12 md:py-24 relative overflow-hidden" style={{ backgroundColor: '#0A0A0A' }}>
+        <section id="faq" className="py-12 md:pt-24 md:pb-[60px] relative overflow-hidden bg-bg-main">
           <div className="max-w-[1280px] mx-auto container-responsive">
             <div className="flex flex-col lg:flex-row gap-10 md:gap-20">
               {/* 왼쪽: 헤더 */}
               <div className="lg:w-1/3">
-                <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold text-white mb-6 md:mb-8 tracking-tight leading-tight font-poppins">
+                <h1 className="text-heading-md md:text-heading-lg lg:text-display-md font-bold mb-6 md:mb-8 tracking-tight leading-tight font-poppins text-text-primary">
                   FAQ
                 </h1>
               </div>
@@ -1346,7 +787,6 @@ const App = () => {
               {/* 오른쪽: 아코디언 리스트 */}
               <div className="lg:w-2/3">
                 <div className="space-y-4">
-                  {/* self-invoking function을 사용하여 지역 상태(openFaqIndex)를 FAQ 목록 전체에서 관리합니다. */}
                   {(() => {
                     const FAQList = () => {
                       const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -1389,16 +829,14 @@ const App = () => {
                                   onClick={() => setOpenIndex(isOpen ? null : i)}
                                   className="w-full py-8 flex items-center justify-between text-left group cursor-pointer h-auto px-0 hover:bg-transparent"
                                 >
-                                  <span className={`text-body-xs md:text-body-md font-bold tracking-tight transition-colors duration-300 ${isOpen ? 'text-text-primary' : 'text-text-secondary/80 group-hover:text-text-primary/90'}`}>
+                                  <span className={`text-body-xs md:text-body-md font-bold tracking-tight transition-colors duration-300 ${isOpen ? 'text-text-primary' : 'text-text-secondary group-hover:text-text-primary'}`}>
                                     {item.q}
                                   </span>
                                   <div className="relative w-6 h-6 flex items-center justify-center">
-                                    {/* Horizontal line (always visible) */}
                                     <motion.div
                                       className="absolute w-5 h-[2px] bg-brand-primary"
                                       animate={{ rotate: 0 }}
                                     />
-                                    {/* Vertical line (rotates to become horizontal to make '-') */}
                                     <motion.div
                                       className="absolute w-5 h-[2px] bg-brand-primary"
                                       animate={{ rotate: isOpen ? 0 : 90 }}
@@ -1415,7 +853,7 @@ const App = () => {
                                       transition={{ duration: 0.3, ease: "easeInOut" }}
                                       className="overflow-hidden"
                                     >
-                                      <p className="pb-8 text-[#CCCCCC] text-body-base leading-relaxed font-normal break-keep max-w-2xl">
+                                      <p className="pb-8 text-body-base leading-relaxed font-normal break-keep max-w-2xl text-text-secondary">
                                         {item.a}
                                       </p>
                                     </motion.div>
@@ -1435,101 +873,68 @@ const App = () => {
           </div>
         </section>
 
-
-        {/* AI Agent 스튜디오 섹션 */}
-        {/* AI Agent 스튜디오 섹션 */}
-        <section id="studio-v2" className="py-16 md:py-32 px-6 relative overflow-hidden" style={{ backgroundColor: '#0A0A0A' }}>
-          <div className="max-w-[1200px] mx-auto relative z-10">
-            {/* 메인 배너 카드 */}
-            <motion.div
-              initial={isMobile ? false : { opacity: 0, y: 30 }}
-              whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative h-[400px] w-full rounded-[32px] overflow-hidden group mb-8 shadow-2xl shadow-black/50"
-            >
-              <div className="absolute inset-0 z-0">
-                <Silk
-                  speed={3.5}
-                  scale={0.8}
-                  color="#ccd2ff"
-                  noiseIntensity={2.7}
-                  rotation={4.8}
-                />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-r from-[#000000] via-[#000000]/60 to-transparent z-[1]" />
-              <div className="relative z-10 px-8 md:px-20 h-full flex flex-col justify-center max-w-3xl font-pretendard">
-                <h3 className="text-heading-md md:text-display-hero font-bold text-white mb-4 md:mb-6 tracking-tight leading-[1.1]">
-                  AI Agent Studio
-                </h3>
-                <p className="text-white/70 text-body-sm leading-relaxed break-keep font-medium mb-8 md:mb-10 max-w-xl">
-                  필요한 Agent, Tool, MCP를 빠르게 확인하고 시작하세요.<br />
-                  쉽게 개발 가능한 AI 아키텍처와 Delivery 가이드를 제공합니다.
-                </p>
-                <a
-                  href="https://studio.abclab.ktds.com/auth/login"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group/btn inline-flex items-center justify-center gap-0 py-3 rounded-lg border border-border-light text-white font-bold text-body-xs w-[120px] hover:border-text-primary/25 transition-all duration-300 overflow-hidden"
-                >
-                  <span className="translate-x-0 group-hover/btn:-translate-x-1 transition-transform duration-300">체험하기</span>
-                  <span className="w-0 opacity-0 group-hover/btn:w-5 group-hover/btn:opacity-100 transition-all duration-300 flex items-center justify-end overflow-hidden">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-300">
-                      <path d="M7 17L17 7M17 7H7M17 7V17" />
-                    </svg>
-                  </span>
-                </a>
-              </div>
-              <div className="absolute right-[-10%] top-[-10%] w-[50%] h-[120%] bg-brand-primary/20 blur-[100px] rounded-full opacity-50 pointer-events-none" />
-            </motion.div>
-
-            {/* 하단 4개 기능 카드 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                { title: "Agent 개발", desc: "AI Agent 개발을 위한 통합 개발 환경과 도구를 제공합니다.", icon: <Code className="text-white" strokeWidth={2} size={28} /> },
-                { title: "Core Agent", desc: "사전 개발된 Core Agent를 활용하여 빠른 프로토타이핑이 가능합니다.", icon: <Cpu className="text-white" strokeWidth={2} size={28} /> },
-                { title: "Use Case 패키징", desc: "Use case 단위로 패키징된 솔루션을 통해 즉시 배포할 수 있습니다.", icon: <Layers className="text-white" strokeWidth={2} size={28} /> },
-                { title: "Delivery 가이드", desc: "AI 아키텍처 소개 및 배포 가이드를 통해 안정적인 운영을 지원합니다.", icon: <BookOpen className="text-white" strokeWidth={2} size={28} /> },
-              ].map((card, i) => (
-                <motion.div
-                  key={i}
-                  initial={isMobile ? false : { opacity: 0, y: 20 }}
-                  whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
-                  className="group relative p-8 rounded-[24px] border border-white/5 hover:border-white/10 transition-all duration-500 overflow-hidden flex flex-col h-full"
-                >
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-brand-secondary/5 blur-2xl rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-brand-secondary/10 transition-colors" />
-                  <div className="mb-6 group-hover:scale-110 transition-all duration-500 w-fit">
-                    {card.icon}
-                  </div>
-                  <h4 className="text-body-md font-bold text-white mb-3 tracking-tight">{card.title}</h4>
-                  <p className="text-white/50 text-label-lg leading-relaxed break-keep font-medium group-hover:text-white/70 transition-colors">{card.desc}</p>
-                </motion.div>
-              ))}
+        <section id="logos" className="relative py-10 overflow-hidden bg-bg-main">
+          <div className="relative z-10 w-full text-center">
+            <div className="relative overflow-hidden w-full py-4">
+              <motion.div
+                className="flex items-center gap-x-12 whitespace-nowrap"
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 60,
+                  ease: "linear"
+                }}
+              >
+                {[...Array(2)].map((_, i) => (
+                  <React.Fragment key={i}>
+                    {[
+                      { name: "KT", logo: "/logos/kt.png", scale: 1 },
+                      { name: "경기도", logo: "/logos/gyeonggido.png", scale: 1 },
+                      { name: "현대그린푸드", logo: "/logos/hwell.png", scale: 1.2 },
+                      { name: "한국철도공사", logo: "/logos/kr.png", scale: 1.2 },
+                      { name: "건국대학교 미래지식교육원", logo: "/logos/konmi.png", scale: 1.2 },
+                      { name: "트루엔", logo: "/logos/true.png", scale: 1.2 }
+                    ].map((brand, idx) => (
+                      <div key={`${i}-${idx}`} className="flex items-center justify-center shrink-0 w-[180px] h-[80px]">
+                        <img
+                          src={brand.logo}
+                          alt={brand.name}
+                          style={{ transform: `scale(${brand.scale})` }}
+                          className={`max-h-[38px] max-w-[140px] w-auto h-auto object-contain opacity-100 transition-all duration-300 pointer-events-auto brightness-0 ${isDark ? 'invert' : ''}`}
+                        />
+                      </div>
+                    ))}
+                  </React.Fragment>
+                ))}
+              </motion.div>
             </div>
           </div>
         </section>
 
-        {/* CTA 배너 - Full Width (Premium Aurora Style) 복구 */}
+        {/* CTA 배너 - Full Width (Silk Motion Style) */}
         <div className="w-full py-0">
-          <section className="relative h-[500px] w-full overflow-hidden flex items-center justify-center bg-black">
-            <div className="absolute inset-0 z-0">
-              <img
-                src="/meeting-bg.jpg"
-                alt="회의"
-                className="w-full h-full object-cover"
+          <section data-theme="dark" className="relative h-[500px] w-full overflow-hidden flex items-center justify-center bg-black">
+            {/* Silk Motion Background */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+              <Silk
+                speed={3.5}
+                scale={0.8}
+                color="#c8d8ff"
+                noiseIntensity={6}
+                rotation={4.8}
               />
-              <div className="absolute inset-0 bg-black/70" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/70 to-black/97" />
             </div>
+
             <div className="relative z-10 w-full max-w-[1200px] mx-auto text-center font-pretendard px-6 py-20">
               <motion.div
-                initial={isMobile ? false : { opacity: 0, scale: 0.95 }}
-                whileInView={isMobile ? {} : { opacity: 1, scale: 1 }}
+                initial={isMobile ? false : { opacity: 0, y: 30 }}
+                whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
                 viewport={{ once: false }}
                 transition={{ duration: 1, ease: "easeOut" }}
               >
-                <h2 className="text-text-primary text-heading-sm md:text-display-sm font-bold mb-6 md:mb-10 tracking-tighter leading-[1.2] drop-shadow-[0_0_25px_rgba(255,255,255,0.2)]">
+                <h2 className="text-white text-heading-sm md:text-display-sm font-bold mb-6 md:mb-10 tracking-tighter leading-[1.2] drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">
                   Biz.AI와 함께<br />
                   AI 혁신을 지금 실행하세요.
                 </h2>
@@ -1577,7 +982,7 @@ const App = () => {
         </AnimatePresence>
 
         {/* 풋터 */}
-        <footer className="py-16 px-6 border-t border-border-light relative z-20" style={{ backgroundColor: '#0A0A0A' }}>
+        <footer className="py-16 px-6 relative z-20 bg-[#0A0A0A]">
           <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-start gap-10 md:gap-0 font-pretendard">
             {/* 좌측: 로고 + 주소 */}
             <div className="flex flex-col items-start gap-8">
@@ -1586,20 +991,20 @@ const App = () => {
                 alt="kt ds"
                 className="h-8 w-auto object-contain"
               />
-              <p className="text-label-lg text-text-primary/90 font-medium text-left">
+              <p className="text-label-lg text-white/50 font-medium text-left">
                 (06707) 서울 서초구 효령로 176, 02-523-7029
               </p>
             </div>
 
-            {/* 우측: 메뉴 + 저작권 (이 부분도 좌측 정렬로 통일) */}
+            {/* 우측: 메뉴 + 저작권 */}
             <div className="flex flex-col items-start gap-8">
-              <div className="flex flex-wrap gap-x-8 gap-y-2 text-label-lg text-text-primary/90 font-medium">
-                <a href="#" className="hover:text-text-primary transition-colors">사이트맵</a>
-                <a href="#" className="hover:text-text-primary transition-colors">공지사항</a>
-                <a href="#" className="hover:text-text-primary transition-colors">개인정보처리방침</a>
-                <a href="#" className="hover:text-text-primary transition-colors">이용약관</a>
+              <div className="flex flex-wrap gap-x-8 gap-y-2 text-label-lg text-white/50 font-medium">
+                <a href="#" className="hover:text-white transition-colors">사이트맵</a>
+                <a href="#" className="hover:text-white transition-colors">공지사항</a>
+                <a href="#" className="hover:text-white transition-colors">개인정보처리방침</a>
+                <a href="#" className="hover:text-white transition-colors">이용약관</a>
               </div>
-              <p className="text-label-md text-text-dim font-medium text-left">
+              <p className="text-label-md text-white/30 font-medium text-left">
                 © 2026 AI Biz Portal. All rights reserved.
               </p>
             </div>

@@ -3,7 +3,7 @@ import { motion, AnimatePresence, useScroll } from 'motion/react';
 import { ChevronRight, ChevronLeft, Play, Download, Mail, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { PLATFORM_PAGE_CONFIG } from '@/context/ai-service/ai-service-data';
+import { AGENT_PAGE_CONFIG as PLATFORM_PAGE_CONFIG } from '@/context/ai-service/ai-agent-data';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import PageBanner from '@/components/PageBanner';
@@ -18,7 +18,7 @@ function EmptyPlaceholder({ label }: { label: string }) {
     );
 }
 
-export default function AiServicePage() {
+export default function AiAgentPage() {
     const [activeTab, setActiveTab] = useState(PLATFORM_PAGE_CONFIG.sidebarItems[0]);
     const { isDark } = useTheme();
     const { scrollYProgress } = useScroll();
@@ -77,11 +77,11 @@ export default function AiServicePage() {
 
     return (
         <div className="min-h-screen text-text-primary font-pretendard flex flex-col transition-colors duration-300" style={{ backgroundColor: t.bg }}>
-            <Navbar activePage="platform" scrollLineProgress={scrollYProgress} />
+            <Navbar activePage="agent" scrollLineProgress={scrollYProgress} />
 
             <PageBanner
-                title="AI Solutions"
-                subtitle="업무별 특화된 AI 솔루션으로 비즈니스 혁신을 경험하세요"
+                title="AI Agent"
+                subtitle="엔터프라이즈 맞춤형 AI 에이전트로 업무 자동화를 경험하세요"
             />
 
             <section className="pt-10 pb-32 flex-1 relative">

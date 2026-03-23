@@ -8,8 +8,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: "Pretendard Variable", "Pretendard", ui-sans-serif, system-ui, sans-serif;
-  --font-poppins: "Poppins", sans-serif;
+  --font-sans: "Pretendard Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-pretendard: "Pretendard Variable", sans-serif;
+  --font-poppins: "Poppins", "Pretendard Variable", sans-serif;
 
   --animate-first: moveVertical 30s ease infinite;
   --animate-second: moveInCircle 20s reverse infinite;
@@ -33,10 +34,8 @@ html {
 /* GPU Acceleration Utility */
 .smooth-gpu {
   backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
-  perspective: 1000px;
-  will-change: transform, opacity;
-  transform-style: preserve-3d;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 body {
