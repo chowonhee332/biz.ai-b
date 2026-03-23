@@ -1,13 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useScroll } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { ChevronRight, ChevronLeft, Play, Download, Mail, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { PLATFORM_PAGE_CONFIG } from '@/context/ai-service/ai-service-data';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
-import PageBanner from '@/components/PageBanner';
-import { useTheme } from '@/context/ThemeContext';
+import Silk from '@/components/Silk';
 
 
 function EmptyPlaceholder({ label }: { label: string }) {
@@ -20,34 +19,6 @@ function EmptyPlaceholder({ label }: { label: string }) {
 
 export default function AiServicePage() {
     const [activeTab, setActiveTab] = useState(PLATFORM_PAGE_CONFIG.sidebarItems[0]);
-    const { isDark } = useTheme();
-    const { scrollYProgress } = useScroll();
-
-    const t = {
-        bg: isDark ? '#0A0A0A' : '#ffffff',
-        heading: isDark ? 'text-white' : 'text-gray-900',
-        bodyColor: isDark ? '#CCCCCC' : '#444444',
-        bodySecondary: isDark ? '#CCCCCC' : '#444444',
-        emphasisColor: isDark ? '#FFFFFF' : '#111111',
-        sectionBorder: isDark ? 'border-white/10' : 'border-gray-200',
-        inlineDivider: isDark ? 'border-white/5' : 'border-gray-100',
-        cardBorder: isDark ? 'border-border-light' : 'border-gray-200',
-        cardBg: isDark ? 'border-white/10 bg-white/[0.03]' : 'border-gray-200 bg-gray-50',
-        boxBg: isDark ? 'bg-bg-surface/50 border-border-light' : 'bg-[#f6f6f6] border-transparent',
-        tagBg: isDark ? 'bg-white/10' : 'bg-gray-200',
-        tagColor: isDark ? '#CCCCCC' : '#444444',
-        tabBg: isDark ? 'rgba(10, 10, 10, 0.95)' : 'rgba(255, 255, 255, 0.95)',
-        tabActive: isDark ? 'text-text-primary font-bold' : 'text-gray-900 font-bold',
-        tabInactive: isDark ? 'text-text-dim hover:text-text-primary/60' : 'text-gray-400 hover:text-gray-900',
-        sidebarActive: isDark ? 'bg-brand-primary text-white' : 'bg-brand-primary text-white',
-        sidebarInactive: isDark ? 'text-text-secondary/40 hover:text-text-primary/70 hover:bg-bg-surface' : 'text-[#999999] hover:text-[#555555] hover:bg-gray-100',
-        tabActiveText: isDark ? 'text-white' : 'text-[#111111]',
-        tabInactiveText: isDark ? 'text-white/25 hover:text-white/50' : 'text-[#999999] hover:text-[#555555]',
-        tabIndicator: isDark ? 'bg-white' : 'bg-gray-900',
-        videoBg: isDark ? 'bg-white/5 border-white/5' : 'bg-gray-100 border-gray-200',
-        videoTitle: isDark ? 'text-white/80 group-hover:text-white' : 'text-gray-700 group-hover:text-gray-900',
-    };
-
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [activeTab]);
@@ -73,42 +44,57 @@ export default function AiServicePage() {
 
     const sidebarItems = PLATFORM_PAGE_CONFIG.sidebarItems;
     const currentContent = PLATFORM_PAGE_CONFIG.products[activeTab];
+    const heroText = PLATFORM_PAGE_CONFIG.hero;
 
 
     return (
-        <div className="min-h-screen text-text-primary font-pretendard flex flex-col transition-colors duration-300" style={{ backgroundColor: t.bg }}>
-            <Navbar activePage="platform" scrollLineProgress={scrollYProgress} />
+        <div className="min-h-screen text-text-primary font-pretendard flex flex-col" style={{ backgroundColor: '#0A0A0A' }}>
+            <Navbar activePage="platform" />
 
-            <PageBanner
-                title="AI Solutions"
-                subtitle="업무별 특화된 AI 솔루션으로 비즈니스 혁신을 경험하세요"
-            />
-
-            <section className="pt-10 pb-32 flex-1 relative">
+            <section className="pt-48 pb-32 flex-1 relative">
+                <div className="absolute inset-0 z-0" style={{ height: '400px' }}>
+                    <Silk speed={3.5} scale={0.8} color="#c8d8ff" noiseIntensity={2.7} rotation={4.8} />
+                </div>
+                <div className="absolute inset-0 z-[1]" style={{ height: '400px', background: 'linear-gradient(to bottom, rgba(10,10,10,0.1) 0%, rgba(10,10,10,1) 100%)' }} />
+                <div className="max-w-[1280px] mx-auto container-responsive mb-20 relative z-10">
+                    <motion.div
+                        key={activeTab + "header"}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <span className="text-body text-[#999999] mb-3 block font-medium">AI 제품 / 서비스</span>
+                        <h1 className="text-heading-lg lg:text-display-md font-bold bg-gradient-to-r from-white via-white via-[40%] to-brand-secondary bg-clip-text text-transparent tracking-tight leading-tight">
+                            AI Products/Service
+                        </h1>
+                    </motion.div>
+                </div>
 
                 {/* 모바일 탭 */}
-                <div className="lg:hidden sticky top-[72px] backdrop-blur-sm z-40 mb-0 relative" style={{ backgroundColor: t.tabBg }}>
+                <div className="lg:hidden sticky top-[72px] backdrop-blur-sm z-40 border-b border-border-light mb-12 relative" style={{ backgroundColor: 'rgba(10, 10, 10, 0.95)' }}>
                     <div className="max-w-[1280px] mx-auto container-responsive flex items-center gap-8 h-[66px] overflow-x-auto no-scrollbar whitespace-nowrap">
                         {sidebarItems.map((item) => (
-                            <button
+                            <Button
                                 key={item}
+                                variant="ghost"
+                                rounded="none"
                                 onClick={() => setActiveTab(item)}
-                                className={`relative !text-[18px] font-bold pb-3 transition-colors cursor-pointer shrink-0 ${activeTab === item ? t.tabActiveText : t.tabInactiveText}`}
+                                className={`relative h-full text-label-lg font-medium transition-all shrink-0 flex items-center px-1 cursor-pointer hover:bg-transparent focus-visible:ring-0 focus-visible:outline-none ${activeTab === item ? "text-text-primary font-bold" : "text-text-dim hover:text-text-primary/60"}`}
                             >
                                 {item}
                                 {activeTab === item && (
-                                    <span className={`absolute bottom-0 left-0 w-full h-[3px] rounded-full ${t.tabIndicator}`} />
+                                    <motion.div layoutId="activePlatformTab" className="absolute bottom-0 left-0 right-0 h-[3px] bg-brand-primary rounded-full" />
                                 )}
-                            </button>
+                            </Button>
                         ))}
                     </div>
                 </div>
 
-                <div className="max-w-[1280px] mx-auto container-responsive relative z-10 pt-7 lg:pt-0">
-                    <div className="flex flex-col lg:flex-row gap-[80px] lg:items-start">
+                <div className="max-w-[1280px] mx-auto container-responsive relative z-10">
+                    <div className="flex flex-col lg:flex-row gap-[60px]">
 
                         {/* 왼쪽 사이드바 (데스크탑) */}
-                        <aside className="hidden lg:block lg:w-[240px] shrink-0">
+                        <aside className="hidden lg:block lg:w-[220px] shrink-0 pt-10 mt-5">
                             <div className="flex flex-col gap-2 sticky top-[100px]">
                                 {sidebarItems.map((item) => (
                                     <Button
@@ -116,9 +102,9 @@ export default function AiServicePage() {
                                         variant={activeTab === item ? "default" : "ghost"}
                                         rounded="lg"
                                         onClick={() => setActiveTab(item)}
-                                        className={`w-full justify-start px-5 h-[48px] !text-[18px] transition-all cursor-pointer ${activeTab === item ? 'font-bold' : 'font-semibold'} ${activeTab === item
-                                            ? t.sidebarActive
-                                            : t.sidebarInactive
+                                        className={`w-full justify-start px-5 h-[48px] !text-body font-semibold transition-all cursor-pointer ${activeTab === item
+                                            ? "bg-brand-primary text-text-primary shadow-lg shadow-brand-primary/20"
+                                            : "text-text-secondary/40 hover:text-text-primary/70 hover:bg-bg-surface"
                                             }`}
                                     >
                                         {item}
@@ -128,7 +114,7 @@ export default function AiServicePage() {
                         </aside>
 
                         {/* 메인 콘텐츠 */}
-                        <main className="flex-1 min-w-0 max-w-[800px]">
+                        <main className="flex-1 min-w-0 pt-10 mt-5">
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={activeTab}
@@ -138,54 +124,50 @@ export default function AiServicePage() {
                                     transition={{ duration: 0.4 }}
                                 >
                                     {/* 1. 개요 */}
-                                    <div id="section-overview" className="mb-[52px] scroll-mt-32">
+                                    <div id="section-overview" className="mb-[52px] scroll-mt-32 pt-8">
                                         <div className="max-w-[75%]">
                                             <p className="text-brand-primary text-body-sm font-bold mb-2 tracking-wide">{activeTab}</p>
-                                            <h2 className={`text-heading-md font-bold mb-4 break-keep ${t.heading}`}>{currentContent.타이틀}</h2>
-                                            <div className="text-body-sm leading-relaxed break-keep font-normal" style={{ color: t.bodyColor }}>
+                                            <h2 className="text-heading-md font-bold text-white mb-4 break-keep">{currentContent.타이틀}</h2>
+                                            <div className="text-text-secondary text-body-sm leading-relaxed break-keep font-normal">
                                                 <p>{currentContent.설명}</p>
                                             </div>
                                         </div>
                                     </div>
 
                                     {/* 2. 주요 고객군 */}
-                                    <div id="section-target" className={`pt-[40px] mb-[40px] border-t scroll-mt-32 ${t.sectionBorder}`}>
-                                        <h3 className={`text-body-xl font-bold mb-3 ${t.heading}`}>주요 고객군</h3>
+                                    <div id="section-target" className="pt-[52px] mb-[52px] border-t border-white/10 scroll-mt-32">
+                                        <h3 className="text-body-xl font-bold text-white mb-4">주요 고객군</h3>
                                         {currentContent.주요고객군 ? (
-                                            <div className={`rounded-[12px] p-7 border ${t.boxBg}`}>
-                                                <p className="text-body-sm font-normal leading-relaxed" style={{ color: t.bodyColor }}>{currentContent.주요고객군}</p>
-                                            </div>
+                                            <p className="text-body-sm font-normal leading-relaxed" style={{ color: '#CCCCCC' }}>{currentContent.주요고객군}</p>
                                         ) : (
                                             <EmptyPlaceholder label="주요 고객군" />
                                         )}
                                     </div>
 
                                     {/* 4. 주요 기능 */}
-                                    <div id="section-features" className={`pt-[40px] mb-[40px] border-t scroll-mt-32 ${t.sectionBorder}`}>
-                                        <h3 className={`text-body-xl font-bold mb-3 ${t.heading}`}>주요기능</h3>
+                                    <div id="section-features" className="pt-[52px] mb-[52px] border-t border-white/10 scroll-mt-32">
+                                        <h3 className="text-body-xl font-bold text-white mb-4">주요기능</h3>
                                         {currentContent.주요기능 && currentContent.주요기능.length > 0 ? (
-                                            <div className={`rounded-[12px] border ${t.boxBg}`}>
-                                                <div className="flex flex-col px-7">
+                                            <div className="flex flex-col">
                                                 {currentContent.주요기능.map((feature, i) => {
                                                     const [title, ...descParts] = feature.split(':');
                                                     const description = descParts.join(':').trim();
                                                     return (
-                                                        <div key={i} className={`py-5 ${i > 0 ? `border-t ${t.inlineDivider}` : ''}`}>
-                                                            <div className="flex items-baseline gap-3 mb-2">
-                                                                <span className="text-body-sm font-bold text-brand-primary shrink-0">{(i + 1).toString().padStart(2, '0')}</span>
-                                                                <div className="text-body font-semibold break-keep" style={{ color: t.emphasisColor, lineHeight: '1.4' }}>
+                                                        <div key={i} className="flex items-start gap-12 py-[18px]">
+                                                            <div className="flex items-start gap-3 w-[240px] shrink-0">
+                                                                <span className="text-label-lg font-normal shrink-0 w-6" style={{ color: '#00ABFF' }}>{(i + 1).toString().padStart(2, '0')}</span>
+                                                                <div className="text-body font-medium" style={{ color: '#FFFFFF', lineHeight: '1.4' }}>
                                                                     {title.trim()}
                                                                 </div>
                                                             </div>
                                                             {description && (
-                                                                <div className="text-body-sm leading-[1.6] font-normal break-keep pl-8" style={{ color: t.bodySecondary }}>
+                                                                <div className="text-body-xs leading-[1.6] font-normal break-keep pt-0.5" style={{ color: '#BBBBBB' }}>
                                                                     {description}
                                                                 </div>
                                                             )}
                                                         </div>
                                                     );
                                                 })}
-                                                </div>
                                             </div>
                                         ) : (
                                             <EmptyPlaceholder label="주요 기능" />
@@ -197,14 +179,18 @@ export default function AiServicePage() {
                                             <div className="relative">
                                                 <div ref={scrollRef} className="flex gap-4 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden" style={{ scrollSnapType: 'x mandatory', scrollbarWidth: 'none' }}>
                                                     {currentContent.주요특징이미지.map((item, i) => (
-                                                        <div key={i} className="shrink-0 w-[calc(50%-8px)]" style={{ scrollSnapAlign: 'start' }}>
-                                                            <img
-                                                                src={item.이미지URL}
-                                                                alt={item.타이틀}
-                                                                className="w-full aspect-video object-cover block rounded-[12px] mb-4"
-                                                            />
-                                                            <h4 className={`text-body font-bold mb-1.5 ${t.heading}`}>{item.타이틀}</h4>
-                                                            <p className="text-body-sm leading-relaxed break-keep font-normal" style={{ color: t.bodySecondary }}>{item.설명}</p>
+                                                        <div key={i} className="rounded-[16px] overflow-hidden border border-white/10 bg-white/[0.03] shrink-0 w-[calc(50%-8px)]" style={{ scrollSnapAlign: 'start' }}>
+                                                            <div className="p-4">
+                                                                <img
+                                                                    src={item.이미지URL}
+                                                                    alt={item.타이틀}
+                                                                    className="w-full aspect-video object-cover block rounded-[8px]"
+                                                                />
+                                                            </div>
+                                                            <div className="pt-2 pb-8 px-8">
+                                                                <h4 className="text-body font-bold text-white mb-2">{item.타이틀}</h4>
+                                                                <p className="leading-relaxed break-keep font-normal" style={{ fontSize: '15px', color: '#BBBBBB' }}>{item.설명}</p>
+                                                            </div>
                                                         </div>
                                                     ))}
                                                 </div>
@@ -234,25 +220,23 @@ export default function AiServicePage() {
                                     </div>
 
                                     {/* 6. 특장점 */}
-                                    <div id="section-advantages" className={`pt-[40px] mb-[40px] border-t scroll-mt-32 ${t.sectionBorder}`}>
-                                        <h3 className={`text-body-xl font-bold mb-3 ${t.heading}`}>특장점</h3>
+                                    <div id="section-advantages" className="pt-[52px] mb-[52px] border-t border-white/10 scroll-mt-32">
+                                        <h3 className="text-body-xl font-bold text-white mb-4">특장점</h3>
                                         {currentContent.특장점 && currentContent.특장점.length > 0 ? (
-                                            <div className={`rounded-[12px] border ${t.boxBg}`}>
-                                                <div className="flex flex-col px-7">
+                                            <div className="flex flex-col">
                                                 {currentContent.특장점.map((item, i) => (
-                                                    <div key={i} className={`py-5 ${i > 0 ? `border-t ${t.inlineDivider}` : ''}`}>
-                                                        <div className="flex items-baseline gap-3 mb-2">
-                                                            <span className="text-body-sm font-bold text-brand-primary shrink-0">{(i + 1).toString().padStart(2, '0')}</span>
-                                                            <div className="text-body font-semibold break-keep" style={{ color: t.emphasisColor, lineHeight: '1.4' }}>
+                                                    <div key={i} className="flex items-start gap-12 py-[18px]">
+                                                        <div className="flex items-start gap-3 w-[240px] shrink-0">
+                                                            <span className="text-label-lg font-normal shrink-0 w-6" style={{ color: '#00ABFF' }}>{(i + 1).toString().padStart(2, '0')}</span>
+                                                            <div className="text-body font-medium" style={{ color: '#FFFFFF', lineHeight: '1.4' }}>
                                                                 {item.타이틀.replace(/^\d+\.\s*/, '')}
                                                             </div>
                                                         </div>
-                                                        <div className="text-body-sm leading-[1.6] font-normal break-keep pl-8" style={{ color: t.bodySecondary }}>
+                                                        <div className="text-body-xs leading-[1.6] font-normal break-keep pt-0.5" style={{ color: '#BBBBBB' }}>
                                                             {item.설명}
                                                         </div>
                                                     </div>
                                                 ))}
-                                                </div>
                                             </div>
                                         ) : (
                                             <EmptyPlaceholder label="특장점" />
@@ -260,36 +244,48 @@ export default function AiServicePage() {
                                     </div>
 
                                     {/* 7. 활용 시나리오 */}
-                                    <div id="section-scenarios" className={`pt-[40px] mb-[40px] border-t scroll-mt-32 ${t.sectionBorder}`}>
-                                        <h3 className={`text-body-xl font-bold mb-3 ${t.heading}`}>이렇게 활용하세요</h3>
+                                    <div id="section-scenarios" className="pt-[52px] mb-[52px] border-t border-white/10 scroll-mt-32">
+                                        <h3 className="text-body-xl font-bold text-white mb-4">이렇게 활용하세요</h3>
                                         {currentContent.주요활용시나리오 && currentContent.주요활용시나리오.length > 0 ? (
-                                            <div className="flex flex-col gap-4">
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 {currentContent.주요활용시나리오.map((item, i) => (
-                                                    <div key={i} className={`rounded-[12px] p-7 border flex flex-col gap-5 ${t.boxBg}`}>
+                                                    <div key={i} className="rounded-[12px] p-6 border border-border-light flex flex-col gap-5">
                                                         {item.항목 ? (
                                                             <>
                                                                 <h4 className="text-body font-bold text-text-primary leading-tight">{item.타이틀}</h4>
                                                                 {item.설명 && (
-                                                                    <div className="text-body-sm leading-relaxed font-normal" style={{ color: t.bodyColor }}>{item.설명}</div>
+                                                                    <div className="leading-relaxed" style={{ fontSize: '14px', color: '#CCCCCC' }}>{item.설명}</div>
                                                                 )}
-                                                                <div className="flex flex-col gap-4">
+                                                                <div className="flex flex-col gap-3">
                                                                     {item.항목.filter(h => h.중타이틀 || h.설명).map((h, hi) => {
+                                                                        const isAsIs = /^As-Is/i.test(h.중타이틀);
                                                                         const isEffect = /^기대/.test(h.중타이틀);
-                                                                        const dotColor = 'bg-brand-primary';
-                                                                        const titleColor = isEffect ? 'text-emerald-400' : t.emphasisColor;
+                                                                        const isToBe = /^To-Be/i.test(h.중타이틀);
+                                                                        const labelColor = isAsIs ? 'text-text-secondary/60' : isEffect ? 'text-emerald-400' : isToBe ? 'text-brand-primary' : 'text-text-secondary';
                                                                         return (
-                                                                            <div key={hi} className="flex items-start gap-3">
-                                                                                <div className={`size-[5px] rounded-full shrink-0 mt-[10px] ${dotColor}`} />
-                                                                                <div className="flex flex-col gap-1.5">
-                                                                                    <div className="text-body-sm font-semibold leading-snug" style={{ color: titleColor }}>
-                                                                                        {h.중타이틀}
-                                                                                    </div>
-                                                                                    {h.설명 && (
-                                                                                        <div className="text-body-sm leading-relaxed font-normal" style={{ color: t.bodyColor }}>
+                                                                            <div key={hi}>
+                                                                                {hi > 0 && <div className="border-t border-white/5 my-3" />}
+                                                                                {isEffect ? (
+                                                                                    <div className="flex flex-col gap-1.5 p-3">
+                                                                                        <div className={`font-bold flex items-center gap-2 ${labelColor}`} style={{ fontSize: '14px' }}>
+                                                                                            <span className={`shrink-0 ${labelColor}`}>–</span>
+                                                                                            {h.중타이틀}
+                                                                                        </div>
+                                                                                        <div className="leading-relaxed pl-3.5" style={{ fontSize: '14px', color: '#CCCCCC' }}>
                                                                                             {h.설명}
                                                                                         </div>
-                                                                                    )}
-                                                                                </div>
+                                                                                    </div>
+                                                                                ) : (
+                                                                                    <div className="flex flex-col gap-1.5">
+                                                                                        <div className={`font-bold flex items-center gap-2 ${labelColor}`} style={{ fontSize: '14px' }}>
+                                                                                            <span className={`shrink-0 ${labelColor}`}>–</span>
+                                                                                            {h.중타이틀}
+                                                                                        </div>
+                                                                                        <div className="leading-relaxed pl-3.5" style={{ fontSize: '14px', color: '#CCCCCC' }}>
+                                                                                            {h.설명}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                )}
                                                                             </div>
                                                                         );
                                                                     })}
@@ -302,7 +298,7 @@ export default function AiServicePage() {
                                                                     <h4 className="text-body font-bold text-text-primary leading-tight">{item.타이틀}</h4>
                                                                 </div>
                                                                 {item.설명 && (
-                                                                    <div className="text-body-sm leading-relaxed font-normal" style={{ color: t.bodyColor }}>
+                                                                    <div className="leading-relaxed pl-4" style={{ fontSize: '14px', color: '#CCCCCC' }}>
                                                                         {item.설명}
                                                                     </div>
                                                                 )}
@@ -317,22 +313,22 @@ export default function AiServicePage() {
                                     </div>
 
                                     {/* 8. 고객사례 */}
-                                    <div id="section-cases" className={`pt-[40px] mb-[40px] border-t scroll-mt-32 ${t.sectionBorder}`}>
-                                        <h3 className={`text-body-xl font-bold mb-3 ${t.heading}`}>고객사례</h3>
+                                    <div id="section-cases" className="pt-[52px] mb-[52px] border-t border-white/10 scroll-mt-32">
+                                        <h3 className="text-body-xl font-bold text-white mb-4">고객사례</h3>
                                         {currentContent.고객사례 && currentContent.고객사례.length > 0 ? (
-                                            <div className="flex flex-col gap-4">
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 {currentContent.고객사례.map((item, i) => (
-                                                    <div key={i} className={`rounded-[12px] border flex flex-col ${t.boxBg}`}>
+                                                    <div key={i} className="rounded-[12px] border border-border-light flex flex-col">
                                                         <div className="p-6 flex flex-col gap-3 flex-1">
                                                             {/* 기업명 + 핵심기능 */}
                                                             <div className="flex flex-col gap-3 mb-1">
-                                                                <h4 className={`text-body font-bold leading-tight ${t.heading}`}>
+                                                                <h4 className="text-body font-bold text-white leading-tight">
                                                                     {item.기업명 || item.고객조직 || "고객 사례"}
                                                                 </h4>
                                                                 {item.핵심적용기능 && (
                                                                     <div className="flex flex-wrap gap-1.5">
                                                                         {Array.isArray(item.핵심적용기능) ? item.핵심적용기능.map((tech: string, ti: number) => (
-                                                                            <span key={ti} className={`px-2.5 py-1 font-medium ${t.tagBg}`} style={{ fontSize: '14px', borderRadius: '100px', color: t.tagColor }}>{tech}</span>
+                                                                            <span key={ti} className="px-2.5 py-1 bg-white/5 font-medium" style={{ fontSize: '14px', borderRadius: '100px', color: '#CCCCCC' }}>{tech}</span>
                                                                         )) : <span className="text-text-secondary" style={{ fontSize: '14px' }}>{item.핵심적용기능}</span>}
                                                                     </div>
                                                                 )}
@@ -341,12 +337,14 @@ export default function AiServicePage() {
                                                             {/* 적용범위 */}
                                                             {(item.산업분야 || item.적용범위) && (
                                                                 <>
-                                                                    <div className={`border-t ${t.inlineDivider}`} />
-                                                                    <div className="flex items-start gap-2.5">
-                                                                        <div className="size-[5px] rounded-full shrink-0 mt-[8px] bg-brand-primary" />
-                                                                        <div className="flex flex-col gap-1">
-                                                                            <span className="text-body-sm font-semibold" style={{ color: t.emphasisColor }}>적용범위</span>
-                                                                            <div className="text-body-sm leading-relaxed break-keep" style={{ color: t.bodyColor }}>{item.산업분야 || item.적용범위}</div>
+                                                                    <div className="border-t border-white/5" />
+                                                                    <div className="flex flex-col gap-1.5">
+                                                                        <div className="font-bold flex items-center gap-2 text-text-secondary" style={{ fontSize: '14px' }}>
+                                                                            <span className="shrink-0 text-text-secondary">–</span>
+                                                                            적용범위
+                                                                        </div>
+                                                                        <div className="leading-relaxed pl-3.5 break-keep" style={{ fontSize: '14px', color: '#CCCCCC' }}>
+                                                                            {item.산업분야 || item.적용범위}
                                                                         </div>
                                                                     </div>
                                                                 </>
@@ -355,12 +353,14 @@ export default function AiServicePage() {
                                                             {/* 적용기간 */}
                                                             {item.적용기간 && (
                                                                 <>
-                                                                    <div className={`border-t ${t.inlineDivider}`} />
-                                                                    <div className="flex items-start gap-2.5">
-                                                                        <div className="size-[5px] rounded-full shrink-0 mt-[8px] bg-brand-primary" />
-                                                                        <div className="flex flex-col gap-1">
-                                                                            <span className="text-body-sm font-semibold" style={{ color: t.emphasisColor }}>적용기간</span>
-                                                                            <div className="text-body-sm leading-relaxed" style={{ color: t.bodyColor }}>{item.적용기간}</div>
+                                                                    <div className="border-t border-white/5" />
+                                                                    <div className="flex flex-col gap-1.5">
+                                                                        <div className="font-bold flex items-center gap-2 text-text-secondary" style={{ fontSize: '14px' }}>
+                                                                            <span className="shrink-0 text-text-secondary">–</span>
+                                                                            적용기간
+                                                                        </div>
+                                                                        <div className="leading-relaxed pl-3.5" style={{ fontSize: '14px', color: '#CCCCCC' }}>
+                                                                            {item.적용기간}
                                                                         </div>
                                                                     </div>
                                                                 </>
@@ -369,13 +369,15 @@ export default function AiServicePage() {
                                                             {/* 성과 */}
                                                             {(item.성과정량 || item.성과정성) && (
                                                                 <>
-                                                                    <div className={`border-t ${t.inlineDivider}`} />
-                                                                    <div className="flex items-start gap-2.5">
-                                                                        <div className="size-[5px] rounded-full shrink-0 mt-[8px] bg-brand-primary" />
-                                                                        <div className="flex flex-col gap-1">
-                                                                            <span className="text-body-sm font-semibold" style={{ color: t.emphasisColor }}>성과</span>
-                                                                            {item.성과정량 && <p className="text-body-sm font-bold leading-snug break-keep text-brand-primary">{item.성과정량}</p>}
-                                                                            {item.성과정성 && <p className="text-body-sm leading-[1.6] break-keep" style={{ color: t.bodyColor }}>{item.성과정성}</p>}
+                                                                    <div className="border-t border-white/5" />
+                                                                    <div className="flex flex-col gap-1.5">
+                                                                        <div className="font-bold flex items-center gap-2 text-emerald-400" style={{ fontSize: '14px' }}>
+                                                                            <span className="shrink-0 text-emerald-400">–</span>
+                                                                            성과
+                                                                        </div>
+                                                                        <div className="pl-3.5 flex flex-col gap-1">
+                                                                            {item.성과정량 && <p className="font-bold leading-snug break-keep" style={{ fontSize: '14px', color: '#34d399' }}>{item.성과정량}</p>}
+                                                                            {item.성과정성 && <p className="leading-[1.6] break-keep" style={{ fontSize: '14px', color: '#CCCCCC' }}>{item.성과정성}</p>}
                                                                         </div>
                                                                     </div>
                                                                 </>
@@ -384,12 +386,14 @@ export default function AiServicePage() {
                                                             {/* 담당자 코멘트 */}
                                                             {item.담당자코멘트 && (
                                                                 <>
-                                                                    <div className={`border-t ${t.inlineDivider}`} />
-                                                                    <div className="flex items-start gap-2.5">
-                                                                        <div className="size-[5px] rounded-full shrink-0 mt-[8px] bg-brand-primary" />
-                                                                        <div className="flex flex-col gap-1">
-                                                                            <span className="text-body-sm font-semibold" style={{ color: t.emphasisColor }}>코멘트</span>
-                                                                            <div className="text-body-sm italic leading-relaxed" style={{ color: t.bodyColor }}>"{item.담당자코멘트}"</div>
+                                                                    <div className="border-t border-white/5" />
+                                                                    <div className="flex flex-col gap-1.5">
+                                                                        <div className="font-bold flex items-center gap-2 text-text-secondary" style={{ fontSize: '14px' }}>
+                                                                            <span className="shrink-0 text-text-secondary">–</span>
+                                                                            코멘트
+                                                                        </div>
+                                                                        <div className="italic leading-relaxed pl-3.5" style={{ fontSize: '14px', color: '#CCCCCC' }}>
+                                                                            "{item.담당자코멘트}"
                                                                         </div>
                                                                     </div>
                                                                 </>
@@ -416,15 +420,14 @@ export default function AiServicePage() {
                                     </div>
 
                                     {/* 기대효과 */}
-                                    <div id="section-values" className={`pt-[40px] mb-[40px] border-t scroll-mt-32 ${t.sectionBorder}`}>
-                                        <h3 className={`text-body-xl font-bold mb-3 ${t.heading}`}>기대효과</h3>
+                                    <div id="section-values" className="pt-[52px] mb-[52px] border-t border-white/10 scroll-mt-32">
+                                        <h3 className="text-body-xl font-bold text-white mb-4">기대효과</h3>
                                         {currentContent.핵심가치 && currentContent.핵심가치.length > 0 ? (
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                                 {currentContent.핵심가치.map((item, i) => (
-                                                    <div key={i} className={`rounded-[12px] p-7 border flex flex-col gap-3 ${t.boxBg}`}>
-                                                        <span className="text-brand-primary text-[16px] font-bold leading-none">{(i + 1).toString().padStart(2, '0')}</span>
-                                                        <div className={`font-semibold leading-tight text-[18px] ${t.heading}`}>{item.타이틀}</div>
-                                                        <p className="leading-[1.6]" style={{ fontSize: '14px', color: t.bodyColor }}>{item.설명}</p>
+                                                    <div key={i} className="rounded-[12px] p-6 border border-border-light">
+                                                        <h4 className="text-body font-bold text-white mb-3"><span className="font-normal" style={{ color: '#00ABFF' }}>{i + 1}.&nbsp;&nbsp;</span>{item.타이틀}</h4>
+                                                        <p className="leading-[1.6]" style={{ fontSize: '14px', color: '#CCCCCC' }}>{item.설명}</p>
                                                     </div>
                                                 ))}
                                             </div>
@@ -434,8 +437,8 @@ export default function AiServicePage() {
                                     </div>
 
                                     {/* 9. 소개영상 */}
-                                    <div id="section-videos" className={`pt-[40px] mb-[40px] border-t scroll-mt-32 ${t.sectionBorder}`}>
-                                        <h3 className={`text-body-xl font-bold mb-3 ${t.heading}`}>소개영상</h3>
+                                    <div id="section-videos" className="pt-[52px] mb-[52px] border-t border-white/10 scroll-mt-32">
+                                        <h3 className="text-body-xl font-bold text-white mb-4">소개영상</h3>
                                         {currentContent.소개영상 && currentContent.소개영상.length > 0 ? (
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                                 {currentContent.소개영상.map((video, i) => {
@@ -456,7 +459,7 @@ export default function AiServicePage() {
                                                             rel="noopener noreferrer"
                                                             className="block group"
                                                         >
-                                                            <div className={`aspect-video rounded-[12px] border flex items-center justify-center relative overflow-hidden transition-all hover:border-brand-primary/40 mb-4 ${t.videoBg}`}>
+                                                            <div className="aspect-video bg-white/5 rounded-[12px] border border-white/5 flex items-center justify-center relative overflow-hidden transition-all hover:border-brand-primary/40 mb-4">
                                                                 {thumbnail ? (
                                                                     <>
                                                                         <img src={thumbnail} alt={video.타이틀} className="absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-500" />
@@ -469,7 +472,7 @@ export default function AiServicePage() {
                                                                     <Play className="size-5 text-white fill-white ml-0.5" />
                                                                 </div>
                                                             </div>
-                                                            <h4 className={`text-body-base font-bold transition-colors break-keep leading-snug pl-1 ${t.videoTitle}`}>
+                                                            <h4 className="text-body-base font-bold text-white/80 group-hover:text-white transition-colors break-keep leading-snug pl-1">
                                                                 {video.타이틀}
                                                             </h4>
                                                         </a>
@@ -482,22 +485,28 @@ export default function AiServicePage() {
                                     </div>
 
                                     {/* 10. 오퍼링 */}
-                                    <div id="section-offerings" className={`pt-[40px] mb-[40px] border-t scroll-mt-32 ${t.sectionBorder}`}>
-                                        <h3 className={`text-body-xl font-bold mb-3 ${t.heading}`}>오퍼링</h3>
+                                    <div id="section-offerings" className="pt-[52px] mb-[52px] border-t border-white/10 scroll-mt-32">
+                                        <h3 className="text-body-xl font-bold text-white mb-4">오퍼링</h3>
                                         {currentContent.오퍼링 && currentContent.오퍼링.length > 0 ? (
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 {currentContent.오퍼링.map((offering, i) => (
-                                                    <div key={i} className={`rounded-[12px] p-7 border hover:border-brand-primary transition-all flex flex-col justify-between group ${t.boxBg}`}>
+                                                    <div key={i} className="bg-bg-surface backdrop-blur-sm rounded-[12px] p-6 border border-border-light hover:border-brand-primary transition-all flex flex-col justify-between group">
                                                         <div>
-                                                            <div className="mb-4">
+                                                            <div className="flex items-center gap-3 mb-4">
+                                                                <div className="w-0.5 h-5 bg-brand-primary rounded-full shrink-0" />
                                                                 <h4 className="text-body font-bold text-text-primary">{offering.타이틀}</h4>
                                                             </div>
-                                                            <p className="text-body-sm mb-7 leading-[1.6]" style={{ color: t.bodyColor }}>{offering.설명}</p>
+                                                            <p className="text-body-xs mb-7 leading-[1.6]" style={{ color: '#CCCCCC' }}>{offering.설명}</p>
                                                         </div>
                                                         {offering.상세링크 && (
-                                                            <Link to={offering.상세링크} className="flex items-center gap-1.5">
-                                                                <span className={`text-label-md font-normal ${t.heading}`}>자세히 보기</span>
-                                                                <ChevronRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{ color: t.emphasisColor }} />
+                                                            <Link to={offering.상세링크}>
+                                                                <Button
+                                                                    variant="ghost"
+                                                                    className="h-auto p-0 text-label-md font-bold relative transition-all duration-300 hover:bg-transparent hover:text-white"
+                                                                >
+                                                                    <span className="group-hover:-translate-x-1.5 transition-transform duration-300">자세히 보기</span>
+                                                                    <ChevronRight size={14} className="max-w-0 opacity-0 group-hover:max-w-[14px] group-hover:opacity-100 transition-all duration-300 overflow-hidden" />
+                                                                </Button>
                                                             </Link>
                                                         )}
                                                     </div>
@@ -509,8 +518,8 @@ export default function AiServicePage() {
                                     </div>
 
                                     {/* 11. 문의/리소스 */}
-                                    <div id="section-contact" className={`pt-10 border-t mb-12 scroll-mt-32 ${t.sectionBorder}`}>
-                                        <h3 className={`text-body-xl font-bold mb-3 ${t.heading}`}>문의 / 리소스</h3>
+                                    <div id="section-contact" className="pt-10 border-t border-white/10 mb-12 scroll-mt-32">
+                                        <h3 className="text-body-xl font-bold text-white mb-4">문의 / 리소스</h3>
                                         {(currentContent.제품상세문의?.이메일 || currentContent.제품상세문의?.전화번호 || (currentContent.관련리소스 && currentContent.관련리소스.length > 0)) ? (
                                             <div className="flex flex-col gap-5">
                                                 {/* 관련 리소스: 좌우 배치 */}
@@ -532,7 +541,7 @@ export default function AiServicePage() {
                                                                                 <Button
                                                                                     variant="outline"
                                                                                     rounded="xl"
-                                                                                    className={`w-full flex justify-between items-center border hover:border-brand-primary transition-all group text-left h-[66px] cursor-pointer ${t.boxBg}`} style={{ padding: '20px' }}
+                                                                                    className="w-full flex justify-between items-center bg-bg-surface border border-border-light hover:border-brand-primary transition-all group text-left h-[66px] cursor-pointer" style={{ padding: '20px' }}
                                                                                 >
                                                                                     <div className="flex items-center gap-4 min-w-0 mr-4">
                                                                                         <div className="size-8 flex-shrink-0 bg-brand-primary/10 rounded-lg flex items-center justify-center text-label-xs font-bold text-brand-primary">
@@ -548,7 +557,7 @@ export default function AiServicePage() {
                                                                                 <Button
                                                                                     variant="outline"
                                                                                     rounded="xl"
-                                                                                    className={`w-full flex justify-between items-center border text-left h-[66px] pointer-events-none ${t.boxBg}`} style={{ padding: '20px' }}
+                                                                                    className="w-full flex justify-between items-center bg-bg-surface border border-border-light text-left h-[66px] pointer-events-none" style={{ padding: '20px' }}
                                                                                 >
                                                                                     <div className="flex items-center gap-4 min-w-0 mr-4">
                                                                                         <div className="size-8 flex-shrink-0 bg-brand-primary/10 rounded-lg flex items-center justify-center text-label-xs font-bold text-brand-primary">
@@ -568,7 +577,7 @@ export default function AiServicePage() {
                                                 {currentContent.제품상세문의 && (currentContent.제품상세문의.이메일 || currentContent.제품상세문의.전화번호) && (
                                                     <div>
                                                         <h4 className="text-label-md font-bold text-text-dim mb-3 tracking-wider uppercase">제품 상세 문의</h4>
-                                                    <div className={`rounded-[12px] py-5 px-5 border flex flex-row items-center justify-between gap-4 flex-wrap ${t.boxBg}`}>
+                                                    <div className="bg-bg-surface backdrop-blur-sm rounded-[12px] py-5 px-5 border border-border-light flex flex-row items-center justify-between gap-4 flex-wrap">
                                                         <span className="text-body-sm font-bold text-text-primary">도입이 궁금하신가요?</span>
                                                         <div className="flex flex-row gap-6 items-center flex-wrap">
                                                             {currentContent.제품상세문의.이메일 && (
