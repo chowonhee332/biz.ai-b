@@ -159,7 +159,7 @@ export default function ParticleEngine({ scrollYProgress, className = '', mode =
       const parent = canvas.parentElement;
       const w = parent?.clientWidth ?? canvas.offsetWidth ?? window.innerWidth;
       const h = parent?.clientHeight ?? canvas.offsetHeight ?? window.innerHeight;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       canvas.width = w * dpr;
       canvas.height = h * dpr;
       ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -172,8 +172,15 @@ export default function ParticleEngine({ scrollYProgress, className = '', mode =
 
     let rafId: number;
     const start = performance.now();
+    let lastFrameTime = 0;
+    const TARGET_FPS = 30;
+    const FRAME_INTERVAL = 1000 / TARGET_FPS;
 
-    const draw = () => {
+    const draw = (timestamp: number) => {
+      rafId = requestAnimationFrame(draw);
+      if (timestamp - lastFrameTime < FRAME_INTERVAL) return;
+      lastFrameTime = timestamp;
+
       const w = canvas.offsetWidth;
       const h = canvas.offsetHeight;
       ctx.clearRect(0, 0, w, h);
@@ -243,13 +250,19 @@ export default function ParticleEngine({ scrollYProgress, className = '', mode =
         ctx.fillRect(x * w - size, y * h - size, size * 2, size * 2);
       }
 
-      rafId = requestAnimationFrame(draw);
     };
-    draw();
+    rafId = requestAnimationFrame(draw);
+
+    const handleVisibility = () => {
+      if (document.hidden) cancelAnimationFrame(rafId);
+      else rafId = requestAnimationFrame(draw);
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
 
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener('resize', resize);
+      document.removeEventListener('visibilitychange', handleVisibility);
     };
   }, [particles, isInView]);
 

@@ -5,18 +5,14 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import HeroSpline from './components/HeroSpline';
-import { useScroll, useTransform, useMotionTemplate, motion, useInView, AnimatePresence, animate, useAnimation, useMotionValueEvent, useMotionValue, useSpring } from 'motion/react';
+import { useScroll, useTransform, motion, useInView, AnimatePresence, animate, useMotionValueEvent, useMotionValue, useSpring } from 'motion/react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import ParticleEngine from './components/ParticleEngine';
 import HeroContent from './components/HeroContent';
 import { HIGHLIGHT_NEWS, REGULAR_NEWS } from '@/context/news/news-data';
 import { USE_CASES, USE_CASE_CATEGORIES, USE_CASE_CATEGORY_COLORS } from '@/context/use-cases/use-case-data';
 import Navbar from './components/Navbar';
-import Aurora from './components/Aurora';
-import Antigravity from './components/Antigravity';
-import { BackgroundGradientAnimation } from './components/ui/background-gradient-animation';
 import Silk from './components/Silk';
 import { Link, useNavigate } from 'react-router-dom';
 import { USE_CASE_HIGHLIGHTS } from './context/use-cases/use-case-highlights';
@@ -24,9 +20,6 @@ import {
   Search,
   Zap,
   Layout,
-  Globe,
-  Database,
-  Shield,
   Clock,
   ChevronRight,
   ChevronLeft,
@@ -41,8 +34,6 @@ import {
   Youtube,
   Linkedin,
   Mail,
-  Smartphone,
-  Info,
   Menu,
   X,
 } from 'lucide-react';

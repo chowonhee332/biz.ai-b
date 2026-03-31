@@ -2,38 +2,46 @@ import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, MotionValue } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
+import { useTheme } from '../context/ThemeContext';
+import { throttle } from '../lib/utils';
+import { NAV_LINKS, NAV_CTA_LINKS } from '../context/home/home-data';
 
 interface NavbarProps {
-  activePage?: 'home' | 'platform' | 'use-cases' | 'news';
+  activePage?: 'home' | 'platform' | 'ai-agents' | 'ai-solutions' | 'use-cases' | 'news';
   scrollLineProgress?: MotionValue<number>;
 }
 
 export default function Navbar({ activePage, scrollLineProgress }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { isDark } = useTheme();
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = throttle(() => {
       setScrolled(window.scrollY > 20);
-    };
+    }, 100);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: 'AI 제품/서비스', path: '/platform', id: 'platform' },
-    { name: '고객 사례', path: '/use-cases', id: 'use-cases' },
-    { name: '새로운 소식', path: '/news', id: 'news' },
-  ];
+  const navLinks = NAV_LINKS;
+
+  const textColor = 'text-text-primary';
+  const scrolledBg = isDark ? 'rgba(10, 10, 10, 1)' : 'rgba(255, 255, 255, 1)';
+  const borderClass = isDark ? 'border-white/10' : 'border-black/10';
+  const mobileMenuBg = isDark ? '#0A0A0A' : '#FFFFFF';
+  const ktdsLogo = isDark ? '/logos/kt-ds-dark.png' : '/logos/kt-ds-light.png';
+  const hoverBg = isDark ? 'hover:bg-white/5' : 'hover:bg-black/5';
 
   return (
-    <nav className={`fixed w-full z-50 py-4 transition-all duration-500 ${scrolled ? 'backdrop-blur-md shadow-lg border-b border-white/10' : 'backdrop-blur-none'}`} style={{ backgroundColor: scrolled ? 'rgba(10, 10, 10, 0.95)' : 'transparent' }}>
-      <div className="max-w-[1280px] mx-auto container-responsive flex items-center">
-        {/* Logo - Always visible */}
+    <nav
+      className={`fixed top-0 w-full z-50 h-[68px] transition-all duration-500 ${scrolled ? `backdrop-blur-md shadow-lg` : 'backdrop-blur-none'}`}
+      style={{ backgroundColor: scrolled ? scrolledBg : (isDark ? 'transparent' : 'rgba(255,255,255,1)') }}
+    >
+      <div className="max-w-[1280px] mx-auto container-responsive flex items-center h-full">
+        {/* Logo */}
         <Link to="/" className="flex items-center gap-2 shrink-0" onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
-          <img src="/bizai_logo.png" alt="Biz.AI Logo" className="h-6 w-auto" />
-          <span className="text-[22px] font-bold text-text-primary tracking-tighter">Biz.AI</span>
+          <img src={isDark ? '/logos/logo_bizai_dark.png' : '/logos/logo_bizai_light.png'} alt="Biz.AI" className="w-auto object-contain" style={{ height: 34 }} />
         </Link>
 
         {/* Desktop Navigation - 정중앙 */}
@@ -42,7 +50,7 @@ export default function Navbar({ activePage, scrollLineProgress }: NavbarProps) 
             <Link
               key={link.id}
               to={link.path}
-              className={`transition-colors text-text-primary ${activePage === link.id ? 'font-bold' : 'font-medium'}`}
+              className={`${activePage === link.id ? 'text-text-primary font-bold' : 'text-text-secondary font-semibold'} hover:text-text-primary transition-colors`}
             >
               {link.name}
             </Link>
@@ -50,35 +58,29 @@ export default function Navbar({ activePage, scrollLineProgress }: NavbarProps) 
         </div>
 
         {/* CTA Buttons */}
-        <div className="hidden lg:flex items-center gap-[0.7rem] ml-auto">
-          <a href="https://www.ktds.com/" target="_blank" rel="noopener noreferrer">
-            <Button variant="ghost" size="sm" className="text-text-primary hover:text-text-primary hover:bg-bg-active group h-9">
-              <img src="/ktds_white.png" alt="kt ds" className="h-5 w-auto object-contain transition-opacity" />
-              <ArrowUpRight size={28} className="-ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-            </Button>
-          </a>
-          <a href="https://studio.abclab.ktds.com/auth/login" target="_blank" rel="noopener noreferrer">
-            <Button variant="premium" size="sm" className="px-4 py-0 h-9 rounded-[8px] font-bold hover:scale-100 group" style={{ fontSize: '15px' }}>
-              AI Agent 스튜디오
-              <ArrowUpRight size={28} stroke="black" className="-ml-1 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Button>
-          </a>
+        <div className="hidden lg:flex items-center gap-2 ml-auto">
+          <div className="flex items-center gap-0">
+            <a href={NAV_CTA_LINKS[0].href} target="_blank" rel="noopener noreferrer" className={`${textColor} flex items-center gap-0.5 px-3 h-10 rounded-full ${hoverBg} transition-colors group`}>
+              <img src={ktdsLogo} alt="kt ds" className="h-[17px] w-auto object-contain" />
+              <ArrowUpRight size={20} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+            </a>
+            <a href={NAV_CTA_LINKS[1].href} target="_blank" rel="noopener noreferrer" className={`${textColor} flex items-center gap-0.5 px-3 h-10 rounded-full ${hoverBg} transition-colors text-[15px] font-bold group`}>
+              {NAV_CTA_LINKS[1].label}
+              <ArrowUpRight size={20} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+            </a>
+          </div>
         </div>
 
-        {/* Mobile Menu Button - Shown only below 1024px */}
-        <Button
-          variant="ghost"
-          size="icon"
-          rounded="lg"
-          className="lg:hidden ml-auto text-text-primary h-10 w-10 hover:bg-bg-active"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
-        </Button>
+        {/* Mobile: 메뉴 버튼 */}
+        <div className="lg:hidden ml-auto flex items-center gap-4">
+          <button className={`${textColor} flex items-center justify-center`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
 
       {/* Scroll Progress Line */}
-      <div className="absolute bottom-[-1px] left-0 w-full h-[3px]">
+      <div className="absolute bottom-[-1px] left-0 w-full h-[4px]">
         {scrollLineProgress && (
           <motion.div
             style={{ scaleX: scrollLineProgress, originX: 0 }}
@@ -94,33 +96,30 @@ export default function Navbar({ activePage, scrollLineProgress }: NavbarProps) 
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden absolute top-full left-0 right-0 border-b border-border-light px-6 py-6 overflow-hidden" style={{ backgroundColor: '#0A0A0A' }}
+            className={`lg:hidden absolute top-full left-0 right-0 border-b px-6 py-6 overflow-hidden ${borderClass}`}
+            style={{ backgroundColor: mobileMenuBg }}
           >
             <div className="flex flex-col gap-5">
               {navLinks.map((link) => (
                 <Link
                   key={link.id}
                   to={link.path}
-                  className={`text-body-sm font-bold py-1 ${activePage === link.id ? 'text-text-primary' : 'text-text-secondary/60'}`}
+                  className={`text-body-sm font-bold py-1 ${activePage === link.id ? textColor : (isDark ? 'text-text-secondary/60' : 'text-gray-500')}`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.name}
                 </Link>
               ))}
-              <div className="h-px bg-border-light my-2" />
+              <div className={`h-px my-2 ${isDark ? 'bg-border-light' : 'bg-black/10'}`} />
               <div className="flex flex-col gap-5">
-                <a href="https://www.ktds.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-text-secondary/60 font-medium py-1">
-                  <span className="text-body-sm">kt ds 홈페이지</span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </a>
-                <a href="https://studio.abclab.ktds.com/auth/login" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-text-secondary/60 font-medium py-1">
-                  <span className="text-body-sm">AI Agent 스튜디오</span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </a>
+                {NAV_CTA_LINKS.map((link) => (
+                  <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-1.5 font-medium py-1 ${isDark ? 'text-text-secondary/60' : 'text-gray-500'}`}>
+                    <span className="text-body-sm">{link.label}</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7M17 7H7M17 7V17" />
+                    </svg>
+                  </a>
+                ))}
               </div>
             </div>
           </motion.div>

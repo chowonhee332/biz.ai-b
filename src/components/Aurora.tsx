@@ -179,8 +179,11 @@ const Aurora = (props: AuroraProps) => {
         ctn.appendChild(gl.canvas);
 
         let animateId = 0;
+        let isVisible = true;
+
         const update = (t: number) => {
             animateId = requestAnimationFrame(update);
+            if (!isVisible) return;
             const { time = t * 0.01, speed = 1.0 } = propsRef.current;
             if (program) {
                 program.uniforms.uTime.value = time * speed * 0.1;
@@ -193,11 +196,21 @@ const Aurora = (props: AuroraProps) => {
         };
         animateId = requestAnimationFrame(update);
 
+        const intersectionObserver = new IntersectionObserver(([entry]) => {
+            isVisible = entry.isIntersecting;
+        }, { threshold: 0 });
+        intersectionObserver.observe(ctn);
+
+        const handleVisibility = () => { isVisible = !document.hidden; };
+        document.addEventListener('visibilitychange', handleVisibility);
+
         resize();
 
         return () => {
             cancelAnimationFrame(animateId);
             window.removeEventListener('resize', resize);
+            intersectionObserver.disconnect();
+            document.removeEventListener('visibilitychange', handleVisibility);
             if (ctn && gl.canvas.parentNode === ctn) {
                 ctn.removeChild(gl.canvas);
             }
