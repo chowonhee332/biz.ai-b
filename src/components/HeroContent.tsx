@@ -78,7 +78,7 @@ export default function HeroContent({ onSubmit, isAnalyzing = false, align = 'ce
   const isLeft = align === 'left';
 
   return (
-    <div className={`relative z-10 w-full max-w-6xl mx-auto px-6 py-20 md:py-24 min-h-[300px] flex flex-col ${isLeft ? 'items-center text-center md:items-start md:text-left' : 'items-center justify-center text-center'}`}>
+    <div className={`relative z-10 w-full max-w-6xl mx-auto px-0 py-20 md:py-24 min-h-[300px] flex flex-col ${isLeft ? 'items-center text-center md:items-start md:text-left' : 'items-center justify-center text-center'}`}>
       {/* 히어로 뱃지 - 타이틀 위 */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
